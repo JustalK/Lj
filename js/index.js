@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var wh = window.innerHeight;
 	var b = document.body.clientHeight - wh;
 	var c = a / b;
+	var segment = a%(2*wh);
 	var position = document.getElementById("POSITION");
 	var timer;
 	var blackout = document.getElementsByClassName("blackout-effect");
@@ -152,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	wh = window.innerHeight;
     	b = document.body.clientHeight - window.innerHeight;
     	c = a / b;
+    	segment = a%(2*wh);
     	position.style.width=c*100+"%";
     	
     	// For all the blackout-effect...
@@ -176,25 +178,42 @@ document.addEventListener("DOMContentLoaded", function() {
     	}
     	
     	for(var i=0; i < photo.length ; i++) {
-    		console.log(Math.max(0,(a/wh)-0.3));
     		photo[i].style.height = "calc(100% - "+Math.max(100,162-400*Math.max(0,((a-wh/6)/wh)-0.4))+"px)";
     		photo[i].style.width = "calc(100% - "+Math.max(100,162-400*Math.max(0,((a-wh/6)/wh)-0.4))+"px)";
     	}
     	
     	for(var i=0; i < photolinevertical.length ; i++) {
-    		photolinevertical[i].style.height = Math.min(100,100*((a+wh/2)/wh))+"%"; 
     		photolinevertical[i].style.top = Math.max(0,(50-50*(a+wh/2)/wh))+"%"; 
     	}
     	
     	for(var i=0; i < photolinehorizontal.length ; i++) {
-    		photolinehorizontal[i].style.width = Math.min(100,100*((a+wh/2)/wh))+"%"; 
     		photolinehorizontal[i].style.left = Math.max(0,(50-50*(a+wh/2)/wh))+"%"; 
+    	}   	
+
+    	for(var i=0,maxvalue=100,minvalue=0,velocity=0.6,offset=(wh/2)-200; i < photolinehorizontal.length ; i++) {
+    		// If my value is between my offset and the end of the project segmentation
+    		if(segment>offset && segment<2*wh) {
+    			// A simple calcul based of  minvalue < ax + b < maxvalue
+    			photolinehorizontal[i].style.width = Math.min(maxvalue,Math.max(minvalue,(velocity*(a - offset)))) + "%";
+        		photolinevertical[i].style.height = Math.min(maxvalue,Math.max(minvalue,(velocity*(a - offset)))) + "%";
+    		} else {
+    			// If we are off the segment, we put the value at the minimal
+    			photolinehorizontal[i].style.width = minvalue;
+        		photolinevertical[i].style.height = minvalue;
+    		}
     	}    	
     	
-    	console.log((2*a-wh-200)/wh);
-    	for(var i=0; i < photoblockvertical.length ; i++) {
-    		photoblockvertical[i].style.width = Math.min(30,Math.max(0,50*((2*a-wh-200)/wh)))+"px"; 
-    		photoblockhorizontal[i].style.height = Math.min(30,Math.max(0,50*((2*a-wh-200)/wh)))+"px";
+    	for(var i=0,maxvalue=30,minvalue=0,velocity=0.12,offset=(wh/2)+100; i < photoblockvertical.length ; i++) {
+    		// If my value is between my offset and the end of the project segmentation
+    		if(segment>offset && segment<2*wh) {
+    			// A simple calcul based of  minvalue < ax + b < maxvalue
+    			photoblockvertical[i].style.width = Math.min(maxvalue,Math.max(minvalue,(velocity*(a - offset)))) + "px";
+    			photoblockhorizontal[i].style.height = Math.min(maxvalue,Math.max(minvalue,(velocity*(a - offset)))) + "px";
+    		} else {
+    			// If we are off the segment, we put the value at the minimal
+    			photoblockvertical[i].style.width = minvalue;
+    			photoblockhorizontal[i].style.height = minvalue;
+    		}
     	}
     	
     	// When we reach a new frame with informations, we add a class
@@ -216,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	function stopScrolling() {
 		document.body.className += " no-scrolling";
 	}
-
+	
 	// ================================================================================
 	// For the explications
 	// ================================================================================	
