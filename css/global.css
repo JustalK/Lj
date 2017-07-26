@@ -1,0 +1,498 @@
+/*
+=====================================================================================================
+COLOR
+=====================================================================================================
+*/
+.background-black {
+	background: #000;
+}
+
+.textcolor-white {
+	color: #FFF;
+}
+
+.textcolor-black {
+	color: #000;
+}
+
+.textcolor-skyblue {
+	color: #def0fd;
+}
+
+.background-skyblue {
+	background: #def0fd;
+}
+
+.textcolor-blue {
+	color: #a1bbdf;
+}
+
+.background-blue {
+	background: #a1bbdf;
+}
+
+.textcolor-darkblue {
+	color: #001966;
+}
+
+.background-darkblue {
+	background: #001966;
+}
+
+body:not(.no-scrolling) {
+	pointer-events: none !important;
+} 
+
+/*
+=====================================================================================================
+FRAME CUSTOM
+=====================================================================================================
+*/
+.cssvhunit #FRAME2 {
+	background-image: url("../imgs/FRAME1_LOW.jpg");
+}
+
+.cssvhunit #FRAME2.active {
+	transition: background-image 0.5s;
+	background-image: url("../imgs/FRAME1.png");
+}
+
+.cssvhunit.rgba #FRAME2 .layer {
+	background: rgba(222, 240, 253, 0.4);
+}
+
+#FRAME2 .blocs-inside-title-line {
+	background: #91c6ff;
+}
+
+#FRAME2 .photo-square {
+	background: rgb(161, 187, 223);
+}
+
+#FRAME2 .area-texte-title {
+	color: #001966;
+}
+
+#FRAME2 .area-texte-subtitle {
+	color: #001966;
+}
+
+#FRAME2 .area-texte-line {
+	background: #001966;
+}
+
+#FRAME2 .letter-l, #FRAME2 .letter-j {
+	color: #91C6FF;
+}
+
+#FRAME2 .blocs-inside-informations-title {
+	color: #001966;
+}
+
+#FRAME2 .blocs-inside-informations-texte {
+	color: #001966;
+}
+
+#FRAME2 .blocs-inside-informations-texte strong {
+	color: #001966;
+}
+
+#FRAME2 .blocs-inside-informations-left-page:hover {
+	background: #91C6FF;
+}
+
+#FRAME2 .blocs-inside-informations-left-page span, #FRAME2 .blocs-inside-informations-right-page span
+	{
+	color: #91C6FF;
+}
+
+#FRAME2 .blocs-inside-informations-page span {
+	color: #91C6FF;
+}
+
+#FRAME2 .date {
+	color: #a1bbdf;
+}
+
+#FRAME2 .date-line {
+	background: #91c6ff;
+}
+
+.new-frame #FRAME2 .photo {
+	border: 1px solid #a1bbdf;	
+}
+
+.new-frame #FRAME2 .blocs {
+	border: 1px solid #a1bbdf;
+}
+
+.cssvhunit #FRAME3 {
+	position: relative;
+	
+	height: 100vh;
+	min-height: 800px;
+	width: 100%;
+	
+	background-image: url("../imgs/FRAME1_LOW.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.cssvhunit #FRAME3.active {	
+    transition: background-image 0.5s;
+	background-image: url("../imgs/FRAME1.png");
+}
+
+/*
+=====================================================================================================
+LETTERS
+=====================================================================================================
+*/
+.letter-l {
+	left: calc(50% - 15px);
+}
+
+.letter-j {
+	left: calc(50% + 7px);
+}
+
+/*
+=====================================================================================================
+LINES STYLE
+=====================================================================================================
+*/
+.blocs-inside-title-line {
+	position: absolute;
+	top: 177px;
+	left: 300px;
+	height: 2px;
+	width: 150px;
+}
+
+.photo-line {
+	position: absolute;
+	background: black;
+	z-index: 15;
+}
+
+.photo-line-vertical {
+	width: 1px;
+	height: 0%;
+	top: 50%;
+}
+
+.photo-line-horizontal {
+	width: 0%;
+	left: 50%;	
+	height: 1px;
+}
+
+.photo-line-black-left {
+	left: 80px;
+}
+
+.photo-line-black-right {
+	right: 80px;
+}
+
+.photo-line-black-up {
+	top: 80px;
+}
+
+.photo-line-black-down {
+	bottom: 80px;
+}
+
+/*
+=====================================================================================================
+DIAPORAMA - LEFT AREA
+=====================================================================================================
+*/
+.photo-wrap {
+	position: relative;
+	width: 800px;
+	height: 50%;
+	left: calc(50% - 400px);
+	margin-top: 100px;
+	z-index: 10;
+}
+
+.photo {
+	position: absolute;
+	height: calc(100% - 162px);
+	width: calc(100% - 162px);
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	border: 1px solid #000;
+	background: rgba(222, 240, 253, 0.3);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin: auto;
+	transition: border 1s;
+}
+
+.photo-square {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	z-index: 20;
+}
+
+.photo-square-black-left {
+	opacity: 0;
+	top: 0;
+	left: 0;
+    transition: opacity 1s;
+}
+
+.photo-square-black-right {
+	opacity: 0;
+	top: 0;
+	right: 0;
+    transition: opacity 1s;
+}
+
+
+.photo-square-black-up {
+	opacity: 0;
+	bottom: 0;
+	left: 0;
+    transition: opacity 1s;
+}
+
+.photo-square-black-down {
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.photo-block {
+	position: absolute;
+	z-index: 16;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.photo-block-vertical {
+	width: 0px;
+	height: 100%;
+}
+
+.photo-block-black-top-left {
+	left: 0;
+	top: 0;
+}
+
+.photo-block-black-top-right {
+	right: 0;
+	top: 0;
+}
+
+.photo-block-horizontal {	
+	width: 100%;
+	height: 0px;
+}
+
+.photo-block-black-bottom-left {
+	left: 0;
+	top: 0;
+}
+
+.photo-block-black-bottom-right {
+	left: 0;
+	bottom: 0;
+}
+
+/*
+=====================================================================================================
+INFORMATIONS - RIGHT AREA
+=====================================================================================================
+*/
+.area-texte {
+	position: relative;
+	width: 800px;
+	height: calc(50% - 200px);
+	left: calc(50% - 400px);
+	z-index: 10;
+}
+
+.area-texte-title {
+	display: block;
+	font-size: 32px;
+	margin-left: 20%;
+}
+
+.area-texte-subtitle {
+	display: block;
+	font-size: 25px;
+	margin-left: 40%;
+	margin-top: 20px;
+}
+
+.area-texte-wrap {
+	position: absolute;
+	width: 100%;
+	top: 60px;
+}
+
+.area-texte-line {
+	position: absolute;
+	height: 2px;
+	width: 15%;
+	top: 66px;
+	left: 23%;
+}
+
+.blocs-inside-informations-title {
+	display: block;
+	font-size: 32px;
+	margin-left: 10px;
+	margin-top: 60px;
+	margin-bottom: 40px;
+}
+
+.blocs-inside-informations-texte {
+	display: block;
+	text-align: left;
+	text-indent: 20px;
+	margin: 0 10px 50px 10px;
+	font-size: 16px;
+	position: relative;
+    left: 0;
+    transition: left 1s;
+}
+
+.right-hover .blocs-inside-informations-texte:nth-child(3) {
+	left: -30%;
+}
+
+.right-hover .blocs-inside-informations-texte:nth-child(2) {
+	left: -15%;
+}
+
+.right-hover .blocs-inside-informations-texte:nth-child(1) {
+	left: -5%;
+}
+
+.left-hover .blocs-inside-informations-texte:nth-child(3) {
+	left: 30%;
+}
+
+.left-hover .blocs-inside-informations-texte:nth-child(2) {
+	left: 15%;
+}
+
+.left-hover .blocs-inside-informations-texte:nth-child(1) {
+	left: 5%;
+}
+
+.blocs-inside-page {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	border: 1px solid black;
+	cursor: pointer;
+	background: white;
+	transition: all 0.5s;
+	z-index: 20;
+}
+
+.blocs-inside-informations-right-page {
+	bottom: 20px;
+	right: 19px;
+}
+
+.blocs-inside-informations-left-page {
+	bottom: 20px;
+	left: 19px;
+}
+
+.blocs-inside-informations-left-page:hover span {
+	color: white;
+}
+
+.blocs-inside-informations-left-page span,
+.blocs-inside-informations-right-page span {
+	display: block;
+	width: 100%;
+	line-height: 40px;
+	text-align: center;
+	font-size: 35px;
+	color: #91C6FF;
+	pointer-events: none;
+}
+
+.blocs-inside-informations-page span {
+	position: absolute;
+	display: block;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	bottom: 35px;
+	font-size: 21px;
+}
+
+.blocs-inside-wrap {
+	position: absolute;
+	top: 28%;
+	bottom: 0;
+	margin: auto;
+	overflow: hidden;
+	width: calc(100% - 40px);
+}
+
+.date-line {
+	position: absolute;
+	width: 2px;
+	height: calc(50% - 200px);
+}
+
+.date-line-up {
+	right: -38px;
+	top: 120px;
+}
+
+.date-line-down {
+	right: -38px;
+	bottom: 45px;
+}
+
+.blocs-inside-informations-left-page-hover-1 {
+	position: absolute;
+	bottom: -1px;
+	left: -1px;
+	width: 1px;
+	height: 42px;
+	background: black;
+	transition: all 0.5s;
+	pointer-events: none;
+}
+
+.blocs-inside-informations-left-page-hover-2 {
+	position: absolute;
+	bottom: 40px;
+	left: -1px;
+	width: 42px;
+	height: 1px;
+	background: black;
+	transition: all 0.5s;
+	pointer-events: none;
+}
+
+.blocs-inside-informations-left-page:hover .blocs-inside-informations-left-page-hover-1
+	{
+	bottom: -1px;
+	left: -10px;
+	height: 50px;
+}
+
+.blocs-inside-blue-informations-page:hover .blocs-inside-informations-left-page-hover-2
+	{
+	bottom: 49px;
+	left: -10px;
+	width: 51px;
+}
