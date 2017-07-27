@@ -1,19 +1,8 @@
 // I don't use JQUERY because I want to keep the website with the less ressource possible
 // Vanila JS - SCRIPT'S LATSUJ
 
-// ================================================================================
-// FUNCTIONS VERY VERY USEFULL - THANK TO PLAINJS
-// ================================================================================
-
-// select a list of matching elements, context is optional
-function $(selector, context) {
-    return (context || document).querySelectorAll(selector);
-}
-
-// select the first match only, context is optional
-function $1(selector, context) {
-    return (context || document).querySelector(selector);
-}
+// I use classList.add instead of += " " because this is faster - jsperf
+// I have created a lot of variables for saving the length of table because...it's faster so better :) 
 
 // ================================================================================
 // MY SCRIPT
@@ -42,19 +31,20 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.fonts.add(fontorbitron);
 	fontorbitron.loaded.then(function() {
 		// When the font is load, we make her appear on the website and we load the others...
-		document.body.className += " show-orbitron";
+		document.body.classList.add("show-orbitron");
 		document.fonts.add(fontmonserratlight);
 		document.fonts.add(fonttekolight);
 		// As soon as the font are loaded, we made them appear on the website
 		fontmonserratlight.loaded.then(function() {
-			document.body.className += " show-montserratlight";
+			document.body.classList.add("show-montserratlight");
 		});
 		fonttekolight.loaded.then(function() {
-			document.body.className += " show-tekolight";
+			document.body.classList.add("show-tekolight");
 			loadHighQualityImagesFirst();
 		});
 	});	
 	
+	// Load the fonts that we dont need for the first paint of the browser
 	function loadAllTheOtherFont() {
     	// we finally load all the font, we need...
     	document.fonts.add(fonttekobold);
@@ -62,32 +52,52 @@ document.addEventListener("DOMContentLoaded", function() {
     	document.fonts.add(fonttekomedium);
     	
     	fonttekobold.loaded.then(function() {
-			document.body.className += " show-tekobold";
+			document.body.classList.add("show-tekobold");
 		});
     	fontmontserratbold.loaded.then(function() {
-			document.body.className += " show-montserratbold";
+			document.body.classList.add("show-montserratbold");
 		});
     	fonttekomedium.loaded.then(function() {
-			document.body.className += " show-tekomedium";
-			
-			// Mb it's not gonna be the last font loaded but it's not very important
-			// Because the browser gonna load the three fonts at the same time
-			// I have just to keep in mind that the three font has to be loaded before the img
+			document.body.classList.add("show-tekomedium");
+		});	
+    	
+    	// On all the previous fonts requested has been loaded
+    	document.fonts.ready.then(function() {
 			loadHighQualityImages();
-		});		
+    	});
+	}
+	
+	// Load only the first time we scroll or if the scroll has already been move the global css file
+	window.addEventListener('scroll', loadTheGlobalCss);
+	function loadTheGlobalCss() {
+		// For avoiding this function to be executed two time, we first remove the event
+		window.removeEventListener('scroll', loadTheGlobalCss);
+		// Then we load all the font, we need under the first screen
+    	loadAllTheOtherFont();
+    	
+    	// And we load the css file
+    	var file = "../Lj/css/global.css";
+    	var link = document.createElement( "link" );
+    	link.href = file.substr( 0, file.lastIndexOf( "." ) ) + ".css";
+    	link.type = "text/css";
+    	link.rel = "stylesheet";
+    	link.media = "screen,print";
+    	
+    	document.getElementsByTagName( "head" )[0].appendChild( link );
 	}
 	
 	// ================================================================================
 	// For the image - LQPI Technique from Facebook
 	// ================================================================================
 	
+	// Function for loading the first image in HD - Juste for a better effect
 	function loadHighQualityImagesFirst() {
 		var background = document.getElementById("FRAME1");
 		var tmp = new Image();
 		tmp.src = background.getAttribute("data-src");
 		tmp.addEventListener('load',function() {
 			// For a better maintainability, we gonna just add a class and make the all animation on the css
-			this.className += " active";
+			this.classList.add("active");
 		}.bind(background));
 	}
 	
@@ -95,16 +105,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	function loadHighQualityImages() {
 		// First, we got the all frame
 		var background = document.getElementsByClassName("frame");
+		var backgroundlength = background.length; 
 		// The first element is load with the other function
 		// @see loadHighQualityImagesFirst()
 		var backgroundHQ = [""];
 		// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
-		for(var i=1; i < background.length ; i++) {
+		for(var i=1; i < backgroundlength ; i++) {
 			backgroundHQ.push(new Image());
 			backgroundHQ[i].src = background[i].getAttribute("data-src");
 			backgroundHQ[i].addEventListener('load',function() {
 				// For a better maintainability, we gonna just add a class and make the all animation on the css
-				background[this].className += " active";
+				background[this].classList.add("active");
 			}.bind(i));
 		}
 	}
@@ -114,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// If the user scroll, I'm gonna load what he needs
 	// Because he need more information that what he got at the start
 	// ================================================================================	
-	var beginScroll = false;
+	
 	// For the little tricky effet for showing when your are
 	var a = document.body.scrollTop;
 	var wh = window.innerHeight;
@@ -123,32 +134,35 @@ document.addEventListener("DOMContentLoaded", function() {
 	var segment = a%(2*wh);
 	var position = document.getElementById("POSITION");
 	var timer;
+	
 	var blackout = document.getElementsByClassName("blackout-effect");
+	var blackoutlength = blackout.length; 
+	
 	var bigtitle = document.getElementsByClassName("big-title");
+	var bigtitlelength = bigtitle.length;
+	
 	var areatextetitle = document.getElementsByClassName("area-texte-title");
+	var areatextetitlelength = areatextetitle.length;
+	
 	var areatextesubtitle = document.getElementsByClassName("area-texte-subtitle");
+	var areatextesubtitlelength = areatextesubtitle.length;
+	
 	var photo = document.getElementsByClassName("photo");
+	var photolength = photo.length;
+	
 	var photolinevertical = document.getElementsByClassName("photo-line-vertical");
+	var photolineverticallength = photolinevertical.length;
+	
 	var photolinehorizontal = document.getElementsByClassName("photo-line-horizontal");
+	var photolinehorizontallength = photolinehorizontal.length;
+	
 	var photoblockvertical = document.getElementsByClassName("photo-block-vertical");
+	var photoblockverticallength = photoblockvertical.length;
+	
 	var photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal");
+	var photoblockhorizontallength = photoblockhorizontal.length;
+	
 	window.addEventListener('scroll', function() {
-		// If the user have done at least one scroll
-        if(!beginScroll) {
-        	beginScroll=true;
-        	loadAllTheOtherFont();
-        	
-        	var file = "../Lj/css/global.css";
-        	
-        	var link = document.createElement( "link" );
-        	link.href = file.substr( 0, file.lastIndexOf( "." ) ) + ".css";
-        	link.type = "text/css";
-        	link.rel = "stylesheet";
-        	link.media = "screen,print";
-        	
-        	document.getElementsByTagName( "head" )[0].appendChild( link );
-        }
-        
         // For the little tricky effect - Moving the width of the bar when we scroll
     	a = document.body.scrollTop;
     	wh = window.innerHeight;
@@ -158,13 +172,13 @@ document.addEventListener("DOMContentLoaded", function() {
     	position.style.width=c*100+"%";
     	
     	// For all the blackout-effect...
-    	for(var i=0; i < blackout.length ; i++) {
+    	for(var i=0; i < blackoutlength ; i++) {
     		// I calculate the position for rendering a white screen when you scroll down at each project
     		blackout[i].style.opacity = a/wh-2*i-0.5;
     	}
     	
     	// For all the title...
-    	for(var i=0; i < bigtitle.length ; i++) {
+    	for(var i=0; i < bigtitlelength ; i++) {
     		// Maths, maths, maths....So it's just mean that I'm gonna move the title only when I pass throught them and the minimum top is 80px
     		bigtitle[i].style.top = Math.max((80 + 80*4*(a/wh-2*i)),80)+"px";
     		// So this one is for the opacity effect
@@ -173,25 +187,25 @@ document.addEventListener("DOMContentLoaded", function() {
     	}
     	
     	// For all the description under the photo 
-    	for(var i=0; i < areatextetitle.length ; i++) {
+    	for(var i=0; i < areatextetitlelength ; i++) {
     		areatextetitle[i].style.marginLeft = 20-(Math.max(0,10*(a/wh-1)))+"%";
     		areatextesubtitle[i].style.marginLeft = 40+(Math.max(0,5*(a/wh-1)))+"%";
     	}
     	
-    	for(var i=0; i < photo.length ; i++) {
+    	for(var i=0; i < photolength ; i++) {
     		photo[i].style.height = "calc(100% - "+Math.max(100,162-400*Math.max(0,((a-wh/6)/wh)-0.4))+"px)";
     		photo[i].style.width = "calc(100% - "+Math.max(100,162-400*Math.max(0,((a-wh/6)/wh)-0.4))+"px)";
     	}
     	
-    	for(var i=0; i < photolinevertical.length ; i++) {
+    	for(var i=0; i < photolineverticallength ; i++) {
     		photolinevertical[i].style.top = Math.max(0,(50-50*(a+wh/2)/wh))+"%"; 
     	}
     	
-    	for(var i=0; i < photolinehorizontal.length ; i++) {
+    	for(var i=0; i < photolinehorizontallength ; i++) {
     		photolinehorizontal[i].style.left = Math.max(0,(50-50*(a+wh/2)/wh))+"%"; 
     	}   	
 
-    	for(var i=0,maxvalue=100,minvalue=0,velocity=0.6,offset=(wh/2)-200; i < photolinehorizontal.length ; i++) {
+    	for(var i=0,maxvalue=100,minvalue=0,velocity=0.6,offset=(wh/2)-200; i < photolinehorizontallength ; i++) {
     		// If my value is between my offset and the end of the project segmentation
     		if(segment>offset && segment<2*wh) {
     			// A simple calcul based of  minvalue < ax + b < maxvalue
@@ -204,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
     		}
     	}    	
     	
-    	for(var i=0,maxvalue=30,minvalue=0,velocity=0.12,offset=(wh/2)+100; i < photoblockvertical.length ; i++) {
+    	for(var i=0,maxvalue=30,minvalue=0,velocity=0.12,offset=(wh/2)+100; i < photoblockverticallength ; i++) {
     		// If my value is between my offset and the end of the project segmentation
     		if(segment>offset && segment<2*wh) {
     			// A simple calcul based of  minvalue < ax + b < maxvalue
@@ -234,7 +248,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// I use this class for keeping the framerate to 60fps when the user scroll
 	function stopScrolling() {
-		document.body.className += " no-scrolling";
+		document.body.classList.add("no-scrolling");
 	}
 	
 	// ================================================================================
@@ -244,31 +258,36 @@ document.addEventListener("DOMContentLoaded", function() {
 	var buttonrightinformation = document.getElementsByClassName("blocs-inside-informations-right-page");
 	var buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page");
 	var wrapinformation = document.getElementsByClassName("blocs-inside-wrap");
+	var wrapinformationlength = wrapinformation.length;
 
-	for(var i=0; i < buttonrightinformation.length ; i++) {
-		buttonrightinformation[i].addEventListener("mouseenter",function() {
-			for(var j=0; j < wrapinformation.length ; j++) {
-				wrapinformation[j].classList.add("right-hover");
-			}
-		});
-		buttonrightinformation[i].addEventListener("mouseout",function() {
-			for(var j=0; j < wrapinformation.length ; j++) {
-				wrapinformation[j].classList.remove("right-hover");
-			}
-		});
-		buttonleftinformation[i].addEventListener("mouseenter",function() {
-			console.log("azeae");
-			for(var j=0; j < wrapinformation.length ; j++) {
-				wrapinformation[j].classList.add("left-hover");
-			}
-		});
-		buttonleftinformation[i].addEventListener("mouseout",function() {
-			console.log("zzzz");
-			for(var j=0; j < wrapinformation.length ; j++) {
-				wrapinformation[j].classList.remove("left-hover");
-			}
-		});
+	/**
+	 * Add a class for all the wrap of informations
+	 * this class is use for choosing the movement of the text (left or right)
+	 */
+	function addClassWrapInformation(nameClass) {
+		for(var j=0; j < wrapinformationlength ; j++) {
+			wrapinformation[j].classList.add(nameClass);
+		}		
 	}
+	
+	/**
+	 * Remove a class for all the wrap of informations
+	 * this class is use for choosing the movement of the text (left or right)
+	 */
+	function removeClassWrapInformation(nameClass) {
+		for(var j=0; j < wrapinformationlength ; j++) {
+			wrapinformation[j].classList.remove(nameClass);
+		}		
+	}
+	
+	// Then I'm adding the event for the differents button in the website
+	for(var i=0,count = buttonrightinformation.length; i < count ; i++) {
+		buttonrightinformation[i].addEventListener("mouseenter",addClassWrapInformation("right-hover"));
+		buttonrightinformation[i].addEventListener("mouseout",removeClassWrapInformation("right-hover"));
+		buttonleftinformation[i].addEventListener("mouseenter",addClassWrapInformation("left-hover"));
+		buttonleftinformation[i].addEventListener("mouseout",removeClassWrapInformation("left-hover"));
+	}
+	
 	
 	
 	// ================================================================================
@@ -277,15 +296,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	var menu = document.getElementsByClassName("menu");
 	var menushow = document.getElementsByClassName("menu-show");
+	var menushowlength = menushow.length;
 	
 	// For all the elements for showing the menu
-	for(var i = 0; i < menu.length; i++) {
+	for(var i = 0,count = menu.length; i < count; i++) {
 	    // I add an event when the user is clicking the element
 	    menu[i].onclick = function() {
 	    	// Then I show all the menu...(there are the exact same number of menu and menushow)
-	    	for(var j = 0; j < menushow.length; j++) {
-		        menushow[j].className += " active";
-			    menu[j].className += " active";
+	    	for(var j = 0; j < menushowlength; j++) {
+		        menushow[j].classList.add("active");
+			    menu[j].classList.add("active");
 	    	}
 	        return false;
 	    };
