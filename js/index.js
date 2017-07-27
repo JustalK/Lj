@@ -12,6 +12,16 @@
 document.addEventListener("DOMContentLoaded", function() {
 
 	// ================================================================================
+	// WebAssembly
+	// ================================================================================
+	var wasmCode = new Uint8Array([0,97,115,109,1,0,0,0,1,148,128,128,128,0,2,96,5,125,125,125,125,125,1,125,96,6,125,125,125,125,125,125,1,125,3,131,128,128,128,0,2,0,1,4,132,128,128,128,0,1,112,0,0,5,131,128,128,128,0,1,0,1,6,129,128,128,128,0,0,7,171,128,128,128,0,3,6,109,101,109,111,114,121,2,0,10,119,97,115,109,115,99,114,111,108,108,0,0,17,119,97,115,109,115,99,114,111,108,108,114,101,118,101,114,115,101,0,1,10,222,128,128,128,0,2,168,128,128,128,0,0,32,1,32,3,32,4,147,32,2,148,34,2,32,2,32,1,95,27,32,0,32,2,32,0,93,32,2,32,2,92,32,0,32,0,92,114,114,27,11,171,128,128,128,0,0,32,2,32,0,32,4,32,5,147,32,3,148,147,34,0,32,0,32,2,95,27,32,1,32,0,32,1,93,32,0,32,0,92,32,1,32,1,92,114,114,27,11]);
+	var m = new WebAssembly.Instance(new WebAssembly.Module(wasmCode));
+	// Since I'm gonna use this function really often (I use it everytime I scroll)
+	// I have made it with webAssembly for a very fast js - wasmScroll(max,min,velocity,a,offset)
+	let wasmScroll = m.exports.wasmscroll;
+	let wasmScrollReverse = m.exports.wasmscrollreverse;
+	
+	// ================================================================================
 	// For the font - FOUT escape - Font Optimization by FontForge for removing the useless glyph
 	// ================================================================================
 	
@@ -178,39 +188,40 @@ document.addEventListener("DOMContentLoaded", function() {
     	}
     	
     	// For all the title...
-    	for(var i=0; i < bigtitlelength ; i++) {
-    		// Maths, maths, maths....So it's just mean that I'm gonna move the title only when I pass throught them and the minimum top is 80px
-    		bigtitle[i].style.top = Math.max((80 + 80*4*(a/wh-2*i)),80)+"px";
-    		// So this one is for the opacity effect
-    		// I have use the cosinus function for create a square function (1.570... is the value for 90 deg in radian)
-    		bigtitle[i].style.opacity = Math.abs(0.55*Math.cos(1.5707963268*a/wh));
+    	for(var i=0,maxvalue=wh/2,minvalue=80,velocity=0.4,offset=0; i < bigtitlelength ; i++) {
+    		bigtitle[i].style.top = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
+    	}
+    	
+    	for(var i=0,maxvalue=0.55,minvalue=0,velocity=0.0006,offset=0; i < bigtitlelength ; i++) {
+    		bigtitle[i].style.opacity = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset);
     	}
     	
     	// For all the description under the photo 
-    	for(var i=0; i < areatextetitlelength ; i++) {
-    		areatextetitle[i].style.marginLeft = 20-(Math.max(0,10*(a/wh-1)))+"%";
-    		areatextesubtitle[i].style.marginLeft = 40+(Math.max(0,5*(a/wh-1)))+"%";
+    	for(var i=0,maxvalue=20,minvalue=10,velocity=0.01,offset=wh; i < areatextetitlelength ; i++) {
+    		areatextetitle[i].style.marginLeft = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%";
+    	}
+
+    	for(var i=0,maxvalue=45,minvalue=40,velocity=-0.005,offset=2*wh; i < areatextetitlelength ; i++) {
+    		areatextesubtitle[i].style.marginLeft = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%";
+    	}
+    		
+    	for(var i=0,maxvalue=162,minvalue=100,velocity=0.25,offset=(wh/2)+100; i < photolength ; i++) {
+    		photo[i].style.height = "calc(100% - "+wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"px)";
+    		photo[i].style.width = "calc(100% - "+wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"px)";
     	}
     	
-    	for(var i=0; i < photolength ; i++) {
-    		photo[i].style.height = "calc(100% - "+Math.max(100,162-400*Math.max(0,((a-wh/6)/wh)-0.4))+"px)";
-    		photo[i].style.width = "calc(100% - "+Math.max(100,162-400*Math.max(0,((a-wh/6)/wh)-0.4))+"px)";
-    	}
-    	
-    	for(var i=0; i < photolineverticallength ; i++) {
-    		photolinevertical[i].style.top = Math.max(0,(50-50*(a+wh/2)/wh))+"%"; 
-    	}
-    	
-    	for(var i=0; i < photolinehorizontallength ; i++) {
-    		photolinehorizontal[i].style.left = Math.max(0,(50-50*(a+wh/2)/wh))+"%"; 
+    	// There are the same number of vertical and horizontal line
+    	for(var i=0,maxvalue=50,minvalue=0,velocity=0.3,offset=(wh/2)-200; i < photolinehorizontallength ; i++) {
+    		photolinehorizontal[i].style.left = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%"; 
+    		photolinevertical[i].style.top = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%"; 
     	}   	
 
     	for(var i=0,maxvalue=100,minvalue=0,velocity=0.6,offset=(wh/2)-200; i < photolinehorizontallength ; i++) {
     		// If my value is between my offset and the end of the project segmentation
     		if(segment>offset && segment<2*wh) {
-    			// A simple calcul based of  minvalue < ax + b < maxvalue
-    			photolinehorizontal[i].style.width = Math.min(maxvalue,Math.max(minvalue,(velocity*(a - offset)))) + "%";
-        		photolinevertical[i].style.height = Math.min(maxvalue,Math.max(minvalue,(velocity*(a - offset)))) + "%";
+    			// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
+    			photolinehorizontal[i].style.width = wasmScroll(maxvalue,minvalue,velocity,a,offset) + "%";
+        		photolinevertical[i].style.height = wasmScroll(maxvalue,minvalue,velocity,a,offset) + "%";
     		} else {
     			// If we are off the segment, we put the value at the minimal
     			photolinehorizontal[i].style.width = minvalue;
@@ -221,9 +232,9 @@ document.addEventListener("DOMContentLoaded", function() {
     	for(var i=0,maxvalue=30,minvalue=0,velocity=0.12,offset=(wh/2)+100; i < photoblockverticallength ; i++) {
     		// If my value is between my offset and the end of the project segmentation
     		if(segment>offset && segment<2*wh) {
-    			// A simple calcul based of  minvalue < ax + b < maxvalue
-    			photoblockvertical[i].style.width = Math.min(maxvalue,Math.max(minvalue,(velocity*(a - offset)))) + "px";
-    			photoblockhorizontal[i].style.height = Math.min(maxvalue,Math.max(minvalue,(velocity*(a - offset)))) + "px";
+    			// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
+    			photoblockvertical[i].style.width = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
+    			photoblockhorizontal[i].style.height = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
     		} else {
     			// If we are off the segment, we put the value at the minimal
     			photoblockvertical[i].style.width = minvalue;
