@@ -1,3 +1,4 @@
+// I don't use JQUERY because I want to keep the website with the less ressource possible
 // Vanila JS - SCRIPT'S LATSUJ
 
 // ================================================================================
