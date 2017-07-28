@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		// Position in a frame
 		segment = a%hf;
 		// Number of Frame
-		numberframe = hf/bh;
+		numberframe = 1;
 	}
 	
 	// ================================================================================
@@ -193,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var photolinehorizontal = document.getElementsByClassName("photo-line-horizontal");
 	var photoblockvertical = document.getElementsByClassName("photo-block-vertical");
 	var photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal");
+	var blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title");
 	
 	window.addEventListener('scroll', function() {
 		// Initialisation of 
@@ -200,11 +201,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		
         // For the little tricky effect - Moving the width of the bar when we scroll
     	position.style.width=c*100+"%";
+
+    	for(var i=0,maxvalue=30,minvalue=10,velocity=0.1,offset=wh-mwh; i < numberframe ; i++) {
+    		blocsinsideinformationstitle[i].style.marginLeft = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"px";
+    	}    	
     	
-    	// For all the blackout-effect...
-    	for(var i=0; i < blackoutlength ; i++) {
-    		// I calculate the position for rendering a white screen when you scroll down at each project
-    		blackout[i].style.opacity = a/wh-2*i-0.5;
+    	for(var i=0,maxvalue=0.5,minvalue=0,velocity=0.001,offset=mwh; i < numberframe ; i++) {
+    		blackout[i].style.opacity = wasmScroll(maxvalue,minvalue,velocity,a,offset);
     	}
     	
     	for(var i=0,maxvalue=mwh,minvalue=80,velocity=0.4,offset=0; i < numberframe ; i++) {
@@ -279,7 +282,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	var buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page");
 	var wrapinformation = document.getElementsByClassName("blocs-inside-wrap");
 	var wrapinformationlength = wrapinformation.length;
-
+	var click = 0;
+	
 	/**
 	 * Add a class for all the wrap of informations
 	 * this class is use for choosing the movement of the text (left or right)
@@ -297,15 +301,47 @@ document.addEventListener("DOMContentLoaded", function() {
 	function removeClassWrapInformation(nameClass) {
 		for(var j=0; j < wrapinformationlength ; j++) {
 			wrapinformation[j].classList.remove(nameClass);
+			wrapinformation[j].classList.remove("clicked");
+		}		
+	}
+	
+	function clickOnceWrapInformation() {
+		for(var j=0; j < wrapinformationlength ; j++) {
+			wrapinformation[j].classList.add("clicked");
+		}				
+	}
+	
+	function clickWrapInformation(nameClass) {
+		// I update the cursor
+		if(nameClass=="right-click") {
+			click = Math.min(wrapinformationlength>>1,click+1);
+		} else {
+			click = Math.max(0,click-1);
+		}
+		
+		for(var j=0; j < wrapinformationlength ; j++) {	
+			if(j==click) { 			
+				wrapinformation[j].classList.remove("right-click");
+				wrapinformation[j].classList.remove("left-click");
+			} else if(j>=click) {				
+				wrapinformation[j].classList.remove("right-click");
+				wrapinformation[j].classList.add("left-click");
+			} else {
+				wrapinformation[j].classList.add(nameClass);
+			}
 		}		
 	}
 	
 	// Then I'm adding the event for the differents button in the website
 	for(var i=0,count = buttonrightinformation.length; i < count ; i++) {
-		buttonrightinformation[i].addEventListener("mouseenter",addClassWrapInformation("right-hover"));
-		buttonrightinformation[i].addEventListener("mouseout",removeClassWrapInformation("right-hover"));
-		buttonleftinformation[i].addEventListener("mouseenter",addClassWrapInformation("left-hover"));
-		buttonleftinformation[i].addEventListener("mouseout",removeClassWrapInformation("left-hover"));
+		buttonrightinformation[i].addEventListener("mouseenter",function() { addClassWrapInformation("right-hover")});
+		buttonrightinformation[i].addEventListener("mouseout",function() { removeClassWrapInformation("right-hover")});
+		buttonrightinformation[i].addEventListener("click",function() {clickWrapInformation("right-click")});
+		buttonrightinformation[i].addEventListener("click",clickOnceWrapInformation);
+		buttonleftinformation[i].addEventListener("mouseenter",function() {addClassWrapInformation("left-hover")});
+		buttonleftinformation[i].addEventListener("mouseout",function() {removeClassWrapInformation("left-hover")});
+		buttonleftinformation[i].addEventListener("click",function() {clickWrapInformation("left-click")});
+		buttonleftinformation[i].addEventListener("click",clickOnceWrapInformation);
 	}
 	
 	// ================================================================================

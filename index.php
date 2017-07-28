@@ -19,7 +19,13 @@
 			<div class="line-vertical line-white-down background-white"></div>
 			
 			<span class="big-title big-title-blue orbitron">
-				C u m h a e c t a l i a q u
+				<span class="title-letters">L</span>
+				<span class="title-letters">A</span>
+				<span class="title-letters">T</span>
+				<span class="title-letters">S</span>
+				<span class="title-letters">U</span>
+				<span class="title-letters"></span>
+				<span class="title-letters">J</span>
 			</span>
 			
 			<div class="menu">
@@ -79,11 +85,23 @@
 					</div>
 				
 					<div class="blocs-inside-title-line"></div>
-					<div class="blocs-inside-title background-white"><span class="tekolight">Project .01</span></div>
-					<div class="blocs-inside-neartitle"><span class="montserratlight">Cum haec taliaque sollicitas eius</span></div>
+					<div class="blocs-inside-title background-white"><span class="tekolight">Project .00</span></div>
+					<div class="blocs-inside-neartitle"><span class="montserratlight">Portefolio & Nouvelle technologie</span></div>
 					<div class="blocs-inside background-white ">
-						<span class="blocs-inside-informations-title tekobold">Cum haec taliaque</span>
+						<span class="blocs-inside-informations-title tekobold">Latsuj.com</span>
 						<div class="blocs-inside-wrap">
+							<span class="blocs-inside-informations-texte montserratlight">
+								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+							</span>
+							<span class="blocs-inside-informations-texte montserratlight">
+								Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+							</span>
+							<span class="blocs-inside-informations-texte montserratlight">
+								Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+							</span>
+						</div>
+
+						<div class="blocs-inside-wrap left-click">
 							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 							</span>
