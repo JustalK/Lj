@@ -1,8 +1,10 @@
 // I don't use JQUERY because I want to keep the website with the less ressource possible
 // Vanila JS - SCRIPT'S LATSUJ
 
+// I add a class when we scroll for remove the hover element - optimization 60fps scroll
 // I use classList.add instead of += " " because this is faster - jsperf
 // I have created a lot of variables for saving the length of table because...it's faster so better :) 
+// I use sometime the shift operator instead of arithmetic operator because it's faster when you have to turn the float value into an integer and multiply or divide it
 
 // ================================================================================
 // MY SCRIPT
@@ -12,9 +14,27 @@
 document.addEventListener("DOMContentLoaded", function() {
 
 	// ================================================================================
-	// WebAssembly
+	// WebAssembly - I have created two functions in C99 for making the user experience smooth
 	// ================================================================================
-	var wasmCode = new Uint8Array([0,97,115,109,1,0,0,0,1,148,128,128,128,0,2,96,5,125,125,125,125,125,1,125,96,6,125,125,125,125,125,125,1,125,3,131,128,128,128,0,2,0,1,4,132,128,128,128,0,1,112,0,0,5,131,128,128,128,0,1,0,1,6,129,128,128,128,0,0,7,171,128,128,128,0,3,6,109,101,109,111,114,121,2,0,10,119,97,115,109,115,99,114,111,108,108,0,0,17,119,97,115,109,115,99,114,111,108,108,114,101,118,101,114,115,101,0,1,10,222,128,128,128,0,2,168,128,128,128,0,0,32,1,32,3,32,4,147,32,2,148,34,2,32,2,32,1,95,27,32,0,32,2,32,0,93,32,2,32,2,92,32,0,32,0,92,114,114,27,11,171,128,128,128,0,0,32,2,32,0,32,4,32,5,147,32,3,148,147,34,0,32,0,32,2,95,27,32,1,32,0,32,1,93,32,0,32,0,92,32,1,32,1,92,114,114,27,11]);
+	var wasmCode = new Uint8Array([ 0, 97, 115, 109, 1, 0, 0,
+			0, 1, 148, 128, 128, 128, 0, 2, 96, 5, 125, 125,
+			125, 125, 125, 1, 125, 96, 6, 125, 125, 125, 125,
+			125, 125, 1, 125, 3, 131, 128, 128, 128, 0, 2, 0,
+			1, 4, 132, 128, 128, 128, 0, 1, 112, 0, 0, 5, 131,
+			128, 128, 128, 0, 1, 0, 1, 6, 129, 128, 128, 128,
+			0, 0, 7, 171, 128, 128, 128, 0, 3, 6, 109, 101,
+			109, 111, 114, 121, 2, 0, 10, 119, 97, 115, 109,
+			115, 99, 114, 111, 108, 108, 0, 0, 17, 119, 97,
+			115, 109, 115, 99, 114, 111, 108, 108, 114, 101,
+			118, 101, 114, 115, 101, 0, 1, 10, 222, 128, 128,
+			128, 0, 2, 168, 128, 128, 128, 0, 0, 32, 1, 32, 3,
+			32, 4, 147, 32, 2, 148, 34, 2, 32, 2, 32, 1, 95,
+			27, 32, 0, 32, 2, 32, 0, 93, 32, 2, 32, 2, 92, 32,
+			0, 32, 0, 92, 114, 114, 27, 11, 171, 128, 128, 128,
+			0, 0, 32, 2, 32, 0, 32, 4, 32, 5, 147, 32, 3, 148,
+			147, 34, 0, 32, 0, 32, 2, 95, 27, 32, 1, 32, 0, 32,
+			1, 93, 32, 0, 32, 0, 92, 32, 1, 32, 1, 92, 114,
+			114, 27, 11 ]);
 	var m = new WebAssembly.Instance(new WebAssembly.Module(wasmCode));
 	// Since I'm gonna use this function really often (I use it everytime I scroll)
 	// I have made it with webAssembly for a very fast js - wasmScroll(max,min,velocity,a,offset)
@@ -129,6 +149,30 @@ document.addEventListener("DOMContentLoaded", function() {
 			}.bind(i));
 		}
 	}
+
+	// ================================================================================
+	// For the different calcul - Calcul all the important value;
+	// ================================================================================
+	var a, wh, mwh, b, c, segment, numberframe, hf;
+	
+	// Initialize all the important variable
+	function initialization() {
+		// Current position of the user
+		a = document.body.scrollTop;
+		// Height of the browser's windows of the user
+		wh = window.innerHeight;
+		mwh = wh>>1;
+		// Height of the website
+		bh = document.body.clientHeight;
+		b = bh - wh;
+		c = a / b;
+		// Height of a frame
+		hf = 2*wh;
+		// Position in a frame
+		segment = a%hf;
+		// Number of Frame
+		numberframe = hf/bh;
+	}
 	
 	// ================================================================================
 	// For the second step of scrolling - 
@@ -137,48 +181,24 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================	
 	
 	// For the little tricky effet for showing when your are
-	var a = document.body.scrollTop;
-	var wh = window.innerHeight;
-	var b = document.body.clientHeight - wh;
-	var c = a / b;
-	var segment = a%(2*wh);
 	var position = document.getElementById("POSITION");
 	var timer;
 	
 	var blackout = document.getElementsByClassName("blackout-effect");
-	var blackoutlength = blackout.length; 
-	
 	var bigtitle = document.getElementsByClassName("big-title");
-	var bigtitlelength = bigtitle.length;
-	
 	var areatextetitle = document.getElementsByClassName("area-texte-title");
-	var areatextetitlelength = areatextetitle.length;
-	
 	var areatextesubtitle = document.getElementsByClassName("area-texte-subtitle");
-	var areatextesubtitlelength = areatextesubtitle.length;
-	
 	var photo = document.getElementsByClassName("photo");
-	var photolength = photo.length;
-	
 	var photolinevertical = document.getElementsByClassName("photo-line-vertical");
-	var photolineverticallength = photolinevertical.length;
-	
 	var photolinehorizontal = document.getElementsByClassName("photo-line-horizontal");
-	var photolinehorizontallength = photolinehorizontal.length;
-	
 	var photoblockvertical = document.getElementsByClassName("photo-block-vertical");
-	var photoblockverticallength = photoblockvertical.length;
-	
 	var photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal");
-	var photoblockhorizontallength = photoblockhorizontal.length;
 	
 	window.addEventListener('scroll', function() {
+		// Initialisation of 
+		initialization();
+		
         // For the little tricky effect - Moving the width of the bar when we scroll
-    	a = document.body.scrollTop;
-    	wh = window.innerHeight;
-    	b = document.body.clientHeight - window.innerHeight;
-    	c = a / b;
-    	segment = a%(2*wh);
     	position.style.width=c*100+"%";
     	
     	// For all the blackout-effect...
@@ -187,67 +207,47 @@ document.addEventListener("DOMContentLoaded", function() {
     		blackout[i].style.opacity = a/wh-2*i-0.5;
     	}
     	
-    	// For all the title...
-    	for(var i=0,maxvalue=wh/2,minvalue=80,velocity=0.4,offset=0; i < bigtitlelength ; i++) {
+    	for(var i=0,maxvalue=mwh,minvalue=80,velocity=0.4,offset=0; i < numberframe ; i++) {
     		bigtitle[i].style.top = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
     	}
     	
-    	for(var i=0,maxvalue=0.55,minvalue=0,velocity=0.0006,offset=0; i < bigtitlelength ; i++) {
+    	for(var i=0,maxvalue=0.55,minvalue=0,velocity=0.0006,offset=0; i < numberframe ; i++) {
     		bigtitle[i].style.opacity = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset);
     	}
     	
-    	// For all the description under the photo 
-    	for(var i=0,maxvalue=20,minvalue=10,velocity=0.01,offset=wh; i < areatextetitlelength ; i++) {
+    	for(var i=0,maxvalue=20,minvalue=10,velocity=0.01,offset=wh; i < numberframe ; i++) {
     		areatextetitle[i].style.marginLeft = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%";
     	}
 
-    	for(var i=0,maxvalue=45,minvalue=40,velocity=-0.005,offset=2*wh; i < areatextetitlelength ; i++) {
+    	for(var i=0,maxvalue=45,minvalue=40,velocity=-0.005,offset=hf; i < numberframe ; i++) {
     		areatextesubtitle[i].style.marginLeft = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%";
     	}
     		
-    	for(var i=0,maxvalue=162,minvalue=100,velocity=0.25,offset=(wh/2)+100; i < photolength ; i++) {
+    	for(var i=0,maxvalue=162,minvalue=100,velocity=0.25,offset=mwh+100; i < numberframe ; i++) {
     		photo[i].style.height = "calc(100% - "+wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"px)";
     		photo[i].style.width = "calc(100% - "+wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"px)";
     	}
     	
     	// There are the same number of vertical and horizontal line
-    	for(var i=0,maxvalue=50,minvalue=0,velocity=0.3,offset=(wh/2)-200; i < photolinehorizontallength ; i++) {
+    	// A simple calcul based of  minvalue > ax + b > maxvalue (WebAssembly) - cause it's a reverse
+    	for(var i=0,maxvalue=50,minvalue=0,velocity=0.3,offset=mwh-200; i < numberframe*2 ; i++) {
     		photolinehorizontal[i].style.left = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%"; 
     		photolinevertical[i].style.top = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%"; 
     	}   	
 
-    	for(var i=0,maxvalue=100,minvalue=0,velocity=0.6,offset=(wh/2)-200; i < photolinehorizontallength ; i++) {
-    		// If my value is between my offset and the end of the project segmentation
-    		if(segment>offset && segment<2*wh) {
-    			// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
-    			photolinehorizontal[i].style.width = wasmScroll(maxvalue,minvalue,velocity,a,offset) + "%";
-        		photolinevertical[i].style.height = wasmScroll(maxvalue,minvalue,velocity,a,offset) + "%";
-    		} else {
-    			// If we are off the segment, we put the value at the minimal
-    			photolinehorizontal[i].style.width = minvalue;
-        		photolinevertical[i].style.height = minvalue;
-    		}
+    	for(var i=0,maxvalue=100,minvalue=0,velocity=0.6,offset=mwh-200; i < numberframe*2 ; i++) {
+    		// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
+			photolinehorizontal[i].style.width = wasmScroll(maxvalue,minvalue,velocity,a,offset) + "%";
+    		photolinevertical[i].style.height = wasmScroll(maxvalue,minvalue,velocity,a,offset) + "%";
     	}    	
     	
-    	for(var i=0,maxvalue=30,minvalue=0,velocity=0.12,offset=(wh/2)+100; i < photoblockverticallength ; i++) {
-    		// If my value is between my offset and the end of the project segmentation
-    		if(segment>offset && segment<2*wh) {
-    			// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
-    			photoblockvertical[i].style.width = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
-    			photoblockhorizontal[i].style.height = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
-    		} else {
-    			// If we are off the segment, we put the value at the minimal
-    			photoblockvertical[i].style.width = minvalue;
-    			photoblockhorizontal[i].style.height = minvalue;
-    		}
+    	for(var i=0,maxvalue=30,minvalue=0,velocity=0.12,offset=mwh+100; i < numberframe*2 ; i++) {
+			// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
+			photoblockvertical[i].style.width = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
+			photoblockhorizontal[i].style.height = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
     	}
     	
-    	// When we reach a new frame with informations, we add a class
-    	if(a%(2*wh) - wh/2 > 0) {
-    		document.body.classList.add("new-frame");
-    	} else {
-    		document.body.classList.remove("new-frame");
-    	}
+    	isNewFrame();
     	
     	// When the user stop scrolling - we add an action of this
     	if(timer!==null) {
@@ -256,6 +256,15 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.body.classList.remove("no-scrolling");
         timer = setTimeout(stopScrolling, 300);
 	});
+	
+	// Add a class when we approach a new frame
+	function isNewFrame() {
+    	if(segment - mwh > 0) {
+    		document.body.classList.add("new-frame");
+    	} else {
+    		document.body.classList.remove("new-frame");
+    	}		
+	}
 	
 	// I use this class for keeping the framerate to 60fps when the user scroll
 	function stopScrolling() {
@@ -298,8 +307,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		buttonleftinformation[i].addEventListener("mouseenter",addClassWrapInformation("left-hover"));
 		buttonleftinformation[i].addEventListener("mouseout",removeClassWrapInformation("left-hover"));
 	}
-	
-	
 	
 	// ================================================================================
 	// For the menu
