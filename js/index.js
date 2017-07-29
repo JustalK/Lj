@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================
 	// For the different calcul - Calcul all the important value;
 	// ================================================================================
-	var a, wh, mwh, b, c, segment, numberframe, hf;
+	var a, wh, mwh, b, c, segment, numberframe, currentframe, hf;
 	
 	// Initialize all the important variable
 	function initialization() {
@@ -171,7 +171,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		// Position in a frame
 		segment = a%hf;
 		// Number of Frame
-		numberframe = 1;
+		numberframe = 2;
+		// Current frame - start by 0
+		currentframe = a/hf>>0;
 	}
 	
 	// ================================================================================
@@ -202,53 +204,35 @@ document.addEventListener("DOMContentLoaded", function() {
         // For the little tricky effect - Moving the width of the bar when we scroll
     	position.style.width=c*100+"%";
 
-    	for(var i=0,maxvalue=30,minvalue=10,velocity=0.1,offset=wh-mwh; i < numberframe ; i++) {
-    		blocsinsideinformationstitle[i].style.marginLeft = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"px";
-    	}    	
+    	blocsinsideinformationstitle[currentframe].style.marginLeft = wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px";
     	
-    	for(var i=0,maxvalue=0.5,minvalue=0,velocity=0.001,offset=mwh; i < numberframe ; i++) {
-    		blackout[i].style.opacity = wasmScroll(maxvalue,minvalue,velocity,a,offset);
-    	}
+    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
     	
-    	for(var i=0,maxvalue=mwh,minvalue=80,velocity=0.4,offset=0; i < numberframe ; i++) {
-    		bigtitle[i].style.top = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
-    	}
+    	bigtitle[currentframe].style.top = wasmScroll(mwh,80,0.4,segment,0)+"px";
+    	bigtitle[currentframe].style.opacity = wasmScrollReverse(0.55,0.55,0,0.0006,segment,0);
     	
-    	for(var i=0,maxvalue=0.55,minvalue=0,velocity=0.0006,offset=0; i < numberframe ; i++) {
-    		bigtitle[i].style.opacity = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset);
-    	}
-    	
-    	for(var i=0,maxvalue=20,minvalue=10,velocity=0.01,offset=wh; i < numberframe ; i++) {
-    		areatextetitle[i].style.marginLeft = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%";
-    	}
-
-    	for(var i=0,maxvalue=45,minvalue=40,velocity=-0.005,offset=hf; i < numberframe ; i++) {
-    		areatextesubtitle[i].style.marginLeft = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%";
-    	}
+    	areatextetitle[currentframe].style.marginLeft = wasmScrollReverse(20,20,10,0.01,segment,wh)+"%";
+    	areatextesubtitle[currentframe].style.marginLeft = wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%";
     		
-    	for(var i=0,maxvalue=162,minvalue=100,velocity=0.25,offset=mwh+100; i < numberframe ; i++) {
-    		photo[i].style.height = "calc(100% - "+wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"px)";
-    		photo[i].style.width = "calc(100% - "+wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"px)";
-    	}
+    	photo[currentframe].style.height = "calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
+    	photo[currentframe].style.width = "calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
     	
-    	// There are the same number of vertical and horizontal line
-    	// A simple calcul based of  minvalue > ax + b > maxvalue (WebAssembly) - cause it's a reverse
-    	for(var i=0,maxvalue=50,minvalue=0,velocity=0.3,offset=mwh-200; i < numberframe*2 ; i++) {
-    		photolinehorizontal[i].style.left = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%"; 
-    		photolinevertical[i].style.top = wasmScrollReverse(maxvalue,maxvalue,minvalue,velocity,a,offset)+"%"; 
-    	}   	
+    	photolinehorizontal[currentframe*2].style.left = wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
+    	photolinehorizontal[currentframe*2+1].style.left = wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
+    	photolinevertical[currentframe*2].style.top = wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
+    	photolinevertical[currentframe*2+1].style.top = wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
 
-    	for(var i=0,maxvalue=100,minvalue=0,velocity=0.6,offset=mwh-200; i < numberframe*2 ; i++) {
-    		// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
-			photolinehorizontal[i].style.width = wasmScroll(maxvalue,minvalue,velocity,a,offset) + "%";
-    		photolinevertical[i].style.height = wasmScroll(maxvalue,minvalue,velocity,a,offset) + "%";
-    	}    	
+    	// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
+		photolinehorizontal[currentframe*2].style.width = wasmScroll(100,0,0.6,segment,mwh-200) + "%";
+		photolinehorizontal[currentframe*2+1].style.width = wasmScroll(100,0,0.6,segment,mwh-200) + "%";
+    	photolinevertical[currentframe*2].style.height = wasmScroll(100,0,0.6,segment,mwh-200) + "%";    	
+    	photolinevertical[currentframe*2+1].style.height = wasmScroll(100,0,0.6,segment,mwh-200) + "%";    	
     	
-    	for(var i=0,maxvalue=30,minvalue=0,velocity=0.12,offset=mwh+100; i < numberframe*2 ; i++) {
-			// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
-			photoblockvertical[i].style.width = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
-			photoblockhorizontal[i].style.height = wasmScroll(maxvalue,minvalue,velocity,a,offset)+"px";
-    	}
+    	// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
+		photoblockvertical[currentframe*2].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+		photoblockvertical[currentframe*2+1].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+		photoblockhorizontal[currentframe*2].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+		photoblockhorizontal[currentframe*2+1].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
     	
     	isNewFrame();
     	
