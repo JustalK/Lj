@@ -45,7 +45,7 @@ body:not(.no-scrolling) {
 
 /*
 =====================================================================================================
-FRAME CUSTOM
+FRAME 2
 =====================================================================================================
 */
 .cssvhunit #FRAME2 {
@@ -54,7 +54,7 @@ FRAME CUSTOM
 
 .cssvhunit #FRAME2.active {
 	transition: background-image 0.5s;
-	background-image: url("../imgs/FRAME1.png");
+	background-image: url("../imgs/FRAME1.jpg");
 }
 
 .cssvhunit.rgba #FRAME2 .layer {
@@ -67,46 +67,29 @@ FRAME CUSTOM
     left: 200px;
 }
 
-#FRAME2 .photo-square {
-	background: rgb(161, 187, 223);
-}
-
-#FRAME2 .area-texte-title {
-	color: #001966;
-}
-
-#FRAME2 .area-texte-subtitle {
-	color: #001966;
-}
-
 #FRAME2 .area-texte-line {
 	background: #001966;
 }
 
-#FRAME2 .letter-l, #FRAME2 .letter-j {
-	color: #91C6FF;
-}
-
-#FRAME2 .blocs-inside-informations-title {
-	color: #001966;
-}
-
-#FRAME2 .blocs-inside-informations-texte {
-	color: #001966;
-}
-
+#FRAME2 .area-texte-title,
+#FRAME2 .area-texte-subtitle,
+#FRAME2 .blocs-inside-informations-title,
+#FRAME2 .blocs-inside-informations-texte,
 #FRAME2 .blocs-inside-informations-texte strong {
 	color: #001966;
 }
 
+#FRAME2 .photo-square,
 #FRAME2 .blocs-inside-informations-left-page:hover,
-#FRAME2 .blocs-inside-informations-right-page:hover {
+#FRAME2 .blocs-inside-informations-right-page:hover,
+#FRAME2 .date-line {
 	background: #91C6FF;
 }
 
 #FRAME2 .blocs-inside-informations-left-page span, 
-#FRAME2 .blocs-inside-informations-right-page span
-{
+#FRAME2 .blocs-inside-informations-right-page span,
+#FRAME2 .blocs-inside-informations-page span,
+#FRAME2 .letter-l, #FRAME2 .letter-j {
 	color: #91C6FF;
 }
 
@@ -115,25 +98,20 @@ FRAME CUSTOM
 	color: white;
 }
 
-#FRAME2 .blocs-inside-informations-page span {
-	color: #91C6FF;
-}
-
 #FRAME2 .date {
 	color: #a1bbdf;
 }
 
-#FRAME2 .date-line {
-	background: #91c6ff;
-}
-
-.new-frame #FRAME2 .photo {
+.new-frame #FRAME2 .photo,
+.new-frame #FRAME2 .blocs {
 	border: 1px solid #a1bbdf;	
 }
 
-.new-frame #FRAME2 .blocs {
-	border: 1px solid #a1bbdf;
-}
+/*
+=====================================================================================================
+FRAME 3
+=====================================================================================================
+*/
 
 .cssvhunit #FRAME3 {
 	position: relative;
@@ -142,7 +120,7 @@ FRAME CUSTOM
 	min-height: 800px;
 	width: 100%;
 	
-	background-image: url("../imgs/FRAME1_LOW.jpg");
+	background-image: url("../imgs/FRAME2_LOW.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -150,8 +128,90 @@ FRAME CUSTOM
 
 .cssvhunit #FRAME3.active {	
     transition: background-image 0.5s;
-	background-image: url("../imgs/FRAME1.png");
+	background-image: url("../imgs/FRAME2.jpg");
 }
+
+/*
+=====================================================================================================
+FRAME 4
+=====================================================================================================
+*/
+
+#FRAME3 .big-title-blue,
+#FRAME4 .big-title-blue {
+    color: rgba(102, 26, 0, 0.3);
+}
+
+.cssvhunit.rgba #FRAME4 .bloc-informations {
+	background: rgba(102, 26, 0, 0.3);
+}
+
+
+#FRAME4 .blocs-inside-neartitle {
+	background: rgba(102, 26, 0);
+}
+
+.cssvhunit #FRAME4 {
+	background-image: url("../imgs/FRAME2_LOW.jpg");
+}
+
+.cssvhunit #FRAME4.active {
+	transition: background-image 0.5s;
+	background-image: url("../imgs/FRAME2.jpg");
+}
+
+.cssvhunit.rgba #FRAME4 .layer {
+	background: rgba(102, 26, 0, 0.4);
+}
+
+#FRAME4 .blocs-inside-title-line {
+    background: #FF7373;
+    width: 250px;
+    left: 200px;
+}
+
+#FRAME4 .area-texte-line {
+	background: #FF7373;
+}
+#FRAME4 .blocs-inside-informations-texte {
+	color: black;
+}
+
+#FRAME4 .area-texte-title,
+#FRAME4 .area-texte-subtitle,
+#FRAME4 .blocs-inside-informations-title,
+#FRAME4 .blocs-inside-informations-texte strong {
+	color: #FF7373;
+}
+
+#FRAME4 .photo-square,
+#FRAME4 .blocs-inside-informations-left-page:hover,
+#FRAME4 .blocs-inside-informations-right-page:hover,
+#FRAME4 .date-line {
+	background: #B20000;
+}
+
+#FRAME4 .blocs-inside-informations-left-page span, 
+#FRAME4 .blocs-inside-informations-right-page span,
+#FRAME4 .blocs-inside-informations-page span,
+#FRAME4 .letter-l, #FRAME4 .letter-j {
+	color: #B20000;
+}
+
+#FRAME4 .blocs-inside-informations-left-page:hover span,
+#FRAME4 .blocs-inside-informations-right-page:hover span {
+	color: white;
+}
+
+#FRAME4 .date {
+	color: #B20000;
+}
+
+.new-frame #FRAME4 .photo,
+.new-frame #FRAME4 .blocs {
+	border: 1px solid #B20000;	
+}
+
 
 /*
 =====================================================================================================

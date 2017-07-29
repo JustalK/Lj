@@ -281,6 +281,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	var buttonrightinformation = document.getElementsByClassName("blocs-inside-informations-right-page");
 	var buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page");
 	var wrapinformation = document.getElementsByClassName("blocs-inside-wrap");
+	var page = document.getElementsByClassName("page");
+	var pagelength = page.length;
 	var wrapinformationlength = wrapinformation.length;
 	var click = 0;
 	
@@ -305,6 +307,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		}		
 	}
 	
+	/**
+	 * Once the user has clicked, he still on the button but I dont want the "hover" effect
+	 * So I had a class for making left:0 the normal position when the cursor still on the button
+	 */
 	function clickOnceWrapInformation() {
 		for(var j=0; j < wrapinformationlength ; j++) {
 			wrapinformation[j].classList.add("clicked");
@@ -317,6 +323,10 @@ document.addEventListener("DOMContentLoaded", function() {
 			click = Math.min(wrapinformationlength>>1,click+1);
 		} else {
 			click = Math.max(0,click-1);
+		}
+		
+		for(var i=0; i < pagelength ; i++) {	
+			page[i].innerHTML = (click+1)+" / "+(wrapinformationlength/2+1);
 		}
 		
 		for(var j=0; j < wrapinformationlength ; j++) {	

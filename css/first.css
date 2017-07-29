@@ -87,7 +87,6 @@ span {
 
 .show-orbitron .big-title-blue {
     position: absolute;
-    color: rgba(145, 198, 255,1);
     text-transform: uppercase;
     font-size: 96px;
     top: 80px;
@@ -100,28 +99,35 @@ span {
     transition: top 0.05s;
 }
 
-.cssvhunit #FRAME1 {
+.cssvhunit .frame-presentation {
 	position: relative;
 	
 	height: 100vh;
 	min-height: 800px;
 	width: 100%;
 	
-	background-image: url("../imgs/FRAME1_LOW.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
 }
 
+.cssvhunit #FRAME1 {
+	background-image: url("../imgs/FRAME1_LOW.jpg");
+}
+
 .cssvhunit #FRAME1.active {	
     transition: background-image 0.5s;
-	background-image: url("../imgs/FRAME1.png");
+	background-image: url("../imgs/FRAME1.jpg");
 }
 
 .cssvhunit.rgba #FRAME2 .bloc-informations {
 	background: rgba(222, 240, 253, 0.3);
 }
 
+#FRAME1 .big-title-blue,
+#FRAME2 .big-title-blue {
+    color: rgba(145, 198, 255,1);
+}
 
 #FRAME2 .blocs-inside-neartitle {
 	background: rgb(222, 240, 253);
@@ -302,6 +308,18 @@ span {
     100% {
     	clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%);
     }
+}
+
+/*
+=====================================================================================================
+LETTERS
+=====================================================================================================
+*/
+
+.title-letters {
+	width: 80px;
+    overflow: hidden;
+    display: inline-block;
 }
 
 /*
