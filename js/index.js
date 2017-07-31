@@ -197,6 +197,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	var photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal");
 	var blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title");
 	
+	// For initializing the variable
+	initialization();
 	window.addEventListener('scroll', function() {
 		// Initialisation of 
 		initialization();
@@ -253,9 +255,83 @@ document.addEventListener("DOMContentLoaded", function() {
     	}		
 	}
 	
+	// ================================================================================
+	// For smooth scrolling - Adding some control for making a good experience for the use
+	// ================================================================================
+	var isMoving = false;
+	document.onkeydown = function (e) {
+	    var e = e || window.event;
+	    if(!isMoving) {
+	    	isMoving = true;
+		    switch(e.keyCode) {
+		    	// When the user press the key down - we scroll automaticaly down
+		    	case 40:
+	    	    	if(segment>=0 && segment<wh) {
+	    	    		smoothScrollingTo(a,wh*(2*currentframe+1));	    		
+	    	    	} else {
+	    	    		smoothScrollingTo(a,hf*(currentframe+1));	
+	    	    	}
+		    		break;
+		    	// Wehn the user press the key right, we open the menu or we switch page
+		    	case 39:
+	    	    	if(segment>=0 && segment<wh) {
+	    	    		onMenu();	 
+	    	    	} else {
+	    	    		clickWrapInformation("right-click");
+	    	    	}
+	    	    	isMoving = false;   		
+		    		break;
+		    	//when the user press the key up - we scroll automaticaly up
+		    	case 38:
+	    	    	if(segment>=0 && segment<wh) {
+	    	    		smoothScrollingTo(a,wh*(2*currentframe-1));	
+	    	    	} else {
+	    	    		smoothScrollingTo(a,wh*(2*currentframe));	    		
+	    	    	}
+		    		break;
+			    	//when the user press the key left - we off the menu or we switch page
+		    	case 37:
+	    	    	if(segment>=0 && segment<wh) {
+	    	    		offMenu();	
+	    	    	} else {
+	    	    		clickWrapInformation("left-click");	    		
+	    	    	}
+	    	    	isMoving = false;  
+		    		break;
+		    }
+	    }
+	};
+	
 	// I use this class for keeping the framerate to 60fps when the user scroll
 	function stopScrolling() {
 		document.body.classList.add("no-scrolling");
+		
+		if(segment<=100) {			
+			smoothScrollingTo(a,hf*currentframe);
+		}else if(segment>=hf-100) {
+			smoothScrollingTo(a,hf*(currentframe+1));
+		} else if(segment>=wh-100 && segment<=wh+100) {		
+			smoothScrollingTo(a,hf/2*(2*currentframe+1));
+		}
+	}
+	
+	// Creating a smooth scroll to a position
+	function smoothScrollingTo(pc,pf) {
+		var b=pc,f=pf;
+		var v=((f-b)/20)>>0;
+	    var move = setInterval(function(){
+	        window.scrollTo(0, b);
+	        b += v;
+	        if (v>=0 && b >= f) {
+	        	window.scrollTo(0, f);
+		    	isMoving = false;
+	        	clearInterval(move);
+	        } else if(v<=0 && b <= f) {
+	        	window.scrollTo(0, f);
+		    	isMoving = false;
+	        	clearInterval(move);
+	        }
+	    }, 20);		
 	}
 	
 	// ================================================================================
@@ -264,10 +340,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	var buttonrightinformation = document.getElementsByClassName("blocs-inside-informations-right-page");
 	var buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page");
+	var wrapblocsinside = document.getElementsByClassName("blocs-inside");
 	var wrapinformation = document.getElementsByClassName("blocs-inside-wrap");
+	var wrapinformationlength = wrapinformation.length;
 	var page = document.getElementsByClassName("page");
 	var pagelength = page.length;
-	var wrapinformationlength = wrapinformation.length;
 	var click = 0;
 	
 	/**
@@ -302,15 +379,26 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	function clickWrapInformation(nameClass) {
+		var count = 0;
+		for(var j=0; j < wrapblocsinside.length ; j++) {
+			if(j==currentframe) {
+				var children = wrapblocsinside[j].childNodes;
+				for(var z=0;z<children.length;z++) {		
+					if(wrapblocsinside[j].childNodes[z].className != undefined && wrapblocsinside[j].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {
+						count++;
+					}
+				}
+			}
+		}
 		// I update the cursor
 		if(nameClass=="right-click") {
-			click = Math.min(wrapinformationlength>>1,click+1);
+			click = Math.min(count-1,click+1);
 		} else {
 			click = Math.max(0,click-1);
 		}
 		
 		for(var i=0; i < pagelength ; i++) {	
-			page[i].innerHTML = (click+1)+" / "+(wrapinformationlength/2+1);
+			page[i].innerHTML = (click+1)+" / "+count;
 		}
 		
 		for(var j=0; j < wrapinformationlength ; j++) {	
@@ -349,14 +437,25 @@ document.addEventListener("DOMContentLoaded", function() {
 	// For all the elements for showing the menu
 	for(var i = 0,count = menu.length; i < count; i++) {
 	    // I add an event when the user is clicking the element
-	    menu[i].onclick = function() {
-	    	// Then I show all the menu...(there are the exact same number of menu and menushow)
-	    	for(var j = 0; j < menushowlength; j++) {
-		        menushow[j].classList.add("active");
-			    menu[j].classList.add("active");
-	    	}
-	        return false;
-	    };
+	    menu[i].onclick = onMenu;
+	}
+	
+	function onMenu() {
+    	// Then I show all the menu...(there are the exact same number of menu and menushow)
+    	for(var j = 0; j < menushowlength; j++) {
+	        menushow[j].classList.add("active");
+		    menu[j].classList.add("active");
+    	}
+        return false;		
 	}
 
+	function offMenu() {
+    	// Then I show all the menu...(there are the exact same number of menu and menushow)
+    	for(var j = 0; j < menushowlength; j++) {
+	        menushow[j].classList.remove("active");
+		    menu[j].classList.remove("active");
+    	}
+        return false;		
+	}	
+	
 });

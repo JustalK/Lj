@@ -88,7 +88,7 @@
 					</div>
 				
 					<div class="blocs-inside-title-line"></div>
-					<div class="blocs-inside-title background-white"><span class="tekolight">Project .00</span></div>
+					<div class="blocs-inside-title background-white"><span class="tekolight">Preambule</span></div>
 					<div class="blocs-inside-neartitle"><span class="montserratlight">Portefolio & Nouvelle technologie</span></div>
 					<div class="blocs-inside background-white ">
 						<span class="blocs-inside-informations-title tekobold">Latsuj.com</span>
