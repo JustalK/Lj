@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="fr" class="no-js">
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Latsuj - The Website</title>
 	<link rel="stylesheet" type="text/css" href="./css/first.css">
 </head>
@@ -122,7 +122,7 @@
 							<span>></span>
 						</div>
 						<div class="blocs-inside-informations-page montserratlight"><span class="page">1 / 2</span></div>
-						<div class="blocs-inside-page blocs-inside-informations-left-page montserratbold"><span><</span></div>
+						<div class="blocs-inside-page blocs-inside-informations-left-page montserratbold"><span>&lt;</span></div>
 					</div>
 				</div>
 			</div>
@@ -238,7 +238,7 @@
 							<span>></span>
 						</div>
 						<div class="blocs-inside-informations-page montserratlight"><span class="page">1 / 2</span></div>
-						<div class="blocs-inside-page blocs-inside-informations-left-page montserratbold"><span><</span></div>
+						<div class="blocs-inside-page blocs-inside-informations-left-page montserratbold"><span>&lt;</span></div>
 					</div>
 				</div>
 			</div>

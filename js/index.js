@@ -383,12 +383,18 @@ document.addEventListener("DOMContentLoaded", function() {
 		}				
 	}
 	
+	/**
+	 * When the user click, we turn the page in one sense or an other
+	 */
 	function clickWrapInformation(nameClass) {
 		var count = 0;
+		
+		// Counting the number of block inside the wrap informations
 		for(var j=0; j < wrapblocsinside.length ; j++) {
 			if(j==currentframe) {
 				var children = wrapblocsinside[j].childNodes;
 				for(var z=0;z<children.length;z++) {		
+					// The span inside the div count like a children so I have to check the childrens by className
 					if(wrapblocsinside[j].childNodes[z].className != undefined && wrapblocsinside[j].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {
 						count++;
 					}
@@ -402,6 +408,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			click = Math.max(0,click-1);
 		}
 		
+		// I update the page number (page number under the text area)
 		for(var i=0; i < pagelength ; i++) {	
 			page[i].innerHTML = (click+1)+" / "+count;
 		}
@@ -445,6 +452,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    menu[i].onclick = onMenu;
 	}
 	
+	// If the user open the menu
 	function onMenu() {
     	// Then I show all the menu...(there are the exact same number of menu and menushow)
     	for(var j = 0; j < menushowlength; j++) {
@@ -454,6 +462,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return false;		
 	}
 
+	// if the user close the menu
 	function offMenu() {
     	// Then I show all the menu...(there are the exact same number of menu and menushow)
     	for(var j = 0; j < menushowlength; j++) {
