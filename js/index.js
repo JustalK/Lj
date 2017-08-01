@@ -12,7 +12,12 @@
 
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
-
+	// Check if the user is not using a very old version of IE - in the case not, trolling him :p
+	if (window.console){
+		// If Some developper look in the console, I have to do something for him also :p
+		console.log('%c-> www.latsuj.com <-\n%cHello Developer, You have pressed the F12 key, you want to check my code ?! \nThat\'s ok, I have nothing to hide.\nI\'m all geared up for that.\nLatsuj', 'background:#222;color:#ff4141;font-size:40px;text-decoration:none;',"color:#ff4141;font-size:20px");
+	}
+	
 	// ================================================================================
 	// WebAssembly - I have created two functions in C99 for making the user experience smooth
 	// ================================================================================
