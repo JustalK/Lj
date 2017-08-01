@@ -310,14 +310,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	// I use this class for keeping the framerate to 60fps when the user scroll
 	function stopScrolling() {
 		document.body.classList.add("no-scrolling");
-		
-		if(segment<=100) {			
-			smoothScrollingTo(a,hf*currentframe);
-		}else if(segment>=hf-100) {
-			smoothScrollingTo(a,hf*(currentframe+1));
-		} else if(segment>=wh-100 && segment<=wh+100) {		
-			smoothScrollingTo(a,hf/2*(2*currentframe+1));
-		}
 	}
 	
 	// Creating a smooth scroll to a position
@@ -388,7 +380,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	 */
 	function clickWrapInformation(nameClass) {
 		var count = 0;
-		
 		// Counting the number of block inside the wrap informations
 		for(var j=0; j < wrapblocsinside.length ; j++) {
 			if(j==currentframe) {
@@ -408,20 +399,27 @@ document.addEventListener("DOMContentLoaded", function() {
 			click = Math.max(0,click-1);
 		}
 		
-		// I update the page number (page number under the text area)
-		for(var i=0; i < pagelength ; i++) {	
-			page[i].innerHTML = (click+1)+" / "+count;
-		}
+		// I update the page number (page number under the text area)	
+		page[currentframe].innerHTML = (click+1)+" / "+count;
 		
-		for(var j=0; j < wrapinformationlength ; j++) {	
-			if(j==click) { 			
-				wrapinformation[j].classList.remove("right-click");
-				wrapinformation[j].classList.remove("left-click");
-			} else if(j>=click) {				
-				wrapinformation[j].classList.remove("right-click");
-				wrapinformation[j].classList.add("left-click");
-			} else {
-				wrapinformation[j].classList.add(nameClass);
+		for(var j=0; j < wrapblocsinside.length ; j++) {	
+			if(j==currentframe) {
+				console.log(currentframe);
+				var children = wrapblocsinside[j].childNodes;
+				for(var z=0;z<children.length;z++) {		
+					// The span inside the div count like a children so I have to check the childrens by className
+					if(wrapblocsinside[j].childNodes[z].className != undefined && wrapblocsinside[j].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {					
+						if(j==click) { 			
+							wrapblocsinside[j].childNodes[z].classList.remove("right-click");
+							wrapblocsinside[j].childNodes[z].classList.remove("left-click");
+						} else if(j>=click) {				
+							wrapblocsinside[j].childNodes[z].classList.remove("right-click");
+							wrapblocsinside[j].childNodes[z].classList.add("left-click");
+						} else {
+							wrapblocsinside[j].childNodes[z].classList.add(nameClass);
+						}
+					}
+				}
 			}
 		}		
 	}
