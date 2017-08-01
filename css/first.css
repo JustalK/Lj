@@ -70,6 +70,7 @@ span {
 	-khtml-user-select: none; /* Konqueror HTML */
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none;
 	cursor: default;
 }
 
@@ -200,7 +201,6 @@ span {
 .menu.active {
 	opacity: 0;
 	cursor: default;
-	pointer-events: none;
 }
 
 .menu-title {
@@ -281,7 +281,6 @@ span {
     background: rgba(222, 240, 253, 0.4);
     z-index: 6;
     
-    //transition: background 0.2s, width 0.3s, clip-path 0.8s;
     clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)
 }
 
