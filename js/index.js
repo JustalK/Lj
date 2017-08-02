@@ -381,45 +381,39 @@ document.addEventListener("DOMContentLoaded", function() {
 	function clickWrapInformation(nameClass) {
 		var count = 0;
 		// Counting the number of block inside the wrap informations
-		for(var j=0; j < wrapblocsinside.length ; j++) {
-			if(j==currentframe) {
-				var children = wrapblocsinside[j].childNodes;
-				for(var z=0;z<children.length;z++) {		
-					// The span inside the div count like a children so I have to check the childrens by className
-					if(wrapblocsinside[j].childNodes[z].className != undefined && wrapblocsinside[j].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {
-						count++;
-					}
-				}
+		var children = wrapblocsinside[currentframe].childNodes;
+		for(var z=0;z<children.length;z++) {		
+			// The span inside the div count like a children so I have to check the childrens by className
+			if(wrapblocsinside[currentframe].childNodes[z].className != undefined && wrapblocsinside[currentframe].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {
+				count++;
 			}
 		}
+		
 		// I update the cursor
 		if(nameClass=="right-click") {
-			click = Math.min(count-1,click+1);
+			wrapblocsinside[currentframe].dataset.count = Math.min(count-1,wrapblocsinside[currentframe].dataset.count+1);
 		} else {
-			click = Math.max(0,click-1);
-		}
+			wrapblocsinside[currentframe].dataset.count = Math.max(0,wrapblocsinside[currentframe].dataset.count-1);
+		}	
 		
 		// I update the page number (page number under the text area)	
-		page[currentframe].innerHTML = (click+1)+" / "+count;
+		page[currentframe].innerHTML = (wrapblocsinside[currentframe].dataset.count*1+1)+" / "+count;
 		
-		for(var j=0; j < wrapblocsinside.length ; j++) {	
-			if(j==currentframe) {
-				console.log(currentframe);
-				var children = wrapblocsinside[j].childNodes;
-				for(var z=0;z<children.length;z++) {		
-					// The span inside the div count like a children so I have to check the childrens by className
-					if(wrapblocsinside[j].childNodes[z].className != undefined && wrapblocsinside[j].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {					
-						if(j==click) { 			
-							wrapblocsinside[j].childNodes[z].classList.remove("right-click");
-							wrapblocsinside[j].childNodes[z].classList.remove("left-click");
-						} else if(j>=click) {				
-							wrapblocsinside[j].childNodes[z].classList.remove("right-click");
-							wrapblocsinside[j].childNodes[z].classList.add("left-click");
-						} else {
-							wrapblocsinside[j].childNodes[z].classList.add(nameClass);
-						}
-					}
+		var children = wrapblocsinside[currentframe].childNodes;
+		for(var z=0,p=0;z<children.length;z++) {		
+			// The span inside the div count like a children so I have to check the childrens by className
+			if(wrapblocsinside[currentframe].childNodes[z].className != undefined && wrapblocsinside[currentframe].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {					
+				// If It's the frame that I have to show, i remove the two classes
+				if(p==wrapblocsinside[currentframe].dataset.count) { 			
+					wrapblocsinside[currentframe].childNodes[z].classList.remove("right-click","left-click");
+				// If it's the frame after the one that I have to show
+				} else if(p>wrapblocsinside[currentframe].dataset.count) {				
+					wrapblocsinside[currentframe].childNodes[z].classList.remove("right-click");
+					wrapblocsinside[currentframe].childNodes[z].classList.add("left-click");
+				} else {
+					wrapblocsinside[currentframe].childNodes[z].classList.add("right-click");
 				}
+				p++;
 			}
 		}		
 	}
