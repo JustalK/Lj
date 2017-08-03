@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			}.bind(i));
 		}
 	}
-
+	
 	// ================================================================================
 	// For the different calcul - Calcul all the important value;
 	// ================================================================================
@@ -242,6 +242,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		photoblockhorizontal[currentframe*2+1].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
     	
     	isNewFrame();
+    	
+    	
     	
     	// When the user stop scrolling - we add an action of this
     	if(timer!==null) {
@@ -395,6 +397,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else {
 			wrapblocsinside[currentframe].dataset.count = Math.max(0,wrapblocsinside[currentframe].dataset.count-1);
 		}	
+		
+		// we change the image
+		photo[currentframe].style.backgroundImage = "url("+wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.img+")";
 		
 		// I update the page number (page number under the text area)	
 		page[currentframe].innerHTML = (wrapblocsinside[currentframe].dataset.count*1+1)+" / "+count;
