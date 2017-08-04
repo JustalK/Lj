@@ -60,6 +60,9 @@
 					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
 					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
 					<div class="photo">
+						<div class="background-photo"></div>
+						<div class="under-background-photo"></div>
+					
 						<div class="photo-square photo-square-black-left"></div>
 						<div class="photo-square photo-square-black-right"></div>
 						<div class="photo-square photo-square-black-up"></div>

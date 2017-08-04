@@ -200,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var photolinehorizontal = document.getElementsByClassName("photo-line-horizontal");
 	var photoblockvertical = document.getElementsByClassName("photo-block-vertical");
 	var photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal");
+	var photosquare = document.getElementsByClassName("photo-square");
 	var blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title");
 	
 	// For initializing the variable
@@ -215,35 +216,29 @@ document.addEventListener("DOMContentLoaded", function() {
     	
     	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
     	
-    	bigtitle[currentframe].style.top = wasmScroll(mwh,80,0.4,segment,0)+"px";
-    	bigtitle[currentframe].style.opacity = wasmScrollReverse(0.55,0.55,0,0.0006,segment,0);
+    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";top:"+wasmScroll(mwh,80,0.8,segment,0)+"px";
     	
     	areatextetitle[currentframe].style.marginLeft = wasmScrollReverse(20,20,10,0.01,segment,wh)+"%";
     	areatextesubtitle[currentframe].style.marginLeft = wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%";
     		
-    	photo[currentframe].style.height = "calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
-    	photo[currentframe].style.width = "calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
+    	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
     	
-    	photolinehorizontal[currentframe*2].style.left = wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
-    	photolinehorizontal[currentframe*2+1].style.left = wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
-    	photolinevertical[currentframe*2].style.top = wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
-    	photolinevertical[currentframe*2+1].style.top = wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
-
-    	// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
-		photolinehorizontal[currentframe*2].style.width = wasmScroll(100,0,0.6,segment,mwh-200) + "%";
-		photolinehorizontal[currentframe*2+1].style.width = wasmScroll(100,0,0.6,segment,mwh-200) + "%";
-    	photolinevertical[currentframe*2].style.height = wasmScroll(100,0,0.6,segment,mwh-200) + "%";    	
-    	photolinevertical[currentframe*2+1].style.height = wasmScroll(100,0,0.6,segment,mwh-200) + "%";    	
+    	photolinehorizontal[currentframe*2].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
+    	photolinehorizontal[currentframe*2+1].style.cssText = "left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%;width"+wasmScroll(100,0,0.6,segment,mwh-200) + "%";
     	
-    	// A simple calcul based of  minvalue < ax + b < maxvalue (WebAssembly)
+    	photolinevertical[currentframe*2].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";
+    	photolinevertical[currentframe*2+1].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";   	
+    	
 		photoblockvertical[currentframe*2].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 		photoblockvertical[currentframe*2+1].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 		photoblockhorizontal[currentframe*2].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 		photoblockhorizontal[currentframe*2+1].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
     	
+		for(var i=0;i<4;i++) {
+			photosquare[currentframe*4+i].style.cssText = "width:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px;height:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+		}
+		
     	isNewFrame();
-    	
-    	
     	
     	// When the user stop scrolling - we add an action of this
     	if(timer!==null) {
@@ -341,6 +336,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page");
 	var wrapblocsinside = document.getElementsByClassName("blocs-inside");
 	var wrapinformation = document.getElementsByClassName("blocs-inside-wrap");
+	var backgroundphoto = document.getElementsByClassName("background-photo");
 	var wrapinformationlength = wrapinformation.length;
 	var page = document.getElementsByClassName("page");
 	var pagelength = page.length;
@@ -398,8 +394,12 @@ document.addEventListener("DOMContentLoaded", function() {
 			wrapblocsinside[currentframe].dataset.count = Math.max(0,wrapblocsinside[currentframe].dataset.count-1);
 		}	
 		
-		// we change the image
-		photo[currentframe].style.backgroundImage = "url("+wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.img+")";
+		// we change the image, so we add the effect and we remove it after x seconds
+		backgroundphoto[currentframe].classList.add("active");
+		setTimeout(function() {
+			backgroundphoto[currentframe].style.backgroundImage = "url("+wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.img+")";
+			backgroundphoto[currentframe].classList.remove("active");			
+		},600);
 		
 		// I update the page number (page number under the text area)	
 		page[currentframe].innerHTML = (wrapblocsinside[currentframe].dataset.count*1+1)+" / "+count;

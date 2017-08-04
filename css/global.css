@@ -102,11 +102,6 @@ FRAME 2
 	color: #a1bbdf;
 }
 
-.new-frame #FRAME2 .photo,
-.new-frame #FRAME2 .blocs {
-	border: 1px solid #a1bbdf;	
-}
-
 /*
 =====================================================================================================
 FRAME 3
@@ -307,25 +302,48 @@ DIAPORAMA - LEFT AREA
 	background-repeat: no-repeat;
 	background-position: center;
 	margin: auto;
+	overflow: hidden;
 	transition: border 1s;
+}
+
+.background-photo {
+    position: relative;
+	height: 100%;
+    width: 100%;
+    background-size: cover;
+	opacity: 1;    
+    z-index: 3;
+    transition: opacity 0.6s;
+}
+
+.background-photo.active {
+	opacity: 0;
+}
+
+.under-background-photo {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+	background: #2E2E2E;
 }
 
 .photo-square {
 	position: absolute;
-	height: 40px;
-	width: 40px;
+	height: 0;
+	width: 0;
 	z-index: 20;
 }
 
 .photo-square-black-left {
-	opacity: 0;
 	top: 0;
 	left: 0;
     transition: opacity 1s;
 }
 
 .photo-square-black-right {
-	opacity: 0;
 	top: 0;
 	right: 0;
     transition: opacity 1s;
@@ -333,7 +351,6 @@ DIAPORAMA - LEFT AREA
 
 
 .photo-square-black-up {
-	opacity: 0;
 	bottom: 0;
 	left: 0;
     transition: opacity 1s;
@@ -342,7 +359,6 @@ DIAPORAMA - LEFT AREA
 .photo-square-black-down {
     bottom: 0;
     right: 0;
-    opacity: 0;
     transition: opacity 1s;
 }
 
@@ -437,7 +453,7 @@ INFORMATIONS - RIGHT AREA
 	margin: 0 10px 50px 10px;
 	font-size: 16px;
 	position: relative;
-    left: 0;
+    left: 0%;
     transition: left 1s;
 }
 
