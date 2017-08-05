@@ -60,7 +60,7 @@
 					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
 					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
 					<div class="photo">
-						<div class="background-photo"></div>
+						<div class="background-photo" data-imglow="./imgs/FRAME2_LOW.jpg" data-img="./imgs/FRAME3.jpg"></div>
 						<div class="under-background-photo"></div>
 					
 						<div class="photo-square photo-square-black-left"></div>
@@ -179,6 +179,9 @@
 					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
 					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
 					<div class="photo">
+						<div class="background-photo" data-imglow="./imgs/FRAME2_LOW.jpg" data-img="./imgs/FRAME4.jpg"></div>
+						<div class="under-background-photo"></div>
+						
 						<div class="photo-square photo-square-black-left"></div>
 						<div class="photo-square photo-square-black-right"></div>
 						<div class="photo-square photo-square-black-up"></div>
@@ -211,7 +214,7 @@
 					<div class="blocs-inside-neartitle"><span class="montserratlight">Portefolio & Nouvelle technologie</span></div>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span class="blocs-inside-informations-title tekobold">Latsuj.com</span>
-						<div class="blocs-inside-wrap">
+						<div class="blocs-inside-wrap"  data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 							</span>
@@ -223,7 +226,7 @@
 							</span>
 						</div>
 						
-						<div class="blocs-inside-wrap left-click">
+						<div class="blocs-inside-wrap left-click"  data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 							</span>
@@ -235,7 +238,7 @@
 							</span>
 						</div>
 						
-						<div class="blocs-inside-wrap left-click">
+						<div class="blocs-inside-wrap left-click"  data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 							</span>

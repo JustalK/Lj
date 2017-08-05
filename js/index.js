@@ -155,6 +155,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 	
+	function loadPhoto() {
+		var background = document.getElementById("FRAME1");
+		var tmp = new Image();
+		tmp.src = background.getAttribute("data-src");
+		tmp.addEventListener('load',function() {
+			// For a better maintainability, we gonna just add a class and make the all animation on the css
+			this.classList.add("active");
+		}.bind(background));
+	}
+	
 	// ================================================================================
 	// For the different calcul - Calcul all the important value;
 	// ================================================================================
@@ -202,6 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal");
 	var photosquare = document.getElementsByClassName("photo-square");
 	var blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title");
+	var backgroundphoto = document.getElementsByClassName("background-photo");
 	
 	// For initializing the variable
 	initialization();
@@ -238,6 +249,16 @@ document.addEventListener("DOMContentLoaded", function() {
 			photosquare[currentframe*4+i].style.cssText = "width:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px;height:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 		}
 		
+		if(segment - mwh > 0) {
+			var background = backgroundphoto[currentframe];
+			background.style.backgroundImage = "url("+background.dataset.imglow+")";
+			var tmp = new Image();
+			tmp.src = backgroundphoto[currentframe].dataset.img;
+			tmp.addEventListener('load',function() {
+				this.style.backgroundImage = "url("+this.dataset.img+")";
+			}.bind(background));
+		}
+		
     	isNewFrame();
     	
     	// When the user stop scrolling - we add an action of this
@@ -254,7 +275,7 @@ document.addEventListener("DOMContentLoaded", function() {
     		document.body.classList.add("new-frame");
     	} else {
     		document.body.classList.remove("new-frame");
-    	}		
+    	}
 	}
 	
 	// ================================================================================
@@ -336,7 +357,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	var buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page");
 	var wrapblocsinside = document.getElementsByClassName("blocs-inside");
 	var wrapinformation = document.getElementsByClassName("blocs-inside-wrap");
-	var backgroundphoto = document.getElementsByClassName("background-photo");
 	var wrapinformationlength = wrapinformation.length;
 	var page = document.getElementsByClassName("page");
 	var pagelength = page.length;
