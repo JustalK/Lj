@@ -116,7 +116,7 @@ span {
 }
 
 .cssvhunit #FRAME1.active {	
-    transition: background-image 0.5s;
+    transition: background-image 0.5ss;
 	background-image: url("../imgs/FRAME1.jpg");
 }
 

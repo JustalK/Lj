@@ -95,11 +95,6 @@ document.addEventListener("DOMContentLoaded", function() {
     	fonttekomedium.loaded.then(function() {
 			document.body.classList.add("show-tekomedium");
 		});	
-    	
-    	// On all the previous fonts requested has been loaded
-    	document.fonts.ready.then(function() {
-			loadHighQualityImages();
-    	});
 	}
 	
 	// Load only the first time we scroll or if the scroll has already been move the global css file
@@ -127,31 +122,35 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Function for loading the first image in HD - Juste for a better effect
 	function loadHighQualityImagesFirst() {
-		var background = document.getElementById("FRAME1");
+		var background = document.getElementsByClassName("frame-first");
 		var tmp = new Image();
-		tmp.src = background.getAttribute("data-src");
+		tmp.src = background[0].getAttribute("data-src");
 		tmp.addEventListener('load',function() {
-			// For a better maintainability, we gonna just add a class and make the all animation on the css
-			this.classList.add("active");
+			for(i=0;i<this.length;i++) {
+				// For a better maintainability, we gonna just add a class and make the all animation on the css
+				this[i].classList.add("active");
+			}
 		}.bind(background));
 	}
 	
 	// Function for loading the images HQ after all the page has been loaded
+	var frames = document.getElementsByClassName("frame");
+	var frameslength = frames.length; 
 	function loadHighQualityImages() {
-		// First, we got the all frame
-		var background = document.getElementsByClassName("frame");
-		var backgroundlength = background.length; 
-		// The first element is load with the other function
-		// @see loadHighQualityImagesFirst()
-		var backgroundHQ = [""];
-		// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
-		for(var i=1; i < backgroundlength ; i++) {
-			backgroundHQ.push(new Image());
-			backgroundHQ[i].src = background[i].getAttribute("data-src");
-			backgroundHQ[i].addEventListener('load',function() {
-				// For a better maintainability, we gonna just add a class and make the all animation on the css
-				background[this].classList.add("active");
-			}.bind(i));
+		// If I'm in a last segment
+		if(segment-wh>0) {
+			// The first element is load with the other function
+			// @see loadHighQualityImagesFirst()
+			var backgroundOnWait = [frames[currentframe*2+2],frames[currentframe*2+3]];
+			var backgroundHQ = [new Image(),new Image()];
+			// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
+			for(var i=0; i < 2 ; i++) {
+				backgroundHQ[i].src = backgroundOnWait[i].getAttribute("data-src");
+				backgroundHQ[i].addEventListener('load',function() {
+					// For a better maintainability, we gonna just add a class and make the all animation on the css
+					backgroundOnWait[this].classList.add("active");
+				}.bind(i));
+			}
 		}
 	}
 	
@@ -168,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================
 	// For the different calcul - Calcul all the important value;
 	// ================================================================================
-	var a, wh, mwh, b, c, segment, numberframe, currentframe, hf;
+	var a, wh, mwh, b, c, segment, numberframe, currentframe, hf, bg;
 	
 	// Initialize all the important variable
 	function initialization() {
@@ -189,6 +188,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		numberframe = 2;
 		// Current frame - start by 0
 		currentframe = a/hf>>0;
+		// The background of photo for the frame
+		bg = backgroundphoto[currentframe];
 	}
 	
 	// ================================================================================
@@ -249,15 +250,23 @@ document.addEventListener("DOMContentLoaded", function() {
 			photosquare[currentframe*4+i].style.cssText = "width:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px;height:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 		}
 		
+		
 		if(segment - mwh > 0) {
-			var background = backgroundphoto[currentframe];
-			background.style.backgroundImage = "url("+background.dataset.imglow+")";
-			var tmp = new Image();
-			tmp.src = backgroundphoto[currentframe].dataset.img;
-			tmp.addEventListener('load',function() {
-				this.style.backgroundImage = "url("+this.dataset.img+")";
-			}.bind(background));
+			// If I have not been in this loop for this frame
+			if(bg.dataset.load!=1) {
+				bg.dataset.load = 1;
+				bg.style.backgroundImage = "url("+bg.dataset.imglow+")";
+				// I create a new image for preload the content
+				var tmp = new Image();
+				tmp.src = backgroundphoto[currentframe].dataset.img;
+				tmp.addEventListener('load',function() {
+					this.style.backgroundImage = "url("+this.dataset.img+")";
+				}.bind(bg));
+			}
 		}
+		
+		// Load the image with LQIP technique at the right moment
+		loadHighQualityImages();
 		
     	isNewFrame();
     	

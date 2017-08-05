@@ -14,7 +14,7 @@
 		<div id="POSITION" class="background-white"></div>
 		
 		<!-- START FRAME1 -->
-		<div id="FRAME1" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation">
+		<div id="FRAME1" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation frame-first">
 			<div class="blackout-effect"></div>
 			<div class="line-vertical line-white-up background-white"></div>
 			<div class="line-vertical line-white-down background-white"></div>
@@ -44,7 +44,7 @@
 		</div>
 
 		<!-- START FRAME2 -->
-		<div id="FRAME2" data-src="./imgs/FRAME1.jpg" class="frame frame-informations">
+		<div id="FRAME2" data-src="./imgs/FRAME1.jpg" class="frame frame-informations frame-first">
 			<div class="line-black-long line-black-long-up background-black"></div>
 			<div class="line-black-long line-black-long-down background-black"></div>
 			<div class="line-vertical line-black-up background-black"></div>
