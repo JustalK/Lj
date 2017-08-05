@@ -421,11 +421,16 @@ INFORMATIONS - RIGHT AREA
 	width: 500px;
     height: 100%;
     top: -100px;
+    float: left;
     
     border:1px solid black;
 	transition: border 1s;
 	
     z-index: 12;
+}
+
+.blocs.left {
+	float: right;
 }
 
 .blocs-inside {

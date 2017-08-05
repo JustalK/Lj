@@ -83,7 +83,7 @@
 				</div>
 			</div>
 			<div class="areas area-40">
-				<div class="blocs bloc-informations">
+				<div class="blocs bloc-informations right">
 					<div class="informations">
 						<div class="date-line date-line-up"></div>
 						<span class="date orbitron">2015</span>
@@ -172,37 +172,8 @@
 			<div class="letter-l letters tekomedium">L</div>
 			<div class="letter-j letters tekomedium">J</div>
 			
-			<div class="areas area-60">
-				<div class="photo-wrap">
-					<div class="photo-line photo-line-vertical photo-line-black-left"></div>
-					<div class="photo-line photo-line-vertical photo-line-black-right"></div>
-					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
-					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
-					<div class="photo">
-						<div class="background-photo" data-imglow="./imgs/FRAME2_LOW.jpg" data-img="./imgs/FRAME4.jpg"></div>
-						<div class="under-background-photo"></div>
-						
-						<div class="photo-square photo-square-black-left"></div>
-						<div class="photo-square photo-square-black-right"></div>
-						<div class="photo-square photo-square-black-up"></div>
-						<div class="photo-square photo-square-black-down"></div>
-						
-						<div class="photo-block photo-block-vertical photo-block-black-top-left"></div>
-						<div class="photo-block photo-block-vertical photo-block-black-top-right"></div>
-						<div class="photo-block photo-block-horizontal photo-block-black-bottom-left"></div>
-						<div class="photo-block photo-block-horizontal photo-block-black-bottom-right"></div>
-					</div>
-				</div>
-				<div class="area-texte">
-					<div class="area-texte-wrap">
-						<div class="area-texte-line"></div>
-						<span class="area-texte-title tekobold">Cum haec taliaque</span>
-						<span class="area-texte-subtitle tekolight">Cum haec taliaque sollicitas eius aures everberent expositas</span>
-					</div>
-				</div>
-			</div>
 			<div class="areas area-40">
-				<div class="blocs bloc-informations">
+				<div class="blocs bloc-informations left">
 					<div class="informations">
 						<div class="date-line date-line-up"></div>
 						<span class="date orbitron">2015</span>
@@ -257,6 +228,36 @@
 						</div>
 						<div class="blocs-inside-informations-page montserratlight"><span class="page">1 / 3</span></div>
 						<div class="blocs-inside-page blocs-inside-informations-left-page montserratbold"><span>&lt;</span></div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="areas area-60">
+				<div class="photo-wrap">
+					<div class="photo-line photo-line-vertical photo-line-black-left"></div>
+					<div class="photo-line photo-line-vertical photo-line-black-right"></div>
+					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
+					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
+					<div class="photo">
+						<div class="background-photo" data-imglow="./imgs/FRAME2_LOW.jpg" data-img="./imgs/FRAME4.jpg"></div>
+						<div class="under-background-photo"></div>
+						
+						<div class="photo-square photo-square-black-left"></div>
+						<div class="photo-square photo-square-black-right"></div>
+						<div class="photo-square photo-square-black-up"></div>
+						<div class="photo-square photo-square-black-down"></div>
+						
+						<div class="photo-block photo-block-vertical photo-block-black-top-left"></div>
+						<div class="photo-block photo-block-vertical photo-block-black-top-right"></div>
+						<div class="photo-block photo-block-horizontal photo-block-black-bottom-left"></div>
+						<div class="photo-block photo-block-horizontal photo-block-black-bottom-right"></div>
+					</div>
+				</div>
+				<div class="area-texte">
+					<div class="area-texte-wrap">
+						<div class="area-texte-line"></div>
+						<span class="area-texte-title tekobold">Cum haec taliaque</span>
+						<span class="area-texte-subtitle tekolight">Cum haec taliaque sollicitas eius aures everberent expositas</span>
 					</div>
 				</div>
 			</div>

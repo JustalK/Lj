@@ -225,7 +225,6 @@ document.addEventListener("DOMContentLoaded", function() {
     	position.style.width=c*100+"%";
 
     	blocsinsideinformationstitle[currentframe].style.marginLeft = wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px";
-    	
     	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
     	
     	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";top:"+wasmScroll(mwh,80,0.8,segment,0)+"px";
