@@ -14,7 +14,7 @@
 		<div id="POSITION" class="background-white"></div>
 		
 		<!-- START FRAME1 -->
-		<div id="FRAME1" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation frame-first">
+		<div id="FRAME1" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation frame-first frame-right">
 			<div class="blackout-effect"></div>
 			<div class="line-vertical line-white-up background-white"></div>
 			<div class="line-vertical line-white-down background-white"></div>
@@ -133,7 +133,7 @@
 		</div>
 	
 		<!-- START FRAME3 -->
-		<div id="FRAME3" data-src="./imgs/FRAME2.jpg" class="frame frame-presentation">
+		<div id="FRAME3" data-src="./imgs/FRAME2.jpg" class="frame frame-presentation frame-left">
 			<div class="blackout-effect"></div>
 			<div class="line-vertical line-white-up background-white"></div>
 			<div class="line-vertical line-white-down background-white"></div>

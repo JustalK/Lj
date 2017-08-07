@@ -577,11 +577,21 @@ INFORMATIONS - RIGHT AREA
 	top: 120px;
 }
 
+.left .date-line-up {
+	left: -38px;
+	right: initial;
+}
+	
 .date-line-down {
 	right: -38px;
 	bottom: 45px;
 }
 
+.left .date-line-down {
+	left: -38px;
+	right: initial;
+}
+	
 .blocs-inside-informations-left-page-hover-1 {
 	position: absolute;
 	bottom: -1px;

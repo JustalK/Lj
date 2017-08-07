@@ -99,6 +99,11 @@ span {
     transition: top 0.05s;
 }
 
+.frame-left .big-title-blue {
+	right: 200px;
+	left: initial;
+}
+	
 .cssvhunit .frame-presentation {
 	position: relative;
 	
@@ -198,6 +203,11 @@ span {
     transition: opacity 0.5s;
 }
 
+.frame-left .menu {
+	left: 0;
+	right: initial;
+}
+
 .menu.active {
 	opacity: 0;
 	cursor: default;
@@ -230,6 +240,11 @@ span {
     transition: all 0.4s;
 }
 
+.frame-left .menu-line-top {
+	left:30px;
+	right: initial;	
+}
+
 .menu:hover .menu-line-top,
 .menu.active .menu-line-top {
     transition: all 0.8s;
@@ -248,6 +263,11 @@ span {
     transition: all 0.4s;
 }
 
+.frame-left .menu-line-middle {
+	left: 30px;
+	right: initial;	
+}
+
 .menu:hover .menu-line-middle,
 .menu.active .menu-line-middle{
     transition: all 0.8s;
@@ -263,6 +283,11 @@ span {
     top: 60px;
     right: 30px;
     transition: all 0.4s;
+}
+
+.frame-left .menu-line-down {
+	left: 30px;
+	right: initial;	
 }
 
 .menu:hover .menu-line-down,
@@ -506,6 +531,11 @@ INFORMATIONS - RIGHT AREA
     width: 25%;	
 }
 
+.left .informations {
+	right: initial;
+	left:0;
+}
+
 .date {
     position: absolute;
     width: auto;
@@ -518,6 +548,11 @@ INFORMATIONS - RIGHT AREA
     font-size: 60px;
     text-align: center;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.left .date {
+	left: -125px;
+	right: initial;	
 }
 
 /*

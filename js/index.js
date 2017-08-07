@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
     	
     	photolinehorizontal[currentframe*2].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
-    	photolinehorizontal[currentframe*2+1].style.cssText = "left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%;width"+wasmScroll(100,0,0.6,segment,mwh-200) + "%";
+    	photolinehorizontal[currentframe*2+1].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
     	
     	photolinevertical[currentframe*2].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";
     	photolinevertical[currentframe*2+1].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";   	
