@@ -204,6 +204,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	var blackout = document.getElementsByClassName("blackout-effect");
 	var bigtitle = document.getElementsByClassName("big-title");
+	var date = document.getElementsByClassName("date");
+	var datelineup = document.getElementsByClassName("date-line-up");
+	var datelinedown = document.getElementsByClassName("date-line-down");
 	var areatextetitle = document.getElementsByClassName("area-texte-title");
 	var areatextesubtitle = document.getElementsByClassName("area-texte-subtitle");
 	var photo = document.getElementsByClassName("photo");
@@ -231,6 +234,10 @@ document.addEventListener("DOMContentLoaded", function() {
     	
     	areatextetitle[currentframe].style.marginLeft = wasmScrollReverse(20,20,10,0.01,segment,wh)+"%";
     	areatextesubtitle[currentframe].style.marginLeft = wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%";
+    	
+    	date[currentframe].style.top = wasmScroll(50,20,0.1,segment,mwh-200)+"%";
+    	datelineup[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
+    	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
     		
     	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
     	
@@ -245,6 +252,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		photoblockhorizontal[currentframe*2].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 		photoblockhorizontal[currentframe*2+1].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
     	
+		backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
+		
 		for(var i=0;i<4;i++) {
 			photosquare[currentframe*4+i].style.cssText = "width:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px;height:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 		}
