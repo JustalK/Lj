@@ -210,6 +210,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var areatextetitle = document.getElementsByClassName("area-texte-title");
 	var areatextesubtitle = document.getElementsByClassName("area-texte-subtitle");
 	var photo = document.getElementsByClassName("photo");
+	var photowrap = document.getElementsByClassName("photo-wrap");
 	var photolinevertical = document.getElementsByClassName("photo-line-vertical");
 	var photolinehorizontal = document.getElementsByClassName("photo-line-horizontal");
 	var photoblockvertical = document.getElementsByClassName("photo-block-vertical");
@@ -217,6 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var photosquare = document.getElementsByClassName("photo-square");
 	var blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title");
 	var backgroundphoto = document.getElementsByClassName("background-photo");
+	var frameinformations = document.getElementsByClassName("frame-informations");
 	
 	// For initializing the variable
 	initialization();
@@ -240,6 +242,8 @@ document.addEventListener("DOMContentLoaded", function() {
     	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
     		
     	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
+    	photowrap[currentframe].style.marginTop = wasmScroll(200,50,0.2,segment,mwh+200)+"px";
+    	frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(400,0,0.5,segment,wh)+"px";
     	
     	photolinehorizontal[currentframe*2].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
     	photolinehorizontal[currentframe*2+1].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
