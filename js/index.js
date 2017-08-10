@@ -219,6 +219,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	var blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title");
 	var backgroundphoto = document.getElementsByClassName("background-photo");
 	var frameinformations = document.getElementsByClassName("frame-informations");
+	var areas = document.getElementsByClassName("areas");
+	var blocsinsidewrap = document.getElementsByClassName("blocs-inside-wrap");
 	
 	// For initializing the variable
 	initialization();
@@ -243,7 +245,13 @@ document.addEventListener("DOMContentLoaded", function() {
     		
     	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
     	photowrap[currentframe].style.marginTop = wasmScroll(200,50,0.2,segment,mwh+200)+"px";
-    	frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(400,0,0.5,segment,wh)+"px";
+    	frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
+    	areas[currentframe*2].style.top = "-"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
+    	areas[currentframe*2+1].style.top = "-"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
+    	
+    	blocsinsidewrap[currentframe*2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
+    	blocsinsidewrap[currentframe*2+1].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
+    	blocsinsidewrap[currentframe*2+2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
     	
     	photolinehorizontal[currentframe*2].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
     	photolinehorizontal[currentframe*2+1].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
