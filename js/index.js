@@ -73,9 +73,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		fontmonserratlight.loaded.then(function() {
 			document.body.classList.add("show-montserratlight");
 		});
+
 		fonttekolight.loaded.then(function() {
 			document.body.classList.add("show-tekolight");
 			loadHighQualityImagesFirst();
+		});
+
+		document.fonts.ready.then(function() {
+			loadTheGlobalCss();
 		});
 	});	
 	
@@ -97,11 +102,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		});	
 	}
 	
-	// Load only the first time we scroll or if the scroll has already been move the global css file
-	window.addEventListener('scroll', loadTheGlobalCss);
+	// Load only the the global css file once everything for the first load as been load
 	function loadTheGlobalCss() {
 		// For avoiding this function to be executed two time, we first remove the event
-		window.removeEventListener('scroll', loadTheGlobalCss);
+		//window.removeEventListener('scroll', loadTheGlobalCss);
 		// Then we load all the font, we need under the first screen
     	loadAllTheOtherFont();
     	
@@ -242,12 +246,12 @@ document.addEventListener("DOMContentLoaded", function() {
     	date[currentframe].style.top = wasmScroll(50,20,0.1,segment,mwh-200)+"%";
     	datelineup[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
     	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
-    		
+    	
     	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
     	photowrap[currentframe].style.marginTop = wasmScroll(200,50,0.2,segment,mwh+200)+"px";
     	frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
-    	areas[currentframe*2].style.top = "-"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
-    	areas[currentframe*2+1].style.top = "-"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
+    	areas[currentframe*2].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px;transform:scale("+wasmScrollReverse(1,1,0.9,0.0002,segment,wh+200)+")";
+    	areas[currentframe*2+1].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px;transform:scale("+wasmScrollReverse(1,1,0.9,0.0002,segment,wh+200)+")";
     	
     	blocsinsidewrap[currentframe*2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
     	blocsinsidewrap[currentframe*2+1].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
