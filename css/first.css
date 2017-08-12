@@ -213,6 +213,7 @@ span {
 .menu.active {
 	opacity: 0;
 	cursor: default;
+	pointer-events: none;
 }
 
 .menu-title {
@@ -233,7 +234,6 @@ span {
     width: 150px;
     position: absolute;
     height: 128px;
-    cursor: pointer;
     z-index: 5;
     opacity: 0;
     pointer-events: none;
@@ -269,7 +269,12 @@ span {
     transition: width 0.2s, border 0.2s;
     transition-delay: 0.3s;
     border-left: 1px solid white;
+    cursor: pointer;
 	width:100%;
+}
+
+.menu-show.active .menu-show-current:hover {
+	background: rgba(68, 68, 68, 0.3);
 }
 
 .menu-show-prev {
@@ -290,6 +295,12 @@ span {
 	opacity: 1;
 }
 
+.menu-show.active .menu-show-prev:hover {
+	background: white;
+	color: black;
+	cursor: pointer;
+}
+
 .menu-show-next {
 	position: absolute;
     bottom: 0;
@@ -306,6 +317,12 @@ span {
 	transition: opacity 0.3s;
 	transition-delay: 0.9s;
 	opacity: 1;
+}
+
+.menu-show.active .menu-show-next:hover {
+	background: white;
+	color: black;
+	cursor: pointer;
 }
 
 .menu-show .menu-show-next-text {
@@ -329,6 +346,11 @@ span {
     left: 57px;
     border-left: 1px solid white;
 	width: calc(100% - 58px);
+	cursor: pointer;
+}
+
+.menu-show.active .menu-show-next-text:hover {
+	background: rgba(68, 68, 68, 0.3);
 }
 
 .menu-show-prev-text {
@@ -352,6 +374,11 @@ span {
     left: 57px;
     border-left: 1px solid white;
 	width: calc(100% - 58px);
+	cursor: pointer;
+}
+
+.menu-show.active .menu-show-prev-text:hover {
+	background: rgba(68, 68, 68, 0.3);
 }
 
 .menu:hover .menu-title,
