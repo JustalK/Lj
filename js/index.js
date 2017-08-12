@@ -506,7 +506,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	function onMenu() {
     	// Then I show all the menu...(there are the exact same number of menu and menushow)
     	for(var j = 0; j < menushowlength; j++) {
-	        menushow[j].classList.add("active");
+	        menushow[j].classList.add("menu-show-active");
 		    menu[j].classList.add("active");
     	}
         return false;		
@@ -516,7 +516,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	function offMenu() {
     	// Then I show all the menu...(there are the exact same number of menu and menushow)
     	for(var j = 0; j < menushowlength; j++) {
-	        menushow[j].classList.remove("active");
+	        menushow[j].classList.remove("menu-show-active");
 		    menu[j].classList.remove("active");
     	}
         return false;		

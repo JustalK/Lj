@@ -114,6 +114,8 @@ span {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
+	
+	 z-index: 1;
 }
 
 .cssvhunit #FRAME1 {
@@ -224,6 +226,85 @@ span {
     cursor: pointer;
 }
 
+.menu-show {
+    display: block;
+    right: 0;
+    top: calc(50% - 32px);
+    width: 200px;
+    position: absolute;
+    height: 128px;
+    cursor: pointer;
+    z-index: 5;
+    opacity: 1;
+}
+
+.menu-show-current {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+    height: 30px;
+    background: rgba(222, 240, 253, 0.3);
+    width: 100%;
+    line-height: 30px;
+    padding: 10px 0;
+    margin: auto;
+    color: white;
+    text-indent: 10px;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+}
+
+.menu-show-prev {
+	position: absolute;
+    top: 0;
+    left: 20px;
+    padding: 10px;
+    color: white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-top: 1px solid white;
+}
+
+.menu-show-next {
+	position: absolute;
+    bottom: 0;
+    left: 20px;
+    padding: 10px;
+    color: white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.menu-show-next-text {
+    position: absolute;
+    left: 58px;
+    color: white;
+    bottom: 0;
+    width: calc(100% - 58px);
+    background: rgba(222, 240, 253, 0.3);
+    height: 38px;
+    line-height: 38px;
+    text-indent: 10px;
+    border-bottom: 1px solid white;
+}
+
+.menu-show-prev-text {
+	position: absolute;
+    left: 58px;
+    color: white;
+    top: 0;
+    width: calc(100% - 58px);
+    background: rgba(222, 240, 253, 0.3);
+    height: 38px;
+    line-height: 38px;
+    text-indent: 10px;
+    border-top: 1px solid white;
+}
+
 .menu:hover .menu-title,
 .menu.active .menu-title{
     transition: all 0.8s;
@@ -295,42 +376,6 @@ span {
     transition: all 0.8s;
 	width: 10px;
 	background:	#a1bbdf;
-}
-
-.menu-show {
-	position: absolute;
-	right: 0;
-	width: 0%;
-	height: 100%;
-	border-left: 0px solid black;
-    background: rgba(222, 240, 253, 0.4);
-    z-index: 6;
-    
-    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)
-}
-
-.menu-show.active {
-    border-left: 1px solid black;
-    background: rgba(222, 240, 253, 0.4);
-	width: 50%;
-    animation-name: menu-show;
-    animation-duration: 1s;
-	animation-fill-mode: forwards;
-}
-
-@keyframes menu-show {
-    0% {
-		clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
-    }
-    30% {
-    	clip-path: polygon(100% 0%, 30% 0%, 50% 100%, 100% 100%);
-    }
-    70% {
-    	clip-path: polygon(100% 0%, 10% 0%, 0% 100%, 100% 100%);
-    }
-    100% {
-    	clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%);
-    }
 }
 
 /*

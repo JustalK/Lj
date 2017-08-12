@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/first.css">
 </head>
 
-<body>
+<body class="no-scrolling">
 
 
 
@@ -29,13 +29,19 @@
 				<span class="title-letters">J</span>
 			</span>
 			
-			<div class="menu">
+			<div class="menu active">
 				<span class="menu-title tekolight">Menu</span>
 				<div class="menu-line-top"></div>
 				<div class="menu-line-middle"></div>
 				<div class="menu-line-down"></div>
 			</div>
-			<div class="menu-show"></div>
+			<div class="menu-show">
+				<div class="menu-show-prev">&#9650;</div>
+				<span class="menu-show-prev-text tekolight">Projet 03</span>
+				<div class="menu-show-current tekolight">Preambule</div>
+				<div class="menu-show-next">&#9660;</div>
+				<span class="menu-show-next-text tekolight">Projet 01</span>
+			</div>
 			
 			<div class="icones scroll-down-1"></div>
 			<div class="icones scroll-down-2"></div>
