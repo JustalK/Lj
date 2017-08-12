@@ -29,7 +29,7 @@
 				<span class="title-letters">J</span>
 			</span>
 			
-			<div class="menu active">
+			<div class="menu">
 				<span class="menu-title tekolight">Menu</span>
 				<div class="menu-line-top"></div>
 				<div class="menu-line-middle"></div>
