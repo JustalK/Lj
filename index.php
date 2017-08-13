@@ -38,10 +38,10 @@
 			<div class="menu-show">
 				<div class="menu-close">&#x25C7;</div>
 				<div class="menu-show-prev">&#9650;</div>
-				<span class="menu-show-prev-text tekolight">Projet 03</span>
+				<span class="menu-show-prev-text tekolight">Projet 01</span>
 				<div class="menu-show-current tekolight">Preambule</div>
 				<div class="menu-show-next">&#9660;</div>
-				<span class="menu-show-next-text tekolight">Projet 01</span>
+				<span class="menu-show-next-text tekolight">Projet 00</span>
 			</div>
 			
 			<div class="icones scroll-down-1"></div>
@@ -98,7 +98,7 @@
 					</div>
 				
 					<div class="blocs-inside-title-line"></div>
-					<div class="blocs-inside-title background-white"><span class="tekolight">Preambule</span></div>
+					<div class="blocs-inside-title background-white"><span class="tekolight projectx">Preambule</span></div>
 					<div class="blocs-inside-neartitle"><span class="montserratlight">Portefolio & Nouvelle technologie</span></div>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span class="blocs-inside-informations-title tekobold">Latsuj.com</span>
@@ -188,7 +188,7 @@
 					</div>
 				
 					<div class="blocs-inside-title-line"></div>
-					<div class="blocs-inside-title background-white"><span class="tekolight">Project .00</span></div>
+					<div class="blocs-inside-title background-white"><span class="tekolight projectx">Project 01</span></div>
 					<div class="blocs-inside-neartitle"><span class="montserratlight">Portefolio & Nouvelle technologie</span></div>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span class="blocs-inside-informations-title tekobold">Latsuj.com</span>
@@ -349,7 +349,7 @@
 					</div>
 				
 					<div class="blocs-inside-title-line"></div>
-					<div class="blocs-inside-title background-white"><span class="tekolight">Preambule</span></div>
+					<div class="blocs-inside-title background-white"><span class="tekolight projectx">Project 02</span></div>
 					<div class="blocs-inside-neartitle"><span class="montserratlight">Portefolio & Nouvelle technologie</span></div>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span class="blocs-inside-informations-title tekobold">Latsuj.com</span>

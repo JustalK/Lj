@@ -529,4 +529,57 @@ document.addEventListener("DOMContentLoaded", function() {
         return false;		
 	}	
 	
+	var projectx = document.getElementsByClassName("projectx");
+	var menushowcurrent = document.getElementsByClassName("menu-show-current");
+	var menushownext = document.getElementsByClassName("menu-show-next");
+	var menushownexttext = document.getElementsByClassName("menu-show-next-text");
+	var menushowprev = document.getElementsByClassName("menu-show-prev");
+	var menushowprevtext = document.getElementsByClassName("menu-show-prev-text");
+	var countmenu = 0;
+	
+	// Adding the event for changing the menu order
+	for(var i = 0,count = menushownext.length; i < count; i++) {
+	    // I add an event when the user is clicking the element
+		menushownext[i].onclick = nextMenu;
+	}	
+	for(var i = 0,count = menushowprev.length; i < count; i++) {
+	    // I add an event when the user is clicking the element
+		menushowprev[i].onclick = prevMenu;
+	}	
+	
+	function prevMenu() {
+		countmenu = countmenu-1>0 ? countmenu-1:projectx.length-1;	
+		console.log(countmenu);
+		updateMenu();
+	}
+	
+	function nextMenu() {
+		countmenu++;	
+		updateMenu();
+	}
+	
+	function updateMenu() {
+		// Changing the previous menu
+		for(var i = 0,count = menushowprevtext.length; i < count; i++) {
+			menushowprevtext[i].innerHTML = projectx[(countmenu-1)%projectx.length].innerHTML;
+		}	
+		// Changing the current menu
+		for(var i = 0,count = menushowcurrent.length; i < count; i++) {
+			menushowcurrent[i].innerHTML = projectx[countmenu%projectx.length].innerHTML;
+		}		
+		//Changing the next menu
+		for(var i = 0,count = menushownexttext.length; i < count; i++) {
+			menushownexttext[i].innerHTML = projectx[(countmenu+1)%projectx.length].innerHTML;
+		}
+	}
 });
+
+
+
+
+
+
+
+
+
+
