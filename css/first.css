@@ -200,9 +200,9 @@ span {
     height: 70px;	
     cursor: pointer;
     z-index: 5;
-    opacity: 1;
-    
+    opacity: 1;    
     transition: opacity 0.3s;
+    transition-delay: 1.2s;
 }
 
 .frame-left .menu {
@@ -211,6 +211,8 @@ span {
 }
 
 .menu.active {
+    transition: opacity 0.3s;
+    transition-delay: 0s;
 	opacity: 0;
 	cursor: default;
 	pointer-events: none;
@@ -237,9 +239,13 @@ span {
     z-index: 5;
     opacity: 0;
     pointer-events: none;
+	transition: opacity 0.2s;
+	transition-delay:1.3s;
 }
 
 .menu-show.active {
+	transition: opacity 0s;
+	transition-delay:0s;
 	opacity:1;
 	pointer-events: initial;	
 }
@@ -263,6 +269,8 @@ span {
     border-left: none;
     border-top: 1px solid white;
 	overflow: hidden;	
+    transition: width 0.2s, border 0.2s;
+    transition-delay: 0.6s;
 }
 
 .menu-show.active .menu-show-current {
@@ -287,6 +295,8 @@ span {
     border-right: 1px solid white;
     border-top: 1px solid white;
 	opacity: 0;
+	transition: opacity 0.3s;
+	transition-delay: 0s;
 }
 
 .menu-show.active .menu-show-prev {
@@ -311,6 +321,8 @@ span {
     border-right: 1px solid white;
     border-bottom: 1px solid white;
     opacity: 0;
+	transition: opacity 0.3s;
+	transition-delay: 0s;
 }
 
 .menu-show.active .menu-show-next {
@@ -338,6 +350,8 @@ span {
     border-left: none;
     border-bottom: 1px solid white;	
     overflow: hidden;
+    transition: width 0.2s,left 0.2s,border 0.6s;
+    transition-delay: 0.3s;
 } 
 
 .menu-show.active .menu-show-next-text {
@@ -366,6 +380,8 @@ span {
     border-left: none;
     border-top: 1px solid white;
     overflow: hidden;
+    transition: width 0.2s,left 0.2s,border 0.6s;
+    transition-delay: 0.3s;
 }
 
 .menu-show.active .menu-show-prev-text {
@@ -387,6 +403,33 @@ span {
     color: #a1bbdf;
 }
 
+.menu-close {
+	position: absolute;
+    top: 38px;
+    right: 0;
+    height: 30px;
+    padding: 10px;
+    color: white;
+    z-index: 10;
+    border: 1px solid white;
+    background: black;
+	opacity: 0;
+	cursor: pointer;
+	transition: opacity 0.3s;
+	transition-delay: 0.9s;
+}
+
+.menu-show.active .menu-close {
+	transition: opacity 0.3s;
+	transisiton-delay: 0s;
+	opacity: 1;
+}	
+
+.menu-show.active .menu-close:hover {
+	background: white;
+	color:black;
+}
+	
 .menu-line-top {
 	width: 70px;
     height: 1px;

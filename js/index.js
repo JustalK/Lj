@@ -494,6 +494,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	var menu = document.getElementsByClassName("menu");
 	var menushow = document.getElementsByClassName("menu-show");
+	var menuclose = document.getElementsByClassName("menu-close");
 	var menushowlength = menushow.length;
 	
 	// For all the elements for showing the menu
@@ -501,6 +502,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	    // I add an event when the user is clicking the element
 	    menu[i].onclick = onMenu;
 	}
+
+	// For all the elements for showing the menu
+	for(var i = 0,count = menuclose.length; i < count; i++) {
+	    // I add an event when the user is clicking the element
+	    menuclose[i].onclick = offMenu;
+	}	
 	
 	// If the user open the menu
 	function onMenu() {
