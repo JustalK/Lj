@@ -535,26 +535,47 @@ document.addEventListener("DOMContentLoaded", function() {
 	var menushownexttext = document.getElementsByClassName("menu-show-next-text");
 	var menushowprev = document.getElementsByClassName("menu-show-prev");
 	var menushowprevtext = document.getElementsByClassName("menu-show-prev-text");
-	var countmenu = 0;
+	var countmenu = 3;
 	
 	// Adding the event for changing the menu order
 	for(var i = 0,count = menushownext.length; i < count; i++) {
-	    // I add an event when the user is clicking the element
 		menushownext[i].onclick = nextMenu;
 	}	
 	for(var i = 0,count = menushowprev.length; i < count; i++) {
-	    // I add an event when the user is clicking the element
 		menushowprev[i].onclick = prevMenu;
 	}	
 	
+	for(var i = 0,count = menushowcurrent.length; i < count; i++) {
+		menushowcurrent[i].onclick = goMenu;
+	}		
+	for(var i = 0,count = menushownexttext.length; i < count; i++) {
+		menushownexttext[i].onclick = goMenuNext;
+	}	
+	for(var i = 0,count = menushowprevtext.length; i < count; i++) {
+		menushowprevtext[i].onclick = goMenuPrev;
+	}	
+	
+	function goMenu() {
+		smoothScrollingTo(a,wh*(2*(countmenu%projectx.length)));	
+	}
+	
+	function goMenuNext() {
+		nextMenu();
+		goMenu();
+	}
+	
+	function goMenuPrev() {
+		prevMenu();
+		goMenu();
+	}
+	
 	function prevMenu() {
-		countmenu = countmenu-1>0 ? countmenu-1:projectx.length-1;	
-		console.log(countmenu);
+		countmenu++;	
 		updateMenu();
 	}
 	
 	function nextMenu() {
-		countmenu++;	
+		countmenu = countmenu-1>0 ? countmenu-1:projectx.length;
 		updateMenu();
 	}
 	

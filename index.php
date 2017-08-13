@@ -36,12 +36,12 @@
 				<div class="menu-line-down"></div>
 			</div>
 			<div class="menu-show">
-				<div class="menu-close">&#x25C7;</div>
+				<div class="menu-close">&#9670;</div>
 				<div class="menu-show-prev">&#9650;</div>
-				<span class="menu-show-prev-text tekolight">Projet 01</span>
+				<span class="menu-show-prev-text tekolight">Project 02</span>
 				<div class="menu-show-current tekolight">Preambule</div>
 				<div class="menu-show-next">&#9660;</div>
-				<span class="menu-show-next-text tekolight">Projet 00</span>
+				<span class="menu-show-next-text tekolight">Project 01</span>
 			</div>
 			
 			<div class="icones scroll-down-1"></div>
