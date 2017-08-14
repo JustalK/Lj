@@ -366,10 +366,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Creating a smooth scroll to a position
 	function smoothScrollingTo(pc,pf) {
 		var b=pc,f=pf;
-		var v=((f-b)/20)>>0;
+		var v=((f-b)/500)>>0;
+		var a=1;
 	    var move = setInterval(function(){
 	        window.scrollTo(0, b);
-	        b += v;
+	        b += v+a*2;
+	        a+=0.5;
 	        if (v>=0 && b >= f) {
 	        	window.scrollTo(0, f);
 		    	isMoving = false;
@@ -379,7 +381,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		    	isMoving = false;
 	        	clearInterval(move);
 	        }
-	    }, 20);		
+	    }, 1);		
 	}
 	
 	// ================================================================================
