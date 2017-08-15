@@ -89,7 +89,10 @@ FRAME 2
 #FRAME2 .blocs-inside-informations-left-page span, 
 #FRAME2 .blocs-inside-informations-right-page span,
 #FRAME2 .blocs-inside-informations-page span,
-#FRAME2 .letter-l, #FRAME2 .letter-j {
+#FRAME2 .letter-l, 
+#FRAME2 .letter-j,
+#FRAME2 .facebook,
+#FRAME2 .twitter {
 	color: #91C6FF;
 }
 
@@ -225,6 +228,28 @@ LETTERS
 	width: 80px;
     overflow: hidden;
     display: inline-block;
+}
+
+.social-media {
+	position: absolute;	
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s;
+    text-decoration: none;
+}
+
+.facebook {
+    bottom: 50px;
+    right: -22px;
+}
+
+.twitter {
+    bottom: 78px;
+    right: -26px;
+}
+
+#CONTENT .social-media:hover {
+	color: black;
 }
 
 /*

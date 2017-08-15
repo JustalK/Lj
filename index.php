@@ -14,7 +14,6 @@
 	<div id="CONTENT">
 		<div id="POSITION" class="background-white"></div>
 		<h1>Latsuj<br />French Fullstack Developer</h1>
-		
 		<!-- START FRAME1 -->
 		<div id="FRAME1" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation frame-first frame-right">
 			<div class="blackout-effect"></div>
@@ -97,6 +96,8 @@
 						<div class="date-line date-line-up"></div>
 						<span itemprop="date" class="date orbitron">2015</span>
 						<div class="date-line date-line-down"></div>
+						<a href="https://www.facebook.com/sharer/sharer.php?u=www.latsuj.com" class="latsuj social-media facebook">J</a>
+						<a href="https://twitter.com/home?status=www.latsuj.com" class="latsuj social-media twitter">T</a>
 					</div>
 				
 					<div class="blocs-inside-title-line"></div>
@@ -356,7 +357,7 @@
 					<div class="blocs-inside background-white"  data-count="0">
 						<span itemprop="name" class="blocs-inside-informations-title tekobold">Latsuj.com</span>
 						<div class="blocs-inside-wrap" data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
-							<span class="blocs-inside-informations-texte montserratlight">
+							<span class="blocs-inside-informations-texte latsuj">
 								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">

@@ -51,16 +51,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================
 	
 	// The font that I want load first
-	var fontorbitron = new FontFace("Orbitron", "url(./../Lj/fonts/orbitron-black-webfont.ttf)");
+	var fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)");
 	
 	// The others fonts that I have to load after the first one has been loaded (there are on the first screen)
-	var fontmonserratlight = new FontFace("Montserrat Light", "url(./../Lj/fonts/montserrat-light-webfont.ttf)");
-	var fonttekolight = new FontFace("Teko Light", "url(./../Lj/fonts/teko-light-webfont.ttf)");
+	var fontmonserratlight = new FontFace("Montserrat Light", "url(./../fonts/montserrat-light-webfont.ttf)");
+	var fonttekolight = new FontFace("Teko Light", "url(./../fonts/teko-light-webfont.ttf)");
 	
 	// And finally the fonts that can be loaded after that the first screen has been loaded
-	var fonttekobold = new FontFace("Teko Bold", "url(./../Lj/fonts/teko-bold-webfont.ttf)");
-	var fontmontserratbold = new FontFace("Montserrat Bold", "url(./../Lj/fonts/montserrat-bold-webfont.ttf)");
-	var fonttekomedium = new FontFace("Teko Medium", "url(./../Lj/fonts/teko-medium-webfont.ttf)");
+	var fonttekobold = new FontFace("Teko Bold", "url(./../fonts/teko-bold-webfont.ttf)");
+	var fontmontserratbold = new FontFace("Montserrat Bold", "url(./../fonts/montserrat-bold-webfont.ttf)");
+	var fonttekomedium = new FontFace("Teko Medium", "url(./../fonts/teko-medium-webfont.ttf)");
+	var fontlatsuj = new FontFace("Latsuj", "url(./../fonts/latsuj.ttf)");
 	
 	// Then we load the first font !
 	document.fonts.add(fontorbitron);
@@ -69,11 +70,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.body.classList.add("show-orbitron");
 		document.fonts.add(fontmonserratlight);
 		document.fonts.add(fonttekolight);
+		document.fonts.add(fontlatsuj);
 		// As soon as the font are loaded, we made them appear on the website
 		fontmonserratlight.loaded.then(function() {
 			document.body.classList.add("show-montserratlight");
 		});
-
+		
+		fontlatsuj.loaded.then(function() {
+			document.body.classList.add("show-latsuj");
+		});
+		
 		fonttekolight.loaded.then(function() {
 			document.body.classList.add("show-tekolight");
 			loadHighQualityImagesFirst();
@@ -110,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	loadAllTheOtherFont();
     	
     	// And we load the css file
-    	var file = "../Lj/css/global.css";
+    	var file = "../css/global.css";
     	var link = document.createElement( "link" );
     	link.href = file.substr( 0, file.lastIndexOf( "." ) ) + ".css";
     	link.type = "text/css";
