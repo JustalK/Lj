@@ -4,16 +4,28 @@
 	<meta charset="UTF-8">
 	<title>Latsuj - The Website</title>
 	<meta name="description" content="French Fullstack Developer, <?= date("Y"); ?>, Latsuj's portfolio on wordpress prestashop and custom cms">
+	
+	<!--  Open Graph Data -->
+	<meta property="og:url"                content="http://www.latsuj.com" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="Latsuj.com" />
+	<meta property="og:description"        content="The portfolio of Latsuj, a french web developer" />
+	<meta property="og:image"              content="http://www.latsuj.com/imgs/FRAME1.jpg" />
+	<meta property="og:image:alt" 		   content="Portfolio of Latsuj" />
+	
+	<!--  Twitter Card -->
+	<meta name="twitter:card" content="Latsuj.com" />
+	<meta name="twitter:description" content="The portfolio of Latsuj, a french web developer" />
+	<meta name="twitter:url" content="http://www.latsuj.com" />
+	<meta name="twitter:image" content="http://www.latsuj.com/imgs/FRAME1.jpg" />
+	
 	<link rel="stylesheet" type="text/css" href="./css/first.css">
 </head>
 
 <body class="no-scrolling">
 
-
-
 	<div id="CONTENT">
 		<div id="POSITION" class="background-white"></div>
-		<h1>Latsuj<br />French Fullstack Developer</h1>
 		<!-- START FRAME1 -->
 		<div id="FRAME1" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation frame-first frame-right">
 			<div class="blackout-effect"></div>
@@ -102,7 +114,7 @@
 				
 					<div class="blocs-inside-title-line"></div>
 					<div itemprop="number" class="blocs-inside-title background-white"><span class="tekolight projectx">Preambule</span></div>
-					<h2 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">Portefolio et Nouvelle technologie</span></h2>
+					<h1 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">Latsuj, french web developer</span></h1>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span itemprop="name" class="blocs-inside-informations-title tekobold">Latsuj.com</span>
 						<div class="blocs-inside-wrap" data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
