@@ -200,6 +200,8 @@
 						<div class="date-line date-line-up"></div>
 						<span itemprop="date" class="date orbitron">2015</span>
 						<div class="date-line date-line-down"></div>
+						<a href="https://www.facebook.com/sharer/sharer.php?u=www.latsuj.com" class="latsuj social-media facebook">J</a>
+						<a href="https://twitter.com/home?status=www.latsuj.com" class="latsuj social-media twitter">T</a>
 					</div>
 				
 					<div class="blocs-inside-title-line"></div>
@@ -361,6 +363,8 @@
 						<div class="date-line date-line-up"></div>
 						<span itemprop="date" class="date orbitron">2015</span>
 						<div class="date-line date-line-down"></div>
+						<a href="https://www.facebook.com/sharer/sharer.php?u=www.latsuj.com" class="latsuj social-media facebook">J</a>
+						<a href="https://twitter.com/home?status=www.latsuj.com" class="latsuj social-media twitter">T</a>
 					</div>
 				
 					<div class="blocs-inside-title-line"></div>

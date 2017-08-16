@@ -192,7 +192,10 @@ FRAME 4
 #FRAME4 .blocs-inside-informations-left-page span, 
 #FRAME4 .blocs-inside-informations-right-page span,
 #FRAME4 .blocs-inside-informations-page span,
-#FRAME4 .letter-l, #FRAME4 .letter-j {
+#FRAME4 .letter-l, 
+#FRAME4 .letter-j,
+#FRAME4 .facebook,
+#FRAME4 .twitter {
 	color: #B20000;
 }
 
@@ -238,12 +241,22 @@ LETTERS
     text-decoration: none;
 }
 
-.facebook {
+.left .facebook {
+    bottom: 50px;
+    left: -22px;
+}
+
+.left .twitter {
+    bottom: 78px;
+    left: -26px;
+}
+
+.right .facebook {
     bottom: 50px;
     right: -22px;
 }
 
-.twitter {
+.right .twitter {
     bottom: 78px;
     right: -26px;
 }

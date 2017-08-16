@@ -256,8 +256,8 @@ document.addEventListener("DOMContentLoaded", function() {
     	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
     	photowrap[currentframe].style.marginTop = wasmScroll(200,50,0.2,segment,mwh+200)+"px";
     	frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
-    	areas[currentframe*2].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px;transform:scale("+wasmScrollReverse(1,1,0.9,0.0002,segment,wh+200)+")";
-    	areas[currentframe*2+1].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px;transform:scale("+wasmScrollReverse(1,1,0.9,0.0002,segment,wh+200)+")";
+    	areas[currentframe*2].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
+    	areas[currentframe*2+1].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
     	
     	blocsinsidewrap[currentframe*2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
     	blocsinsidewrap[currentframe*2+1].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
