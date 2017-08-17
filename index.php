@@ -19,6 +19,7 @@
 	<meta name="twitter:url" content="http://www.latsuj.com" />
 	<meta name="twitter:image" content="http://www.latsuj.com/imgs/FRAME1.jpg" />
 	
+	<link rel="shortcut icon" type="image/png" href="./favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="./css/first.css">
 </head>
 <?php
