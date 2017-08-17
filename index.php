@@ -21,7 +21,11 @@
 	
 	<link rel="stylesheet" type="text/css" href="./css/first.css">
 </head>
-
+<?php
+	// Flush optimization
+	ob_flush();
+	flush(); 
+?>
 <body class="no-scrolling">
 
 	<div id="CONTENT">
