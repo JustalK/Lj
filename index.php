@@ -85,7 +85,7 @@
 					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
 					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
 					<div class="photo">
-						<div class="background-photo" data-imglow="./imgs/FRAME2_LOW.jpg" data-img="./imgs/FRAME3.jpg"></div>
+						<div class="background-photo" data-imglow="./imgs/FRAME1_LOW.jpg" data-img="./imgs/FRAME1.jpg"></div>
 						<div class="under-background-photo"></div>
 					
 						<div class="photo-square photo-square-black-left"></div>
@@ -214,7 +214,7 @@
 					<h2 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">Portefolio et Nouvelle technologie</span></h2>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span itemprop="name" class="blocs-inside-informations-title tekobold">Latsuj.com</span>
-						<div class="blocs-inside-wrap"  data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
+						<div class="blocs-inside-wrap"  data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 							</span>
@@ -238,7 +238,7 @@
 							</span>
 						</div>
 						
-						<div class="blocs-inside-wrap left-click"  data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
+						<div class="blocs-inside-wrap left-click"  data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 							</span>
@@ -268,7 +268,7 @@
 					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
 					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
 					<div class="photo">
-						<div class="background-photo" data-imglow="./imgs/FRAME2_LOW.jpg" data-img="./imgs/FRAME4.jpg"></div>
+						<div class="background-photo" data-imglow="./imgs/FRAME2_LOW.jpg" data-img="./imgs/FRAME2.jpg"></div>
 						<div class="under-background-photo"></div>
 						
 						<div class="photo-square photo-square-black-left"></div>
@@ -294,7 +294,7 @@
 		</div>
 		
 		<!-- START FRAME1 -->
-		<div id="FRAME5" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation frame-first frame-right">
+		<div id="FRAME5" data-src="./imgs/FRAME3.jpg" class="frame frame-presentation frame-first frame-right">
 			<div class="blackout-effect"></div>
 			<div class="line-vertical line-white-up background-white"></div>
 			<div class="line-vertical line-white-down background-white"></div>
@@ -315,7 +315,14 @@
 				<div class="menu-line-middle"></div>
 				<div class="menu-line-down"></div>
 			</div>
-			<div class="menu-show"></div>
+			<div class="menu-show">
+				<div class="menu-close">&#9670;</div>
+				<div class="menu-show-prev">&#9650;</div>
+				<span class="menu-show-prev-text tekolight">Project 02</span>
+				<div class="menu-show-current tekolight">Preambule</div>
+				<div class="menu-show-next">&#9660;</div>
+				<span class="menu-show-next-text tekolight">Project 01</span>
+			</div>
 			
 			<div class="icones scroll-down-1"></div>
 			<div class="icones scroll-down-2"></div>
@@ -324,7 +331,7 @@
 		</div>
 
 		<!-- START FRAME2 -->
-		<div itemscope itemtype="http://schema.org/Project" id="FRAME6" data-src="./imgs/FRAME1.jpg" class="frame frame-informations frame-first">
+		<div itemscope itemtype="http://schema.org/Project" id="FRAME6" data-src="./imgs/FRAME3.jpg" class="frame frame-informations frame-first">
 			<div class="line-black-long line-black-long-up background-black"></div>
 			<div class="line-black-long line-black-long-down background-black"></div>
 			<div class="line-vertical line-black-up background-black"></div>
@@ -340,7 +347,7 @@
 					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
 					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
 					<div class="photo">
-						<div class="background-photo" data-imglow="./imgs/FRAME2_LOW.jpg" data-img="./imgs/FRAME3.jpg"></div>
+						<div class="background-photo" data-imglow="./imgs/FRAME3_LOW.jpg" data-img="./imgs/FRAME3.jpg"></div>
 						<div class="under-background-photo"></div>
 					
 						<div class="photo-square photo-square-black-left"></div>
@@ -374,11 +381,11 @@
 				
 					<div class="blocs-inside-title-line"></div>
 					<div itemprop="number" class="blocs-inside-title background-white"><span class="tekolight projectx">Project 02</span></div>
-					<h2 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">Portefolio et Nouvelle technologie</span></h2>
+					<h1 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">Latsuj, french web developer</span></h1>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span itemprop="name" class="blocs-inside-informations-title tekobold">Latsuj.com</span>
-						<div class="blocs-inside-wrap" data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
-							<span class="blocs-inside-informations-texte latsuj">
+						<div class="blocs-inside-wrap" data-img="./imgs/FRAME3.jpg" data-title="" data-text="">
+							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
@@ -420,8 +427,6 @@
 
 	<!-- FRAMEWORK -->
 	<script type="text/javascript">
-		/*! modernizr 3.5.0 (Custom Build) | MIT *
-		 * https://modernizr.com/download/?-cssvhunit-rgba-setclasses !*/
 		!function(e,n,t){function o(e,n){return typeof e===n}function s(){var e,n,t,s,a,r,i;for(var l in c)if(c.hasOwnProperty(l)){if(e=[],n=c[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(s=o(n.fn,"function")?n.fn():n.fn,a=0;a<e.length;a++)r=e[a],i=r.split("."),1===i.length?Modernizr[i[0]]=s:(!Modernizr[i[0]]||Modernizr[i[0]]instanceof Boolean||(Modernizr[i[0]]=new Boolean(Modernizr[i[0]])),Modernizr[i[0]][i[1]]=s),f.push((s?"":"no-")+i.join("-"))}}function a(e){var n=p.className,t=Modernizr._config.classPrefix||"";if(g&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),g?p.className.baseVal=n:p.className=n)}function r(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):g?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function i(n,t,o){var s;if("getComputedStyle"in e){s=getComputedStyle.call(e,n,t);var a=e.console;if(null!==s)o&&(s=s.getPropertyValue(o));else if(a){var r=a.error?"error":"log";a[r].call(a,"getComputedStyle returning null, its possible modernizr test results are inaccurate")}}else s=!t&&n.currentStyle&&n.currentStyle[o];return s}function l(){var e=n.body;return e||(e=r(g?"svg":"body"),e.fake=!0),e}function d(e,t,o,s){var a,i,d,f,c="modernizr",u=r("div"),g=l();if(parseInt(o,10))for(;o--;)d=r("div"),d.id=s?s[o]:c+(o+1),u.appendChild(d);return a=r("style"),a.type="text/css",a.id="s"+c,(g.fake?g:u).appendChild(a),g.appendChild(u),a.styleSheet?a.styleSheet.cssText=e:a.appendChild(n.createTextNode(e)),u.id=c,g.fake&&(g.style.background="",g.style.overflow="hidden",f=p.style.overflow,p.style.overflow="hidden",p.appendChild(g)),i=t(u,e),g.fake?(g.parentNode.removeChild(g),p.style.overflow=f,p.offsetHeight):u.parentNode.removeChild(u),!!i}var f=[],c=[],u={_version:"3.5.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){c.push({name:e,fn:n,options:t})},addAsyncTest:function(e){c.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=u,Modernizr=new Modernizr;var p=n.documentElement,g="svg"===p.nodeName.toLowerCase();Modernizr.addTest("rgba",function(){var e=r("a").style;return e.cssText="background-color:rgba(150,255,150,.5)",(""+e.backgroundColor).indexOf("rgba")>-1});var h=u.testStyles=d;h("#modernizr { height: 50vh; }",function(n){var t=parseInt(e.innerHeight/2,10),o=parseInt(i(n,null,"height"),10);Modernizr.addTest("cssvhunit",o==t)}),s(),a(f),delete u.addTest,delete u.addAsyncTest;for(var v=0;v<Modernizr._q.length;v++)Modernizr._q[v]();e.Modernizr=Modernizr}(window,document);
 	</script>
 	

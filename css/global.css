@@ -137,7 +137,7 @@ FRAME 4
 
 #FRAME3 .big-title-blue,
 #FRAME4 .big-title-blue {
-    color: rgba(102, 26, 0, 0.3);
+    color: rgba(154, 0, 0, 0.6);
 }
 
 .cssvhunit.rgba #FRAME4 .bloc-informations {
@@ -168,7 +168,8 @@ FRAME 4
     left: 200px;
 }
 
-#FRAME4 .area-texte-line {
+#FRAME4 .area-texte-line,
+#FRAME4 .blocs-inside-neartitle {
 	background: #FF7373;
 }
 #FRAME4 .blocs-inside-informations-texte {
@@ -213,6 +214,114 @@ FRAME 4
 	border: 1px solid #B20000;	
 }
 
+/*
+=====================================================================================================
+FRAME 5
+=====================================================================================================
+*/
+
+.cssvhunit #FRAME5 {
+	position: relative;
+	
+	height: 100vh;
+	min-height: 800px;
+	width: 100%;
+	
+	background-image: url("../imgs/FRAME3_LOW.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.cssvhunit #FRAME5.active {	
+    transition: background-image 0.5s;
+	background-image: url("../imgs/FRAME3.jpg");
+}
+
+/*
+=====================================================================================================
+FRAME 6
+=====================================================================================================
+*/
+
+#FRAME5 .big-title-blue,
+#FRAME6 .big-title-blue {
+	color: rgba(0, 202, 0, 0.6);
+}
+
+.cssvhunit.rgba #FRAME6 .bloc-informations {
+	background: rgba(117, 193, 117, 0.3);
+}
+
+
+#FRAME6 .blocs-inside-neartitle {
+	background: rgba(117, 193, 117);
+}
+
+.cssvhunit #FRAME6 {
+	background-image: url("../imgs/FRAME3_LOW.jpg");
+}
+
+.cssvhunit #FRAME6.active {
+	transition: background-image 0.5s;
+	background-image: url("../imgs/FRAME3.jpg");
+}
+
+.cssvhunit.rgba #FRAME6 .layer {
+	background: rgba(117, 193, 117, 0.4);
+}
+
+#FRAME6 .blocs-inside-title-line {
+    background: #75c175;
+    width: 250px;
+    left: 200px;
+}
+
+#FRAME6 .area-texte-line,
+#FRAME6 .blocs-inside-neartitle {
+	background: #75c175;
+}
+#FRAME6 .blocs-inside-informations-texte {
+	color: black;
+}
+
+#FRAME6 .area-texte-title,
+#FRAME6 .area-texte-subtitle,
+#FRAME6 .blocs-inside-informations-title,
+#FRAME6 .blocs-inside-informations-texte strong {
+	color: #75c175;
+}
+
+#FRAME6 .photo-square,
+#FRAME6 .blocs-inside-informations-left-page:hover,
+#FRAME6 .blocs-inside-informations-right-page:hover,
+#FRAME6 .date-line {
+	background: #008C00;
+}
+
+#FRAME6 .blocs-inside-informations-left-page span, 
+#FRAME6 .blocs-inside-informations-right-page span,
+#FRAME6 .blocs-inside-informations-page span,
+#FRAME6 .letter-l, 
+#FRAME6 .letter-j,
+#FRAME6 .facebook,
+#FRAME6 .twitter {
+	color: #008C00;
+}
+
+#FRAME6 .blocs-inside-informations-left-page:hover span,
+#FRAME6 .blocs-inside-informations-right-page:hover span {
+	color: white;
+}
+
+#FRAME6 .date {
+	color: #008C00;
+}
+
+.new-frame #FRAME6 .photo,
+.new-frame #FRAME6 .blocs {
+	border: 1px solid #008C00;	
+}
 
 /*
 =====================================================================================================
