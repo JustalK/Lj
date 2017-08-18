@@ -294,7 +294,7 @@
 		</div>
 		
 		<!-- START FRAME1 -->
-		<div id="FRAME5" data-src="./imgs/FRAME3.jpg" class="frame frame-presentation frame-first frame-right">
+		<div id="FRAME5" data-src="./imgs/FRAME3.jpg" class="frame frame-presentation frame-right">
 			<div class="blackout-effect"></div>
 			<div class="line-vertical line-white-up background-white"></div>
 			<div class="line-vertical line-white-down background-white"></div>
@@ -331,7 +331,7 @@
 		</div>
 
 		<!-- START FRAME2 -->
-		<div itemscope itemtype="http://schema.org/Project" id="FRAME6" data-src="./imgs/FRAME3.jpg" class="frame frame-informations frame-first">
+		<div itemscope itemtype="http://schema.org/Project" id="FRAME6" data-src="./imgs/FRAME3.jpg" class="frame frame-informations">
 			<div class="line-black-long line-black-long-up background-black"></div>
 			<div class="line-black-long line-black-long-down background-black"></div>
 			<div class="line-vertical line-black-up background-black"></div>
@@ -421,6 +421,11 @@
 		<!-- END FRAME2 -->
 		</div>
 		
+		<!-- BEGIN LAST FRAME -->
+		<div id="LASTFRAME" class="last-frame">
+			<div class="board"></div>
+		</div>
+		<!-- END LAST FRAME -->
 	
 	<!--  END CONTENT -->
 	</div>

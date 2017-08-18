@@ -126,7 +126,8 @@ span {
 	left: initial;
 }
 	
-.cssvhunit .frame-presentation {
+.cssvhunit .frame-presentation,
+.cssvhunit .last-frame {
 	position: relative;
 	
 	height: 100vh;
