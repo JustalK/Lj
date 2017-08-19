@@ -426,10 +426,20 @@
 			<div class="board-wrap">
 				<div class="board"></div>
 				<div class="board-under">
-					<span class="orbitron">	
+					<span class="orbitronr">	
 						Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
 					</span>
 				</div>
+				<small class="tekolight">Mission A.1</small>
+				<div class="life"></div>
+				<div class="heart heart1"></div>
+				<div class="heart heart2"></div>
+				<div class="heart heart3"></div>
+				<img src="./imgs/cats.png">
+			</div>
+			
+			<div class="footer-wrap">
+				<div class="footer-design-1"></div>
 			</div>
 		</div>
 		<!-- END LAST FRAME -->

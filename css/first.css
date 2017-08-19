@@ -22,6 +22,7 @@ FONT
 */
 
 .orbitron,
+.orbitronr,
 .montserratlight,
 .tekolight,
 .tekobold,
@@ -33,6 +34,10 @@ FONT
 
 .orbitron {
     font-family: "Orbitron";
+}
+
+.orbitronr {
+    font-family: "Orbitron Regular";
 }
 
 .montserratlight {
@@ -60,6 +65,7 @@ FONT
 }
 
 .show-orbitron .orbitron,
+.show-orbitronr .orbitronr,
 .show-montserratlight .montserratlight,
 .show-tekolight .tekolight,
 .show-tekobold .tekobold,

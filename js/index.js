@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// The font that I want load first
 	var fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)");
+	var fontorbitronr = new FontFace("Orbitron Regular", "url(./../fonts/orbitron-regular-webfont.ttf)");
 	
 	// The others fonts that I have to load after the first one has been loaded (there are on the first screen)
 	var fontmonserratlight = new FontFace("Montserrat Light", "url(./../fonts/montserrat-light-webfont.ttf)");
@@ -71,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.fonts.add(fontmonserratlight);
 		document.fonts.add(fonttekolight);
 		document.fonts.add(fontlatsuj);
+		document.fonts.add(fontorbitronr);
 		// As soon as the font are loaded, we made them appear on the website
 		fontmonserratlight.loaded.then(function() {
 			document.body.classList.add("show-montserratlight");
@@ -79,6 +81,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		fontlatsuj.loaded.then(function() {
 			document.body.classList.add("show-latsuj");
 		});
+
+		fontorbitronr.loaded.then(function() {
+			document.body.classList.add("show-orbitronr");
+		});		
 		
 		fonttekolight.loaded.then(function() {
 			document.body.classList.add("show-tekolight");
