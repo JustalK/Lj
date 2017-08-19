@@ -423,7 +423,14 @@
 		
 		<!-- BEGIN LAST FRAME -->
 		<div id="LASTFRAME" class="last-frame">
-			<div class="board"></div>
+			<div class="board-wrap">
+				<div class="board"></div>
+				<div class="board-under">
+					<span class="orbitron">	
+						Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+					</span>
+				</div>
+			</div>
 		</div>
 		<!-- END LAST FRAME -->
 	

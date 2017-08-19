@@ -338,64 +338,55 @@ LAST_FRAME
 	background-image: url("../imgs/FRAME3.jpg");
 }
 
+#LASTFRAME .board-wrap {
+	position: relative;
+}
+
 #LASTFRAME .board {
-	clip-path: polygon(
-		74% 7%,
-		92% 7%,
-		96% 12%,
-		96% 32%,
-		94% 36%,
-		94% 92%,
-		64% 92%,
-		60% 96%, 
-		60% 100%, 
-		100% 100%, 
-		100% 90%, 
-		95% 80%, 
-		95% 40%, 
-		100% 30%, 
-		100% 10%, 
-		92% 0%, 
-		12% 0%, 
-		10% 2%, 
-		2% 2%, 
-		0% 4%, 
-		0% 35%
-	);
-	background: red;
-    width: 50%;
-    height: 50%;
+    clip-path: polygon( 0 153px,0 19px,11px 8px,87px 8px,95px 0,462px 0, 502px 39px, 502px 156px, 465px 194px, 465px 372px, 502px 411px, 502px 486px, 305px 486px, 305px 471px, 321px 456px, 456px 456px, 456px 167px, 465px 159px, 465px 39px, 456px 30px, 391px 30px, 385px 24px, 99px 24px, 94px 30px, 26px 30px, 15px 41px, 15px 142px );
+	background: white;
+    width: 503px;
+    height: 488px;
+    position: relative;
+    z-index: 3;
 }
 
 #LASTFRAME .board:before {
-	clip-path: polygon(
-		74% 7%,
-		92% 7%,
-		96% 12%,
-		96% 32%,
-		94% 36%,
-		94% 92%,
-		64% 92%,
-		60% 96%, 
-		60% 100%, 
-		100% 100%, 
-		100% 90%, 
-		95% 80%, 
-		95% 40%, 
-		100% 30%, 
-		100% 10%, 
-		92% 0%, 
-		12% 0%, 
-		10% 2%, 
-		2% 2%, 
-		0% 4%, 
-		0% 35%
-	);
-	background: red;
-    width: 49.9%;
-    height: 49.9%;
+	clip-path: polygon( 1px 151px,1px 20px,12px 9px,89px 9px,97px 1px,461px 1px, 501px 41px, 501px 155px, 464px 193px, 464px 373px, 501px 412px, 501px 485px, 306px 485px, 306px 472px, 323px 457px, 457px 457px, 457px 168px, 466px 160px, 466px 38px, 457px 29px, 393px 29px, 386px 23px, 98px 23px, 93px 29px, 24px 29px, 14px 40px, 14px 141px );
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #003554;
+    width: 503px;
+    height: 488px;
+    content: "";
 }
-	
+
+#LASTFRAME .board-under{
+	position: absolute;
+    top: 23px;
+    left: 8px;
+    width: 457px;
+    height: 449px;
+    background: rgba(249, 249, 249, 0.19);
+    z-index: 2;
+}
+
+#LASTFRAME .board-under span {
+    font-size: 16px;
+    color: #45cfff;
+    width: 85%;
+    display: block;
+    left: 10%;
+    position: relative;
+    top: 61px;
+}
+
+#LASTFRAME .board-under span::first-letter {
+	font-size: 20px;
+	color: white;	
+}
+
 /*
 =====================================================================================================
 LETTERS
