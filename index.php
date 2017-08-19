@@ -439,7 +439,9 @@
 			</div>
 			
 			<div class="footer-wrap">
+				<span class="orbitronr footer-text">Flux RSS | Mentions légale | Contact | Plan du site | @Latsuj <?= date("Y") ?></span>
 				<div class="footer-design-1"></div>
+				<div class="footer-design-2"></div>
 			</div>
 		</div>
 		<!-- END LAST FRAME -->

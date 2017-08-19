@@ -339,8 +339,8 @@ LAST_FRAME
 }
 
 #LASTFRAME .board-wrap {
-    position: absolute;
-    right: 10%;
+	position: absolute;
+    left: 60%;
     top: 100px;
 }
 
@@ -483,7 +483,7 @@ LAST_FRAME
 
 #LASTFRAME .footer-design-1 {
     width: 500px;
-    height: 40px;
+    height: 20px;
     background: #ffffff;
     position: absolute;
     bottom: 0;
@@ -496,7 +496,7 @@ LAST_FRAME
 #LASTFRAME .footer-design-1:before {
     content: "";
     width: 500px;
-    height: 40px;
+    height: 20px;
     background: #003554;
     position: absolute;
     bottom: 0;
@@ -504,6 +504,39 @@ LAST_FRAME
     right: 0;
     margin: auto;
     clip-path: polygon(51px 1px,449px 1px,498px 40px,482px 40px,449px 14px,54px 14px,18px 40px,2px 40px);		
+}
+
+#LASTFRAME .footer-design-2 {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    width: calc(50% + 300px);
+    height: 100px;
+    background: white;
+    clip-path: polygon(579px 100%,506px 41px,102px 41px,25px 100%,0 100%,95px 20px,250px 20px,274px 0px,360px 0px,373px 10px,440px 10px,465px 30px,520px 30px,583px 80px, 100% 80px,100% 100%);
+}
+
+#LASTFRAME .footer-design-2:before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: #003554;
+    content: "";
+    clip-path: polygon(581px 100%,507px 40px,102px 40px,23px 100%,2px 100%,96px 21px,251px 21px,275px 1px,359px 1px,372px 11px,440px 11px,464px 31px,519px 31px,582px 81px, 100% 81px,100% 100%);
+}
+
+.footer-text {
+	position: absolute;
+    bottom: 32px;
+    color: white;
+    font-size: 11px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 500px;
+    text-align: center;
 }
 
 /*
