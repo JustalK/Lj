@@ -443,6 +443,13 @@
 				<div class="footer-design-1"></div>
 				<div class="footer-design-2"></div>
 			</div>
+			
+			<div class="footer-game">
+			<span class="footer-level-text tekolight">Level : 1337</span>
+			<span class="footer-difficulty-text tekolight">Difficulty : Serious</span>
+				<div class="footer-level"></div>
+				<div class="footer-difficulty"></div>
+			</div>
 		</div>
 		<!-- END LAST FRAME -->
 	

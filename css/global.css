@@ -530,13 +530,68 @@ LAST_FRAME
 .footer-text {
 	position: absolute;
     bottom: 32px;
-    color: white;
+    color: #45cfff;
     font-size: 11px;
     left: 0;
     right: 0;
     margin: auto;
     width: 500px;
     text-align: center;
+}
+
+.footer-level {
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    background: white;
+    width: 200px;
+    height: 200px;
+    clip-path: polygon(0 160px,0px 200px,20px 177px,22px 142px,62px 94px,74px 88px,99px 57px,100px 35px);
+}
+
+.footer-level:before {
+    content: "";
+    position: absolute;
+    background: #003554;
+    width: 200px;
+    height: 200px;
+    clip-path: polygon(0 162px,0px 198px,18px 177px,21px 141px,61px 93px,73px 87px,98px 56px,99px 38px);
+}
+
+.footer-level-text {
+    position: absolute;
+    bottom: 211px;
+    color: #45cfff;
+    transform: rotateZ(-51deg);
+    font-size: 30px;
+}
+
+.footer-difficulty {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    background: white;
+    width: 200px;
+	height: 225px;
+    clip-path: polygon(22px 191px,0px 191px,0 220px,10px 220px,29px 201px,50px 200px,70px 177px,72px 142px,112px 94px,124px 88px,149px 57px,150px 35px);
+}
+
+.footer-difficulty:before {
+	content: "";
+    position: absolute;
+    background: #003554;
+    width: 200px;
+    height: 225px;
+    clip-path: polygon(23px 192px,0px 192px,0 219px,9px 219px,28px 200px,49px 199px,69px 176px,71px 141px,111px 93px,123px 87px,147px 57px,149px 38px);
+}
+
+.footer-difficulty-text {
+    position: absolute;
+    bottom: 166px;
+    left: 10px;
+    color: #45cfff;
+    transform: rotateZ(-51deg);
+    font-size: 30px;
 }
 
 /*
