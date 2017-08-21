@@ -445,10 +445,12 @@
 			</div>
 			
 			<div class="footer-game">
-			<span class="footer-level-text tekolight">Level : 1337</span>
-			<span class="footer-difficulty-text tekolight">Difficulty : Serious</span>
+				<span class="footer-level-text tekolight">Level : 1337</span>
+				<span class="footer-difficulty-text tekolight">Difficulty : Serious</span>
+				<span class="footer-score-text tekolight">Score : 3141592653</span>
 				<div class="footer-level"></div>
 				<div class="footer-difficulty"></div>
+				<div class="footer-rocket"></div>
 			</div>
 		</div>
 		<!-- END LAST FRAME -->

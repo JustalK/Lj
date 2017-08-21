@@ -507,13 +507,13 @@ LAST_FRAME
 }
 
 #LASTFRAME .footer-design-2 {
-	position: absolute;
+    position: absolute;
     bottom: 0;
     right: 0;
     width: calc(50% + 300px);
     height: 100px;
     background: white;
-    clip-path: polygon(579px 100%,506px 41px,102px 41px,25px 100%,0 100%,95px 20px,250px 20px,274px 0px,360px 0px,373px 10px,440px 10px,465px 30px,520px 30px,583px 80px, 100% 80px,100% 100%);
+    clip-path: polygon(579px 100%,506px 41px,102px 41px,30px 100%,0 100%,95px 20px,250px 20px,274px 0px,360px 0px,373px 10px,440px 10px,465px 30px,520px 30px,590px 86px, 100% 86px,100% 100%);
 }
 
 #LASTFRAME .footer-design-2:before {
@@ -524,7 +524,7 @@ LAST_FRAME
     height: 100px;
     background: #003554;
     content: "";
-    clip-path: polygon(581px 100%,507px 40px,102px 40px,23px 100%,2px 100%,96px 21px,251px 21px,275px 1px,359px 1px,372px 11px,440px 11px,464px 31px,519px 31px,582px 81px, 100% 81px,100% 100%);
+    clip-path: polygon(581px 100%,507px 40px,102px 40px,28px 100%,2px 100%,96px 21px,251px 21px,275px 1px,359px 1px,372px 11px,440px 11px,464px 31px,519px 31px,589px 87px, 100% 87px,100% 100%);
 }
 
 .footer-text {
@@ -589,6 +589,36 @@ LAST_FRAME
     position: absolute;
     bottom: 166px;
     left: 10px;
+    color: #45cfff;
+    transform: rotateZ(-51deg);
+    font-size: 30px;
+}
+
+.footer-rocket {
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    height: 250px;
+    background: white;
+    clip-path: polygon(0 250px,0 230px,88px 230px,250px 37px,250px 47px,220px 83px,216px 104px,157px 177px,137px 186px,106px 224px,113px 250px);
+}
+
+.footer-rocket:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    height: 250px;
+    background: #003554;
+    clip-path: polygon(0 250px,0 231px,89px 231px,249px 40px,249px 46px,219px 82px,215px 103px,156px 176px,136px 185px,104px 223px,111px 250px);
+}
+
+.footer-score-text {
+    position: absolute;
+    bottom: 107px;
+    left: 73px;
     color: #45cfff;
     transform: rotateZ(-51deg);
     font-size: 30px;
