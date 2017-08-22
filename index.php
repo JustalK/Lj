@@ -423,6 +423,7 @@
 		
 		<!-- BEGIN LAST FRAME -->
 		<div id="LASTFRAME" class="last-frame">
+			<div class="parallax"></div>
 			<div class="board-wrap">
 				<div class="board"></div>
 				<div class="board-under">
