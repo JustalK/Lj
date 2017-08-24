@@ -162,7 +162,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			// The first element is load with the other function
 			// @see loadHighQualityImagesFirst()
 			var backgroundOnWait = [frames[currentframe*2+2],frames[currentframe*2+3]];
-			console.log(currentframe*2+2);
 			var backgroundHQ = [new Image(),new Image()];
 			// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
 			for(var i=0; i < 2 ; i++) {
@@ -251,46 +250,47 @@ document.addEventListener("DOMContentLoaded", function() {
 		
         // For the little tricky effect - Moving the width of the bar when we scroll
     	position.style.width=c*100+"%";
-
-    	blocsinsideinformationstitle[currentframe].style.marginLeft = wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px";
-    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
-    	
-    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";top:"+wasmScroll(mwh,80,0.8,segment,0)+"px";
-    	
-    	areatextetitle[currentframe].style.marginLeft = wasmScrollReverse(20,20,10,0.01,segment,wh)+"%";
-    	areatextesubtitle[currentframe].style.marginLeft = wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%";
-    	
-    	date[currentframe].style.top = wasmScroll(50,20,0.1,segment,mwh-200)+"%";
-    	datelineup[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
-    	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
-    	
-    	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
-    	photowrap[currentframe].style.marginTop = wasmScroll(200,50,0.4,segment,mwh+200)+"px";
-    	frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
-    	areas[currentframe*2].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
-    	areas[currentframe*2+1].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
-    	
-    	blocsinsidewrap[currentframe*2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
-    	blocsinsidewrap[currentframe*2+1].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
-    	blocsinsidewrap[currentframe*2+2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
-    	
-    	photolinehorizontal[currentframe*2].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
-    	photolinehorizontal[currentframe*2+1].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
-    	
-    	photolinevertical[currentframe*2].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";
-    	photolinevertical[currentframe*2+1].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";   	
-    	
-		photoblockvertical[currentframe*2].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
-		photoblockvertical[currentframe*2+1].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
-		photoblockhorizontal[currentframe*2].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
-		photoblockhorizontal[currentframe*2+1].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
-    	
-		backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
-		
-		for(var i=0;i<4;i++) {
-			photosquare[currentframe*4+i].style.cssText = "width:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px;height:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px";
-		}
-		
+    	// Play the animation only if we have not reach the footer yet
+    	if(currentframe<frames.length/2) {
+	    	blocsinsideinformationstitle[currentframe].style.marginLeft = wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px";
+	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
+	    	
+	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";top:"+wasmScroll(mwh,80,0.8,segment,0)+"px";
+	    	
+	    	areatextetitle[currentframe].style.marginLeft = wasmScrollReverse(20,20,10,0.01,segment,wh)+"%";
+	    	areatextesubtitle[currentframe].style.marginLeft = wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%";
+	    	
+	    	date[currentframe].style.top = wasmScroll(50,20,0.1,segment,mwh-200)+"%";
+	    	datelineup[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
+	    	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
+	    	
+	    	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
+	    	photowrap[currentframe].style.marginTop = wasmScroll(200,50,0.4,segment,mwh+200)+"px";
+	    	frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
+	    	areas[currentframe*2].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
+	    	areas[currentframe*2+1].style.cssText = "top: -"+wasmScroll(200,0,0.5,segment,wh+200)+"px";
+	    	
+	    	blocsinsidewrap[currentframe*2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
+	    	blocsinsidewrap[currentframe*2+1].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
+	    	blocsinsidewrap[currentframe*2+2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
+	    	
+	    	photolinehorizontal[currentframe*2].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
+	    	photolinehorizontal[currentframe*2+1].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
+	    	
+	    	photolinevertical[currentframe*2].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";
+	    	photolinevertical[currentframe*2+1].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";   	
+	    	
+			photoblockvertical[currentframe*2].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+			photoblockvertical[currentframe*2+1].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+			photoblockhorizontal[currentframe*2].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+			photoblockhorizontal[currentframe*2+1].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+	    	
+			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
+			
+			for(var i=0;i<4;i++) {
+				photosquare[currentframe*4+i].style.cssText = "width:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px;height:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+			}
+    	}
 		
 		if(segment - mwh > 0) {
 			// If I have not been in this loop for this frame
@@ -642,7 +642,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Use event.pageX / event.pageY here
-        console.log(event.pageY%hf);
+        //console.log(event.pageY%hf);
 		for(var i = 0,count = parallax.length; i < count; i++) {
 			parallax[i].style.backgroundPosition = "0 calc(50% - "+(event.pageY%(2*hf))*0.2+"px)";
 		}
