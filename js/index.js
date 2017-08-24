@@ -153,11 +153,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	var frames = document.getElementsByClassName("frame");
 	var frameslength = frames.length; 
 	function loadHighQualityImages() {
+		// If we reach the end of the website, there are nothing to load
+		if(currentframe*2+2>=frames.length) {
+			return false;
+		}
 		// If I'm in a last segment
 		if(segment-wh>0) {
 			// The first element is load with the other function
 			// @see loadHighQualityImagesFirst()
 			var backgroundOnWait = [frames[currentframe*2+2],frames[currentframe*2+3]];
+			console.log(currentframe*2+2);
 			var backgroundHQ = [new Image(),new Image()];
 			// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
 			for(var i=0; i < 2 ; i++) {
@@ -549,7 +554,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var menushownexttext = document.getElementsByClassName("menu-show-next-text");
 	var menushowprev = document.getElementsByClassName("menu-show-prev");
 	var menushowprevtext = document.getElementsByClassName("menu-show-prev-text");
-	var countmenu = 3;
+	var countmenu = 0;
 	
 	// Adding the event for changing the menu order
 	for(var i = 0,count = menushownext.length; i < count; i++) {
