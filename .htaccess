@@ -1,11 +1,12 @@
-RewriteEngine On
-RewriteCond %{HTTP_HOST} ^latsuj.com [NC]
-RewriteRule ^(.*)$ http://www.latsuj.com/$1 [L,R=301]
+#RewriteEngine On
+#RewriteCond %{HTTP_HOST} ^latsuj.com [NC]
+#RewriteRule ^(.*)$ http://www.latsuj.com/$1 [L,R=301]
 # Ensure all URLs have a trailing slash.
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !(.*)/$
-RewriteRule ^(.*)$ http://www.latsuj.com/$1/ [L,R=301]
+#RewriteBase /
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_URI} !(.*)/$
+#RewriteRule ^(.*)$ http://www.latsuj.com/$1/ [L,R=301]
+ErrorDocument 404 /404.php
 
 <IfModule mod_rewrite.c>   
 	RewriteEngine on
