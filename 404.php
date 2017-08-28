@@ -47,7 +47,7 @@ scene.add(ambLight);
 				var geometry = new THREE.BoxBufferGeometry( 100, 200, 0 );
 				mesh = new THREE.Mesh( geometry, material );
 
-				var extrudeSettings = { amount: 2, bevelEnabled: true, bevelSegments: 10, steps: 2, bevelSize: 3, bevelThickness: 3 };
+				var extrudeSettings = { amount: 2, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 
 				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 				board = new THREE.Group();
@@ -66,7 +66,10 @@ scene.add(ambLight);
 				leftboard.lineTo( 40, 20 );
 				leftboard.lineTo( 40, 10 );
 				// The left part of the board
-				var leftrightboardmaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
+				var texture = new THREE.TextureLoader().load( 'textures/dark4.jpg' );
+				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+				texture.repeat.set( 0.008, 0.008 );
+				var leftrightboardmaterial = new THREE.MeshPhongMaterial( {  map: texture } );
 				var leftboardgeometry = new THREE.ExtrudeGeometry( leftboard, extrudeSettings );
 				var leftboardmesh = new THREE.Mesh( leftboardgeometry, leftrightboardmaterial );
 				leftboardmesh.position.set( -80, 0, 0 );
@@ -78,19 +81,33 @@ scene.add(ambLight);
 				rightboardmesh.position.set( 60, 0, 2 );
 				board.add( rightboardmesh );
 				// The middle part of the board, it's there where I'm gonna show the content
-				var texture = new THREE.TextureLoader().load( 'imgs/frame1.jpg' );
+				var texture = new THREE.TextureLoader().load( 'imgs/frame1_LOW.jpg' );
 				var material = new THREE.MeshBasicMaterial( { map: texture } );
 				var middleboardmesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 100, 70, 1 ), material );			
 				middleboardmesh.position.set( -10, 50, 2 );
 				board.add( middleboardmesh );
 
-				//board.rotation.set(0.5,0.5,0);
-
+			    // wireframe for the left side
+			    var mat = new THREE.LineBasicMaterial( { color: 0x60A8D6, linewidth: 1 } );
+			    var leftboardwireframe = new THREE.LineSegments( new THREE.EdgesGeometry( leftboardmesh.geometry ), mat );
+			    leftboardwireframe.position.set( -80, 0, 0 );
+				board.add( leftboardwireframe );
+				//Wireframe for the right side
+			    var rightboardwireframe = new THREE.LineSegments( new THREE.EdgesGeometry( leftboardmesh.geometry ), mat );
+			    rightboardwireframe.rotation.set( 0, Math.PI, 0 );				
+			    rightboardwireframe.position.set( 60, 0, 2 );
+				board.add( rightboardwireframe );				
+				
+				// Light only for one board
 	            var dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
 	            dirLight.position.set(0, 0, 400);
 	            board.add(dirLight);
+
+				//board.rotation.set(0.5,0.5,0);
 				
 				scene.add( board );				
+
+
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
