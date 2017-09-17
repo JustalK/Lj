@@ -423,7 +423,11 @@
 		
 		<!-- BEGIN LAST FRAME -->
 		<div id="LASTFRAME" class="last-frame">
-			<div class="parallax"></div>
+			<div class="sky">
+				<div class="clouds_one"></div>
+				<div class="clouds_two"></div>
+				<div class="clouds_three"></div>
+			</div>
 			<div class="board-wrap">
 				<div class="board"></div>
 				<div class="board-under">

@@ -624,13 +624,78 @@ LAST_FRAME
     font-size: 30px;
 }
 
-.parallax {
+.clouds_one {
+    background: url(./../imgs/cloud_one.png);
     position: absolute;
+    left: 0;
+    top: -1%;
+    height: 50%;
+    width: 300%;
+    -webkit-animation: cloud_one 100s linear infinite;
+    -moz-animation: cloud_one 50s linear infinite;
+    -o-animation: cloud_one 50s linear infinite;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    opacity: 0.4;
+    -o-transform: translate3d(0, 0, 0);
+}
+
+.clouds_two {
+    background: url(./../imgs/cloud_two.png);
+    position: absolute;
+    left: 0;
+    top: 52%;
+    height: 50%;
+    width: 300%;
+    -webkit-animation: cloud_two 125s linear infinite;
+    -moz-animation: cloud_two 75s linear infinite;
+    -o-animation: cloud_two 75s linear infinite;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    opacity: 0.5;
+}
+
+.clouds_three {
+    background: url(./../imgs/cloud_three.png);
+    position: absolute;
+    left: 0;
+    top: 8%;
+    height: 50%;
+    width: 300%;
+    z-index: 20000;
+    -webkit-animation: cloud_three 100s linear infinite;
+    -moz-animation: cloud_three 100s linear infinite;
+    -o-animation: cloud_three 100s linear infinite;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    opacity: 0.6;
+}
+
+.sky {
+	height: 100vh;;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    transform: rotate(180deg);
     width: 100%;
-    height: 100%;
-    background-image: url(./../imgs/stars.png);
-    background-position: 0px calc(50% - 48px);
-    background-size: 200%;
+    z-index: 1000;
+}
+
+@keyframes cloud_one {
+    0%   {left: 0;}
+    100% {left: -200%;}
+}
+
+@keyframes cloud_two {
+    0%   {left: 0;}
+    100% {left: -200%;}
+}
+
+@keyframes cloud_three {
+    0%   {left: 0;}
+    100% {left: -200%;}
 }
 
 /*
