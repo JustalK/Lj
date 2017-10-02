@@ -17,13 +17,27 @@
 		<script src="./framework/three.js"></script>
 
 		<script>
-			var camera, scene, renderer;
+
+			Math.radians = function(degrees) {
+				  return degrees * Math.PI / 180;
+			};
+			 
+			// Converts from radians to degrees.
+			Math.degrees = function(radians) {
+			  return radians * 180 / Math.PI;
+			};
+		
+			var camera, scene, renderer, board;
 			var mesh;
 			init();
 			animate();
+
+			/* Constants */
+			var SPEED = 1;
+			
 			function init() {
 				
-				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
 				// Position of the camera
 				camera.position.set(0,0,400);
 
@@ -41,13 +55,13 @@
 	            //scene.add(hemiLight);
 				
 
-var ambLight = new THREE.AmbientLight(0x404040);
-scene.add(ambLight);
+				var ambLight = new THREE.AmbientLight(0x404040);
+				scene.add(ambLight);
 				
 				var geometry = new THREE.BoxBufferGeometry( 100, 200, 0 );
 				mesh = new THREE.Mesh( geometry, material );
 
-				var extrudeSettings = { amount: 2, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
+				var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 
 				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 				board = new THREE.Group();
@@ -84,7 +98,7 @@ scene.add(ambLight);
 				var texture = new THREE.TextureLoader().load( 'imgs/frame1_LOW.jpg' );
 				var material = new THREE.MeshBasicMaterial( { map: texture } );
 				var middleboardmesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 100, 70, 1 ), material );			
-				middleboardmesh.position.set( -10, 50, 2 );
+				middleboardmesh.position.set( -10, 50, -4 );
 				board.add( middleboardmesh );
 
 			    // wireframe for the left side
@@ -105,8 +119,11 @@ scene.add(ambLight);
 
 				//board.rotation.set(0.5,0.5,0);
 				
+				// Position the elements
+				board.position.set(0,-30,450);
+				board.rotation.set(Math.radians(10),Math.radians(70),Math.radians(10));
+				
 				scene.add( board );				
-
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -122,7 +139,17 @@ scene.add(ambLight);
 			}
 			function animate() {
 				requestAnimationFrame( animate );
+
+				// If the board is not at it's original position
+				if(board.position.z>0) {
+					board.position.set(0,-30,parseInt(board.position.z)-1);
+				}
+				if(board.position.y>0) {
+					board.position.set(0,parseInt(board.position.y)-1,board.position.z);
+				}
+				
 				renderer.render( scene, camera );
+				
 			}
 		</script>
 
