@@ -187,17 +187,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================
 	// For the different calcul - Calcul all the important value;
 	// ================================================================================
-	var a, wh, mwh, b, c, segment, numberframe, currentframe, hf, bg;
+	var a, wh, mwh, b, c, segment, numberframe, currentframe, hf, bg, bh;
 	
 	// Initialize all the important variable
 	function initialization() {
 		// Current position of the user
-		a = document.body.scrollTop;
+		a = document.documentElement.scrollTop;
 		// Height of the browser's windows of the user
 		wh = window.innerHeight;
 		mwh = wh>>1;
 		// Height of the website
-		bh = document.body.clientHeight;
+		bh = document.documentElement.clientHeight;
 		b = bh - wh;
 		c = a / b;
 		// Height of a frame
