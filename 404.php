@@ -34,6 +34,7 @@
 
 			/* Constants */
 			var SPEED = 1;
+			var TIME = 0;
 			
 			function init() {
 				
@@ -139,17 +140,19 @@
 			}
 			function animate() {
 				requestAnimationFrame( animate );
-
+				TIME++;
+				
 				// If the board is not at it's original position
-				if(board.position.z>0) {
-					board.position.set(0,-30,parseInt(board.position.z)-1);
-				}
-				if(board.position.y>0) {
-					board.position.set(0,parseInt(board.position.y)-1,board.position.z);
-				}
+				movement(board,0,20,0,-0.1,1);
 				
 				renderer.render( scene, camera );
-				
+			}
+
+			function movement(board,start,end,x,y,z) {
+				// If it's the moment to move the board
+				if(start<=TIME && TIME<=end) {
+					board.position.set(parseInt(board.position.x)+(start-TIME)*x,parseInt(board.position.y)+(start-TIME)*y,parseInt(board.position.z)+(start-TIME)*z);
+				}
 			}
 		</script>
 
