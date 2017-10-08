@@ -40,7 +40,7 @@
 				
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
 				// Position of the camera
-				camera.position.set(0,0,400);
+				camera.position.set(0,0,2000);
 
 				
 				scene = new THREE.Scene();
@@ -93,13 +93,13 @@
 				// The right part of the board, I made by using the left part
 				var rightboardmesh = new THREE.Mesh( leftboardgeometry, leftrightboardmaterial );
 				rightboardmesh.rotation.set( 0, Math.PI, 0 );				
-				rightboardmesh.position.set( 60, 0, 2 );
+				rightboardmesh.position.set( 60, 0, 10 );
 				board.add( rightboardmesh );
 				// The middle part of the board, it's there where I'm gonna show the content
 				var texture = new THREE.TextureLoader().load( 'imgs/frame1_LOW.jpg' );
 				var material = new THREE.MeshBasicMaterial( { map: texture } );
 				var middleboardmesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 100, 70, 1 ), material );			
-				middleboardmesh.position.set( -10, 50, -4 );
+				middleboardmesh.position.set( -10, 50, 4 );
 				board.add( middleboardmesh );
 
 			    // wireframe for the left side
@@ -110,7 +110,7 @@
 				//Wireframe for the right side
 			    var rightboardwireframe = new THREE.LineSegments( new THREE.EdgesGeometry( leftboardmesh.geometry ), mat );
 			    rightboardwireframe.rotation.set( 0, Math.PI, 0 );				
-			    rightboardwireframe.position.set( 60, 0, 2 );
+			    rightboardwireframe.position.set( 60, 0, 10 );
 				board.add( rightboardwireframe );				
 				
 				// Light only for one board
@@ -121,11 +121,12 @@
 				//board.rotation.set(0.5,0.5,0);
 				
 				// Position the elements
-				board.position.set(0,-30,450);
-				board.rotation.set(Math.radians(10),Math.radians(70),Math.radians(10));
+				board.position.set(0,0,2000);
+				board.rotation.set(0,0,0);
+				board["ascending"] = true;
 				
 				scene.add( board );				
-
+				//scene.rotateX(Math.radians(90));
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
@@ -143,18 +144,62 @@
 				TIME++;
 				
 				// If the board is not at it's original position
-				movement(board,0,20,0,-0.1,1);
+				// We move the different object for a beautiful aniamtion
+				movement(board,0,100,0,0,-1,-0.002,0,0);
+				movement(board,100,300,0,0.1,-1,0,0,0);
+
+				perpetual(board,300);
+				
+				//board.translateX(200);
 				
 				renderer.render( scene, camera );
 			}
 
-			function movement(board,start,end,x,y,z) {
+			// Move an object only if the period of time is between start and end
+			// x,y,z is for make a translation and rotx,roty,rotz is for a rotation
+			function movement(board,start,end,x,y,z,rotx,roty,rotz) {
 				// If it's the moment to move the board
 				if(start<=TIME && TIME<=end) {
-					board.position.set(parseInt(board.position.x)+(start-TIME)*x,parseInt(board.position.y)+(start-TIME)*y,parseInt(board.position.z)+(start-TIME)*z);
+					board.translateX(x);
+					board.translateY(y);
+					board.translateZ(z);
+					board.rotateX(rotx);
+					board.rotateY(roty);
+					board.rotateZ(rotz);
 				}
+			}
+
+			function perpetual(board,start) {
+				if(start<=TIME) {
+					if(board.ascending) {
+						board.rotateY(0.002);
+						board.rotateX(0.001);
+						if(board.rotation.y>=Math.radians(20)) {
+							board["ascending"] = false; 
+						}
+					} else {
+						board.rotateY(-0.002);
+						board.rotateX(-0.001);
+						if(board.rotation.y<=Math.radians(0)) {
+							board["ascending"] = true;
+						}
+					}
+				}
+			}
+			
+			// Helper for showing the axis
+			function helper() {
+				var axisHelper = new THREE.AxisHelper( 50 );
+				scene.add( axisHelper );
 			}
 		</script>
 
 	</body>
 </html>
+
+
+
+
+
+
+
