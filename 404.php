@@ -44,7 +44,7 @@
 
 				
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xf0f0f0 );
+				scene.background = new THREE.Color( 0x000000 );
 				var light = new THREE.PointLight( 0xffffff, 0.8 );
 				light.position.set( 0, 0, 0 );
 				//camera.add( light );
@@ -56,6 +56,8 @@
 	            //scene.add(hemiLight);
 				
 
+	            
+	            
 				var ambLight = new THREE.AmbientLight(0x404040);
 				scene.add(ambLight);
 				
@@ -64,6 +66,7 @@
 
 				var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 
+				
 				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 				board = new THREE.Group();
 				// Create the board with the point
@@ -125,7 +128,12 @@
 				board.rotation.set(0,0,0);
 				board["ascending"] = true;
 				
-				scene.add( board );				
+				scene.add( board );		
+				// Adding some fog for a badass effect on the scene
+				scene.fog = new THREE.FogExp2( 0x000000, 0.0008 );	
+
+				starForge();
+					
 				//scene.rotateX(Math.radians(90));
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -134,6 +142,33 @@
 				//
 				window.addEventListener( 'resize', onWindowResize, false );
 			}
+
+			function starForge() {
+				// Quantity of stars
+				var starQty = 45000;
+				var geometry = new THREE.SphereGeometry(10000, 100, 50);
+
+			    var materialOptions = { size: 3.0, transparency: true, opacity: 0.7, color: 0x0000ff
+			    	};
+
+			    	starStuff = new THREE.PointCloudMaterial(materialOptions);
+			    	
+				for (var i = 0; i < starQty; i++) {		
+
+					var starVertex = new THREE.Vector3();
+					starVertex.x = Math.random() * 3000 - 1000;
+					starVertex.y = Math.random() * 3000 - 1000;
+					starVertex.z = Math.random() * 1500 - 100;
+
+					geometry.vertices.push(starVertex);
+
+				}
+
+
+				stars = new THREE.PointCloud(geometry, starStuff);
+				scene.add(stars);
+			}
+			
 			function onWindowResize() {
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
@@ -169,6 +204,7 @@
 				}
 			}
 
+			// Make the object moving without stopping
 			function perpetual(board,start) {
 				if(start<=TIME) {
 					if(board.ascending) {
