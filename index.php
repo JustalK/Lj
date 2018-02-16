@@ -124,25 +124,25 @@
 						<span itemprop="name" class="blocs-inside-informations-title tekobold">Latsuj.com</span>
 						<div class="blocs-inside-wrap" data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+								<strong>W</strong>hat can I find on this website, Latsuj ? Hum...In fact, just the awesome me and my works. So, first thing first : <strong>Do you know who I am ?</strong> I'm sure you already know. I'm famous out there. Starting by my ONLY flaw, I'm french ! You know...Nobody is perfect. So I'm a french web developper. No, no, no...I'm THE french web developper. How much time did I spend on coding ? I dont really know...I like coding so I dont really see the time moving. Hey ! You live developper or you die, that the way the thing going.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+								<strong>Why did you create this website ?</strong> Oh, you know, it's simple. I just wanna show my AWESOME skills to the W-O-R-L-D. No, I'm not too proud of myself. Just a little too much. Anyways, I will show you some of my technical background and some projects that I'm doing right now or already living out there.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+								<strong>By the way, why did you call yourself Latsuj ?</strong> Oh, there is no meaning behind it, just a pseudonym that I keep it from when I was kid.
 							</span>
 						</div>
 
 						<div class="blocs-inside-wrap left-click" data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>C</strong>um haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et <strong>Vrsicinum primum ad se venire</strong> summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+								<strong>I</strong>'m using a lot of differents softwares for making my website but my favorites are those ones. <strong>Eclipse</strong>, there are a lot of IDE but Eclipse is certainly the one fitting all my needs. Also I'm using <strong>GIT</strong>, but I have a local version of GIT so I often forget to push on the version online. It's cool for showing your code but I dont really need too. The versionning is the only thing that I'm really looking for.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+								<strong>T</strong>he frameworks and libraries are also one of the big parts of my works. I'm evidently using <strong>JQuery</strong>. But actually, I'm loosing interest in it, I find this library too heavy for the use. So I prefer going with the hard way with Vanilla JS. I also love <strong>Polymer</strong>, the module building is an amazing things that I'm trying to use often. Fast coding but high reward. I could aslo speak about Modernizer (I use it on this website), Bootstrap, React, Angular...But I use those tools only when I really need them.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
+								<strong>I dfsdfsdf</strong> 
 							</span>
 						</div>
 						
@@ -181,7 +181,14 @@
 				<div class="menu-line-middle"></div>
 				<div class="menu-line-down"></div>
 			</div>
-			<div class="menu-show"></div>
+			<div class="menu-show">
+				<div class="menu-close">&#9670;</div>
+				<div class="menu-show-prev">&#9650;</div>
+				<span class="menu-show-prev-text tekolight">Project 02</span>
+				<div class="menu-show-current tekolight">Preambule</div>
+				<div class="menu-show-next">&#9660;</div>
+				<span class="menu-show-next-text tekolight">Project 01</span>
+			</div>
 			
 			<div class="icones scroll-down-1"></div>
 			<div class="icones scroll-down-2"></div>

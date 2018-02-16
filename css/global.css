@@ -45,6 +45,55 @@ body:not(.no-scrolling) {
 
 /*
 =====================================================================================================
+MENU LEFT
+=====================================================================================================
+*/
+
+.frame-left .menu-show {
+    left: 0;
+}
+
+.frame-left .menu-close {
+	left: 0px;
+	right: initial;
+}
+
+.frame-left .menu-show .menu-show-current {
+	left: -11px;
+	right: initial;
+	text-align: right;
+	border-left: none;
+	padding-right: 10px;
+    border-right: 1px solid white;
+}
+
+.frame-left .menu-show-next-text,
+.frame-left .menu-show-prev-text {
+	border-right: 1px solid white;
+	border-left: none;
+	right: calc(100% + 1px);
+	left: initial;
+	text-align: right;
+	padding-right: 10px;
+	transition: width 0.2s,right 0.2s;
+	transition-delay: 0.3s;
+}
+
+.frame-left .menu-show.active .menu-show-next-text,
+.frame-left .menu-show.active .menu-show-prev-text {
+	transition: width 0.2s,right 0.2s;
+	right: 57px;
+	left: initial;
+}
+
+.frame-left .menu-show-next,
+.frame-left .menu-show-prev {
+	right: 20px;
+	left: initial;
+}
+	
+/*
+=====================================================================================================
 FRAME 2
 =====================================================================================================
 */
@@ -103,6 +152,15 @@ FRAME 2
 
 #FRAME2 .date {
 	color: #a1bbdf;
+}
+
+
+.frame1::-webkit-scrollbar-track {
+    background: rgba(128, 0, 0,1);
+}
+
+.frame1::-webkit-scrollbar-thumb {
+    background: rgba(255, 115, 115,1); 
 }
 
 /*
@@ -212,6 +270,14 @@ FRAME 4
 .new-frame #FRAME4 .photo,
 .new-frame #FRAME4 .blocs {
 	border: 1px solid #B20000;	
+}
+
+.frame2::-webkit-scrollbar-thumb {
+    background: rgba(117, 193, 117,1); 
+}
+
+.frame2::-webkit-scrollbar-track {
+    background: rgba(0, 100, 0,1);
 }
 
 /*

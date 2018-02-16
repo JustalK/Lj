@@ -321,6 +321,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Add a class when we approach a new frame
 	function isNewFrame() {
+		//TODO Refactoring this part please
+		document.body.classList.remove("frame0","frame1","frame2");
+		document.body.classList.add("frame"+currentframe);
     	if(segment - mwh > 0) {
     		document.body.classList.add("new-frame");
     	} else {

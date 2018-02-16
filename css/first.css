@@ -17,6 +17,39 @@ h1, h2 {
 
 /*
 =====================================================================================================
+ROOT
+=====================================================================================================
+*/
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 0px;
+}
+ 
+::-webkit-scrollbar-track {
+    background: rgba(0, 53, 84,1);
+    border-left: 1px solid black;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,255,255,0.2); 
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    border-left: 1px solid black;
+}
+
+.frame0::-webkit-scrollbar-track {
+    background: rgba(0, 53, 84,1);
+}
+
+.frame0::-webkit-scrollbar-thumb {
+    background: rgba(145, 198, 255,1); 
+}
+
+/*
+=====================================================================================================
 FONT
 =====================================================================================================
 */
@@ -284,7 +317,7 @@ span {
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 0;
+    right: -1px;
     display: block;
     height: 30px;
     background: rgba(222, 240, 253, 0.3);
@@ -367,7 +400,7 @@ span {
 
 .menu-show .menu-show-next-text {
     position: absolute;
-    left: calc(100% - 1px);
+    left: calc(100% + 1px);
     color: white;
     bottom: 0;
     width: 0;
@@ -396,7 +429,7 @@ span {
 
 .menu-show-prev-text {
 	position: absolute;
-    left: calc(100% - 1px);
+    left: calc(100% + 1px);
     color: white;
     top: 0;
     width: 0;
@@ -432,7 +465,7 @@ span {
 .menu-close {
 	position: absolute;
     top: 38px;
-    right: 0;
+    right: 0px;
     height: 30px;
     padding: 10px;
     color: white;
@@ -757,17 +790,6 @@ LETTERS
     font-size: 26px;
     z-index: 15;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
