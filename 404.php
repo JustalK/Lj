@@ -138,22 +138,19 @@
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				document.body.appendChild( renderer.domElement );
-				//
+				document.getElementById("FRAME1").appendChild( renderer.domElement );
 				window.addEventListener( 'resize', onWindowResize, false );
 			}
 
 			function starForge() {
 				// Quantity of stars
-				var starQty = 45000;
+				var starQty = 50000;
 				var geometry = new THREE.SphereGeometry(10000, 100, 50);
 
-			    var materialOptions = { size: 3.0, transparency: true, opacity: 0.7, color: 0x0000ff
-			    	};
-
-			    	starStuff = new THREE.PointCloudMaterial(materialOptions);
+			    var materialOptions = { size: 3.0, transparency: true, opacity: 0.7, color: 0xffffff};
+				starStuff = new THREE.PointCloudMaterial(materialOptions);
 			    	
-				for (var i = 0; i < starQty; i++) {		
+				for (var i = 0; i < starQty/2; i++) {		
 
 					var starVertex = new THREE.Vector3();
 					starVertex.x = Math.random() * 3000 - 1000;
@@ -184,7 +181,7 @@
 				movement(board,100,300,0,0.1,-1,0,0,0);
 
 				perpetual(board,300);
-				
+				stars.translateZ(-0.1);
 				//board.translateX(200);
 				
 				renderer.render( scene, camera );

@@ -390,8 +390,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		var a=1;
 	    var move = setInterval(function(){
 	        window.scrollTo(0, b);
-	        b += v+a*2;
-	        a+=0.5;
+	        b += v>0 ? v+a*2 : v-a*2;
+	        a+=0.1;
 	        if (v>=0 && b >= f) {
 	        	window.scrollTo(0, f);
 		    	isMoving = false;
@@ -558,6 +558,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var menushowprev = document.getElementsByClassName("menu-show-prev");
 	var menushowprevtext = document.getElementsByClassName("menu-show-prev-text");
 	var countmenu = 0;
+	var fmove = true;
 	
 	// Adding the event for changing the menu order
 	for(var i = 0,count = menushownext.length; i < count; i++) {
@@ -592,12 +593,15 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	function prevMenu() {
-		countmenu++;	
+		if(fmove) ountmenu = countmenu=3;
+		fmove=false;
+		countmenu = countmenu-1>0 ? countmenu-1:projectx.length;
 		updateMenu();
 	}
 	
 	function nextMenu() {
-		countmenu = countmenu-1>0 ? countmenu-1:projectx.length;
+		fmove=false;
+		countmenu++;	
 		updateMenu();
 	}
 	
@@ -645,7 +649,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Use event.pageX / event.pageY here
-        //console.log(event.pageY%hf);
 		for(var i = 0,count = parallax.length; i < count; i++) {
 			parallax[i].style.backgroundPosition = "0 calc(50% - "+(event.pageY%(2*hf))*0.2+"px)";
 		}
