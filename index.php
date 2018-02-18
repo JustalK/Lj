@@ -519,7 +519,7 @@
 	            hemiLight.position.set( 0, 0, 1000 );
 	            //scene.add(hemiLight);
 				
-
+				clock = new THREE.Clock();
 	            
 	            
 				var ambLight = new THREE.AmbientLight(0x404040);
@@ -594,10 +594,14 @@
 				
 				scene.add( board );		
 				// Adding some fog for a badass effect on the scene
-				scene.fog = new THREE.FogExp2( 0x000000, 0.0008 );	
+				scene.fog = new THREE.FogExp2( 0x000000, 0.0007 );	
 
-				starForge();
-					
+				starForge(10000,3,0xffffff);
+				starForge(50000,1,0xAA0000);
+				starForge(100000,2,0x075AA4);
+				background();
+
+				
 				//scene.rotateX(Math.radians(90));
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -606,15 +610,51 @@
 				window.addEventListener( 'resize', onWindowResize, false );
 			}
 
-			function starForge() {
-				// Quantity of stars
-				var starQty = 50000;
-				var geometry = new THREE.SphereGeometry(10000, 100, 50);
+			var background;
+			function background() {
+			    light = new THREE.DirectionalLight(0xffffff,0.5);
+			    light.position.set(-1,0,1);
+			    //scene.add(light);
+			    
+			    smokeTexture = THREE.ImageUtils.loadTexture('./textures/smoke.png');
+			    smokeMaterial = new THREE.MeshLambertMaterial({color: 0x155CA3, map: smokeTexture, transparent: true});
+			    smokeGeo = new THREE.PlaneGeometry(300,300);
+			    smokeParticles = [];
+			    
+			    for (p = 0; p < 300; p++) {
+			        var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
+			        positionX = Math.random()*1000;
+			        positionY = Math.random()*1000-500;
+			        positionY = positionY<300 && positionY>-300 && positionX<100 ? positionY-500 : positionY; 
+				        
+			        particle.position.set(positionX,positionY,Math.random()*2000-100);
+			        particle.rotation.z = Math.random() * 600;
+			        scene.add(particle);
+			        smokeParticles.push(particle);
+			    }	
 
-			    var materialOptions = { size: 3.0, transparency: true, opacity: 0.7, color: 0xffffff};
+			    smokeMaterial = new THREE.MeshLambertMaterial({color: 0x001966, map: smokeTexture, transparent: true});
+			    for (p = 0; p < 500; p++) {
+			        var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
+			        positionX = Math.random()*1000-800;
+			        positionY = Math.random()*1000-500;
+			        positionY = positionY<300 && positionY>-300 && positionX<100 ? positionY-500 : positionY; 
+				        
+			        particle.position.set(positionX,positionY,Math.random()*2000-100);
+			        particle.rotation.z = Math.random() * 360;
+			        scene.add(particle);
+			        smokeParticles.push(particle);
+			    }				
+			}
+			
+			function starForge(number,size,color) {
+				// Quantity of stars
+				var starQty = number;
+				var geometry = new THREE.Geometry();
+			    var materialOptions = { size: size, transparency: true, opacity: 1, color: color};
 				starStuff = new THREE.PointCloudMaterial(materialOptions);
 			    	
-				for (var i = 0; i < starQty/2; i++) {		
+				for (var i = 0; i < starQty; i++) {		
 
 					var starVertex = new THREE.Vector3();
 					starVertex.x = Math.random() * 3000 - 1000;
@@ -622,7 +662,6 @@
 					starVertex.z = Math.random() * 1500 - 100;
 
 					geometry.vertices.push(starVertex);
-
 				}
 
 
@@ -643,12 +682,35 @@
 				// We move the different object for a beautiful aniamtion
 				movement(board,0,100,0,0,-1,-0.002,0,0);
 				movement(board,100,300,0,0.1,-1,0,0,0);
-
+				
+				delta = clock.getDelta();
+				evolveSmoke();
+				//moveSky();
 				perpetual(board,300);
-				stars.translateZ(-0.1);
 				//board.translateX(200);
 				
 				renderer.render( scene, camera );
+			}
+
+			function evolveSmoke() {
+			    var sp = smokeParticles.length;
+			    while(sp--) {
+			        smokeParticles[sp].rotation.z += (delta * 0.1);
+			    }
+			}
+			
+			/**
+			* Move the sky
+			**/
+			var movementSky=-0.1;
+			function moveSky() {
+				if(stars.position.z<-20) {
+					movementSky=0.3;	
+				}
+				if(stars.position.z>=0) {
+					movementSky=-0.3;	
+				}
+				stars.translateZ(movementSky);
 			}
 
 			// Move an object only if the period of time is between start and end
