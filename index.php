@@ -479,9 +479,15 @@
 
 
 		<script src="./framework/three.js"></script>
+		<script src="./framework/lensflare.js"></script>
 
 		<script>
 
+			/**
+			*============================================================================================>
+			* Util function 
+			*============================================================================================> 
+			**/
 			Math.radians = function(degrees) {
 				  return degrees * Math.PI / 180;
 			};
@@ -490,95 +496,55 @@
 			Math.degrees = function(radians) {
 			  return radians * 180 / Math.PI;
 			};
-		
-			var camera, scene, renderer, board;
-			var mesh;
-			init();
-			animate();
 
+			/**
+			*============================================================================================>
+			* Constant and variables 
+			*============================================================================================> 
+			**/
+
+			/** The Three Camera **/
+			var camera;
+			/** The render **/
+			var renderer;
+			/** The scene where every mesh and object gonna be **/
+			var scene;
+			/** My special window */
+			var board;
+			/** The position of mouse of the user **/
+			var mouse = { x: 0, y: 0 };
+			/** Object that keep a track on the time */
+			var clock;
+			/** The differents objects with those raycaseter can interact **/
+			var objectInteraction = [];
+
+			var board;
+			
 			/* Constants */
 			var SPEED = 1;
 			var TIME = 0;
+			var BACKGROUND_COLOR = 0x000000;
+			var LIGHT_AMBIANT_COLOR = 0x404040;
+			var WIREFRAME_COLOR = 0x60A8D6;
+			var CAMERA_START_POSITION_X = 0;
+			var CAMERA_START_POSITION_Y = 0;
+			var CAMERA_START_POSITION_Z = 2000;
+			var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
+			var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 			
+			init();
+			animate();
+
+			/**
+			* The initial function
+			**/
 			function init() {
-				
-				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
-				// Position of the camera
-				camera.position.set(0,0,2000);
+				initCamera();
+				initScene(BACKGROUND_COLOR);
+				initLight(LIGHT_AMBIANT_COLOR);
+				initClock();
 
-				
-				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0x000000 );
-				var light = new THREE.PointLight( 0xffffff, 0.8 );
-				light.position.set( 0, 0, 0 );
-				//camera.add( light );
-
-	            var hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.3 );
-	            hemiLight.color = new THREE.Color( 0xf0f0f0 );
-	            hemiLight.groundColor = new THREE.Color( 0xf0f0f0 );
-	            hemiLight.position.set( 0, 0, 1000 );
-	            //scene.add(hemiLight);
-				
-				clock = new THREE.Clock();
-	            
-	            
-				var ambLight = new THREE.AmbientLight(0x404040);
-				scene.add(ambLight);
-				
-				var geometry = new THREE.BoxBufferGeometry( 100, 200, 0 );
-				mesh = new THREE.Mesh( geometry, material );
-
-				var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
-
-				
-				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
-				board = new THREE.Group();
-				// Create the board with the point
-				var leftboard = new THREE.Shape();
-				leftboard.moveTo( 0, 0 );
-				leftboard.lineTo( 0, 20 );
-				leftboard.lineTo( 10, 30 );
-				leftboard.lineTo( 10, 70 );
-				leftboard.lineTo( 0, 80 );
-				leftboard.lineTo( 0, 100 );
-				leftboard.lineTo( 40, 90 );
-				leftboard.lineTo( 40, 80 );
-				leftboard.lineTo( 20, 80 );
-				leftboard.lineTo( 20, 20 );
-				leftboard.lineTo( 40, 20 );
-				leftboard.lineTo( 40, 10 );
-				// The left part of the board
-				var texture = new THREE.TextureLoader().load( 'textures/dark4.jpg' );
-				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-				texture.repeat.set( 0.008, 0.008 );
-				var leftrightboardmaterial = new THREE.MeshPhongMaterial( {  map: texture } );
-				var leftboardgeometry = new THREE.ExtrudeGeometry( leftboard, extrudeSettings );
-				var leftboardmesh = new THREE.Mesh( leftboardgeometry, leftrightboardmaterial );
-				leftboardmesh.position.set( -80, 0, 0 );
-				leftboardmesh.rotation.set( 0, 0, 0 );
-				board.add( leftboardmesh );
-				// The right part of the board, I made by using the left part
-				var rightboardmesh = new THREE.Mesh( leftboardgeometry, leftrightboardmaterial );
-				rightboardmesh.rotation.set( 0, Math.PI, 0 );				
-				rightboardmesh.position.set( 60, 0, 10 );
-				board.add( rightboardmesh );
-				// The middle part of the board, it's there where I'm gonna show the content
-				var texture = new THREE.TextureLoader().load( 'imgs/frame1_LOW.jpg' );
-				var material = new THREE.MeshBasicMaterial( { map: texture } );
-				var middleboardmesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 100, 70, 1 ), material );			
-				middleboardmesh.position.set( -10, 50, 4 );
-				board.add( middleboardmesh );
-
-			    // wireframe for the left side
-			    var mat = new THREE.LineBasicMaterial( { color: 0x60A8D6, linewidth: 1 } );
-			    var leftboardwireframe = new THREE.LineSegments( new THREE.EdgesGeometry( leftboardmesh.geometry ), mat );
-			    leftboardwireframe.position.set( -80, 0, 0 );
-				board.add( leftboardwireframe );
-				//Wireframe for the right side
-			    var rightboardwireframe = new THREE.LineSegments( new THREE.EdgesGeometry( leftboardmesh.geometry ), mat );
-			    rightboardwireframe.rotation.set( 0, Math.PI, 0 );				
-			    rightboardwireframe.position.set( 60, 0, 10 );
-				board.add( rightboardwireframe );				
+				board = createBoard('imgs/frame1_LOW.jpg');
 				
 				// Light only for one board
 	            var dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
@@ -594,22 +560,193 @@
 				
 				scene.add( board );		
 				// Adding some fog for a badass effect on the scene
-				scene.fog = new THREE.FogExp2( 0x000000, 0.0007 );	
+				//scene.fog = new THREE.FogExp2( 0x000000, 0.0007 );	
 
-				starForge(10000,3,0xffffff);
-				starForge(50000,1,0xAA0000);
-				starForge(100000,2,0x075AA4);
 				background();
 
+				addLight( 0.55, 0.9, 0.5, 0, 0, 1000 );
+				addLight( 0.08, 0.8, 0.5,    0, 0, 1500 );
+				addLight( 0.995, 0.5, 0.9, 0, 0, 1000 );
+				
 				
 				//scene.rotateX(Math.radians(90));
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.getElementById("FRAME1").appendChild( renderer.domElement );
+				renderer.gammaInput = true;
+				renderer.gammaOutput = true;
 				window.addEventListener( 'resize', onWindowResize, false );
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			}
 
+			/**
+			* Initialize the camera
+			**/
+			function initCamera() {
+				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.set(CAMERA_START_POSITION_X,CAMERA_START_POSITION_Y,CAMERA_START_POSITION_Z);
+			}
+
+			/**
+			* Initialize the scene
+			* @param hex color The background's color of the scene
+			**/
+			function initScene(color) {
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( color );
+			}
+
+			/**
+			* Initialize the light of this scene
+			* @param hex color The general light's color of the scene
+			**/	
+			function initLight(color) {
+				scene.add(new THREE.AmbientLight(color));
+			}
+
+			/**
+			* Initialize the clock save
+			**/
+			function initClock() {
+				clock = new THREE.Clock();
+				// Set the time to 0
+				clock.start();
+			}
+
+			/**
+			* Create a board in the scene
+			* @param string textureCenter The texture of the center of the board 
+			* @return One board with all his pieces
+			**/
+			function createBoard(textureCenter) {
+				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
+				boardTmp = new THREE.Group();
+
+				// Construct the mesh piece by piece
+				piece = [];
+				piece.push(createSideBoard(-80,0,0,0,0,0));
+				piece.push(createSideWireframe(-80,0,0,0,0,0));
+				piece.push(createSideBoard(60,0,10,0,Math.PI,0));	
+				piece.push(createSideWireframe(60,0,10,0,Math.PI,0));
+				piece.push(createCenterBoard(textureCenter,-10,50,4));
+
+				/** Add the differents parts to the group of meshes **/
+				for(i=0;i<piece.length;i++) {
+					boardTmp.add(piece[i]);
+				}
+
+				/** Add each mesh to the objectInteract for letting the user play with them **/
+				for(i=0;i<piece.length;i++) {
+					objectInteraction.push(piece[i]);
+				}
+				
+				return boardTmp
+			}
+
+			/**
+			* Return the shape of the left part of the board
+			**/
+			function createShape() {
+				var leftShape = new THREE.Shape();
+				leftShape.moveTo( 0, 0 );
+				leftShape.lineTo( 0, 20 );
+				leftShape.lineTo( 10, 30 );
+				leftShape.lineTo( 10, 70 );
+				leftShape.lineTo( 0, 80 );
+				leftShape.lineTo( 0, 100 );
+				leftShape.lineTo( 40, 90 );
+				leftShape.lineTo( 40, 80 );
+				leftShape.lineTo( 20, 80 );
+				leftShape.lineTo( 20, 20 );
+				leftShape.lineTo( 40, 20 );
+				leftShape.lineTo( 40, 10 );
+				return leftShape;
+			}
+
+			/**
+			* Create the extremity of the board
+			* @param int x The position X of the object
+			* @param int y The position Y of the object
+			* @param int z The position Z of the object
+			* @param int rx The rotation X of the object
+			* @param int ry The rotation Y of the object
+			* @param int rz The rotation Z of the object
+			* @return Mesh The mesh of this side of the board
+			**/
+			function createSideBoard(x,y,z,rx,ry,rz) {
+				texture = new THREE.TextureLoader().load(TEXTURE_BOARD_EXTREMITY);
+				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+				texture.repeat.set(0.008, 0.008);
+				
+				materialBoard = new THREE.MeshPhongMaterial( {  map: texture } );
+				geometryBoard = new THREE.ExtrudeGeometry( createShape(), extrudeSettings );
+				sideMesh = new THREE.Mesh( geometryBoard, materialBoard );	
+				
+				sideMesh.position.set( x, y, z );
+				sideMesh.rotation.set( rx, ry, rz );
+				return sideMesh;
+			}
+
+			/**
+			* Create the center of the board
+			* @param string textureCenter The texture of the center of the board
+			* @param int x The position X of the object
+			* @param int y The position Y of the object
+			* @param int z The position Z of the object
+			* @return Mesh The center piece of the board
+			**/
+			function createCenterBoard(textureCenter,x,y,z) {
+				texture = new THREE.TextureLoader().load( textureCenter );
+				material = new THREE.MeshBasicMaterial( { map: texture } );
+				centerMesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 100, 70, 1 ), material );
+				centerMesh.position.set(x,y,z);
+				return centerMesh;
+			}
+
+			/**
+			* Create the wireframe effect around the element
+			* @param int x The position X of the object
+			* @param int y The position Y of the object
+			* @param int z The position Z of the object
+			* @param int rx The rotation X of the object
+			* @param int ry The rotation Y of the object
+			* @param int rz The rotation Z of the object
+			* @return Mesh The wireframe element
+			**/
+			function createSideWireframe(x,y,z,rx,ry,rz) {
+				geometryBoard = new THREE.ExtrudeGeometry( createShape(), extrudeSettings );
+				material = new THREE.LineBasicMaterial( { color: WIREFRAME_COLOR, linewidth: 1 } );
+				sideWireframe = new THREE.LineSegments( new THREE.EdgesGeometry( geometryBoard ), material );
+				sideWireframe.position.set( x, y, z );
+				sideWireframe.rotation.set( rx, ry, rz );
+				return sideWireframe;
+			}
+
+
+
+			
+			function addLight( h, s, l, x, y, z ) {
+
+				var textureLoader = new THREE.TextureLoader();
+				var textureFlare3 = textureLoader.load( 'textures/lensflare3.png' );
+				var textureFlare0 = textureLoader.load( 'textures/lensflare0.png' );
+				var light = new THREE.PointLight( 0xffffff, 1.5, 2000 );
+				light.color.setHSL( h, s, l );
+				light.position.set( x, y, z );
+				scene.add( light );
+
+				var lensflare = new THREE.Lensflare();
+				lensflare.addElement( new THREE.LensflareElement( textureFlare0, 700, 0, light.color ) );
+				lensflare.addElement( new THREE.LensflareElement( textureFlare3, 60, 0.6 ) );
+				lensflare.addElement( new THREE.LensflareElement( textureFlare3, 70, 0.7 ) );
+				lensflare.addElement( new THREE.LensflareElement( textureFlare3, 120, 0.9 ) );
+				lensflare.addElement( new THREE.LensflareElement( textureFlare3, 70, 1 ) );
+				light.add( lensflare );
+
+			}
+			
 			var background;
 			function background() {
 			    light = new THREE.DirectionalLight(0xffffff,0.5);
@@ -668,7 +805,19 @@
 				stars = new THREE.PointCloud(geometry, starStuff);
 				scene.add(stars);
 			}
-			
+
+
+			function onDocumentMouseMove( event ) 
+			{
+				// the following line would stop any other event handler from firing
+				// (such as the mouse's TrackballControls)
+				// event.preventDefault();
+				
+				// update the mouse variable
+				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
+						
 			function onWindowResize() {
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
@@ -676,6 +825,7 @@
 			}
 			function animate() {
 				requestAnimationFrame( animate );
+				renderer.render( scene, camera );
 				TIME++;
 				
 				// If the board is not at it's original position
@@ -685,11 +835,16 @@
 				
 				delta = clock.getDelta();
 				evolveSmoke();
-				//moveSky();
 				perpetual(board,300);
-				//board.translateX(200);
-				
-				renderer.render( scene, camera );
+				var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+				var raycaster = new THREE.Raycaster();
+				raycaster.setFromCamera( mouse, camera );
+				// Permet de recuperer l'ensemble des objects avec lequels on peux interajir
+				var intersects = raycaster.intersectObjects( objectInteraction, true );
+
+				if(intersects.length>0) {
+					console.log("azeaze");
+				}
 			}
 
 			function evolveSmoke() {
