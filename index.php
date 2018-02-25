@@ -517,8 +517,10 @@
 			var clock;
 			/** The differents objects with those raycaseter can interact **/
 			var objectInteraction = [];
-
-			var board;
+			// The array of the mesh group of the scene
+			var groupScene = [];
+			// The differents object that create the particle system
+			var smokeParticles = [];
 			
 			/* Constants */
 			var SPEED = 1;
@@ -530,6 +532,9 @@
 			var CAMERA_START_POSITION_Y = 0;
 			var CAMERA_START_POSITION_Z = 2000;
 			var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
+			var TEXTURE_BUTTON_BACK = 'imgs/back.png';
+			var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
+			var FOG_POWER = 0.0007;
 			var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 			
 			init();
@@ -543,33 +548,17 @@
 				initScene(BACKGROUND_COLOR);
 				initLight(LIGHT_AMBIANT_COLOR);
 				initClock();
+				initFog(false);
 
-				board = createBoard('imgs/frame1_LOW.jpg');
+				createSmoke(300,'./textures/smoke.png',0x155CA3,0,500,100,600);
+				createSmoke(500,'./textures/smoke.png',0x001966,800,500,100,360);		
 				
-				// Light only for one board
-	            var dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
-	            dirLight.position.set(0, 0, 400);
-	            board.add(dirLight);
+				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',0,0,2000,0,0,0));
 
-				//board.rotation.set(0.5,0.5,0);
+				for(i=0;i<groupScene.length;i++) {
+					scene.add(groupScene[i]);		
+				}
 				
-				// Position the elements
-				board.position.set(0,0,2000);
-				board.rotation.set(0,0,0);
-				board["ascending"] = true;
-				
-				scene.add( board );		
-				// Adding some fog for a badass effect on the scene
-				//scene.fog = new THREE.FogExp2( 0x000000, 0.0007 );	
-
-				background();
-
-				addLight( 0.55, 0.9, 0.5, 0, 0, 1000 );
-				addLight( 0.08, 0.8, 0.5,    0, 0, 1500 );
-				addLight( 0.995, 0.5, 0.9, 0, 0, 1000 );
-				
-				
-				//scene.rotateX(Math.radians(90));
 				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
@@ -616,31 +605,60 @@
 			}
 
 			/**
+			* Initialize the fog
+			* @param boolean fog Active the fog if true
+			**/
+			function initFog(fog) {
+				if(fog) {
+					scene.fog = new THREE.FogExp2( 0x000000, FOG_POWER );
+				}
+			}
+			
+			/**
 			* Create a board in the scene
 			* @param string textureCenter The texture of the center of the board 
+			* @param int x The position X of the object
+			* @param int y The position Y of the object
+			* @param int z The position Z of the object
+			* @param int rx The rotation X of the object
+			* @param int ry The rotation Y of the object
+			* @param int rz The rotation Z of the object
 			* @return One board with all his pieces
 			**/
-			function createBoard(textureCenter) {
+			function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz) {
 				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 				boardTmp = new THREE.Group();
 
 				// Construct the mesh piece by piece
 				piece = [];
 				piece.push(createSideBoard(-80,0,0,0,0,0));
-				piece.push(createSideWireframe(-80,0,0,0,0,0));
 				piece.push(createSideBoard(60,0,10,0,Math.PI,0));	
+				piece.push(createSideWireframe(-80,0,0,0,0,0));
 				piece.push(createSideWireframe(60,0,10,0,Math.PI,0));
+				piece.push(createCenterWireframe(-10,50,4,0,0,0));
 				piece.push(createCenterBoard(textureCenter,-10,50,4));
+				piece.push(createPanel(textureInformations,140, 40, 1,-10,110,8));
+				piece.push(createPanel(TEXTURE_BUTTON_BACK,40, 20, 1,20,-10,8));
+				piece.push(createPanel(TEXTURE_BUTTON_VISIT,40, 20, 1,-40,-10,8));
 
-				/** Add the differents parts to the group of meshes **/
+				// Add the differents parts to the group of meshes
 				for(i=0;i<piece.length;i++) {
 					boardTmp.add(piece[i]);
 				}
 
-				/** Add each mesh to the objectInteract for letting the user play with them **/
+				// Add each mesh to the objectInteract for letting the user play with them
 				for(i=0;i<piece.length;i++) {
 					objectInteraction.push(piece[i]);
 				}
+
+
+				
+				// Value for the perpetual movement
+				boardTmp["ascending"] = true;
+
+				// Position of the board in the scene
+				boardTmp.position.set(x,y,z);
+				boardTmp.rotation.set(rx,ry,rz);
 				
 				return boardTmp
 			}
@@ -680,10 +698,10 @@
 				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 				texture.repeat.set(0.008, 0.008);
 				
-				materialBoard = new THREE.MeshPhongMaterial( {  map: texture } );
+				materialBoard = new THREE.MeshPhongMaterial( {  color:WIREFRAME_COLOR,wireframe:true } );
 				geometryBoard = new THREE.ExtrudeGeometry( createShape(), extrudeSettings );
 				sideMesh = new THREE.Mesh( geometryBoard, materialBoard );	
-				
+
 				sideMesh.position.set( x, y, z );
 				sideMesh.rotation.set( rx, ry, rz );
 				return sideMesh;
@@ -700,9 +718,28 @@
 			function createCenterBoard(textureCenter,x,y,z) {
 				texture = new THREE.TextureLoader().load( textureCenter );
 				material = new THREE.MeshBasicMaterial( { map: texture } );
-				centerMesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 100, 70, 1 ), material );
+				centerMesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 100, 70, 1 ),  [0,0,0,0,material,0] );
 				centerMesh.position.set(x,y,z);
 				return centerMesh;
+			}
+
+			/**
+			* Create a panel on the board
+			* @param string texture The path for the texture
+			* @param int sx The size on X of the panel 
+			* @param int sy The size on Y of the panel 
+			* @param int sz The size on Z of the panel 
+			* @param int x The position on x of the panel 
+			* @param int y The position on y of the panel 
+			* @param int z The position on z of the panel 
+			* @return mesh The panel
+			**/
+			function createPanel(texture,sx,sy,sz,x,y,z) {
+				texture = new THREE.TextureLoader().load( texture );
+				material = new THREE.MeshBasicMaterial( { map: texture, transparent: true } );
+				informationsMesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( sx, sy, sz ), [0,0,0,0,material,0] );
+				informationsMesh.position.set(x,y,z);
+				return informationsMesh;
 			}
 
 			/**
@@ -719,110 +756,53 @@
 				geometryBoard = new THREE.ExtrudeGeometry( createShape(), extrudeSettings );
 				material = new THREE.LineBasicMaterial( { color: WIREFRAME_COLOR, linewidth: 1 } );
 				sideWireframe = new THREE.LineSegments( new THREE.EdgesGeometry( geometryBoard ), material );
+				sideWireframe["wireframe"] = true;
 				sideWireframe.position.set( x, y, z );
 				sideWireframe.rotation.set( rx, ry, rz );
 				return sideWireframe;
 			}
 
-
-
-			
-			function addLight( h, s, l, x, y, z ) {
-
-				var textureLoader = new THREE.TextureLoader();
-				var textureFlare3 = textureLoader.load( 'textures/lensflare3.png' );
-				var textureFlare0 = textureLoader.load( 'textures/lensflare0.png' );
-				var light = new THREE.PointLight( 0xffffff, 1.5, 2000 );
-				light.color.setHSL( h, s, l );
-				light.position.set( x, y, z );
-				scene.add( light );
-
-				var lensflare = new THREE.Lensflare();
-				lensflare.addElement( new THREE.LensflareElement( textureFlare0, 700, 0, light.color ) );
-				lensflare.addElement( new THREE.LensflareElement( textureFlare3, 60, 0.6 ) );
-				lensflare.addElement( new THREE.LensflareElement( textureFlare3, 70, 0.7 ) );
-				lensflare.addElement( new THREE.LensflareElement( textureFlare3, 120, 0.9 ) );
-				lensflare.addElement( new THREE.LensflareElement( textureFlare3, 70, 1 ) );
-				light.add( lensflare );
-
+			// Same as previously but create a wireframe for the center
+			function createCenterWireframe(x,y,z,rx,ry,rz) {
+				geometryBoard = new THREE.BoxBufferGeometry( 100, 70, 1 );
+				material = new THREE.LineBasicMaterial( { color: WIREFRAME_COLOR, linewidth: 1 } );
+				sideWireframe = new THREE.LineSegments( new THREE.EdgesGeometry( geometryBoard ), material );
+				sideWireframe["wireframe"] = true;
+				sideWireframe.position.set( x, y, z );
+				sideWireframe.rotation.set( rx, ry, rz );
+				return sideWireframe;
 			}
-			
-			var background;
-			function background() {
-			    light = new THREE.DirectionalLight(0xffffff,0.5);
-			    light.position.set(-1,0,1);
-			    //scene.add(light);
-			    
-			    smokeTexture = THREE.ImageUtils.loadTexture('./textures/smoke.png');
-			    smokeMaterial = new THREE.MeshLambertMaterial({color: 0x155CA3, map: smokeTexture, transparent: true});
+
+			/**
+			* Create a nice effect with smoke
+			* @param int numbers The number of particle
+			* @param string texture The texture for the smoke (png)
+			* @param string color The color of the smoke
+			* @param int x The position X of the smoke
+			* @param int y The position Y of the smoke
+			* @param int z The position Z of the smoke
+			* @param int rz The rotation of the smoke
+			**/
+			function createSmoke(numbers,texture,color,x,y,z,rz) {
+				smokeTexture = THREE.ImageUtils.loadTexture(texture);
+			    smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
 			    smokeGeo = new THREE.PlaneGeometry(300,300);
-			    smokeParticles = [];
-			    
-			    for (p = 0; p < 300; p++) {
+
+			    for (p = 0; p < numbers; p++) {
 			        var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
-			        positionX = Math.random()*1000;
-			        positionY = Math.random()*1000-500;
+			        positionX = Math.random()*1000-x;
+			        positionY = Math.random()*1000-y;
 			        positionY = positionY<300 && positionY>-300 && positionX<100 ? positionY-500 : positionY; 
 				        
-			        particle.position.set(positionX,positionY,Math.random()*2000-100);
-			        particle.rotation.z = Math.random() * 600;
+			        particle.position.set(positionX,positionY,Math.random()*2000-z);
+			        particle.rotation.z = Math.random() * rz;
 			        scene.add(particle);
 			        smokeParticles.push(particle);
-			    }	
-
-			    smokeMaterial = new THREE.MeshLambertMaterial({color: 0x001966, map: smokeTexture, transparent: true});
-			    for (p = 0; p < 500; p++) {
-			        var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
-			        positionX = Math.random()*1000-800;
-			        positionY = Math.random()*1000-500;
-			        positionY = positionY<300 && positionY>-300 && positionX<100 ? positionY-500 : positionY; 
-				        
-			        particle.position.set(positionX,positionY,Math.random()*2000-100);
-			        particle.rotation.z = Math.random() * 360;
-			        scene.add(particle);
-			        smokeParticles.push(particle);
-			    }				
-			}
-			
-			function starForge(number,size,color) {
-				// Quantity of stars
-				var starQty = number;
-				var geometry = new THREE.Geometry();
-			    var materialOptions = { size: size, transparency: true, opacity: 1, color: color};
-				starStuff = new THREE.PointCloudMaterial(materialOptions);
-			    	
-				for (var i = 0; i < starQty; i++) {		
-
-					var starVertex = new THREE.Vector3();
-					starVertex.x = Math.random() * 3000 - 1000;
-					starVertex.y = Math.random() * 3000 - 1000;
-					starVertex.z = Math.random() * 1500 - 100;
-
-					geometry.vertices.push(starVertex);
-				}
-
-
-				stars = new THREE.PointCloud(geometry, starStuff);
-				scene.add(stars);
+			    }			
 			}
 
-
-			function onDocumentMouseMove( event ) 
-			{
-				// the following line would stop any other event handler from firing
-				// (such as the mouse's TrackballControls)
-				// event.preventDefault();
-				
-				// update the mouse variable
-				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			}
-						
-			function onWindowResize() {
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-				renderer.setSize( window.innerWidth, window.innerHeight );
-			}
+			var parent = null;
+			var childrens = null;
 			function animate() {
 				requestAnimationFrame( animate );
 				renderer.render( scene, camera );
@@ -830,20 +810,41 @@
 				
 				// If the board is not at it's original position
 				// We move the different object for a beautiful aniamtion
-				movement(board,0,100,0,0,-1,-0.002,0,0);
-				movement(board,100,300,0,0.1,-1,0,0,0);
+				movement(groupScene[0],0,100,0,0,-1,-0.002,0,0);
+				movement(groupScene[0],100,300,0,0.1,-1,0,0,0);
 				
 				delta = clock.getDelta();
 				evolveSmoke();
-				perpetual(board,300);
+
+				for(i=0;i<groupScene.length;i++) {
+					perpetual(groupScene[i],300);
+				}
+				
 				var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 				var raycaster = new THREE.Raycaster();
 				raycaster.setFromCamera( mouse, camera );
 				// Permet de recuperer l'ensemble des objects avec lequels on peux interajir
-				var intersects = raycaster.intersectObjects( objectInteraction, true );
-
+				var intersects = raycaster.intersectObjects( objectInteraction, true );			
+				
 				if(intersects.length>0) {
-					console.log("azeaze");
+					if(parent==null || parent!=intersects[0].object.parent) {
+						document.body.style.cursor = "pointer";
+						parent = intersects[0].object.parent;
+						childrens = parent.children;
+						for(i=0;i<childrens.length;i++) {
+							if(childrens[i]["wireframe"]) {
+								childrens[i].material.color = new THREE.Color(0xFFFFFF);
+							}
+						}
+					}
+				} else {
+					document.body.style.cursor = "inherit";
+					for(i=0;childrens!=null && i<childrens.length;i++) {
+						if(childrens[i]["wireframe"]) {
+							childrens[i].material.color = new THREE.Color(0x081D2F);
+						}
+					}
+					parent=null;
 				}
 			}
 
@@ -852,20 +853,6 @@
 			    while(sp--) {
 			        smokeParticles[sp].rotation.z += (delta * 0.1);
 			    }
-			}
-			
-			/**
-			* Move the sky
-			**/
-			var movementSky=-0.1;
-			function moveSky() {
-				if(stars.position.z<-20) {
-					movementSky=0.3;	
-				}
-				if(stars.position.z>=0) {
-					movementSky=-0.3;	
-				}
-				stars.translateZ(movementSky);
 			}
 
 			// Move an object only if the period of time is between start and end
@@ -900,11 +887,22 @@
 					}
 				}
 			}
-			
-			// Helper for showing the axis
-			function helper() {
-				var axisHelper = new THREE.AxisHelper( 50 );
-				scene.add( axisHelper );
+
+			/**
+			* I catch the mouse positionwhen the user move it
+			**/
+			function onDocumentMouseMove(event) {
+				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
+
+			/**
+			* We resize the entire windows when the user play with it's browser
+			**/			
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
 			}
 		</script>
 
