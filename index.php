@@ -553,7 +553,7 @@
 				createSmoke(300,'./textures/smoke.png',0x155CA3,0,500,100,600);
 				createSmoke(500,'./textures/smoke.png',0x001966,800,500,100,360);		
 				
-				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',0,0,2000,0,0,0));
+				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',0,0,2000,0,0,0,10,10,10));
 
 				for(i=0;i<groupScene.length;i++) {
 					scene.add(groupScene[i]);		
@@ -568,6 +568,7 @@
 				window.addEventListener( 'resize', onWindowResize, false );
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 			}
 
 			/**
@@ -625,7 +626,7 @@
 			* @param int rz The rotation Z of the object
 			* @return One board with all his pieces
 			**/
-			function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz) {
+			function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,zoomx,zoomy,zoomz) {
 				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 				boardTmp = new THREE.Group();
 
@@ -655,6 +656,9 @@
 				
 				// Value for the perpetual movement
 				boardTmp["ascending"] = true;
+				boardTmp["zoomX"] = zoomx;
+				boardTmp["zoomY"] = zoomy;
+				boardTmp["zoomZ"] = zoomz;
 
 				// Position of the board in the scene
 				boardTmp.position.set(x,y,z);
@@ -803,6 +807,7 @@
 
 			var parent = null;
 			var childrens = null;
+			var movementCamera = false;
 			function animate() {
 				requestAnimationFrame( animate );
 				renderer.render( scene, camera );
@@ -816,6 +821,11 @@
 				delta = clock.getDelta();
 				evolveSmoke();
 
+				if(movementCamera) {
+					camera.position.z += delta * 20;
+					
+				}
+				
 				for(i=0;i<groupScene.length;i++) {
 					perpetual(groupScene[i],300);
 				}
@@ -888,12 +898,30 @@
 				}
 			}
 
+			function moveCameraTo(speed,x,y,z) {
+				if(camera.position.x>0) {
+					camera.position.x += speed * delta * 20;
+					camera.position.y += speed * delta * 20;
+					camera.position.z += speed * delta * 20;
+				}
+			}
+
 			/**
 			* I catch the mouse positionwhen the user move it
 			**/
 			function onDocumentMouseMove(event) {
 				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
+
+			function onDocumentMouseDown( event ) {
+				// If I'm on a board
+				if(parent!=null) {
+					movementCamera = true;
+					console.log(parent["zoomX"]);
+					console.log(parent["zoomY"]);
+					console.log(parent["zoomZ"]);
+				}
 			}
 
 			/**
