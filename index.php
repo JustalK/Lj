@@ -26,6 +26,7 @@
 	// Flush optimization
 	ob_flush();
 	flush(); 
+	
 ?>
 <body class="no-scrolling">
 	<div id="CONTENT">
