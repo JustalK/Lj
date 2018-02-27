@@ -564,7 +564,7 @@
 				createSmoke(300,'./textures/smoke.png',0x155CA3,0,500,100,600);
 				createSmoke(500,'./textures/smoke.png',0x001966,800,500,100,360);		
 				
-				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',0,0,2000,0,0,0,10,10,10,1,1,1));
+				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,4,2,14.2));
 
 				for(i=0;i<groupScene.length;i++) {
 					scene.add(groupScene[i]);		
@@ -842,8 +842,8 @@
 				
 				// If the board is not at it's original position
 				// We move the different object for a beautiful aniamtion
-				movement(groupScene[0],0,100,0,0,-1,-0.002,0,0);
-				movement(groupScene[0],100,300,0,0.1,-1,0,0,0);
+				//movement(groupScene[0],0,100,0,0,-1,-0.002,0,0);
+				//movement(groupScene[0],100,300,0,0.1,-1,0,0,0);
 				
 				delta = clock.getDelta();
 				moveSmoke();
@@ -855,7 +855,7 @@
 				// If I'm on a movement, I cannot change the parent, so the raycaster is not usefull
 				if(movementCamera && parent!=null) {
 					// If I have not reached the final position on each abcisse
-					if(!positionReached[0] && !positionReached[1] && !positionReached[2]) {
+					if(!(positionReached[0] && positionReached[1] && positionReached[2])) {
 						moveCameraToBoard();
 					}
 				} else {
