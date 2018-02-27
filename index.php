@@ -26,7 +26,6 @@
 	// Flush optimization
 	ob_flush();
 	flush(); 
-	
 ?>
 <body class="no-scrolling">
 	<div id="CONTENT">
@@ -522,6 +521,16 @@
 			var groupScene = [];
 			// The differents object that create the particle system
 			var smokeParticles = [];
+			// True if the camera is actually moving to a new position, false if else
+			var movementCamera = false;
+			// The direction of the movement when we translation to a new position
+			var movements = [0,0,0];
+			// The final position of our camera
+			var positionFinal = [0,0,0];
+			// The speed of the movement on each absciss
+			var speedToFinal = [0,0,0];
+			// Check if the position is reached on all abscisse
+			var positionReached = [false,false,false];
 			
 			/* Constants */
 			var SPEED = 1;
@@ -535,6 +544,7 @@
 			var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
 			var TEXTURE_BUTTON_BACK = 'imgs/back.png';
 			var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
+			var DEFAULT_MOVEMENT_CAMERA_SPEED = 20;
 			var FOG_POWER = 0.0007;
 			var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 			
@@ -554,22 +564,20 @@
 				createSmoke(300,'./textures/smoke.png',0x155CA3,0,500,100,600);
 				createSmoke(500,'./textures/smoke.png',0x001966,800,500,100,360);		
 				
-				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',0,0,2000,0,0,0,10,10,10));
+				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',0,0,2000,0,0,0,10,10,10,1,1,1));
 
 				for(i=0;i<groupScene.length;i++) {
 					scene.add(groupScene[i]);		
 				}
 				
-				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderWebGL();
 				document.getElementById("FRAME1").appendChild( renderer.domElement );
-				renderer.gammaInput = true;
-				renderer.gammaOutput = true;
-				window.addEventListener( 'resize', onWindowResize, false );
 
+				// Events
+				window.addEventListener( 'resize', onWindowResize, false );
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				initMouse();
 			}
 
 			/**
@@ -615,6 +623,22 @@
 					scene.fog = new THREE.FogExp2( 0x000000, FOG_POWER );
 				}
 			}
+
+			function initMouse() {
+				
+			}
+
+			/**
+			* Setting the parameter for the WebGL
+			**/
+			function renderWebGL() {
+				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.gammaInput = true;
+				renderer.gammaOutput = true;
+				renderer.powerPreference = "high-performance";
+			}
 			
 			/**
 			* Create a board in the scene
@@ -627,7 +651,7 @@
 			* @param int rz The rotation Z of the object
 			* @return One board with all his pieces
 			**/
-			function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,zoomx,zoomy,zoomz) {
+			function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,zoomx,zoomy,zoomz,speedx,speedy,speedz) {
 				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 				boardTmp = new THREE.Group();
 
@@ -660,6 +684,9 @@
 				boardTmp["zoomX"] = zoomx;
 				boardTmp["zoomY"] = zoomy;
 				boardTmp["zoomZ"] = zoomz;
+				boardTmp["speedX"] = speedx;
+				boardTmp["speedY"] = speedy;
+				boardTmp["speedZ"] = speedz;
 
 				// Position of the board in the scene
 				boardTmp.position.set(x,y,z);
@@ -808,7 +835,6 @@
 
 			var parent = null;
 			var childrens = null;
-			var movementCamera = false;
 			function animate() {
 				requestAnimationFrame( animate );
 				renderer.render( scene, camera );
@@ -820,46 +846,51 @@
 				movement(groupScene[0],100,300,0,0.1,-1,0,0,0);
 				
 				delta = clock.getDelta();
-				evolveSmoke();
+				moveSmoke();
 
-				if(movementCamera) {
-					camera.position.z += delta * 20;
-					
-				}
-				
 				for(i=0;i<groupScene.length;i++) {
 					perpetual(groupScene[i],300);
 				}
-				
-				var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-				var raycaster = new THREE.Raycaster();
-				raycaster.setFromCamera( mouse, camera );
-				// Permet de recuperer l'ensemble des objects avec lequels on peux interajir
-				var intersects = raycaster.intersectObjects( objectInteraction, true );			
-				
-				if(intersects.length>0) {
-					if(parent==null || parent!=intersects[0].object.parent) {
-						document.body.style.cursor = "pointer";
-						parent = intersects[0].object.parent;
-						childrens = parent.children;
-						for(i=0;i<childrens.length;i++) {
-							if(childrens[i]["wireframe"]) {
-								childrens[i].material.color = new THREE.Color(0xFFFFFF);
-							}
-						}
+
+				// If I'm on a movement, I cannot change the parent, so the raycaster is not usefull
+				if(movementCamera && parent!=null) {
+					// If I have not reached the final position on each abcisse
+					if(!positionReached[0] && !positionReached[1] && !positionReached[2]) {
+						moveCameraToBoard();
 					}
 				} else {
-					document.body.style.cursor = "inherit";
-					for(i=0;childrens!=null && i<childrens.length;i++) {
-						if(childrens[i]["wireframe"]) {
-							childrens[i].material.color = new THREE.Color(0x081D2F);
-						}
-					}
-					parent=null;
+    				var raycaster = new THREE.Raycaster();
+    				raycaster.setFromCamera( mouse, camera );
+    				// Permet de recuperer l'ensemble des objects avec lequels on peux interajir
+    				var intersects = raycaster.intersectObjects( objectInteraction, true );			
+    				
+    				if(intersects.length>0) {
+    					if(parent==null || parent!=intersects[0].object.parent) {
+    						document.body.style.cursor = "pointer";
+    						parent = intersects[0].object.parent;
+    						childrens = parent.children;
+    						for(i=0;i<childrens.length;i++) {
+    							if(childrens[i]["wireframe"]) {
+    								childrens[i].material.color = new THREE.Color(0xFFFFFF);
+    							}
+    						}
+    					}
+    				} else {
+    					document.body.style.cursor = "inherit";
+    					for(i=0;childrens!=null && i<childrens.length;i++) {
+    						if(childrens[i]["wireframe"]) {
+    							childrens[i].material.color = new THREE.Color(0x081D2F);
+    						}
+    					}
+    					parent=null;
+    				}
 				}
 			}
 
-			function evolveSmoke() {
+			/**
+			* Move the smoke particule - in fact they jus rotate arount Z
+			**/
+			function moveSmoke() {
 			    var sp = smokeParticles.length;
 			    while(sp--) {
 			        smokeParticles[sp].rotation.z += (delta * 0.1);
@@ -899,12 +930,29 @@
 				}
 			}
 
-			function moveCameraTo(speed,x,y,z) {
-				if(camera.position.x>0) {
-					camera.position.x += speed * delta * 20;
-					camera.position.y += speed * delta * 20;
-					camera.position.z += speed * delta * 20;
+			/**
+			* Move the camera to a new position
+			**/
+			function moveCameraToBoard() {
+				for(i=0;i<movements.length;i++) {
+					if(isMoveCameraTo(movements[i],camera.position.getComponent(i),positionFinal[i])) {
+						add = speedToFinal[i] * delta * movements[i] * DEFAULT_MOVEMENT_CAMERA_SPEED;
+						camera.position.setComponent(i,camera.position.getComponent(i) + add);
+					} else {
+						positionReached[i] = true;
+					}
 				}
+			}
+
+			/**
+			* Determine if I have to move the camera to the final destination depending of the actual position of the camera
+			* @param int movement The way of the movement 1 for upward and -1 for backward
+			* @param int cameraPosition The actual position of the camera
+			* @param int finalDestination The final destination of the camera
+			* @return boolean True if the camera has to be move or false 
+			**/
+			function isMoveCameraTo(movement,cameraPosition,finalDestination) {
+				return (movement>0 && cameraPosition<finalDestination) || (movement<0 && cameraPosition>finalDestination);
 			}
 
 			/**
@@ -915,13 +963,32 @@
 				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 			}
 
+			/**
+			* Catch the vent when the user click on the board
+			**/
 			function onDocumentMouseDown( event ) {
-				// If I'm on a board
-				if(parent!=null) {
+				// If I'm on a board, I move to the new position
+				if(parent!=null && !movementCamera) {
+					positionFinal[0] = parent["zoomX"];
+					positionFinal[1] = parent["zoomY"];
+					positionFinal[2] = parent["zoomZ"];
+					speedToFinal[0] = parent["speedX"];
+					speedToFinal[1] = parent["speedY"];
+					speedToFinal[2] = parent["speedZ"];
+					positionReached[0] = false;
+					positionReached[1] = false;
+					positionReached[2] = false;
+					getMovementWay();
 					movementCamera = true;
-					console.log(parent["zoomX"]);
-					console.log(parent["zoomY"]);
-					console.log(parent["zoomZ"]);
+				}
+			}
+
+			/**
+			* Save the direction of the movement in an array
+			**/
+			function getMovementWay() {
+				for(i=0;i<movements.length;i++) {
+					movements[i] = camera.position.getComponent(i)>positionFinal[i] ? -1 : 1;	
 				}
 			}
 
