@@ -527,10 +527,14 @@
 			var movements = [0,0,0];
 			// The final position of our camera
 			var positionFinal = [0,0,0];
-			// The speed of the movement on each absciss
-			var speedToFinal = [0,0,0];
+			// The final rotation of our camera
+			var rotationFinal = [0,0,0];
 			// Check if the position is reached on all abscisse
 			var positionReached = [false,false,false];
+			// The speed of the camera when it's translating to a new position
+			var speedTranslation = 0;
+			// The speed of the camera when it's rotating to a new position
+			var speedRotation = 0;
 			
 			/* Constants */
 			var SPEED = 1;
@@ -541,6 +545,9 @@
 			var CAMERA_START_POSITION_X = 0;
 			var CAMERA_START_POSITION_Y = 0;
 			var CAMERA_START_POSITION_Z = 2000;
+			var CAMERA_START_ROTATION_X = 0;
+			var CAMERA_START_ROTATION_Y = 0;
+			var CAMERA_START_ROTATION_Z = 0;
 			var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
 			var TEXTURE_BUTTON_BACK = 'imgs/back.png';
 			var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
@@ -564,7 +571,7 @@
 				createSmoke(300,'./textures/smoke.png',0x155CA3,0,500,100,600);
 				createSmoke(500,'./textures/smoke.png',0x001966,800,500,100,360);		
 				
-				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,4,2,14.2));
+				groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,0,0,0));
 
 				for(i=0;i<groupScene.length;i++) {
 					scene.add(groupScene[i]);		
@@ -586,6 +593,7 @@
 			function initCamera() {
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.set(CAMERA_START_POSITION_X,CAMERA_START_POSITION_Y,CAMERA_START_POSITION_Z);
+				camera.rotation.set(CAMERA_START_ROTATION_X,CAMERA_START_ROTATION_Y,CAMERA_START_ROTATION_Z);
 			}
 
 			/**
@@ -619,9 +627,7 @@
 			* @param boolean fog Active the fog if true
 			**/
 			function initFog(fog) {
-				if(fog) {
-					scene.fog = new THREE.FogExp2( 0x000000, FOG_POWER );
-				}
+				if(fog) scene.fog = new THREE.FogExp2( 0x000000, FOG_POWER );
 			}
 
 			function initMouse() {
@@ -651,7 +657,7 @@
 			* @param int rz The rotation Z of the object
 			* @return One board with all his pieces
 			**/
-			function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,zoomx,zoomy,zoomz,speedx,speedy,speedz) {
+			function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,translationX,translationY,translationZ,rotationX,rotationY,rotationZ) {
 				// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 				boardTmp = new THREE.Group();
 
@@ -681,12 +687,12 @@
 				
 				// Value for the perpetual movement
 				boardTmp["ascending"] = true;
-				boardTmp["zoomX"] = zoomx;
-				boardTmp["zoomY"] = zoomy;
-				boardTmp["zoomZ"] = zoomz;
-				boardTmp["speedX"] = speedx;
-				boardTmp["speedY"] = speedy;
-				boardTmp["speedZ"] = speedz;
+				boardTmp["translationX"] = translationX;
+				boardTmp["translationY"] = translationY;
+				boardTmp["translationZ"] = translationZ;
+				boardTmp["rotationX"] = rotationX;
+				boardTmp["rotationY"] = rotationY;
+				boardTmp["rotationZ"] = rotationZ;
 
 				// Position of the board in the scene
 				boardTmp.position.set(x,y,z);
@@ -936,7 +942,7 @@
 			function moveCameraToBoard() {
 				for(i=0;i<movements.length;i++) {
 					if(isMoveCameraTo(movements[i],camera.position.getComponent(i),positionFinal[i])) {
-						add = speedToFinal[i] * delta * movements[i] * DEFAULT_MOVEMENT_CAMERA_SPEED;
+						add = delta * movements[i] * speedTranslation;
 						camera.position.setComponent(i,camera.position.getComponent(i) + add);
 					} else {
 						positionReached[i] = true;
@@ -969,20 +975,32 @@
 			function onDocumentMouseDown( event ) {
 				// If I'm on a board, I move to the new position
 				if(parent!=null && !movementCamera) {
-					positionFinal[0] = parent["zoomX"];
-					positionFinal[1] = parent["zoomY"];
-					positionFinal[2] = parent["zoomZ"];
-					speedToFinal[0] = parent["speedX"];
-					speedToFinal[1] = parent["speedY"];
-					speedToFinal[2] = parent["speedZ"];
+					positionFinal[0] = parent["translationX"];
+					positionFinal[1] = parent["translationY"];
+					positionFinal[2] = parent["translationZ"];
+					rotationFinal[0] = parent["rotationX"];
+					rotationFinal[1] = parent["rotationY"];
+					rotationFinal[2] = parent["rotationZ"];
 					positionReached[0] = false;
 					positionReached[1] = false;
 					positionReached[2] = false;
+					getSpeedMovement();
 					getMovementWay();
 					movementCamera = true;
 				}
 			}
 
+			/**
+			* Calcul the speed for the translation's movement
+			**/
+			function getSpeedMovement() {
+				// Get the distance maximum for this movement
+				for(i=0,maxdif=0;i<movements.length;i++) {
+					maxdif = Math.max(maxdif,Math.abs(camera.position.getComponent(i)-positionFinal[i]));
+				}
+				speedTranslation = maxdif/DEFAULT_MOVEMENT_CAMERA_SPEED;
+			}
+			
 			/**
 			* Save the direction of the movement in an array
 			**/
