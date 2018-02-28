@@ -47,9 +47,9 @@ var rotationFinal = [0,0,0];
 // Check if the position is reached on all abscisse
 var positionReached = [false,false,false];
 // The speed of the camera when it's translating to a new position
-var speedTranslation = 0;
+var speedTranslation = [0,0,0];
 // The speed of the camera when it's rotating to a new position
-var speedRotation = 0;
+var speedRotation = [0,0,0];
 
 /* Constants */
 var SPEED = 1;
@@ -66,7 +66,7 @@ var CAMERA_START_ROTATION_Z = 0;
 var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
 var TEXTURE_BUTTON_BACK = 'imgs/back.png';
 var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
-var DEFAULT_MOVEMENT_CAMERA_SPEED = 20;
+var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var FOG_POWER = 0.0007;
 var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 
@@ -473,7 +473,7 @@ function perpetual(board,start) {
 function moveCameraToBoard() {
 	for(i=0;i<movements.length;i++) {
 		if(isMoveCameraTo(movements[i],camera.position.getComponent(i),positionFinal[i])) {
-			add = delta * movements[i] * speedTranslation;
+			add = delta * movements[i] * speedTranslation[i];
 			camera.position.setComponent(i,camera.position.getComponent(i) + add);
 		} else {
 			positionReached[i] = true;
@@ -496,11 +496,9 @@ function isMoveCameraTo(movement,cameraPosition,finalDestination) {
  * Calcul the speed for the translation's movement
  **/
 function getSpeedMovement() {
-	// Get the distance maximum for this movement
-	for(i=0,maxdif=0;i<movements.length;i++) {
-		maxdif = Math.max(maxdif,Math.abs(camera.position.getComponent(i)-positionFinal[i]));
+	for(i=0;i<movements.length;i++) {
+		speedTranslation[i] = Math.abs(camera.position.getComponent(i)-positionFinal[i])*DEFAULT_MOVEMENT_CAMERA_SPEED;
 	}
-	speedTranslation = maxdif/DEFAULT_MOVEMENT_CAMERA_SPEED;
 }
 
 /**
