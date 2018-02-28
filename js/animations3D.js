@@ -40,12 +40,16 @@ var smokeParticles = [];
 var movementCamera = false;
 // The direction of the movement when we translation to a new position
 var movements = [0,0,0];
+// The direction of the rotation when we rotate to a new position
+var rotation = [0,0,0];
 // The final position of our camera
 var positionFinal = [0,0,0];
 // The final rotation of our camera
 var rotationFinal = [0,0,0];
 // Check if the position is reached on all abscisse
 var positionReached = [false,false,false];
+// Check if the final rotation is reached on all abscisse
+var rotationReached = [false,false,false];
 // The speed of the camera when it's translating to a new position
 var speedTranslation = [0,0,0];
 // The speed of the camera when it's rotating to a new position
@@ -67,6 +71,7 @@ var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
 var TEXTURE_BUTTON_BACK = 'imgs/back.png';
 var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
+var DEFAULT_ROTATION_CAMERA_SPEED = 1;
 var FOG_POWER = 0.0007;
 var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 
@@ -89,7 +94,7 @@ function init() {
 	createSmoke(300,'./textures/smoke.png',0x155CA3,0,500,100,600);
 	createSmoke(500,'./textures/smoke.png',0x001966,800,500,100,360);		
 	
-	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,0,0,0));
+	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,0,0,Math.radians(20)));
 
 	for(i=0;i<groupScene.length;i++) {
 		scene.add(groupScene[i]);		
@@ -386,7 +391,7 @@ function animate() {
 	// If I'm on a movement, I cannot change the parent, so the raycaster is not usefull
 	if(movementCamera && parent!=null) {
 		// If I have not reached the final position on each abcisse
-		if(!(positionReached[0] && positionReached[1] && positionReached[2])) {
+		if(!(positionReached[0] && positionReached[1] && positionReached[2] && rotationReached[0] && rotationReached[1] && rotationReached[2])) { //TODO Cyclomatic complexity here
 			moveCameraToBoard();
 		}
 	} else {
@@ -478,6 +483,21 @@ function moveCameraToBoard() {
 		} else {
 			positionReached[i] = true;
 		}
+		if(isMoveCameraTo(rotation[i],camera.rotation.toVector3().getComponent(i),rotationFinal[i])) {
+			add = delta * rotation[i] * speedRotation[i];
+			//TODO REFACTORING TO DO HERE
+			// It's bad but something like toVector3().setComponent(i,...) is not working
+			// I have to find a path around that before doing anything else - I dont like writing bad code like that :X
+			if(i==0) {				
+				camera.rotation.x = camera.rotation.toVector3().getComponent(i) + add;
+			} else if(i==1) {				
+				camera.rotation.y = camera.rotation.toVector3().getComponent(i) + add;
+			} else {				
+				camera.rotation.z = camera.rotation.toVector3().getComponent(i) + add;
+			}
+		} else {
+			rotationReached[i] = true;
+		}
 	}
 }
 
@@ -498,6 +518,7 @@ function isMoveCameraTo(movement,cameraPosition,finalDestination) {
 function getSpeedMovement() {
 	for(i=0;i<movements.length;i++) {
 		speedTranslation[i] = Math.abs(camera.position.getComponent(i)-positionFinal[i])*DEFAULT_MOVEMENT_CAMERA_SPEED;
+		speedRotation[i] = Math.abs(camera.rotation.toVector3().getComponent(i)-rotationFinal[i])*DEFAULT_ROTATION_CAMERA_SPEED;
 	}
 }
 
@@ -507,6 +528,7 @@ function getSpeedMovement() {
 function getMovementWay() {
 	for(i=0;i<movements.length;i++) {
 		movements[i] = camera.position.getComponent(i)>positionFinal[i] ? -1 : 1;	
+		rotation[i] = camera.rotation.toVector3().getComponent(i)>rotationFinal[i] ? -1 : 1;
 	}
 }
 
