@@ -102,7 +102,6 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-	initMouse();
 }
 
 /**
@@ -146,10 +145,6 @@ function initClock() {
 **/
 function initFog(fog) {
 	if(fog) scene.fog = new THREE.FogExp2( 0x000000, FOG_POWER );
-}
-
-function initMouse() {
-	
 }
 
 /**
@@ -424,6 +419,12 @@ function animate() {
 }
 
 /**
+*============================================================================================>
+* Calculations
+*============================================================================================> 
+**/
+
+/**
 * Move the smoke particule - in fact they jus rotate arount Z
 **/
 function moveSmoke() {
@@ -492,6 +493,32 @@ function isMoveCameraTo(movement,cameraPosition,finalDestination) {
 }
 
 /**
+ * Calcul the speed for the translation's movement
+ **/
+function getSpeedMovement() {
+	// Get the distance maximum for this movement
+	for(i=0,maxdif=0;i<movements.length;i++) {
+		maxdif = Math.max(maxdif,Math.abs(camera.position.getComponent(i)-positionFinal[i]));
+	}
+	speedTranslation = maxdif/DEFAULT_MOVEMENT_CAMERA_SPEED;
+}
+
+/**
+ * Save the direction of the movement in an array
+ **/
+function getMovementWay() {
+	for(i=0;i<movements.length;i++) {
+		movements[i] = camera.position.getComponent(i)>positionFinal[i] ? -1 : 1;	
+	}
+}
+
+/**
+*============================================================================================>
+* Events
+*============================================================================================> 
+**/
+
+/**
 * I catch the mouse positionwhen the user move it
 **/
 function onDocumentMouseMove(event) {
@@ -520,25 +547,6 @@ function onDocumentMouseDown( event ) {
 	}
 }
 
-/**
-* Calcul the speed for the translation's movement
-**/
-function getSpeedMovement() {
-	// Get the distance maximum for this movement
-	for(i=0,maxdif=0;i<movements.length;i++) {
-		maxdif = Math.max(maxdif,Math.abs(camera.position.getComponent(i)-positionFinal[i]));
-	}
-	speedTranslation = maxdif/DEFAULT_MOVEMENT_CAMERA_SPEED;
-}
-
-/**
-* Save the direction of the movement in an array
-**/
-function getMovementWay() {
-	for(i=0;i<movements.length;i++) {
-		movements[i] = camera.position.getComponent(i)>positionFinal[i] ? -1 : 1;	
-	}
-}
 
 /**
 * We resize the entire windows when the user play with it's browser
