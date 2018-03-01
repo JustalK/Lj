@@ -95,6 +95,7 @@ function init() {
 	createSmoke(500,'./textures/smoke.png',0x001966,800,500,100,360);		
 	
 	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,0,0,Math.radians(20)));
+	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-400,-20,800,0,0,0,-400,-20,1400,0,0,Math.radians(-20)));
 
 	for(i=0;i<groupScene.length;i++) {
 		scene.add(groupScene[i]);		
@@ -194,6 +195,7 @@ function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,translatio
 	piece.push(createCenterWireframe(-10,50,4,0,0,0));
 	piece.push(createCenterBoard(textureCenter,-10,50,4));
 	piece.push(createPanel(textureInformations,140, 40, 1,-10,110,8));
+	// The back button has to be the 7th mesh because of the return implementation
 	piece.push(createPanel(TEXTURE_BUTTON_BACK,40, 20, 1,20,-10,8));
 	piece.push(createPanel(TEXTURE_BUTTON_VISIT,40, 20, 1,-40,-10,8));
 
@@ -390,37 +392,60 @@ function animate() {
 
 	// If I'm on a movement, I cannot change the parent, so the raycaster is not usefull
 	if(movementCamera && parent!=null) {
+		document.body.style.cursor = "inherit";
 		// If I have not reached the final position on each abcisse
 		if(!(positionReached[0] && positionReached[1] && positionReached[2] && rotationReached[0] && rotationReached[1] && rotationReached[2])) { //TODO Cyclomatic complexity here
 			moveCameraToBoard();
+		} else {
+			movementCamera=false;
+			resetPositionReached();
 		}
 	} else {
-		var raycaster = new THREE.Raycaster();
-		raycaster.setFromCamera( mouse, camera );
-		// Permet de recuperer l'ensemble des objects avec lequels on peux interajir
-		var intersects = raycaster.intersectObjects( objectInteraction, true );			
-		
-		if(intersects.length>0) {
-			if(parent==null || parent!=intersects[0].object.parent) {
-				document.body.style.cursor = "pointer";
-				parent = intersects[0].object.parent;
-				childrens = parent.children;
-				for(i=0;i<childrens.length;i++) {
-					if(childrens[i]["wireframe"]) {
-						childrens[i].material.color = new THREE.Color(0xFFFFFF);
-					}
-				}
-			}
-		} else {
-			document.body.style.cursor = "inherit";
-			for(i=0;childrens!=null && i<childrens.length;i++) {
-				if(childrens[i]["wireframe"]) {
-					childrens[i].material.color = new THREE.Color(0x081D2F);
-				}
-			}
-			parent=null;
-		}
+		searchingMatchMouseAndMesh();
 	}
+}
+
+/**
+ * Reset the variable once the position is reached for allowing the movement again
+ */
+function resetPositionReached() {
+	positionReached = [false,false,false];
+	rotationReached = [false,false,false];
+}
+
+/**
+ * Search is the user is on a mesh or an object for interaction
+ */
+function searchingMatchMouseAndMesh() {
+	var raycaster = new THREE.Raycaster();
+	raycaster.setFromCamera( mouse, camera );
+	var intersects = raycaster.intersectObjects( objectInteraction, true );			
+	
+	if(intersects.length>0) {
+		// If the user trying to interact with a new mesh
+		if(parent==null || parent!=intersects[0].object.parent) {
+			document.body.style.cursor = "pointer";
+			parent = intersects[0].object.parent;
+			childrens = parent.children;
+			for(i=0;i<childrens.length;i++) {
+				if(childrens[i]["wireframe"]) {
+					childrens[i].material.color = new THREE.Color(0xFFFFFF);
+				}
+			}
+		}
+		// If the user is interacting with the back button
+		if(intersects[0].object==childrens[7]) {
+			console.log("yes");
+		}
+	} else {
+		document.body.style.cursor = "inherit";
+		for(i=0;childrens!=null && i<childrens.length;i++) {
+			if(childrens[i]["wireframe"]) {
+				childrens[i].material.color = new THREE.Color(0x081D2F);
+			}
+		}
+		parent=null;
+	}	
 }
 
 /**
