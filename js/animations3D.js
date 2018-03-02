@@ -84,8 +84,12 @@ var DEFAULT_NUMBER_SMOKE_TYPE_1 = 300;
 var DEFAULT_NUMBER_SMOKE_TYPE_2 = 300;
 var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
 var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
-var DEFAULT_AMPLITUDE_PERPETUAL_X = 10;
-var DEFAULT_AMPLITUDE_PERPETUAL_Y = 10;
+var DEFAULT_ROTATION_PERPETUAL_X_START = 0;
+var DEFAULT_ROTATION_PERPETUAL_Y_START = 0;
+var DEFAULT_ROTATION_PERPETUAL_X_AMPLITUDE = 20;
+var DEFAULT_ROTATION_PERPETUAL_Y_AMPLITUDE = 15;
+var DEFAULT_ROTATION_PERPETUAL_X_SPEED = 100;
+var DEFAULT_ROTATION_PERPETUAL_Y_SPEED = 200;
 var FOG_POWER = 0.0007;
 var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 
@@ -105,7 +109,8 @@ function init() {
 	initLight(LIGHT_AMBIANT_COLOR);
 	initClock();
 	initFog(false);
-
+	initRaycaster();
+	
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,'./textures/smoke.png',0x155CA3,0,500,100,600);
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,'./textures/smoke.png',0x001966,800,500,100,360);		
 	
@@ -452,7 +457,8 @@ function resetPositionReached() {
  * Search is the user is on a mesh or an object for interaction
  */
 function searchingMatchMouseAndMesh() {
-	intersects = raycaster.intersectObjects( objectInteraction, true );			
+	raycaster.setFromCamera( mouse, camera );
+	intersects = raycaster.intersectObjects( objectInteraction, true );	
 	
 	if(intersects.length>0) {
 		// If the user trying to interact with a new mesh
@@ -498,8 +504,8 @@ function moveSmoke() {
  * @param mesh board The board that we want to move
  */ 
 function perpetual(board) {
-	board.rotation.x = (1 + Math.cos(delta * DEFAULT_ROTATION_PERPETUAL_X) * DEFAULT_AMPLITUDE_PERPETUAL_X);
-	board.rotation.y = (1 + Math.cos(delta * DEFAULT_ROTATION_PERPETUAL_Y) * DEFAULT_AMPLITUDE_PERPETUAL_Y);
+	board.rotation.x = (Math.radians(DEFAULT_ROTATION_PERPETUAL_X_START) + Math.cos(clock.elapsedTime*DEFAULT_ROTATION_PERPETUAL_X_SPEED * DEFAULT_ROTATION_PERPETUAL_X) * Math.radians(DEFAULT_ROTATION_PERPETUAL_X_AMPLITUDE));
+	board.rotation.y = (Math.radians(DEFAULT_ROTATION_PERPETUAL_Y_START) + Math.cos(clock.elapsedTime*DEFAULT_ROTATION_PERPETUAL_Y_SPEED * DEFAULT_ROTATION_PERPETUAL_Y + 300) * Math.radians(DEFAULT_ROTATION_PERPETUAL_Y_AMPLITUDE));
 }
 
 /**
