@@ -115,6 +115,12 @@ function init() {
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,'./textures/smoke.png',0x001966,800,500,100,360);		
 	
 	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,0,0,Math.radians(20)));
+	childrens = groupScene[0].children;
+	for(i=0;childrens!=null && i<childrens.length;i++) {
+		if(childrens[i]["panel"]) {
+			childrens[i].material[4].opacity = 1;
+		}
+	}
 	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-400,-20,800,0,0,0,-400,-20,1400,0,0,Math.radians(-20)));
 
 	for(i=0;i<groupScene.length;i++) {
@@ -254,6 +260,7 @@ function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,translatio
 	boardTmp["rotationx"] = rotationX;
 	boardTmp["rotationy"] = rotationY;
 	boardTmp["rotationz"] = rotationZ;
+	boardTmp["lock"] = false;
 
 	// Position of the board in the scene
 	boardTmp.position.set(x,y,z);
@@ -335,9 +342,10 @@ function createCenterBoard(textureCenter,x,y,z) {
 **/
 function createPanel(texture,sx,sy,sz,x,y,z) {
 	texture = new THREE.TextureLoader().load( texture );
-	material = new THREE.MeshBasicMaterial( { map: texture, transparent: true } );
+	material = new THREE.MeshBasicMaterial( { map: texture, transparent: true, opacity: 0 } );
 	informationsMesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( sx, sy, sz ), [0,0,0,0,material,0] );
 	informationsMesh.position.set(x,y,z);
+	informationsMesh["panel"] = true;
 	return informationsMesh;
 }
 
@@ -465,10 +473,18 @@ function searchingMatchMouseAndMesh() {
 		if(parent==null || parent!=intersects[0].object.parent) {
 			document.body.style.cursor = "pointer";
 			parent = intersects[0].object.parent;
+			for(i=0;childrens!=null && i<childrens.length;i++) {
+				if(childrens[i]["panel"]) {
+					childrens[i].material[4].opacity = 0;
+				}
+			}
 			childrens = parent.children;
 			for(i=0;i<childrens.length;i++) {
 				if(childrens[i]["wireframe"]) {
 					childrens[i].material.color = new THREE.Color(0xFFFFFF);
+				}
+				if(childrens[i]["panel"]) {
+					childrens[i].material[4].opacity = 1;
 				}
 			}
 		}
@@ -569,6 +585,9 @@ function backToStart() {
 	rotationFinal[0] = CAMERA_START_ROTATION_X;
 	rotationFinal[1] = CAMERA_START_ROTATION_Y;
 	rotationFinal[2] = CAMERA_START_ROTATION_Z;
+	for(i=0;i<groupScene.length;i++) {
+		groupScene[i]["lock"] = false;
+	}
 	getSpeedMovement();
 	getMovementWay();
 	movementCamera = true;
@@ -600,7 +619,7 @@ function onDocumentMouseDown( event ) {
 		}
 		
 		// If I'm on a board, I move to the new position
-		if(parent!=null) {
+		if(parent!=null && !parent["lock"]) {
 			for(i=0;i<ABSCISSA.length;i++) {
 				positionFinal[i] = parent["translation"+ABSCISSA[i]];
 				rotationFinal[i] = parent["rotation"+ABSCISSA[i]];
@@ -609,6 +628,7 @@ function onDocumentMouseDown( event ) {
 			getSpeedMovement();
 			getMovementWay();
 			movementCamera = true;
+			parent["lock"] = true;
 			return true;
 		}
 	}
