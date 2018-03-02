@@ -54,10 +54,11 @@ var rotationReached = [false,false,false];
 var speedTranslation = [0,0,0];
 // The speed of the camera when it's rotating to a new position
 var speedRotation = [0,0,0];
+// Number total of smoke particle
+var smokeTotal = 0;
 
 /* Constants */
-var SPEED = 1;
-var TIME = 0;
+var ABSCISSA = ["x","y","z"];
 var BACKGROUND_COLOR = 0x000000;
 var LIGHT_AMBIANT_COLOR = 0x404040;
 var WIREFRAME_COLOR = 0x60A8D6;
@@ -72,6 +73,13 @@ var TEXTURE_BUTTON_BACK = 'imgs/back.png';
 var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var DEFAULT_ROTATION_CAMERA_SPEED = 1;
+var DEFAULT_SMOKE_ROTATION_SPEED = 0.1;
+var DEFAULT_NUMBER_SMOKE_TYPE_1 = 300;
+var DEFAULT_NUMBER_SMOKE_TYPE_2 = 300;
+var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
+var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
+var DEFAULT_AMPLITUDE_PERPETUAL_X = 10;
+var DEFAULT_AMPLITUDE_PERPETUAL_Y = 10;
 var FOG_POWER = 0.0007;
 var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 
@@ -85,14 +93,15 @@ var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps:
 * The initial function
 **/
 function init() {
+	initVariable();
 	initCamera();
 	initScene(BACKGROUND_COLOR);
 	initLight(LIGHT_AMBIANT_COLOR);
 	initClock();
 	initFog(false);
 
-	createSmoke(300,'./textures/smoke.png',0x155CA3,0,500,100,600);
-	createSmoke(500,'./textures/smoke.png',0x001966,800,500,100,360);		
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,'./textures/smoke.png',0x155CA3,0,500,100,600);
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,'./textures/smoke.png',0x001966,800,500,100,360);		
 	
 	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,0,0,Math.radians(20)));
 	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-400,-20,800,0,0,0,-400,-20,1400,0,0,Math.radians(-20)));
@@ -108,6 +117,13 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+}
+
+/**
+ * Initialize some variable
+ */
+function initVariable() {
+	smokeTotal = DEFAULT_NUMBER_SMOKE_TYPE_1 + DEFAULT_NUMBER_SMOKE_TYPE_2;
 }
 
 /**
@@ -212,13 +228,12 @@ function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,translatio
 
 	
 	// Value for the perpetual movement
-	boardTmp["ascending"] = true;
-	boardTmp["translationX"] = translationX;
-	boardTmp["translationY"] = translationY;
-	boardTmp["translationZ"] = translationZ;
-	boardTmp["rotationX"] = rotationX;
-	boardTmp["rotationY"] = rotationY;
-	boardTmp["rotationZ"] = rotationZ;
+	boardTmp["translationx"] = translationX;
+	boardTmp["translationy"] = translationY;
+	boardTmp["translationz"] = translationZ;
+	boardTmp["rotationx"] = rotationX;
+	boardTmp["rotationy"] = rotationY;
+	boardTmp["rotationz"] = rotationZ;
 
 	// Position of the board in the scene
 	boardTmp.position.set(x,y,z);
@@ -376,25 +391,19 @@ var childrens = null;
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
-	TIME++;
-	
-	// If the board is not at it's original position
-	// We move the different object for a beautiful aniamtion
-	//movement(groupScene[0],0,100,0,0,-1,-0.002,0,0);
-	//movement(groupScene[0],100,300,0,0.1,-1,0,0,0);
 	
 	delta = clock.getDelta();
 	moveSmoke();
 
 	for(i=0;i<groupScene.length;i++) {
-		perpetual(groupScene[i],300);
+		perpetual(groupScene[i]);
 	}
 
 	// If I'm on a movement, I cannot change the parent, so the raycaster is not usefull
 	if(movementCamera && parent!=null) {
 		document.body.style.cursor = "inherit";
 		// If I have not reached the final position on each abcisse
-		if(!(positionReached[0] && positionReached[1] && positionReached[2] && rotationReached[0] && rotationReached[1] && rotationReached[2])) { //TODO Cyclomatic complexity here
+		if(isPositionNotReached()) { 
 			moveCameraToBoard();
 		} else {
 			movementCamera=false;
@@ -403,6 +412,17 @@ function animate() {
 	} else {
 		searchingMatchMouseAndMesh();
 	}
+}
+
+/**
+ * Test if I have reached or not the finla position
+ * @returns boolean Return true if I have not reach the final position, false if else 
+ */
+function isPositionNotReached() {
+	for(i=0;i<ABSCISSA.length;i++) {
+		if(!positionReached[i] || !rotationReached[i]) return true;
+	}
+	return false;
 }
 
 /**
@@ -458,43 +478,18 @@ function searchingMatchMouseAndMesh() {
 * Move the smoke particule - in fact they jus rotate arount Z
 **/
 function moveSmoke() {
-    var sp = smokeParticles.length;
-    while(sp--) {
-        smokeParticles[sp].rotation.z += (delta * 0.1);
+    for(i=0;i<smokeTotal;i++) {
+        smokeParticles[i].rotation.z += (delta * DEFAULT_SMOKE_ROTATION_SPEED);
     }
 }
 
-// Move an object only if the period of time is between start and end
-// x,y,z is for make a translation and rotx,roty,rotz is for a rotation
-function movement(board,start,end,x,y,z,rotx,roty,rotz) {
-	// If it's the moment to move the board
-	if(start<=TIME && TIME<=end) {
-		board.translateX(x);
-		board.translateY(y);
-		board.translateZ(z);
-		board.rotateX(rotx);
-		board.rotateY(roty);
-		board.rotateZ(rotz);
-	}
-}
-
-// Make the object moving without stopping
-function perpetual(board,start) {
-	if(start<=TIME) {
-		if(board.ascending) {
-			board.rotateY(0.002);
-			board.rotateX(0.001);
-			if(board.rotation.y>=Math.radians(20)) {
-				board["ascending"] = false; 
-			}
-		} else {
-			board.rotateY(-0.002);
-			board.rotateX(-0.001);
-			if(board.rotation.y<=Math.radians(0)) {
-				board["ascending"] = true;
-			}
-		}
-	}
+/**
+ * Make the object moving forever - add some animation event when the user is not doing anything
+ * @param mesh board The board that we want to move
+ */ 
+function perpetual(board) {
+	board.rotation.x = (1 + Math.cos(delta * DEFAULT_ROTATION_PERPETUAL_X) * DEFAULT_AMPLITUDE_PERPETUAL_X);
+	board.rotation.y = (1 + Math.cos(delta * DEFAULT_ROTATION_PERPETUAL_Y) * DEFAULT_AMPLITUDE_PERPETUAL_Y);
 }
 
 /**
@@ -509,17 +504,8 @@ function moveCameraToBoard() {
 			positionReached[i] = true;
 		}
 		if(isMoveCameraTo(rotation[i],camera.rotation.toVector3().getComponent(i),rotationFinal[i])) {
-			add = delta * rotation[i] * speedRotation[i];
-			//TODO REFACTORING TO DO HERE
-			// It's bad but something like toVector3().setComponent(i,...) is not working
-			// I have to find a path around that before doing anything else - I dont like writing bad code like that :X
-			if(i==0) {				
-				camera.rotation.x = camera.rotation.toVector3().getComponent(i) + add;
-			} else if(i==1) {				
-				camera.rotation.y = camera.rotation.toVector3().getComponent(i) + add;
-			} else {				
-				camera.rotation.z = camera.rotation.toVector3().getComponent(i) + add;
-			}
+			add = delta * rotation[i] * speedRotation[i];			
+			camera.rotation[ABSCISSA[i]] = camera.rotation.toVector3().getComponent(i) + add;
 		} else {
 			rotationReached[i] = true;
 		}
@@ -541,7 +527,7 @@ function isMoveCameraTo(movement,cameraPosition,finalDestination) {
  * Calcul the speed for the translation's movement
  **/
 function getSpeedMovement() {
-	for(i=0;i<movements.length;i++) {
+	for(i=0;i<ABSCISSA.length;i++) {
 		speedTranslation[i] = Math.abs(camera.position.getComponent(i)-positionFinal[i])*DEFAULT_MOVEMENT_CAMERA_SPEED;
 		speedRotation[i] = Math.abs(camera.rotation.toVector3().getComponent(i)-rotationFinal[i])*DEFAULT_ROTATION_CAMERA_SPEED;
 	}
@@ -551,7 +537,7 @@ function getSpeedMovement() {
  * Save the direction of the movement in an array
  **/
 function getMovementWay() {
-	for(i=0;i<movements.length;i++) {
+	for(i=0;i<ABSCISSA.length;i++) {
 		movements[i] = camera.position.getComponent(i)>positionFinal[i] ? -1 : 1;	
 		rotation[i] = camera.rotation.toVector3().getComponent(i)>rotationFinal[i] ? -1 : 1;
 	}
@@ -577,15 +563,11 @@ function onDocumentMouseMove(event) {
 function onDocumentMouseDown( event ) {
 	// If I'm on a board, I move to the new position
 	if(parent!=null && !movementCamera) {
-		positionFinal[0] = parent["translationX"];
-		positionFinal[1] = parent["translationY"];
-		positionFinal[2] = parent["translationZ"];
-		rotationFinal[0] = parent["rotationX"];
-		rotationFinal[1] = parent["rotationY"];
-		rotationFinal[2] = parent["rotationZ"];
-		positionReached[0] = false;
-		positionReached[1] = false;
-		positionReached[2] = false;
+		for(i=0;i<ABSCISSA.length;i++) {
+			positionFinal[i] = parent["translation"+ABSCISSA[i]];
+			rotationFinal[i] = parent["rotation"+ABSCISSA[i]];
+			positionReached[i] = false;
+		}
 		getSpeedMovement();
 		getMovementWay();
 		movementCamera = true;
