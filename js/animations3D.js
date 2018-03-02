@@ -56,6 +56,12 @@ var speedTranslation = [0,0,0];
 var speedRotation = [0,0,0];
 // Number total of smoke particle
 var smokeTotal = 0;
+// If the user is on a back button
+var backButton = false;
+// The object for the intersection between the mouse and the camera
+var raycaster;
+// The object with who the mouse is hover it
+var intersects;
 
 /* Constants */
 var ABSCISSA = ["x","y","z"];
@@ -167,6 +173,15 @@ function initClock() {
 **/
 function initFog(fog) {
 	if(fog) scene.fog = new THREE.FogExp2( 0x000000, FOG_POWER );
+}
+
+/**
+ * Initialize the raycaster
+ * @returns
+ */
+function initRaycaster() {
+	raycaster = new THREE.Raycaster();
+	raycaster.setFromCamera( mouse, camera );
 }
 
 /**
@@ -437,9 +452,7 @@ function resetPositionReached() {
  * Search is the user is on a mesh or an object for interaction
  */
 function searchingMatchMouseAndMesh() {
-	var raycaster = new THREE.Raycaster();
-	raycaster.setFromCamera( mouse, camera );
-	var intersects = raycaster.intersectObjects( objectInteraction, true );			
+	intersects = raycaster.intersectObjects( objectInteraction, true );			
 	
 	if(intersects.length>0) {
 		// If the user trying to interact with a new mesh
@@ -453,10 +466,6 @@ function searchingMatchMouseAndMesh() {
 				}
 			}
 		}
-		// If the user is interacting with the back button
-		if(intersects[0].object==childrens[7]) {
-			console.log("yes");
-		}
 	} else {
 		document.body.style.cursor = "inherit";
 		for(i=0;childrens!=null && i<childrens.length;i++) {
@@ -464,6 +473,7 @@ function searchingMatchMouseAndMesh() {
 				childrens[i].material.color = new THREE.Color(0x081D2F);
 			}
 		}
+		backButton = false;
 		parent=null;
 	}	
 }
@@ -544,6 +554,21 @@ function getMovementWay() {
 }
 
 /**
+ * move the camera to the start of the application
+ */
+function backToStart() {
+	positionFinal[0] = CAMERA_START_POSITION_X;
+	positionFinal[1] = CAMERA_START_POSITION_Y;
+	positionFinal[2] = CAMERA_START_POSITION_Z;
+	rotationFinal[0] = CAMERA_START_ROTATION_X;
+	rotationFinal[1] = CAMERA_START_ROTATION_Y;
+	rotationFinal[2] = CAMERA_START_ROTATION_Z;
+	getSpeedMovement();
+	getMovementWay();
+	movementCamera = true;
+}
+
+/**
 *============================================================================================>
 * Events
 *============================================================================================> 
@@ -561,16 +586,25 @@ function onDocumentMouseMove(event) {
 * Catch the vent when the user click on the board
 **/
 function onDocumentMouseDown( event ) {
-	// If I'm on a board, I move to the new position
-	if(parent!=null && !movementCamera) {
-		for(i=0;i<ABSCISSA.length;i++) {
-			positionFinal[i] = parent["translation"+ABSCISSA[i]];
-			rotationFinal[i] = parent["rotation"+ABSCISSA[i]];
-			positionReached[i] = false;
+	if(!movementCamera && intersects.length>0) {
+		// If the user is interacting with the back button
+		if(intersects[0].object==childrens[7]) {
+			backToStart();
+			return true;
 		}
-		getSpeedMovement();
-		getMovementWay();
-		movementCamera = true;
+		
+		// If I'm on a board, I move to the new position
+		if(parent!=null) {
+			for(i=0;i<ABSCISSA.length;i++) {
+				positionFinal[i] = parent["translation"+ABSCISSA[i]];
+				rotationFinal[i] = parent["rotation"+ABSCISSA[i]];
+				positionReached[i] = false;
+			}
+			getSpeedMovement();
+			getMovementWay();
+			movementCamera = true;
+			return true;
+		}
 	}
 }
 

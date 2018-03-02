@@ -147,12 +147,6 @@ describe("Test the calculations of the rotation's speed", function() {
 		getSpeedMovement();
 		expect(speedRotation).toEqual([150,40,930]);
 	});
-	it("from 5,-2,3 deg to 20,-6,96 deg", function() {
-		camera.rotation.set(0,0,0);
-		var c="x";
-		camera.rotation[c] = 10;
-		console.log(camera.rotation);
-	});
 });
 
 //======================================================================================================================>
