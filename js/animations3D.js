@@ -80,8 +80,9 @@ var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var DEFAULT_ROTATION_CAMERA_SPEED = 1;
 var DEFAULT_SMOKE_ROTATION_SPEED = 0.1;
-var DEFAULT_NUMBER_SMOKE_TYPE_1 = 300;
+var DEFAULT_NUMBER_SMOKE_TYPE_1 = 200;
 var DEFAULT_NUMBER_SMOKE_TYPE_2 = 300;
+var DEFAULT_NUMBER_SMOKE_TYPE_3 = 100;
 var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
 var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
 var DEFAULT_ROTATION_PERPETUAL_X_START = 0;
@@ -113,15 +114,19 @@ function init() {
 	
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,'./textures/smoke.png',0x155CA3,0,500,100,600);
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,'./textures/smoke.png',0x001966,800,500,100,360);		
-	
-	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,0,-100,-20,1600,0,0,Math.radians(20)));
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,'./textures/smoke.png',0x000000,800,500,100,360);		
+
+	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-100,-20,1200,0,0,Math.radians(20),-100,-20,1600,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
 	for(i=0;childrens!=null && i<childrens.length;i++) {
 		if(childrens[i]["panel"]) {
 			childrens[i].material[4].opacity = 1;
 		}
 	}
-	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-400,-20,800,0,0,0,-400,-20,1400,0,0,Math.radians(-20)));
+	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-500,200,600,0,0,Math.radians(-20),-500,150,1100,0,0,Math.radians(-20)));
+	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',0,-80,500,0,Math.radians(-90),Math.radians(-40),0,-60,900,0,0,Math.radians(-40)));
+	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-400,-150,1400,0,0,Math.radians(-60),-350,-200,1800,0,0,Math.radians(-40)));
+	groupScene.push(createBoard('imgs/frame1_LOW.jpg','imgs/test.png',-400,-150,0,0,0,Math.radians(-60),-400,-100,400,0,0,Math.radians(-40)));
 
 	for(i=0;i<groupScene.length;i++) {
 		scene.add(groupScene[i]);		
@@ -393,14 +398,16 @@ function createCenterWireframe(x,y,z,rx,ry,rz) {
 function createSmoke(numbers,texture,color,x,y,z,rz) {
 	smokeTexture = THREE.ImageUtils.loadTexture(texture);
     smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
-    smokeGeo = new THREE.PlaneGeometry(300,300);
+    smokeGeo = new THREE.PlaneGeometry(600,600);
 
     for (p = 0; p < numbers; p++) {
         var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
-        positionX = Math.random()*1000-x;
+        positionX = Math.random()*3000-x;
         positionY = Math.random()*1000-y;
-        positionY = positionY<300 && positionY>-300 && positionX<100 ? positionY-500 : positionY; 
-	        
+        while(positionY<300 && positionY>-300 && positionX<300) {
+            positionY = Math.random()*1000-y;
+        }
+        
         particle.position.set(positionX,positionY,Math.random()*2000-z);
         particle.rotation.z = Math.random() * rz;
         scene.add(particle);
