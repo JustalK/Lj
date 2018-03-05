@@ -3,6 +3,9 @@
 * Util function 
 *============================================================================================> 
 **/
+/**
+ * Convert from degree to radians
+ */
 Math.radians = function(degrees) {
 	  return degrees * Math.PI / 180;
 };
@@ -11,6 +14,13 @@ Math.radians = function(degrees) {
 Math.degrees = function(radians) {
   return radians * 180 / Math.PI;
 };
+
+/**
+ * Give a random number betwenn -1 and 1
+ */
+Math.randomRange = function () {
+	return (Math.random() - 0.5)*2;
+}
 
 /**
 *============================================================================================>
@@ -64,7 +74,10 @@ var raycaster;
 var intersects;
 
 /* Constants */
+var FOV = 50;
 var ABSCISSA = ["x","y","z"];
+var WINDOWS_WIDTH = window.innerWidth;
+var WINDOWS_HEIGHT = window.innerHeight;
 var BACKGROUND_COLOR = 0x000000;
 var LIGHT_AMBIANT_COLOR = 0x404040;
 var WIREFRAME_COLOR = 0x020B13;
@@ -78,6 +91,7 @@ var CAMERA_START_ROTATION_Z = 0;
 var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
 var TEXTURE_BUTTON_BACK = 'imgs/back.png';
 var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
+var TEXTURE_SMOKE = './textures/smoke.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var DEFAULT_ROTATION_CAMERA_SPEED = 1;
 var DEFAULT_SMOKE_ROTATION_SPEED = 0.1;
@@ -113,10 +127,10 @@ function init() {
 	initFog(false);
 	initRaycaster();
 	
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,'./textures/smoke.png',0x155CA3,0,500,100,600);
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,'./textures/smoke.png',0x001966,800,500,100,360);		
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,'./textures/smoke.png',0x000000,800,500,100,360);		
-	createSmoke2(100,'./textures/smoke.png',0x000913,3000,500,100,360);		
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,600,600,0x155CA3,2000);
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,600,600,0x001966,2000);		
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,600,600,0x000000,2000);		
+	createSmoke(100,600,600,0x000913,0);		
 
 	groupScene.push(createBoard('imgs/zipWorld.jpg','imgs/test.png',-400,-20,-600,0,0,Math.radians(20),-400,-20,-200,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
@@ -155,7 +169,7 @@ function initVariable() {
 * Initialize the camera
 **/
 function initCamera() {
-	camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
+	camera = new THREE.PerspectiveCamera( FOV, WINDOWS_WIDTH / WINDOWS_HEIGHT, 1, 10000 );
 	camera.position.set(CAMERA_START_POSITION_X,CAMERA_START_POSITION_Y,CAMERA_START_POSITION_Z);
 	camera.rotation.set(CAMERA_START_ROTATION_X,CAMERA_START_ROTATION_Y,CAMERA_START_ROTATION_Z);
 }
@@ -398,41 +412,24 @@ function createCenterWireframe(x,y,z,rx,ry,rz) {
 * @param int z The position Z of the smoke
 * @param int rz The rotation of the smoke
 **/
-function createSmoke(numbers,texture,color,x,y,z,rz) {
-	smokeTexture = THREE.ImageUtils.loadTexture(texture);
+function createSmoke(numbers,texture,sizex,sizey,color,coeffZ) {
+	smokeTexture = THREE.ImageUtils.loadTexture(TEXTURE_SMOKE);
     smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
-    smokeGeo = new THREE.PlaneGeometry(600,600);
+    smokeGeo = new THREE.PlaneGeometry(sizex,sizey);
 
     for (p = 0; p < numbers; p++) {
         var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
-        positionX = Math.random()*3000-x;
-        positionY = Math.random()*1000-y;
-        while(positionY<300 && positionY>-300 && positionX<300) {
-            positionY = Math.random()*1000-y;
+        positionX = Math.randomRange()*WINDOWS_WIDTH;
+        positionY = Math.randomRange()*WINDOWS_HEIGHT;
+        while(positionY<WINDOWS_HEIGHT/4 && positionY>-WINDOWS_HEIGHT/4 && positionX<300) {
+            positionY = Math.random()*WINDOWS_HEIGHT;
         }
         
-        particle.position.set(positionX,positionY,Math.random()*2000-z);
-        particle.rotation.z = Math.random() * rz;
+        particle.position.set(positionX,positionY,Math.random()*coeffZ);
+        particle.rotation.z = Math.random() * 360;
         scene.add(particle);
         smokeParticles.push(particle);
     }			
-}
-
-function createSmoke2(numbers,texture,color,x,y,z,rz) {
-	smokeTexture = THREE.ImageUtils.loadTexture(texture);
-	smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
-	smokeGeo = new THREE.PlaneGeometry(2000,2000);
-	
-	for (p = 0; p < numbers; p++) {
-		var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
-		positionX = Math.random()*3000-x;
-		positionY = Math.random()*1000-y;
-		
-		particle.position.set(positionX,positionY,-2000);
-		particle.rotation.z = Math.random() * rz;
-		scene.add(particle);
-		smokeParticles.push(particle);
-	}			
 }
 
 /**
