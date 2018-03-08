@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" class="no-js">
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" charset="text/html; UTF-8">
 	<title>Latsuj - The Website</title>
 	<meta name="description" content="French Fullstack Developer, <?= date("Y"); ?>, Latsuj's portfolio on wordpress prestashop and custom cms">
 	
