@@ -98,6 +98,7 @@ var DEFAULT_SMOKE_ROTATION_SPEED = 0.1;
 var DEFAULT_NUMBER_SMOKE_TYPE_1 = 200;
 var DEFAULT_NUMBER_SMOKE_TYPE_2 = 300;
 var DEFAULT_NUMBER_SMOKE_TYPE_3 = 100;
+var DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/4;
 var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
 var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
 var DEFAULT_ROTATION_PERPETUAL_X_START = 0;
@@ -272,8 +273,6 @@ function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,translatio
 	for(i=0;i<piece.length;i++) {
 		objectInteraction.push(piece[i]);
 	}
-
-
 	
 	// Value for the perpetual movement
 	boardTmp["translationx"] = translationX;
@@ -416,14 +415,13 @@ function createSmoke(numbers,texture,sizex,sizey,color,coeffZ) {
 	smokeTexture = THREE.ImageUtils.loadTexture(TEXTURE_SMOKE);
     smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
     smokeGeo = new THREE.PlaneGeometry(sizex,sizey);
-
+    
     for (p = 0; p < numbers; p++) {
         var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
         positionX = Math.randomRange()*WINDOWS_WIDTH;
         positionY = Math.randomRange()*WINDOWS_HEIGHT;
-        while(positionY<WINDOWS_HEIGHT/4 && positionY>-WINDOWS_HEIGHT/4 && positionX<300) {
-            positionY = Math.random()*WINDOWS_HEIGHT;
-        }
+        if(positionY<DEFAULT_RANGE_WITHOUT_SMOKE && positionY>=0 && positionX<300) positionY = positionY+DEFAULT_RANGE_WITHOUT_SMOKE;
+        if(positionY>-DEFAULT_RANGE_WITHOUT_SMOKE && positionY<=0 && positionX<300) positionY = positionY-DEFAULT_RANGE_WITHOUT_SMOKE;
         
         particle.position.set(positionX,positionY,Math.random()*coeffZ);
         particle.rotation.z = Math.random() * 360;
