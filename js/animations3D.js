@@ -228,21 +228,23 @@ function renderWebGL() {
 *============================================================================================> 
 **/
 
+var DIAMETRE_EXTERIEUR = 85;
+var DIAMETRE_INTERIEUR = 75;
 function createShapeCog() {
 	var leftShape = new THREE.Shape();
-	leftShape.moveTo( 0, 0 );
-	leftShape.lineTo( 0, 20 );
-	leftShape.lineTo( 10, 30 );
-	leftShape.lineTo( 10, 70 );
-	leftShape.lineTo( 0, 80 );
-	leftShape.lineTo( 0, 100 );
-	leftShape.lineTo( 40, 90 );
-	leftShape.lineTo( 40, 80 );
-	leftShape.lineTo( 20, 80 );
-	leftShape.lineTo( 20, 20 );
-	leftShape.lineTo( 40, 20 );
-	leftShape.lineTo( 40, 10 );
-	return leftShape;	
+	leftShape.moveTo( DIAMETRE_INTERIEUR, 0 );
+	for(i=0;i<16;i++) {
+		leftShape.absarc( 0, 0, DIAMETRE_INTERIEUR, i*3*Math.PI/24, (i*3+2)*Math.PI/24 );
+		leftShape.lineTo( DIAMETRE_EXTERIEUR*Math.cos((i*3+2)*Math.PI/24), DIAMETRE_EXTERIEUR*Math.sin((i*3+2)*Math.PI/24));
+		leftShape.absarc( 0, 0, DIAMETRE_EXTERIEUR, (i*3+2)*Math.PI/24, (i*3+3)*Math.PI/24 );
+		leftShape.lineTo( DIAMETRE_INTERIEUR*Math.cos((i*3+3)*Math.PI/24), DIAMETRE_INTERIEUR*Math.sin((i*3+3)*Math.PI/24));
+	}
+	var holePath = new THREE.Path();
+	holePath.moveTo( 20, 10 );
+	holePath.absarc( 10, 10, 10, 0, Math.PI * 2, true );
+	leftShape.holes.push( holePath );
+	
+	return leftShape;
 }
 
 function createCog(x,y,z,rx,ry,rz) {
