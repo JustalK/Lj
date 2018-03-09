@@ -64,8 +64,6 @@ var rotationReached = [false,false,false];
 var speedTranslation = [0,0,0];
 // The speed of the camera when it's rotating to a new position
 var speedRotation = [0,0,0];
-// Number total of smoke particle
-var smokeTotal = 0;
 // If the user is on a back button
 var backButton = false;
 // The object for the intersection between the mouse and the camera
@@ -79,12 +77,12 @@ var ABSCISSA = ["x","y","z"];
 var WINDOWS_WIDTH = window.innerWidth;
 var WINDOWS_HEIGHT = window.innerHeight;
 var BACKGROUND_COLOR = 0x000000;
-var LIGHT_AMBIANT_COLOR = 0x404040;
+var LIGHT_AMBIANT_COLOR = 0xF0F0F0;
 var WIREFRAME_COLOR = 0x020B13;
 var BOARD_COLOR = 0x000000;
 var CAMERA_START_POSITION_X = 0;
 var CAMERA_START_POSITION_Y = 0;
-var CAMERA_START_POSITION_Z = 2000;
+var CAMERA_START_POSITION_Z = 8000;
 var CAMERA_START_ROTATION_X = 0;
 var CAMERA_START_ROTATION_Y = 0;
 var CAMERA_START_ROTATION_Z = 0;
@@ -94,11 +92,11 @@ var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
 var TEXTURE_SMOKE = './textures/smoke.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var DEFAULT_ROTATION_CAMERA_SPEED = 1;
-var DEFAULT_SMOKE_ROTATION_SPEED = 0.1;
+var DEFAULT_SMOKE_ROTATION_SPEED = 0.05;
 var DEFAULT_NUMBER_SMOKE_TYPE_1 = 200;
 var DEFAULT_NUMBER_SMOKE_TYPE_2 = 300;
 var DEFAULT_NUMBER_SMOKE_TYPE_3 = 100;
-var DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/4;
+var DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/2;
 var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
 var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
 var DEFAULT_ROTATION_PERPETUAL_X_START = 0;
@@ -120,7 +118,6 @@ var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps:
 * The initial function
 **/
 function init() {
-	initVariable();
 	initCamera();
 	initScene(BACKGROUND_COLOR);
 	initLight(LIGHT_AMBIANT_COLOR);
@@ -128,11 +125,13 @@ function init() {
 	initFog(false);
 	initRaycaster();
 	
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,600,600,0x155CA3,2000);
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,600,600,0x001966,2000);		
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,600,600,0x000000,2000);		
-	createSmoke(100,600,600,0x000913,0);		
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,1200,1200,0x22AAFF,8000);
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x66FFFF,8000);		
+	//createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,600,600,0x000000,4000);		
+	createSmoke(10,30000,30000,0x77FFFF,0);		
 
+	scene.add(createCog(0,0,7500,0,0,0));
+	
 	groupScene.push(createBoard('imgs/zipWorld.jpg','imgs/test.png',-400,-20,-600,0,0,Math.radians(20),-400,-20,-200,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
 	for(i=0;childrens!=null && i<childrens.length;i++) {
@@ -157,13 +156,6 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-}
-
-/**
- * Initialize some variable
- */
-function initVariable() {
-	smokeTotal = DEFAULT_NUMBER_SMOKE_TYPE_1 + DEFAULT_NUMBER_SMOKE_TYPE_2;
 }
 
 /**
@@ -235,6 +227,38 @@ function renderWebGL() {
 * Creating the object
 *============================================================================================> 
 **/
+
+function createShapeCog() {
+	var leftShape = new THREE.Shape();
+	leftShape.moveTo( 0, 0 );
+	leftShape.lineTo( 0, 20 );
+	leftShape.lineTo( 10, 30 );
+	leftShape.lineTo( 10, 70 );
+	leftShape.lineTo( 0, 80 );
+	leftShape.lineTo( 0, 100 );
+	leftShape.lineTo( 40, 90 );
+	leftShape.lineTo( 40, 80 );
+	leftShape.lineTo( 20, 80 );
+	leftShape.lineTo( 20, 20 );
+	leftShape.lineTo( 40, 20 );
+	leftShape.lineTo( 40, 10 );
+	return leftShape;	
+}
+
+function createCog(x,y,z,rx,ry,rz) {
+	texture = new THREE.TextureLoader().load(TEXTURE_BOARD_EXTREMITY);
+	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+	texture.repeat.set(0.008, 0.008);
+	
+	materialBoard = new THREE.MeshPhongMaterial( {  color:BOARD_COLOR } );
+	geometryBoard = new THREE.ExtrudeGeometry( createShapeCog(), extrudeSettings );
+	sideMesh = new THREE.Mesh( geometryBoard, materialBoard );	
+
+	sideMesh.position.set( x, y, z );
+	sideMesh.rotation.set( rx, ry, rz );
+	return sideMesh;
+}
+
 
 /**
 * Create a board in the scene
@@ -411,7 +435,7 @@ function createCenterWireframe(x,y,z,rx,ry,rz) {
 * @param int z The position Z of the smoke
 * @param int rz The rotation of the smoke
 **/
-function createSmoke(numbers,texture,sizex,sizey,color,coeffZ) {
+function createSmoke(numbers,sizex,sizey,color,coeffZ) {
 	smokeTexture = THREE.ImageUtils.loadTexture(TEXTURE_SMOKE);
     smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
     smokeGeo = new THREE.PlaneGeometry(sizex,sizey);
@@ -419,10 +443,9 @@ function createSmoke(numbers,texture,sizex,sizey,color,coeffZ) {
     for (p = 0; p < numbers; p++) {
         var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
         positionX = Math.randomRange()*WINDOWS_WIDTH;
-        positionY = Math.randomRange()*WINDOWS_HEIGHT;
-        if(positionY<DEFAULT_RANGE_WITHOUT_SMOKE && positionY>=0 && positionX<300) positionY = positionY+DEFAULT_RANGE_WITHOUT_SMOKE;
-        if(positionY>-DEFAULT_RANGE_WITHOUT_SMOKE && positionY<=0 && positionX<300) positionY = positionY-DEFAULT_RANGE_WITHOUT_SMOKE;
-        
+        positionY = Math.randomRange()*WINDOWS_HEIGHT/2-WINDOWS_HEIGHT/2;
+        if(positionY<DEFAULT_RANGE_WITHOUT_SMOKE && positionY>=0 && positionX<500 && coeffZ!=0) positionY = positionY+DEFAULT_RANGE_WITHOUT_SMOKE;
+        if(positionY>-DEFAULT_RANGE_WITHOUT_SMOKE && positionY<=0 && positionX<500 && coeffZ!=0) positionY = positionY-DEFAULT_RANGE_WITHOUT_SMOKE;
         particle.position.set(positionX,positionY,Math.random()*coeffZ);
         particle.rotation.z = Math.random() * 360;
         scene.add(particle);
@@ -532,7 +555,7 @@ function searchingMatchMouseAndMesh() {
 * Move the smoke particule - in fact they jus rotate arount Z
 **/
 function moveSmoke() {
-    for(i=0;i<smokeTotal;i++) {
+    for(i=0,total=smokeParticles.length;i<total;i++) {
         smokeParticles[i].rotation.z += (delta * DEFAULT_SMOKE_ROTATION_SPEED);
     }
 }
