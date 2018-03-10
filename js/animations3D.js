@@ -77,15 +77,16 @@ var ABSCISSA = ["x","y","z"];
 var WINDOWS_WIDTH = window.innerWidth;
 var WINDOWS_HEIGHT = window.innerHeight;
 var BACKGROUND_COLOR = 0x000000;
-var LIGHT_AMBIANT_COLOR = 0xF0F0F0;
-var WIREFRAME_COLOR = 0x020B13;
+var LIGHT_AMBIANT_COLOR = 0xFFFFFF;
+var WIREFRAME_COLOR = 0x555555;
+var WIREFRAME_COLOR_HOVER = 0x000000;
 var BOARD_COLOR = 0x000000;
 var CAMERA_START_POSITION_X = 0;
 var CAMERA_START_POSITION_Y = 0;
 var CAMERA_START_POSITION_Z = 8000;
 var CAMERA_START_ROTATION_X = 0;
 var CAMERA_START_ROTATION_Y = 0;
-var CAMERA_START_ROTATION_Z = 0;
+var CAMERA_START_ROTATION_Z = Math.radians(-20);
 var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
 var TEXTURE_BUTTON_BACK = 'imgs/back.png';
 var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
@@ -105,7 +106,7 @@ var DEFAULT_ROTATION_PERPETUAL_X_AMPLITUDE = 20;
 var DEFAULT_ROTATION_PERPETUAL_Y_AMPLITUDE = 15;
 var DEFAULT_ROTATION_PERPETUAL_X_SPEED = 100;
 var DEFAULT_ROTATION_PERPETUAL_Y_SPEED = 200;
-var FOG_POWER = 0.0007;
+var FOG_POWER = 0.0002;
 var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
 
 /**
@@ -125,25 +126,23 @@ function init() {
 	initFog(false);
 	initRaycaster();
 	
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,1200,1200,0x22AAFF,8000);
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x66FFFF,8000);		
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,1200,1200,0xFFFFFF,8000);
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x000000,8000);		
 	//createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,600,600,0x000000,4000);		
-	createSmoke(10,30000,30000,0x77FFFF,0);		
-
-	scene.add(createCog(0,0,7500,0,0,0));
+	createSmoke(10,30000,30000,0xEEFFFF,0);		
 	
-	groupScene.push(createBoard('imgs/zipWorld.jpg','imgs/test.png',-400,-20,-600,0,0,Math.radians(20),-400,-20,-200,0,0,Math.radians(20)));
+	groupScene.push(createBoard('imgs/zipWorld.jpg','imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
 	for(i=0;childrens!=null && i<childrens.length;i++) {
 		if(childrens[i]["panel"]) {
 			childrens[i].material[4].opacity = 1;
 		}
 	}
-	groupScene.push(createBoard('imgs/gouterMagique.jpg','imgs/test.png',-500,200,600,0,0,Math.radians(-20),-500,150,1100,0,0,Math.radians(-20)));
-	groupScene.push(createBoard('imgs/hapee.jpg','imgs/test.png',0,-80,500,0,Math.radians(-90),Math.radians(-40),0,-60,900,0,0,Math.radians(-40)));
-	groupScene.push(createBoard('imgs/promarine.jpg','imgs/test.png',-1800,100,-1800,0,0,Math.radians(-60),-1750,100,-1400,0,0,Math.radians(-40)));
-	groupScene.push(createBoard('imgs/onarto.jpg','imgs/test.png',-600,-200,0,0,0,Math.radians(-60),-600,-200,400,0,0,Math.radians(-40)));
-	groupScene.push(createBoard('imgs/odyssea.jpg','imgs/test.png',0,250,-1400,0,0,Math.radians(-20),0,250,-900,0,0,Math.radians(-40)));
+	groupScene.push(createBoard('imgs/gouterMagique.jpg','imgs/test.png',-500,1300,2600,0,0,Math.radians(-20),-500,1300,3000,0,0,Math.radians(-20)));
+	groupScene.push(createBoard('imgs/hapee.jpg','imgs/test.png',200,100,4000,0,Math.radians(-90),Math.radians(-40),200,100,4500,0,0,Math.radians(-40)));
+	groupScene.push(createBoard('imgs/promarine.jpg','imgs/test.png',-1600,500,3800,0,0,Math.radians(-60),-1550,500,4200,0,0,Math.radians(-60)));
+	groupScene.push(createBoard('imgs/onarto.jpg','imgs/test.png',1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
+	groupScene.push(createBoard('imgs/odyssea.jpg','imgs/test.png',-300,250,2400,0,0,Math.radians(-20),-300,250,3000,0,0,Math.radians(-20)));
 
 	for(i=0;i<groupScene.length;i++) {
 		scene.add(groupScene[i]);		
@@ -181,7 +180,7 @@ function initScene(color) {
 * @param hex color The general light's color of the scene
 **/	
 function initLight(color) {
-	scene.add(new THREE.AmbientLight(color));
+	scene.add(new THREE.AmbientLight(color,1));
 }
 
 /**
@@ -228,40 +227,6 @@ function renderWebGL() {
 *============================================================================================> 
 **/
 
-var DIAMETRE_EXTERIEUR = 85;
-var DIAMETRE_INTERIEUR = 75;
-function createShapeCog() {
-	var leftShape = new THREE.Shape();
-	leftShape.moveTo( DIAMETRE_INTERIEUR, 0 );
-	for(i=0;i<16;i++) {
-		leftShape.absarc( 0, 0, DIAMETRE_INTERIEUR, i*3*Math.PI/24, (i*3+2)*Math.PI/24 );
-		leftShape.lineTo( DIAMETRE_EXTERIEUR*Math.cos((i*3+2)*Math.PI/24), DIAMETRE_EXTERIEUR*Math.sin((i*3+2)*Math.PI/24));
-		leftShape.absarc( 0, 0, DIAMETRE_EXTERIEUR, (i*3+2)*Math.PI/24, (i*3+3)*Math.PI/24 );
-		leftShape.lineTo( DIAMETRE_INTERIEUR*Math.cos((i*3+3)*Math.PI/24), DIAMETRE_INTERIEUR*Math.sin((i*3+3)*Math.PI/24));
-	}
-	var holePath = new THREE.Path();
-	holePath.moveTo( 20, 10 );
-	holePath.absarc( 10, 10, 10, 0, Math.PI * 2, true );
-	leftShape.holes.push( holePath );
-	
-	return leftShape;
-}
-
-function createCog(x,y,z,rx,ry,rz) {
-	texture = new THREE.TextureLoader().load(TEXTURE_BOARD_EXTREMITY);
-	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-	texture.repeat.set(0.008, 0.008);
-	
-	materialBoard = new THREE.MeshPhongMaterial( {  color:BOARD_COLOR } );
-	geometryBoard = new THREE.ExtrudeGeometry( createShapeCog(), extrudeSettings );
-	sideMesh = new THREE.Mesh( geometryBoard, materialBoard );	
-
-	sideMesh.position.set( x, y, z );
-	sideMesh.rotation.set( rx, ry, rz );
-	return sideMesh;
-}
-
-
 /**
 * Create a board in the scene
 * @param string textureCenter The texture of the center of the board 
@@ -290,6 +255,7 @@ function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,translatio
 	piece.push(createPanel(TEXTURE_BUTTON_BACK,40, 20, 1,20,-10,8));
 	piece.push(createPanel(TEXTURE_BUTTON_VISIT,40, 20, 1,-40,-10,8));
 
+	
 	// Add the differents parts to the group of meshes
 	for(i=0;i<piece.length;i++) {
 		boardTmp.add(piece[i]);
@@ -349,9 +315,9 @@ function createShape() {
 function createSideBoard(x,y,z,rx,ry,rz) {
 	texture = new THREE.TextureLoader().load(TEXTURE_BOARD_EXTREMITY);
 	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-	texture.repeat.set(0.008, 0.008);
+	texture.repeat.set(0.005, 0.005);
 	
-	materialBoard = new THREE.MeshPhongMaterial( {  color:BOARD_COLOR } );
+	materialBoard = new THREE.MeshPhongMaterial( {  color: 0xFFFFFF } );
 	geometryBoard = new THREE.ExtrudeGeometry( createShape(), extrudeSettings );
 	sideMesh = new THREE.Mesh( geometryBoard, materialBoard );	
 
@@ -448,7 +414,9 @@ function createSmoke(numbers,sizex,sizey,color,coeffZ) {
         positionY = Math.randomRange()*WINDOWS_HEIGHT/2-WINDOWS_HEIGHT/2;
         if(positionY<DEFAULT_RANGE_WITHOUT_SMOKE && positionY>=0 && positionX<500 && coeffZ!=0) positionY = positionY+DEFAULT_RANGE_WITHOUT_SMOKE;
         if(positionY>-DEFAULT_RANGE_WITHOUT_SMOKE && positionY<=0 && positionX<500 && coeffZ!=0) positionY = positionY-DEFAULT_RANGE_WITHOUT_SMOKE;
-        particle.position.set(positionX,positionY,Math.random()*coeffZ);
+        positionZ = Math.random()*coeffZ;
+        if(positionZ<2000) positionY = positionY+Math.random()*WINDOWS_HEIGHT; 
+        particle.position.set(positionX,positionY,positionZ);
         particle.rotation.z = Math.random() * 360;
         scene.add(particle);
         smokeParticles.push(particle);
@@ -469,7 +437,7 @@ function animate() {
 	
 	delta = clock.getDelta();
 	moveSmoke();
-
+	
 	for(i=0;i<groupScene.length;i++) {
 		perpetual(groupScene[i]);
 	}
@@ -528,7 +496,7 @@ function searchingMatchMouseAndMesh() {
 			childrens = parent.children;
 			for(i=0;i<childrens.length;i++) {
 				if(childrens[i]["wireframe"]) {
-					childrens[i].material.color = new THREE.Color(0xFFFFFF);
+					childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR_HOVER);
 				}
 				if(childrens[i]["panel"]) {
 					childrens[i].material[4].opacity = 1;
