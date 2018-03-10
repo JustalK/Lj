@@ -127,9 +127,8 @@ function init() {
 	initRaycaster();
 	
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,1200,1200,0xFFFFFF,8000);
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x000000,8000);		
-	//createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,600,600,0x000000,4000);		
-	createSmoke(10,30000,30000,0xEEFFFF,0);		
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x000000,8000);	
+	createSmoke(10,30000,30000,0xEEFFFF,0);
 	
 	groupScene.push(createBoard('imgs/zipWorld.jpg','imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
@@ -138,11 +137,11 @@ function init() {
 			childrens[i].material[4].opacity = 1;
 		}
 	}
-	groupScene.push(createBoard('imgs/gouterMagique.jpg','imgs/test.png',-500,1300,2600,0,0,Math.radians(-20),-500,1300,3000,0,0,Math.radians(-20)));
+	groupScene.push(createBoard('imgs/gouterMagique.jpg','imgs/test.png',-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
 	groupScene.push(createBoard('imgs/hapee.jpg','imgs/test.png',200,100,4000,0,Math.radians(-90),Math.radians(-40),200,100,4500,0,0,Math.radians(-40)));
 	groupScene.push(createBoard('imgs/promarine.jpg','imgs/test.png',-1600,500,3800,0,0,Math.radians(-60),-1550,500,4200,0,0,Math.radians(-60)));
 	groupScene.push(createBoard('imgs/onarto.jpg','imgs/test.png',1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
-	groupScene.push(createBoard('imgs/odyssea.jpg','imgs/test.png',-300,250,2400,0,0,Math.radians(-20),-300,250,3000,0,0,Math.radians(-20)));
+	groupScene.push(createBoard('imgs/odyssea.jpg','imgs/test.png',-300,250,2400,0,0,Math.radians(-70),-300,250,3000,0,0,Math.radians(-70)));
 
 	for(i=0;i<groupScene.length;i++) {
 		scene.add(groupScene[i]);		

@@ -41,11 +41,11 @@ ROOT
 }
 
 .frame0::-webkit-scrollbar-track {
-    background: rgba(0, 53, 84,1);
+    background: rgba(0, 0, 0, 1);
 }
 
 .frame0::-webkit-scrollbar-thumb {
-    background: rgba(145, 198, 255,1); 
+    background: rgba(100, 100, 100, 1); 
 }
 
 /*
@@ -195,7 +195,7 @@ span {
 
 #FRAME1 .big-title-blue,
 #FRAME2 .big-title-blue {
-    color: rgba(145, 198, 255,1);
+    color: rgba(0, 0, 0, 1);
 }
 
 #FRAME2 .blocs-inside-neartitle {

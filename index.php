@@ -27,7 +27,7 @@
 	ob_flush();
 	flush(); 
 ?>
-<body class="no-scrolling">
+<body class="no-scrolling frame0">
 	<div id="CONTENT">
 		<div id="POSITION" class="background-white"></div>
 		<!-- START FRAME1 -->
