@@ -80,7 +80,7 @@ var BACKGROUND_COLOR = 0x000000;
 var LIGHT_AMBIANT_COLOR = 0xFFFFFF;
 var WIREFRAME_COLOR = 0x555555;
 var WIREFRAME_COLOR_HOVER = 0x000000;
-var BOARD_COLOR = 0x000000;
+var BOARD_COLOR = 0x333333;
 var CAMERA_START_POSITION_X = 0;
 var CAMERA_START_POSITION_Y = 0;
 var CAMERA_START_POSITION_Z = 8000;
@@ -316,7 +316,7 @@ function createSideBoard(x,y,z,rx,ry,rz) {
 	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 	texture.repeat.set(0.005, 0.005);
 	
-	materialBoard = new THREE.MeshPhongMaterial( {  color: 0xFFFFFF } );
+	materialBoard = new THREE.MeshPhongMaterial( {  color: BOARD_COLOR } );
 	geometryBoard = new THREE.ExtrudeGeometry( createShape(), extrudeSettings );
 	sideMesh = new THREE.Mesh( geometryBoard, materialBoard );	
 
@@ -433,7 +433,7 @@ var childrens = null;
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
-	
+
 	delta = clock.getDelta();
 	moveSmoke();
 	

@@ -111,13 +111,13 @@ FRAME 2
 }
 
 #FRAME2 .blocs-inside-title-line {
-    background: #91c6ff;
+    background: #6f767b;
     width: 250px;
     left: 200px;
 }
 
 #FRAME2 .area-texte-line {
-	background: #001966;
+	background: #6f767b;
 }
 
 #FRAME2 .area-texte-title,
@@ -125,14 +125,14 @@ FRAME 2
 #FRAME2 .blocs-inside-informations-title,
 #FRAME2 .blocs-inside-informations-texte,
 #FRAME2 .blocs-inside-informations-texte strong {
-	color: #001966;
+	color: #000000;
 }
 
 #FRAME2 .photo-square,
 #FRAME2 .blocs-inside-informations-left-page:hover,
 #FRAME2 .blocs-inside-informations-right-page:hover,
 #FRAME2 .date-line {
-	background: #91C6FF;
+	background: #6f767b;
 }
 
 #FRAME2 .blocs-inside-informations-left-page span, 
@@ -142,7 +142,7 @@ FRAME 2
 #FRAME2 .letter-j,
 #FRAME2 .facebook,
 #FRAME2 .twitter {
-	color: #91C6FF;
+	color: #484848;
 }
 
 #FRAME2 .blocs-inside-informations-left-page:hover span,
@@ -151,7 +151,7 @@ FRAME 2
 }
 
 #FRAME2 .date {
-	color: #a1bbdf;
+	color: #6f767b;
 }
 
 

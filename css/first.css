@@ -190,7 +190,7 @@ span {
 }
 
 .cssvhunit.rgba #FRAME2 .bloc-informations {
-	background: rgba(222, 240, 253, 0.3);
+	background: rgba(0, 0, 0, 0.26);
 }
 
 #FRAME1 .big-title-blue,
@@ -199,7 +199,7 @@ span {
 }
 
 #FRAME2 .blocs-inside-neartitle {
-	background: rgb(222, 240, 253);
+	background: rgb(148, 148, 148);
 }
 
 .icones {
