@@ -154,6 +154,10 @@ FRAME 2
 	color: #6f767b;
 }
 
+.new-frame #FRAME2 .photo, .new-frame #FRAME2 .blocs {
+    border: 1px solid white;
+}
+
 
 .frame1::-webkit-scrollbar-track {
     background: rgba(128, 0, 0,1);

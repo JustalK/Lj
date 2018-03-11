@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" class="no-js">
 <head>
-	<meta http-equiv="Content-Type" charset="text/html; UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Latsuj - The Website</title>
 	<meta name="description" content="French Fullstack Developer, <?= date("Y"); ?>, Latsuj's portfolio on wordpress prestashop and custom cms">
 	
@@ -101,8 +101,8 @@
 				<div class="area-texte">
 					<div class="area-texte-wrap">
 						<div class="area-texte-line"></div>
-						<span class="area-texte-title tekobold">Cum haec taliaque</span>
-						<span class="area-texte-subtitle tekolight">Cum haec taliaque sollicitas eius aures everberent expositas</span>
+						<span class="area-texte-title tekobold">Factoriser, optimiser, tester...</span>
+						<span class="area-texte-subtitle tekolight">Tout faire pour éclaircir son code et le sortir de l'ombre</span>
 					</div>
 				</div>
 			</div>
@@ -118,30 +118,42 @@
 				
 					<div class="blocs-inside-title-line"></div>
 					<div itemprop="number" class="blocs-inside-title background-white"><span class="tekolight projectx">Preambule</span></div>
-					<h1 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">Latsuj, french web developer</span></h1>
+					<h1 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">De l'amateur au professionel</span></h1>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span itemprop="name" class="blocs-inside-informations-title tekobold">Latsuj.com</span>
 						<div class="blocs-inside-wrap" data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>W</strong>hat can I find on this website, Latsuj ? Hum...In fact, just the awesome me and my works. So, first thing first : <strong>Do you know who I am ?</strong> I'm sure you already know. I'm famous out there. Starting by my ONLY flaw, I'm french ! You know...Nobody is perfect. So I'm a french web developper. No, no, no...I'm THE french web developper. How much time did I spend on coding ? I dont really know...I like coding so I dont really see the time moving. Hey ! You live developper or you die, that the way the thing going.
+								<strong>S</strong>alut à toi, voyageur, j'imagine que si tu te trouve à naviguer sur mon site, tu y cherche très certainement des informations à propos de moi, de mes travaux ou mais encore de mes projets. Inutile de sortir ta carte au trésor et de creuser, je vais te donner volontier ce que tu cherches. Tu as de la chance, je suis de bonne humeur aujourd'hui.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>Why did you create this website ?</strong> Oh, you know, it's simple. I just wanna show my AWESOME skills to the W-O-R-L-D. No, I'm not too proud of myself. Just a little too much. Anyways, I will show you some of my technical background and some projects that I'm doing right now or already living out there.
+								<strong>Sais-tu qui je suis ?</strong> Non ? Ce n'est pas grâve, je sais au moins par où commencer mon récit. Mon pseudonyme sur internet est <strong>Latsuj</strong>, inutile de chercher mon prénom et mon nom, tu ne le trouveras pas. Je ne me dévoile pas si facilement. Je suis un développeur depuis pas mal d'années maintenant. J'ai commencer à développer mes premiers sites très tôt, je devais avoir 8 ou 9 ans lorsque j'ai commencé à faire des sites vitrines pour des équipes de jeux vidéos. Cette passion et ma curiosité m'ont emmené à explorer plein d'autre horizon. J'ai au fil des années en total autodidacte, fait des logiciels pour windows, appris l'assembleur pour déssambler des programmes et les trafiquer, appris les bases de données pour participer activement à des créations de sites communautaires, appris le C++ pour créer des plugins pour des logiciels... 
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>By the way, why did you call yourself Latsuj ?</strong> Oh, there is no meaning behind it, just a pseudonym that I keep it from when I was kid.
+								<strong>C</strong>et intéret sans fin pour la programmation m'a amené à suivre de grande étude dans ce domaine et même de voyager à l'autre bout du monde pour apprendre d'autre manière de travailler.
 							</span>
 						</div>
 
 						<div class="blocs-inside-wrap left-click" data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>I</strong>'m using a lot of differents softwares for making my website but my favorites are those ones. <strong>Eclipse</strong>, there are a lot of IDE but Eclipse is certainly the one fitting all my needs. Also I'm using <strong>GIT</strong>, but I have a local version of GIT so I often forget to push on the version online. It's cool for showing your code but I dont really need too. The versionning is the only thing that I'm really looking for.
+								<strong>A</strong>u fils des projets et des années d'expériences, j'ai noté certains points et fais certaines erreurs qui m'ont fais passer de l'amateur au professionnel que je suis. Il est facile de programmer mais difficile de bien programmer. Il y a de nombreuses contraintes invisibles.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>T</strong>he frameworks and libraries are also one of the big parts of my works. I'm evidently using <strong>JQuery</strong>. But actually, I'm loosing interest in it, I find this library too heavy for the use. So I prefer going with the hard way with Vanilla JS. I also love <strong>Polymer</strong>, the module building is an amazing things that I'm trying to use often. Fast coding but high reward. I could aslo speak about Modernizer (I use it on this website), Bootstrap, React, Angular...But I use those tools only when I really need them.
+								<strong>L</strong>a maintenabilité ou l'art de rendre son code le plus simple et compréhensible que possible dans l'optique d'une modification future. Après avoir repris des projets de d'autres développeurs, on remarque qu'il n'y a rien de pire qu'un code non commenté. Etre soumis à lire des centaines et des centaines de lignes de code pour effectuer une simple modifications est très éprouvant. <strong>C'est pourquoi, je me suis obligé à commenter mon code autant que possible pour ne pas faire subir cela à mes successeurs. J'utilise souvent le même standard "phpDocumentor".</strong>
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>I dfsdfsdf</strong> 
+								<strong>D</strong>ans la continuité, j'ai fait l'erreur de ne pas faire de tests unitaires ou de scénarios sur des projets à première vues assez simple. Sauf que en réalité, les projets sont mouvant et quand un client décide de changer les fonctionnalités pendant la création du site, je me suis retrouvé bête en cassant involontairement d'anciennes fonctionnalités. Après avoir été secoué assez méchamment par un projet, j'ai décidé de ne plus jamais sauté l'étape des tests. Je me suis perfectionné sur plusieurs outils en particulier : <strong>PHP Unit</strong> pour faire mes tests unitaires, <strong>Selenium</strong> pour faire mes tests de scénarios sur tout les navigateurs, <strong>Jasmine</strong> pour mes tests Javascripts et <strong>JUnit</strong> quand j'ai besoin de faire des tests Java.  
+							</span>
+						</div>
+						
+						<div class="blocs-inside-wrap left-click" data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
+							<span class="blocs-inside-informations-texte montserratlight">
+								<strong>J</strong>'en arrive donc à mon points favoris : l'optimisation. Dans ce terme, je regroupe aussi la factorisation qui est selon moi, une partie de <strong>l'optimisation</strong>. Ce sujet est celui qui me passionne le plus et celui sur lequel je passe généralement beaucoup de temps à m'informer.
+							</span>
+							<span class="blocs-inside-informations-texte montserratlight">
+								<strong>L</strong>a maintenabilité ou l'art de rendre son code le plus simple et compréhensible que possible dans l'optique d'une modification future. Après avoir repris des projets de d'autres développeurs, on remarque qu'il n'y a rien de pire qu'un code non commenté. Etre soumis à lire des centaines et des centaines de lignes de code pour effectuer une simple modifications est très éprouvant. <strong>C'est pourquoi, je me suis obligé à commenter mon code autant que possible pour ne pas faire subir cela à mes successeurs. J'utilise souvent le même standard "phpDocumentor".</strong>
+							</span>
+							<span class="blocs-inside-informations-texte montserratlight">
+								<strong>D</strong>ans la continuité, j'ai fait l'erreur de ne pas faire de tests unitaires ou de scénarios sur des projets à première vues assez simple. Sauf que en réalité, les projets sont mouvant et quand un client décide de changer les fonctionnalités pendant la création du site, je me suis retrouvé bête en cassant involontairement d'anciennes fonctionnalités. Après avoir été secoué assez méchamment par un projet, j'ai décidé de ne plus jamais sauté l'étape des tests. Je me suis perfectionné sur plusieurs outils en particulier : <strong>PHP Unit</strong> pour faire mes tests unitaires, <strong>Selenium</strong> pour faire mes tests de scénarios sur tout les navigateurs, <strong>Jasmine</strong> pour mes tests Javascripts et <strong>JUnit</strong> quand j'ai besoin de faire des tests Java.  
 							</span>
 						</div>
 						
@@ -150,7 +162,7 @@
 							<div class="blocs-inside-informations-left-page-hover-2"></div>
 							<span>></span>
 						</div>
-						<div class="blocs-inside-informations-page montserratlight"><span class="page">1 / 2</span></div>
+						<div class="blocs-inside-informations-page montserratlight"><span class="page">1 / 3</span></div>
 						<div class="blocs-inside-page blocs-inside-informations-left-page montserratbold"><span>&lt;</span></div>
 					</div>
 				</div>
