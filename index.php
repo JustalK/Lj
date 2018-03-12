@@ -101,8 +101,8 @@
 				<div class="area-texte">
 					<div class="area-texte-wrap">
 						<div class="area-texte-line"></div>
-						<span class="area-texte-title tekobold">Factoriser, optimiser, tester...</span>
-						<span class="area-texte-subtitle tekolight">Tout faire pour éclaircir son code et le sortir de l'ombre</span>
+						<span class="area-texte-title tekobold">Bienvenue sur mon site !</span>
+						<span class="area-texte-subtitle tekolight">I'm Latsuj ! Un développeur français passioné.</span>
 					</div>
 				</div>
 			</div>
@@ -118,42 +118,30 @@
 				
 					<div class="blocs-inside-title-line"></div>
 					<div itemprop="number" class="blocs-inside-title background-white"><span class="tekolight projectx">Preambule</span></div>
-					<h1 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">De l'amateur au professionel</span></h1>
+					<h1 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">Quelques mots...</span></h1>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span itemprop="name" class="blocs-inside-informations-title tekobold">Latsuj.com</span>
 						<div class="blocs-inside-wrap" data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>S</strong>alut à toi, voyageur, j'imagine que si tu te trouve à naviguer sur mon site, tu y cherche très certainement des informations à propos de moi, de mes travaux ou mais encore de mes projets. Inutile de sortir ta carte au trésor et de creuser, je vais te donner volontier ce que tu cherches. Tu as de la chance, je suis de bonne humeur aujourd'hui.
+								<strong>H</strong>llo world ! Tu te trouve actuellement sur mon portefolio dans mon monde, mon univers. J'imagine que si tu te trouve ici, c'est que tu cherche certainement à savoir qui je suis.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>Sais-tu qui je suis ?</strong> Non ? Ce n'est pas grâve, je sais au moins par où commencer mon récit. Mon pseudonyme sur internet est <strong>Latsuj</strong>, inutile de chercher mon prénom et mon nom, tu ne le trouveras pas. Je ne me dévoile pas si facilement. Je suis un développeur depuis pas mal d'années maintenant. J'ai commencer à développer mes premiers sites très tôt, je devais avoir 8 ou 9 ans lorsque j'ai commencé à faire des sites vitrines pour des équipes de jeux vidéos. Cette passion et ma curiosité m'ont emmené à explorer plein d'autre horizon. J'ai au fil des années en total autodidacte, fait des logiciels pour windows, appris l'assembleur pour déssambler des programmes et les trafiquer, appris les bases de données pour participer activement à des créations de sites communautaires, appris le C++ pour créer des plugins pour des logiciels... 
+								<strong>Qui suis-je ?</strong> Un fan de sport de vitesse, un voyageur mais surtout un développeur passioné. Une passion qui a démarré assez jeune et qui m'as poussé à suivre de longue étude d'ingénieur et qui m'a aussi fait voyagé pour travailler dans d'autres continents (Asie). 
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>C</strong>et intéret sans fin pour la programmation m'a amené à suivre de grande étude dans ce domaine et même de voyager à l'autre bout du monde pour apprendre d'autre manière de travailler.
+								<strong>A</strong>u moment où j'écrit ces lignes, je code depuis pas mal de temps. Mes principaux langages de programmations sont le <strong>Java, PHP, Python et le C++</strong>. Bon, j'admet cependant avoir un gros penchant pour le <strong>JavaScript</strong>. Mes connaissances sont aussi devenu assez vaste avec le temps : <strong>JQuery, Angular, Zend, Wordpress, Three.js, Modernizer.js, Wordpress...</strong> De même, pour mes méthodes de travail qui inclus maintenant systématiquement <strong>des tests unitaires/scénarios (Selenium/PHP Unit), benchmark, SEO...</strong>
 							</span>
 						</div>
 
 						<div class="blocs-inside-wrap left-click" data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>A</strong>u fils des projets et des années d'expériences, j'ai noté certains points et fais certaines erreurs qui m'ont fais passer de l'amateur au professionnel que je suis. Il est facile de programmer mais difficile de bien programmer. Il y a de nombreuses contraintes invisibles.
+								<strong>U</strong>n point que j'affectionne particulièrement, c'est <strong>les techniques d'optimisation</strong>. Curieux, j'adore chercher les moyens les dernières techniques pour rendre son sites plus rapide aux chargements et l'execution. C'est d'ailleurs ce qui m'a poussé à apprendre <strong>le WebAssembleur, le LQIP, Flush start, Web Font loader, Ajax CSS...</strong>. J'utilise d'ailleurs abondamment ces techniques sur ce site avec de nombreuses autres optimisations. 
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>L</strong>a maintenabilité ou l'art de rendre son code le plus simple et compréhensible que possible dans l'optique d'une modification future. Après avoir repris des projets de d'autres développeurs, on remarque qu'il n'y a rien de pire qu'un code non commenté. Etre soumis à lire des centaines et des centaines de lignes de code pour effectuer une simple modifications est très éprouvant. <strong>C'est pourquoi, je me suis obligé à commenter mon code autant que possible pour ne pas faire subir cela à mes successeurs. J'utilise souvent le même standard "phpDocumentor".</strong>
+								<strong>E</strong>nfin, je suis un sportif. Un grand passionné de roller de vitesse avec plus de 25 ans de pratique et pas mal de titre à mon actif. Bien dans son corps, bien dans sa tête que l'on dit souvent. Peut-être me croiserez vous lors d'un marathon roller ?
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>D</strong>ans la continuité, j'ai fait l'erreur de ne pas faire de tests unitaires ou de scénarios sur des projets à première vues assez simple. Sauf que en réalité, les projets sont mouvant et quand un client décide de changer les fonctionnalités pendant la création du site, je me suis retrouvé bête en cassant involontairement d'anciennes fonctionnalités. Après avoir été secoué assez méchamment par un projet, j'ai décidé de ne plus jamais sauté l'étape des tests. Je me suis perfectionné sur plusieurs outils en particulier : <strong>PHP Unit</strong> pour faire mes tests unitaires, <strong>Selenium</strong> pour faire mes tests de scénarios sur tout les navigateurs, <strong>Jasmine</strong> pour mes tests Javascripts et <strong>JUnit</strong> quand j'ai besoin de faire des tests Java.  
-							</span>
-						</div>
-						
-						<div class="blocs-inside-wrap left-click" data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
-							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>J</strong>'en arrive donc à mon points favoris : l'optimisation. Dans ce terme, je regroupe aussi la factorisation qui est selon moi, une partie de <strong>l'optimisation</strong>. Ce sujet est celui qui me passionne le plus et celui sur lequel je passe généralement beaucoup de temps à m'informer.
-							</span>
-							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>L</strong>a maintenabilité ou l'art de rendre son code le plus simple et compréhensible que possible dans l'optique d'une modification future. Après avoir repris des projets de d'autres développeurs, on remarque qu'il n'y a rien de pire qu'un code non commenté. Etre soumis à lire des centaines et des centaines de lignes de code pour effectuer une simple modifications est très éprouvant. <strong>C'est pourquoi, je me suis obligé à commenter mon code autant que possible pour ne pas faire subir cela à mes successeurs. J'utilise souvent le même standard "phpDocumentor".</strong>
-							</span>
-							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>D</strong>ans la continuité, j'ai fait l'erreur de ne pas faire de tests unitaires ou de scénarios sur des projets à première vues assez simple. Sauf que en réalité, les projets sont mouvant et quand un client décide de changer les fonctionnalités pendant la création du site, je me suis retrouvé bête en cassant involontairement d'anciennes fonctionnalités. Après avoir été secoué assez méchamment par un projet, j'ai décidé de ne plus jamais sauté l'étape des tests. Je me suis perfectionné sur plusieurs outils en particulier : <strong>PHP Unit</strong> pour faire mes tests unitaires, <strong>Selenium</strong> pour faire mes tests de scénarios sur tout les navigateurs, <strong>Jasmine</strong> pour mes tests Javascripts et <strong>JUnit</strong> quand j'ai besoin de faire des tests Java.  
+								<strong>E</strong>t voila pour le tour d'horizon, j'imagine que maintenant, vous avez une idée globale de qui je suis. Dans la suite, vous trouverez surtout des projets personnels qui me tiennent à coeur.  
 							</span>
 						</div>
 						
