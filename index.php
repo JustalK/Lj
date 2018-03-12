@@ -110,7 +110,7 @@
 				<div class="blocs bloc-informations right">
 					<div class="informations">
 						<div class="date-line date-line-up"></div>
-						<span itemprop="date" class="date orbitron">2015</span>
+						<span itemprop="date" class="date orbitron">2016</span>
 						<div class="date-line date-line-down"></div>
 						<a href="https://www.facebook.com/sharer/sharer.php?u=www.latsuj.com" class="latsuj social-media facebook">J</a>
 						<a href="https://twitter.com/home?status=www.latsuj.com" class="latsuj social-media twitter">T</a>
@@ -121,9 +121,9 @@
 					<h1 itemprop="description" class="blocs-inside-neartitle"><span class="montserratlight">Quelques mots...</span></h1>
 					<div class="blocs-inside background-white"  data-count="0">
 						<span itemprop="name" class="blocs-inside-informations-title tekobold">Latsuj.com</span>
-						<div class="blocs-inside-wrap" data-img="./imgs/FRAME1.jpg" data-title="" data-text="">
+						<div class="blocs-inside-wrap" data-img="./imgs/FRAME1.jpg" data-title="Bienvenue sur mon site !" data-text="I'm Latsuj ! Un développeur français passioné.">
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>H</strong>llo world ! Tu te trouve actuellement sur mon portefolio dans mon monde, mon univers. J'imagine que si tu te trouve ici, c'est que tu cherche certainement à savoir qui je suis.
+								<strong>H</strong>ello world ! Tu te trouve actuellement sur mon portefolio dans mon monde, mon univers. J'imagine que si tu te trouve ici, c'est que tu cherche certainement à savoir qui je suis.
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>Qui suis-je ?</strong> Un fan de sport de vitesse, un voyageur mais surtout un développeur passioné. Une passion qui a démarré assez jeune et qui m'as poussé à suivre de longue étude d'ingénieur et qui m'a aussi fait voyagé pour travailler dans d'autres continents (Asie). 
@@ -133,9 +133,9 @@
 							</span>
 						</div>
 
-						<div class="blocs-inside-wrap left-click" data-img="./imgs/FRAME2.jpg" data-title="" data-text="">
+						<div class="blocs-inside-wrap left-click" data-img="./imgs/Latsuj_roller_skating.jpg" data-title="En plein exercice à Sanam Luang (Thaïlande)" data-text="Et oui, un geek qui aime le sport, ça existe !">
 							<span class="blocs-inside-informations-texte montserratlight">
-								<strong>U</strong>n point que j'affectionne particulièrement, c'est <strong>les techniques d'optimisation</strong>. Curieux, j'adore chercher les moyens les dernières techniques pour rendre son sites plus rapide aux chargements et l'execution. C'est d'ailleurs ce qui m'a poussé à apprendre <strong>le WebAssembleur, le LQIP, Flush start, Web Font loader, Ajax CSS...</strong>. J'utilise d'ailleurs abondamment ces techniques sur ce site avec de nombreuses autres optimisations. 
+								<strong>U</strong>n point que j'affectionne particulièrement, c'est <strong>les techniques d'optimisation</strong>. Curieux, j'adore chercher les moyens les dernières techniques pour rendre son sites plus rapide aux chargements et l'execution. C'est d'ailleurs ce qui m'a poussé à apprendre <strong>le WebAssembleur, le LQIP, Flush start, Web Font loader, Ajax CSS...</strong>. J'utilise d'ailleurs abondamment ces techniques sur ce site avec de nombreuses autres optimisations. Je n'ai cependant pas minimisé les fichiers pour que vous puissez voir mon code comme je le vois moi. 
 							</span>
 							<span class="blocs-inside-informations-texte montserratlight">
 								<strong>E</strong>nfin, je suis un sportif. Un grand passionné de roller de vitesse avec plus de 25 ans de pratique et pas mal de titre à mon actif. Bien dans son corps, bien dans sa tête que l'on dit souvent. Peut-être me croiserez vous lors d'un marathon roller ?
@@ -150,7 +150,7 @@
 							<div class="blocs-inside-informations-left-page-hover-2"></div>
 							<span>></span>
 						</div>
-						<div class="blocs-inside-informations-page montserratlight"><span class="page">1 / 3</span></div>
+						<div class="blocs-inside-informations-page montserratlight"><span class="page">1 / 2</span></div>
 						<div class="blocs-inside-page blocs-inside-informations-left-page montserratbold"><span>&lt;</span></div>
 					</div>
 				</div>

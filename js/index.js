@@ -412,6 +412,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	var buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page");
 	var wrapblocsinside = document.getElementsByClassName("blocs-inside");
 	var wrapinformation = document.getElementsByClassName("blocs-inside-wrap");
+	var areatextetitle = document.getElementsByClassName("area-texte-title");
+	var areatextesubtitle = document.getElementsByClassName("area-texte-subtitle");
 	var wrapinformationlength = wrapinformation.length;
 	var page = document.getElementsByClassName("page");
 	var pagelength = page.length;
@@ -471,9 +473,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 		// we change the image, so we add the effect and we remove it after x seconds
 		backgroundphoto[currentframe].classList.add("active");
+		areatextetitle[currentframe].classList.add("active");
+		areatextetitle[currentframe].classList.add("active");
+		areatextesubtitle[currentframe].classList.add("active");
 		setTimeout(function() {
 			backgroundphoto[currentframe].style.backgroundImage = "url("+wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.img+")";
+			areatextetitle[currentframe].innerHTML = wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.title;
+			areatextesubtitle[currentframe].innerHTML = wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.text;
 			backgroundphoto[currentframe].classList.remove("active");			
+			areatextetitle[currentframe].classList.remove("active");			
+			areatextesubtitle[currentframe].classList.remove("active");			
 		},600);
 		
 		// I update the page number (page number under the text area)	

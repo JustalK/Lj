@@ -1007,6 +1007,7 @@ INFORMATIONS - RIGHT AREA
 	display: block;
 	font-size: 32px;
 	margin-left: 20%;
+	transition: opacity 0.6s;
 }
 
 .area-texte-subtitle {
@@ -1014,6 +1015,12 @@ INFORMATIONS - RIGHT AREA
 	font-size: 25px;
 	margin-left: 40%;
 	margin-top: 20px;
+	transition: opacity 0.6s;
+}
+
+.area-texte-title.active,
+.area-texte-subtitle.active {
+	opacity: 0;	
 }
 
 .area-texte-wrap {
