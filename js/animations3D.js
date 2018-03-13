@@ -31,7 +31,7 @@ Math.randomRange = function () {
 /** The Three Camera **/
 var camera;
 /** Framerate **/
-var framerate = 1000/23.4;
+var framerate = 1000/60;
 /** The render **/
 var renderer;
 /** The scene where every mesh and object gonna be **/
@@ -98,7 +98,7 @@ var DEFAULT_ROTATION_CAMERA_SPEED = 1;
 var DEFAULT_SMOKE_ROTATION_SPEED = 0.05;
 var DEFAULT_NUMBER_SMOKE_TYPE_1 = 50;
 var DEFAULT_NUMBER_SMOKE_TYPE_2 = 100;
-var DEFAULT_NUMBER_SMOKE_TYPE_3 = 1;
+var DEFAULT_NUMBER_SMOKE_TYPE_3 = 2;
 var DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/2;
 var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
 var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
@@ -127,6 +127,7 @@ function init() {
 	initClock();
 	initFog(false);
 	initRaycaster();
+	initDecors();
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,1200,1200,0xFFFFFF,8000);
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x000000,8000);	
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,30000,30000,0xEEFFFF,0);
@@ -180,7 +181,9 @@ function initScene(color) {
 * @param hex color The general light's color of the scene
 **/	
 function initLight(color) {
-	scene.add(new THREE.AmbientLight(color,1));
+	scene.add(new THREE.AmbientLight(color,0.8));
+	var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+	scene.add( light );
 }
 
 /**
@@ -226,6 +229,28 @@ function renderWebGL() {
 * Creating the object
 *============================================================================================> 
 **/
+
+function initDecors() {
+	createBlocs(-300,-1500,7000);
+	createBlocs(-400,-1200,6800);
+	createBlocs(800,-1000,7500);
+	createBlocs(400,-1500,5500);
+	createBlocs(1500,-1000,3000);
+	createBlocs(1500,-600,1500);
+	createBlocs(-1000,-600,1500);
+	createBlocs(-3500,0,100);
+	createBlocs(-800,1800,7000);
+	createBlocs(-630,1700,7000);
+	createBlocs(-1200,2000,7000);
+}
+
+function createBlocs(x,y,z) {
+	material = new THREE.MeshPhongMaterial( {  color: 0x000000 } );
+	blocs =  new THREE.Mesh( new THREE.BoxBufferGeometry( 150, 3000, 150 ),  material );
+	blocs.position.set(x,y,z);
+	blocs.rotation.set(0,0,Math.radians(20));
+	scene.add(blocs);	
+}
 
 /**
 * Create a board in the scene
