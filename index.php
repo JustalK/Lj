@@ -455,6 +455,10 @@
 				<div class="footer-design-2"></div>
 			</div>
 			
+			<div class="footer-contact">
+				<div class="pseudo-down"></div>
+			</div>
+			
 			<div class="footer-game">
 				<span class="footer-level-text tekolight">Level : 1337</span>
 				<span class="footer-difficulty-text tekolight">Difficulty : Serious</span>

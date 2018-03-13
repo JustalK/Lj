@@ -685,6 +685,27 @@ LAST_FRAME
     clip-path: polygon(0 250px,0 231px,89px 231px,249px 40px,249px 46px,219px 82px,215px 103px,156px 176px,136px 185px,104px 223px,111px 250px);
 }
 
+.footer-contact .pseudo-down {
+	position: absolute;
+    top: 400px;
+    left: 30px;
+    width: 370px;
+    height: 250px;
+    background: white;
+    clip-path: polygon(0 30px,20px 80px, 120px 80px, 132px 100px, 300px 100px, 312px 80px, 350px 80px, 370px 30px, 340px 30px, 330px 50px, 40px 50px, 30px 30px);
+}
+
+.footer-contact .pseudo-down:before {
+	content: "";
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 370px;
+    height: 250px;
+    background: #003554;
+    clip-path: polygon(1px 31px,21px 79px, 121px 79px, 133px 99px, 299px 99px, 311px 79px, 349px 79px, 369px 31px, 341px 31px, 331px 51px, 39px 51px, 29px 31px);
+}
+
 .footer-score-text {
     position: absolute;
     bottom: 107px;
