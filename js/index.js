@@ -221,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// For the little tricky effet for showing when your are
 	var position = document.getElementById("POSITION");
 	var timer;
+	var framerateScroll = 1000/60;
 	
 	var blackout = document.getElementsByClassName("blackout-effect");
 	var bigtitle = document.getElementsByClassName("big-title");
@@ -241,11 +242,35 @@ document.addEventListener("DOMContentLoaded", function() {
 	var frameinformations = document.getElementsByClassName("frame-informations");
 	var areas = document.getElementsByClassName("areas");
 	var blocsinsidewrap = document.getElementsByClassName("blocs-inside-wrap");
-	
+	var refresh = true;
+	var endRefresh = false;
 	// For initializing the variable
 	initialization();
+	
+	/**
+	 * Creating an event on the croll but setting a framerate for smoothing the animation on every computer
+	 */
 	window.addEventListener('scroll', function() {
-		// Initialisation of 
+		if (!refresh) return;
+		clearTimeout(endRefresh);
+		refresh = false;
+
+		scroll();
+		
+        setTimeout(function () {
+            refresh = true;
+        }, framerateScroll);
+        // If the last event is a waiting, we make an other call to scroll - In that way, we add more accuracy to the project
+        endRefresh = setTimeout(function () {
+            scroll();
+        }, 100);
+	});
+	
+	/**
+	 * The all actions done on one scroll
+	 */
+	function scroll() {
+		// Initialisation of variables
 		initialization();
 		
         // For the little tricky effect - Moving the width of the bar when we scroll
@@ -317,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	}
 		document.body.classList.remove("no-scrolling");
         timer = setTimeout(stopScrolling, 300);
-	});
+	}
 	
 	// Add a class when we approach a new frame
 	function isNewFrame() {
