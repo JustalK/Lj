@@ -184,9 +184,9 @@ span {
 	background-image: url("../imgs/FRAME1_LOW.jpg");
 }
 
-.cssvhunit #FRAME1.active {	
+.cssvhunit #FRAME1.active {
     transition: background-image 0.5ss;
-	background-image: url("../imgs/FRAME1.jpg");
+    /* background-image: url("../imgs/FRAME1.jpg"); */
 }
 
 .cssvhunit.rgba #FRAME2 .bloc-informations {

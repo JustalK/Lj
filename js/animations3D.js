@@ -30,6 +30,8 @@ Math.randomRange = function () {
 
 /** The Three Camera **/
 var camera;
+/** Framerate **/
+var framerate = 1000/23.4;
 /** The render **/
 var renderer;
 /** The scene where every mesh and object gonna be **/
@@ -94,9 +96,9 @@ var TEXTURE_SMOKE = './textures/smoke.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var DEFAULT_ROTATION_CAMERA_SPEED = 1;
 var DEFAULT_SMOKE_ROTATION_SPEED = 0.05;
-var DEFAULT_NUMBER_SMOKE_TYPE_1 = 200;
-var DEFAULT_NUMBER_SMOKE_TYPE_2 = 300;
-var DEFAULT_NUMBER_SMOKE_TYPE_3 = 100;
+var DEFAULT_NUMBER_SMOKE_TYPE_1 = 50;
+var DEFAULT_NUMBER_SMOKE_TYPE_2 = 100;
+var DEFAULT_NUMBER_SMOKE_TYPE_3 = 1;
 var DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/2;
 var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
 var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
@@ -125,10 +127,9 @@ function init() {
 	initClock();
 	initFog(false);
 	initRaycaster();
-	
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,1200,1200,0xFFFFFF,8000);
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x000000,8000);	
-	createSmoke(10,30000,30000,0xEEFFFF,0);
+	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,30000,30000,0xEEFFFF,0);
 	
 	groupScene.push(createBoard('imgs/zipWorld.jpg','imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
@@ -431,7 +432,10 @@ function createSmoke(numbers,sizex,sizey,color,coeffZ) {
 var parent = null;
 var childrens = null;
 function animate() {
-	requestAnimationFrame( animate );
+	// Setting the number of refresh - Frame rate
+	setTimeout( function() {
+		requestAnimationFrame( animate );
+	}, framerate );
 	renderer.render( scene, camera );
 
 	delta = clock.getDelta();
@@ -634,6 +638,7 @@ function onDocumentMouseDown( event ) {
 		
 		// If I'm on a board, I move to the new position
 		if(parent!=null && !parent["lock"]) {
+			framerate = 1000 / 60;
 			for(i=0;i<ABSCISSA.length;i++) {
 				positionFinal[i] = parent["translation"+ABSCISSA[i]];
 				rotationFinal[i] = parent["rotation"+ABSCISSA[i]];
