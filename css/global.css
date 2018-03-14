@@ -735,7 +735,7 @@ LAST_FRAME
 }
 
 .footer-contact .pseudo-valid {
-    background: red;
+    background: #00314D;
     width: 47px;
     height: 20px;
     position: absolute;
@@ -787,7 +787,7 @@ LAST_FRAME
 }
 
 .footer-contact .email-valid {
-    background: red;
+    background: #00314D;
     width: 300px;
     height: 20px;
     position: absolute;
@@ -799,13 +799,43 @@ LAST_FRAME
 
 .footer-contact .message-down {
 	position: absolute;
-	top: 200px;
+	top: 300px;
 	left: 0;
 	width: 370px;
 	height: 250px;
-	background: black;
+	background: white;
 	clip-path: polygon(0 80px,20px 130px, 90px 130px, 102px 110px, 280px 110px, 292px 130px, 350px 130px, 370px 100px, 40px 100px, 30px 80px);
 	z-index: 5;
+}
+
+.footer-contact .message-down:before {
+	content: "";
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 370px;
+    height: 250px;
+    background: #003554;
+	clip-path: polygon(1px 81px,21px 129px, 89px 129px, 101px 109px, 281px 109px, 293px 129px, 349px 129px, 369px 101px, 39px 101px, 29px 81px);
+	z-index: 5;	
+}
+
+.footer-contact .message-under {
+    position: absolute;
+    top: 220px;
+    left: 15px;
+    width: 340px;
+    height: 180px;
+    background: rgba(249, 249, 249, 0.19);
+    z-index: 2;	
+}
+
+.footer-contact .message-design {
+    position: absolute;
+    left: 50px;
+    top: 407px;
+    color: white;
+    z-index: 6;
 }
 
 .footer-contact .email-valid.valid,
