@@ -456,7 +456,15 @@
 			</div>
 			
 			<div class="footer-contact">
+				<div class="pseudo-design tekolight">Pseudo/Nom</div>
+				<div class="pseudo-valid"></div>
+				<div class="pseudo-under"></div>
 				<div class="pseudo-down"></div>
+				<div class="email-design tekolight">Email</div>
+				<div class="email-down"></div>
+				<div class="email-under"></div>
+				<div class="email-valid"></div>
+				<div class="message-down"></div>
 			</div>
 			
 			<div class="footer-game">

@@ -150,14 +150,13 @@ span {
     position: absolute;
     text-transform: uppercase;
     font-size: 96px;
-    top: 80px;
+    transform: translate(200px,80px);
     width: 310px;
-    left: 200px;
     text-align: justify;
     z-index: 20;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     opacity: 0.4;
-    transition: top 0.05s;
+    transition: transform 0.05s;
 }
 
 .frame-left .big-title-blue {

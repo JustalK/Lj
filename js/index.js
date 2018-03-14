@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }, framerateScroll);
         // If the last event is a waiting, we make an other call to scroll - In that way, we add more accuracy to the project
         endRefresh = setTimeout(function () {
-            scroll();
+        	scroll();
         }, 100);
 	});
 	
@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	blocsinsideinformationstitle[currentframe].style.marginLeft = wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px";
 	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
 	    	
-	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";top:"+wasmScroll(mwh,80,0.8,segment,0)+"px";
+	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";transform:translate(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px)";
 	    	
 	    	areatextetitle[currentframe].style.marginLeft = wasmScrollReverse(20,20,10,0.01,segment,wh)+"%";
 	    	areatextesubtitle[currentframe].style.marginLeft = wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%";
@@ -687,6 +687,10 @@ document.addEventListener("DOMContentLoaded", function() {
 			parallax[i].style.backgroundPosition = "0 calc(50% - "+(event.pageY%(2*hf))*0.2+"px)";
 		}
 	}
+	
+	// ================================================================================
+	// GAME
+	// ================================================================================	
 	
 });
 
