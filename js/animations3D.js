@@ -88,7 +88,7 @@ var CAMERA_START_POSITION_Y = 0;
 var CAMERA_START_POSITION_Z = 8000;
 var CAMERA_START_ROTATION_X = 0;
 var CAMERA_START_ROTATION_Y = 0;
-var CAMERA_START_ROTATION_Z = Math.radians(-20);
+var CAMERA_START_ROTATION_Z = 0;
 var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
 var TEXTURE_BUTTON_BACK = 'imgs/back.png';
 var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
@@ -127,11 +127,9 @@ function init() {
 	initClock();
 	initFog(false);
 	initRaycaster();
-	initDecors();
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,1200,1200,0xFFFFFF,8000);
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x000000,8000);	
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,30000,30000,0xEEFFFF,0);
-	
 	groupScene.push(createBoard('imgs/zipWorld.jpg','imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
 	for(i=0;childrens!=null && i<childrens.length;i++) {
@@ -229,28 +227,6 @@ function renderWebGL() {
 * Creating the object
 *============================================================================================> 
 **/
-
-function initDecors() {
-	createBlocs(-300,-1500,7000);
-	createBlocs(-400,-1200,6800);
-	createBlocs(800,-1000,7500);
-	createBlocs(400,-1500,5500);
-	createBlocs(1500,-1000,3000);
-	createBlocs(1500,-600,1500);
-	createBlocs(-1000,-600,1500);
-	createBlocs(-3500,0,100);
-	createBlocs(-800,1800,7000);
-	createBlocs(-630,1700,7000);
-	createBlocs(-1200,2000,7000);
-}
-
-function createBlocs(x,y,z) {
-	material = new THREE.MeshPhongMaterial( {  color: 0x000000 } );
-	blocs =  new THREE.Mesh( new THREE.BoxBufferGeometry( 150, 3000, 150 ),  material );
-	blocs.position.set(x,y,z);
-	blocs.rotation.set(0,0,Math.radians(20));
-	scene.add(blocs);	
-}
 
 /**
 * Create a board in the scene

@@ -12,6 +12,8 @@
 
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
+	// My temporary variable for all the system
+	var tmp;
 	// Check if the user is not using a very old version of IE - in the case not, trolling him :p
 	if (window.console){
 		// If Some developper look in the console, I have to do something for him also :p
@@ -139,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Function for loading the first image in HD - Juste for a better effect
 	function loadHighQualityImagesFirst() {
 		var background = document.getElementsByClassName("frame-first");
-		var tmp = new Image();
+		tmp = new Image();
 		tmp.src = background[0].getAttribute("data-src");
 		tmp.addEventListener('load',function() {
 			for(i=0;i<this.length;i++) {
@@ -176,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	function loadPhoto() {
 		var background = document.getElementById("FRAME1");
-		var tmp = new Image();
+		tmp = new Image();
 		tmp.src = background.getAttribute("data-src");
 		tmp.addEventListener('load',function() {
 			// For a better maintainability, we gonna just add a class and make the all animation on the css
@@ -323,12 +325,13 @@ document.addEventListener("DOMContentLoaded", function() {
 				bg.dataset.load = 1;
 				bg.style.backgroundImage = "url("+bg.dataset.imglow+")";
 				// I create a new image for preload the content
-				var tmp = new Image();
+				tmp = new Image();
 				tmp.src = backgroundphoto[currentframe].dataset.img;
 				tmp.addEventListener('load',function() {
 					this.style.backgroundImage = "url("+this.dataset.img+")";
 				}.bind(bg));
 			}
+    		document.body.classList.add("new-frame");
 		}
 		
 		// Load the image with LQIP technique at the right moment
@@ -346,12 +349,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Add a class when we approach a new frame
 	function isNewFrame() {
-		//TODO Refactoring this part please
-		document.body.classList.remove("frame0","frame1","frame2");
-		document.body.classList.add("frame"+currentframe);
-    	if(segment - mwh > 0) {
-    		document.body.classList.add("new-frame");
-    	} else {
+		// Only doing thing when I'm going to a new frame
+		if(!document.body.classList.contains("frame"+currentframe)) {
+			document.body.classList.remove("frame0","frame1","frame2");
+			document.body.classList.add("frame"+currentframe);
+		}
+    	if(segment - mwh <= 0) {
     		document.body.classList.remove("new-frame");
     	}
 	}
