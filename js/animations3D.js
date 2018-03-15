@@ -666,3 +666,7 @@ function onWindowResize() {
 
 init();
 animate();
+
+setTimeout(function() {
+	framerate = 0;
+}, 1000);

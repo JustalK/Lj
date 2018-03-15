@@ -429,11 +429,6 @@
 		
 		<!-- BEGIN LAST FRAME -->
 		<div id="LASTFRAME" class="last-frame">
-			<div class="sky">
-				<div class="clouds_one"></div>
-				<div class="clouds_two"></div>
-				<div class="clouds_three"></div>
-			</div>
 			<div class="board-wrap">
 				<div class="board"></div>
 				<div class="board-under">
@@ -490,10 +485,8 @@
 	
 	<!-- SCRIPT'S LATSUJ -->
 	<script type="text/javascript" src="./js/index.js"></script>
-
-
-		<script src="./framework/three.js"></script>
-		<script src="./js/animations3D.js"></script>
+	<script src="./framework/three.js"></script>
+	<script src="./js/animations3D.js"></script>
 
 </body>
 

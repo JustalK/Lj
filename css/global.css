@@ -995,6 +995,7 @@ LINES STYLE
 	position: absolute;
 	background: black;
 	z-index: 15;
+	transition: all 0.5s;
 }
 
 .photo-line-vertical {
@@ -1035,7 +1036,7 @@ DIAPORAMA - LEFT AREA
 	width: 800px;
 	height: 50%;
 	left: calc(50% - 400px);
-	margin-top: 100px;
+	transition: all 0.5s;
 	z-index: 10;
 }
 
@@ -1055,7 +1056,7 @@ DIAPORAMA - LEFT AREA
 	background-position: center;
 	margin: auto;
 	overflow: hidden;
-	transition: border 1s;
+	transition: border 1s, width 0.5s, height 0.5s;
 }
 
 .background-photo {
@@ -1119,6 +1120,7 @@ DIAPORAMA - LEFT AREA
 	position: absolute;
 	z-index: 16;
 	background: rgba(0, 0, 0, 0.3);
+	transition: all 0.5s;
 }
 
 .photo-block-vertical {
@@ -1161,6 +1163,7 @@ INFORMATIONS - RIGHT AREA
 	width: 800px;
 	height: calc(50% - 200px);
 	left: calc(50% - 400px);
+	transition: all 0.5s;
 	z-index: 10;
 }
 
