@@ -182,7 +182,6 @@ FRAME 3
 	
 	background-image: url("../imgs/FRAME2_LOW.jpg");
 	background-size: cover;
-	-webkit-transform: translate3d(0,0,0);
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -300,7 +299,6 @@ FRAME 5
 	
 	background-image: url("../imgs/FRAME3_LOW.jpg");
 	background-size: cover;
-	-webkit-transform: translate3d(0,0,0);
 	background-repeat: no-repeat;
 	background-position: center;
 }

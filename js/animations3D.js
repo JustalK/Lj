@@ -72,6 +72,10 @@ var backButton = false;
 var raycaster;
 // The object with who the mouse is hover it
 var intersects;
+// Block the animation when true
+var lockAnimation = false;
+// For knowing if the animation is actually running
+var runAnimation = false;
 
 /* Constants */
 var FOV = 50;
@@ -433,31 +437,37 @@ function createSmoke(numbers,sizex,sizey,color,coeffZ) {
 var parent = null;
 var childrens = null;
 function animate() {
-	// Setting the number of refresh - Frame rate
-	setTimeout( function() {
-		requestAnimationFrame( animate );
-	}, framerate );
-	renderer.render( scene, camera );
-
-	delta = clock.getDelta();
-	moveSmoke();
+	// If I scroll down, I lock the animation for using less memory
+	if(!lockAnimation) {
+		runAnimation = true;
+		// Setting the number of refresh - Frame rate
+		updateAnimation = setTimeout( function() {
+			requestAnimationFrame( animate );
+		}, framerate );
+		renderer.render( scene, camera );
 	
-	for(i=0;i<groupScene.length;i++) {
-		perpetual(groupScene[i]);
-	}
-
-	// If I'm on a movement, I cannot change the parent, so the raycaster is not usefull
-	if(movementCamera && parent!=null) {
-		document.body.style.cursor = "inherit";
-		// If I have not reached the final position on each abcisse
-		if(isPositionNotReached()) { 
-			moveCameraToBoard();
+		delta = clock.getDelta();
+		moveSmoke();
+		
+		for(i=0;i<groupScene.length;i++) {
+			perpetual(groupScene[i]);
+		}
+	
+		// If I'm on a movement, I cannot change the parent, so the raycaster is not usefull
+		if(movementCamera && parent!=null) {
+			document.body.style.cursor = "inherit";
+			// If I have not reached the final position on each abcisse
+			if(isPositionNotReached()) { 
+				moveCameraToBoard();
+			} else {
+				movementCamera=false;
+				resetPositionReached();
+			}
 		} else {
-			movementCamera=false;
-			resetPositionReached();
+			searchingMatchMouseAndMesh();
 		}
 	} else {
-		searchingMatchMouseAndMesh();
+		runAnimation = false;
 	}
 }
 
@@ -666,7 +676,3 @@ function onWindowResize() {
 
 init();
 animate();
-
-setTimeout(function() {
-	framerate = 0;
-}, 1000);

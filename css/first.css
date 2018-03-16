@@ -174,20 +174,10 @@ span {
 	width: 100%;
 	
 	background-size: cover;
-	-webkit-transform: translate3d(0,0,0);
 	background-repeat: no-repeat;
 	background-position: center;
 	
 	 z-index: 1;
-}
-
-.cssvhunit #FRAME1 {
-	background-image: url("../imgs/FRAME1_LOW.jpg");
-}
-
-.cssvhunit #FRAME1.active {
-    transition: background-image 0.5ss;
-    /* background-image: url("../imgs/FRAME1.jpg"); */
 }
 
 .cssvhunit.rgba #FRAME2 .bloc-informations {

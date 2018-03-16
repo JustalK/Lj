@@ -142,7 +142,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	function loadHighQualityImagesFirst() {
 		var background = document.getElementsByClassName("frame-first");
 		tmp = new Image();
-		tmp.src = background[0].getAttribute("data-src");
+		// We just add a background for the second frame - the first one dont need it because of the three.js canvas
+		tmp.src = background[1].getAttribute("data-src");
 		tmp.addEventListener('load',function() {
 			for(i=0;i<this.length;i++) {
 				// For a better maintainability, we gonna just add a class and make the all animation on the css
@@ -320,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				photosquare[currentframe*4+i].style.cssText = "width:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px;height:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 			}
     	}
-		
+    	
 		if(segment - mwh > 0) {
 			// If I have not been in this loop for this frame
 			if(bg.dataset.load!=1) {
@@ -335,6 +336,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
     		document.body.classList.add("new-frame");
 		}
+
+    	hasToLockAnimation();
 		
 		// Load the image with LQIP technique at the right moment
 		loadHighQualityImages();
@@ -347,6 +350,16 @@ document.addEventListener("DOMContentLoaded", function() {
     	}
 		document.body.classList.remove("no-scrolling");
         timer = setTimeout(stopScrolling, 300);
+	}
+	
+	// Lock or active the animation in function of the scroll
+	function hasToLockAnimation() {
+    	if(a < mwh) {
+    		if(!runAnimation) animate();
+    		lockAnimation = false;
+    	} else if(a > mwh) {
+    		lockAnimation = true;
+    	}
 	}
 	
 	// Add a class when we approach a new frame
