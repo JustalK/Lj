@@ -285,10 +285,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	
 	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";transform:translate(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px)";
 	    	
-	    	areatextetitle[currentframe].style.marginLeft = wasmScrollReverse(20,20,10,0.01,segment,wh)+"%";
-	    	areatextesubtitle[currentframe].style.marginLeft = wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%";
+	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
+	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
 	    	
-	    	date[currentframe].style.top = wasmScroll(50,20,0.1,segment,mwh-200)+"%";
+	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(268,100,0.17,segment,-wh/2)+"%)";
 	    	datelineup[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
 	    	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
 	    	

@@ -1170,14 +1170,14 @@ INFORMATIONS - RIGHT AREA
 .area-texte-title {
 	display: block;
 	font-size: 32px;
-	margin-left: 20%;
+	transform: translateX(20%);
 	transition: opacity 0.6s;
 }
 
 .area-texte-subtitle {
 	display: block;
 	font-size: 25px;
-	margin-left: 40%;
+	transform: translate(40%);
 	margin-top: 20px;
 	transition: opacity 0.6s;
 }
