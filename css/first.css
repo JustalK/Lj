@@ -617,11 +617,9 @@ AREAS
 .areas {
     position: relative;
     float: left;
-    
 	height: 100%;
-    top: 0;
-    
     z-index: 10;
+    transition: all 0.3s;
 }
 
 .area-60 {
@@ -647,7 +645,6 @@ FRAME
 	width: 100%;	
 	
 	background-size: cover;
-	-webkit-transform: translate3d(0,0,0);
 	background-repeat: no-repeat;
 	background-position: center;
 	
