@@ -1054,7 +1054,7 @@ DIAPORAMA - LEFT AREA
 	background-position: center;
 	margin: auto;
 	overflow: hidden;
-	transition: border 1s, width 0.5s, height 0.5s;
+	transition: border 1s, transform 0.5s;
 }
 
 .background-photo {
@@ -1122,18 +1122,22 @@ DIAPORAMA - LEFT AREA
 }
 
 .photo-block-vertical {
-	width: 0px;
+	width: 30px;
 	height: 100%;
 }
 
 .photo-block-black-top-left {
 	left: 0;
 	top: 0;
+    transform: scaleX(0);
+    transform-origin: left;
 }
 
 .photo-block-black-top-right {
 	right: 0;
 	top: 0;
+    transform: scaleX(0);
+    transform-origin: right;
 }
 
 .photo-block-horizontal {	

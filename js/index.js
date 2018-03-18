@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	datelineup[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
 	    	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
 	    	
-	    	photo[currentframe].style.cssText = "height:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px);width:calc(100% - "+wasmScrollReverse(162,162,100,0.25,segment,mwh+100)+"px)";
+	    	photo[currentframe].style.cssText = "transform:scale("+wasmScrollReverse(1,1,1.105,0.00001,segment,mwh+100)+","+wasmScrollReverse(1,1,1.35,0.25,segment,mwh+100)+")";
 	    	areatexte[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 	    	//frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
@@ -310,8 +310,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	photolinevertical[currentframe*2].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";
 	    	photolinevertical[currentframe*2+1].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";   	
 	    	
-			photoblockvertical[currentframe*2].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
-			photoblockvertical[currentframe*2+1].style.width = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+			photoblockvertical[currentframe*2].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")";
+			photoblockvertical[currentframe*2+1].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")";
+			console.log(wasmScroll(1,0,1,segment,mwh+100));
 			photoblockhorizontal[currentframe*2].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 			photoblockhorizontal[currentframe*2+1].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
 	    	
