@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	datelineup[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
 	    	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
 	    	
-	    	photo[currentframe].style.cssText = "transform:scale("+wasmScrollReverse(1,1,1.105,0.00001,segment,mwh+100)+","+wasmScrollReverse(1,1,1.35,0.25,segment,mwh+100)+")";
+	    	photo[currentframe].style.cssText = "transform:scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.818,1,segment,mwh+100)+")";
 	    	areatexte[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 	    	//frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
@@ -312,9 +312,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	
 			photoblockvertical[currentframe*2].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")";
 			photoblockvertical[currentframe*2+1].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")";
-			console.log(wasmScroll(1,0,1,segment,mwh+100));
-			photoblockhorizontal[currentframe*2].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
-			photoblockhorizontal[currentframe*2+1].style.height = wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+			photoblockhorizontal[currentframe*2].style.transform = "scaleY("+wasmScroll(1,0,1,segment,mwh+100)+")";
+			photoblockhorizontal[currentframe*2+1].style.transform = "scaleY("+wasmScroll(1,0,1,segment,mwh+100)+")";
 	    	
 			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
 			

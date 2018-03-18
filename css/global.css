@@ -1040,8 +1040,8 @@ DIAPORAMA - LEFT AREA
 
 .photo {
 	position: absolute;
-	height: calc(100% - 162px);
-	width: calc(100% - 162px);
+	height: calc(100% - 100px);
+	width: calc(100% - 100px);
 	right: 0;
 	left: 0;
 	top: 0;
@@ -1054,6 +1054,7 @@ DIAPORAMA - LEFT AREA
 	background-position: center;
 	margin: auto;
 	overflow: hidden;
+	transform: scale(0.912, 0.818);
 	transition: border 1s, transform 0.5s;
 }
 
@@ -1142,17 +1143,21 @@ DIAPORAMA - LEFT AREA
 
 .photo-block-horizontal {	
 	width: 100%;
-	height: 0px;
+	height: 30px;
 }
 
 .photo-block-black-bottom-left {
 	left: 0;
 	top: 0;
+    transform: scaleY(0);
+    transform-origin: top;
 }
 
 .photo-block-black-bottom-right {
 	left: 0;
 	bottom: 0;
+    transform: scaleY(0);
+    transform-origin: bottom;
 }
 
 /*
