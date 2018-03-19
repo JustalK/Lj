@@ -297,18 +297,18 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	areatexte[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 	    	//frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
-	    	areas[currentframe*2].style.cssText = "transform: translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
-	    	areas[currentframe*2+1].style.cssText = "transform: translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
+	    	areas[currentframe*2].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
+	    	areas[currentframe*2+1].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
 	    	
 	    	blocsinsidewrap[currentframe*2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
 	    	blocsinsidewrap[currentframe*2+1].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
 	    	blocsinsidewrap[currentframe*2+2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
 	    	
-	    	photolinehorizontal[currentframe*2].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
-	    	photolinehorizontal[currentframe*2+1].style.cssText = "width:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;left:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%"; 
+	    	photolinehorizontal[currentframe*2].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")"; 
+	    	photolinehorizontal[currentframe*2+1].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")"; 
 	    	
-	    	photolinevertical[currentframe*2].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";
-	    	photolinevertical[currentframe*2+1].style.cssText = "height:"+wasmScroll(100,0,0.6,segment,mwh-200) + "%;top:"+wasmScrollReverse(50,50,0,0.3,segment,mwh-200)+"%";   	
+	    	photolinevertical[currentframe*2].style.transform = "scaleY("+wasmScroll(1,0,1,segment,mwh+100)+")";
+	    	photolinevertical[currentframe*2+1].style.transform = "scaleY("+wasmScroll(1,0,1,segment,mwh+100)+")";   	
 	    	
 			photoblockvertical[currentframe*2].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")";
 			photoblockvertical[currentframe*2+1].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")";
