@@ -281,6 +281,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	position.style.width=c*100+"%";
     	// Play the animation only if we have not reach the footer yet
     	if(currentframe<frames.length/2) {
+
 	    	blocsinsideinformationstitle[currentframe].style.marginLeft = wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px";
 	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
 	    	
@@ -296,6 +297,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	photo[currentframe].style.cssText = "transform:scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.818,1,segment,mwh+100)+")";
 	    	areatexte[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
+
 	    	//frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
 	    	areas[currentframe*2].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
 	    	areas[currentframe*2+1].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
@@ -318,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
 			
 			for(var i=0;i<4;i++) {
-				photosquare[currentframe*4+i].style.cssText = "width:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px;height:"+wasmScroll(30,0,0.12,segment,mwh+100)+"px";
+				photosquare[currentframe*4+i].style.transform = "scale("+wasmScroll(1,0,1,segment,mwh+100)+","+wasmScroll(1,0,1,segment,mwh+100)+")";
 			}
     	}
     	
@@ -348,7 +350,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	if(timer!==null) {
     		clearTimeout(timer);
     	}
-		document.body.classList.remove("no-scrolling");
+		//document.body.classList.remove("no-scrolling");
         timer = setTimeout(stopScrolling, 300);
 	}
 	
