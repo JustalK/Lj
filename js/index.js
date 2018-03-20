@@ -14,11 +14,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 	// My temporary variable for all the system
 	var tmp;
-	// Check if the user is not using a very old version of IE - in the case not, trolling him :p
-	if (window.console){
-		// If Some developper look in the console, I have to do something for him also :p
-		console.log('%c-> www.latsuj.com <-\n%cHello Developer, You have pressed the F12 key, you want to check my code ?! \nThat\'s ok, I have nothing to hide.\nI\'m all geared up for that.\nLatsuj', 'background:#222;color:#ff4141;font-size:40px;text-decoration:none;',"color:#ff4141;font-size:20px");
-	}
 	
 	// ================================================================================
 	// WebAssembly - I have created two functions in C99 for making the user experience smooth
@@ -276,7 +271,47 @@ document.addEventListener("DOMContentLoaded", function() {
 	function scroll() {
 		// Initialisation of variables
 		initialization();
+    	
+		animations();
 		
+		if(segment - mwh > 0) {
+			// If I have not been in this loop for this frame
+			if(bg.dataset.load!=1) {
+				bg.dataset.load = 1;
+				bg.style.backgroundImage = "url("+bg.dataset.imglow+")";
+				// I create a new image for preload the content
+				tmp = new Image();
+				tmp.src = backgroundphoto[currentframe].dataset.img;
+				tmp.addEventListener('load',function() {
+					this.style.backgroundImage = "url("+this.dataset.img+")";
+				}.bind(bg));
+			}
+    		document.body.classList.add("new-frame");
+		}
+
+		if ('requestIdleCallback' in window) {
+			requestIdleCallback(adConsole);
+		}
+		
+    	hasToLockAnimation();
+		
+		// Load the image with LQIP technique at the right moment
+		loadHighQualityImages();
+		
+    	isNewFrame();
+    	
+    	// When the user stop scrolling - we add an action of this
+    	if(timer!==null) {
+    		clearTimeout(timer);
+    	}
+		document.body.classList.remove("no-scrolling");
+        timer = setTimeout(stopScrolling, 300);
+	}
+	
+	/**
+	 * All the animation of movements when the user scroll
+	 */
+	function animations() {
     	// Play the animation only if we have not reach the footer yet
     	if(currentframe<frames.length/2) {
     		calculChangeFrame = wasmScroll(1,0,1,segment,mwh+100);
@@ -321,35 +356,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				photosquare[currentframe*4+i].style.transform = "scale("+wasmScroll(1,0,1,segment,mwh+100)+","+wasmScroll(1,0,1,segment,mwh+100)+")";
 			}
     	}
-    	
-		if(segment - mwh > 0) {
-			// If I have not been in this loop for this frame
-			if(bg.dataset.load!=1) {
-				bg.dataset.load = 1;
-				bg.style.backgroundImage = "url("+bg.dataset.imglow+")";
-				// I create a new image for preload the content
-				tmp = new Image();
-				tmp.src = backgroundphoto[currentframe].dataset.img;
-				tmp.addEventListener('load',function() {
-					this.style.backgroundImage = "url("+this.dataset.img+")";
-				}.bind(bg));
-			}
-    		document.body.classList.add("new-frame");
-		}
-
-    	hasToLockAnimation();
-		
-		// Load the image with LQIP technique at the right moment
-		loadHighQualityImages();
-		
-    	isNewFrame();
-    	
-    	// When the user stop scrolling - we add an action of this
-    	if(timer!==null) {
-    		clearTimeout(timer);
-    	}
-		document.body.classList.remove("no-scrolling");
-        timer = setTimeout(stopScrolling, 300);
 	}
 	
 	// Lock or active the animation in function of the scroll
@@ -673,43 +679,19 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// ================================================================================
-	// PARALLAX
-	// ================================================================================
-	
-	var parallax = document.getElementsByClassName("parallax");
-	document.onmousemove = moveElements;
-	
-	function moveElements(event) {
-        var dot, eventDoc, doc, body, pageX, pageY;
-
-        event = event || window.event; // IE-ism
-
-        // If pageX/Y aren't available and clientX/Y are,
-        // calculate pageX/Y - logic taken from jQuery.
-        // (This is to support old IE)
-        if (event.pageX == null && event.clientX != null) {
-            eventDoc = (event.target && event.target.ownerDocument) || document;
-            doc = eventDoc.documentElement;
-            body = eventDoc.body;
-
-            event.pageX = event.clientX +
-              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-              (doc && doc.clientLeft || body && body.clientLeft || 0);
-            event.pageY = event.clientY +
-              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-              (doc && doc.clientTop  || body && body.clientTop  || 0 );
-        }
-
-        // Use event.pageX / event.pageY here
-		for(var i = 0,count = parallax.length; i < count; i++) {
-			parallax[i].style.backgroundPosition = "0 calc(50% - "+(event.pageY%(2*hf))*0.2+"px)";
-		}
+	// Ad only if I can and things are not really busy
+	// ================================================================================	
+	if ('requestIdleCallback' in window) {
+		requestIdleCallback(adConsole);
 	}
 	
-	// ================================================================================
-	// GAME
-	// ================================================================================	
-	
+	function adConsole() {
+		// Check if the user is not using a very old version of IE - in the case not, trolling him :p
+		if (window.console){
+			// If Some developper look in the console, I have to do something for him also :p
+			console.log('%c-> www.latsuj.com <-\n%cHello Developer, You have pressed the F12 key, you want to check my code ?! \nThat\'s ok, I have nothing to hide.\nI\'m all geared up for that.\nLatsuj', 'background:#222;color:#ff4141;font-size:40px;text-decoration:none;',"color:#ff4141;font-size:20px");
+		}
+	}
 });
 
 
