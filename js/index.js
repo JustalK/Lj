@@ -189,18 +189,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// ================================================================================
 	// For the different calcul - Calcul all the important value;
+	// bh : Height of the document
+	// wh : Height of the browser's windows of the user
 	// ================================================================================
-	var a, wh, mwh, b, c, segment, numberframe, currentframe, hf, bg, bh;
+	var a, wh = window.innerHeight, mwh, b, c, segment, numberframe, currentframe, hf, bg, bh = document.documentElement.clientHeight;
 	
 	// Initialize all the important variable
 	function initialization() {
 		// Current position of the user
-		a = document.documentElement.scrollTop;
-		// Height of the browser's windows of the user
-		wh = window.innerHeight;
+		a = lastScrollY;
 		mwh = wh>>1;
-		// Height of the website
-		bh = document.documentElement.clientHeight;
 		b = bh - wh;
 		c = a / b;
 		// Height of a frame
@@ -247,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var areas = document.getElementsByClassName("areas");
 	var blocsinsidewrap = document.getElementsByClassName("blocs-inside-wrap");
 	var refresh = true;
+	var lastScrollY = document.documentElement.scrollTop;
 	var endRefresh = false;
 	// For initializing the variable
 	initialization();
@@ -259,14 +258,15 @@ document.addEventListener("DOMContentLoaded", function() {
 		clearTimeout(endRefresh);
 		refresh = false;
 
-		scroll();
+		lastScrollY = document.documentElement.scrollTop;
+		requestAnimationFrame(scroll);
 		
         setTimeout(function () {
             refresh = true;
         }, framerateScroll);
         // If the last event is a waiting, we make an other call to scroll - In that way, we add more accuracy to the project
         endRefresh = setTimeout(function () {
-        	scroll();
+        	requestAnimationFrame(scroll);
         }, 100);
 	});
 	
@@ -277,12 +277,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		// Initialisation of variables
 		initialization();
 		
-        // For the little tricky effect - Moving the width of the bar when we scroll
-    	position.style.width=c*100+"%";
     	// Play the animation only if we have not reach the footer yet
     	if(currentframe<frames.length/2) {
-
-	    	blocsinsideinformationstitle[currentframe].style.marginLeft = wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px";
+    		calculChangeFrame = wasmScroll(1,0,1,segment,mwh+100);
+    		
+	    	blocsinsideinformationstitle[currentframe].style.transform = "translateX("+wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px)";
 	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
 	    	
 	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";transform:translate(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px)";
@@ -290,15 +289,14 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
 	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
 	    	
-	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(268,100,0.17,segment,-wh/2)+"%)";
-	    	datelineup[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
-	    	datelinedown[currentframe].style.height = wasmScroll(32,0,0.1,segment,mwh+200)+"vh";
+	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(280,100,0.17,segment,-wh/2)+"%)";
+	    	datelineup[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
+	    	datelinedown[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
 	    	
-	    	photo[currentframe].style.cssText = "transform:scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.818,1,segment,mwh+100)+")";
+	    	photo[currentframe].style.transform = "scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.818,1,segment,mwh+100)+")";
 	    	areatexte[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 
-	    	//frameinformations[currentframe].style.backgroundPosition = "center "+wasmScroll(1000,0,0.5,segment,wh)+"px";
 	    	areas[currentframe*2].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
 	    	areas[currentframe*2+1].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
 	    	
@@ -306,16 +304,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	blocsinsidewrap[currentframe*2+1].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
 	    	blocsinsidewrap[currentframe*2+2].style.opacity = wasmScroll(1,0,0.003,segment,mwh);
 	    	
-	    	photolinehorizontal[currentframe*2].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")"; 
-	    	photolinehorizontal[currentframe*2+1].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")"; 
+	    	photolinehorizontal[currentframe*2].style.transform = "scaleX("+calculChangeFrame+")"; 
+	    	photolinehorizontal[currentframe*2+1].style.transform = "scaleX("+calculChangeFrame+")"; 
 	    	
-	    	photolinevertical[currentframe*2].style.transform = "scaleY("+wasmScroll(1,0,1,segment,mwh+100)+")";
-	    	photolinevertical[currentframe*2+1].style.transform = "scaleY("+wasmScroll(1,0,1,segment,mwh+100)+")";   	
+	    	photolinevertical[currentframe*2].style.transform = "scaleY("+calculChangeFrame+")";
+	    	photolinevertical[currentframe*2+1].style.transform = "scaleY("+calculChangeFrame+")";   	
 	    	
-			photoblockvertical[currentframe*2].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")";
-			photoblockvertical[currentframe*2+1].style.transform = "scaleX("+wasmScroll(1,0,1,segment,mwh+100)+")";
-			photoblockhorizontal[currentframe*2].style.transform = "scaleY("+wasmScroll(1,0,1,segment,mwh+100)+")";
-			photoblockhorizontal[currentframe*2+1].style.transform = "scaleY("+wasmScroll(1,0,1,segment,mwh+100)+")";
+			photoblockvertical[currentframe*2].style.transform = "scaleX("+calculChangeFrame+")";
+			photoblockvertical[currentframe*2+1].style.transform = "scaleX("+calculChangeFrame+")";
+			photoblockhorizontal[currentframe*2].style.transform = "scaleY("+calculChangeFrame+")";
+			photoblockhorizontal[currentframe*2+1].style.transform = "scaleY("+calculChangeFrame+")";
 	    	
 			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
 			
@@ -350,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	if(timer!==null) {
     		clearTimeout(timer);
     	}
-		//document.body.classList.remove("no-scrolling");
+		document.body.classList.remove("no-scrolling");
         timer = setTimeout(stopScrolling, 300);
 	}
 	

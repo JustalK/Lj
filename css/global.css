@@ -1217,6 +1217,8 @@ INFORMATIONS - RIGHT AREA
 	margin-left: 10px;
 	margin-top: 60px;
 	margin-bottom: 40px;
+	transform: translateX(30px);
+	transition: transform 0.5s;
 }
 
 .blocs-inside-informations-texte {
@@ -1342,12 +1344,15 @@ INFORMATIONS - RIGHT AREA
 .date-line {
 	position: absolute;
 	width: 2px;
-	height: calc(50% - 200px);
+    height: 32vh;
+    transform: scaleY(0);
+    transition: transform 0.5s;
 }
 
 .date-line-up {
-	right: -38px;
-	top: 120px;
+    right: -38px;
+    top: 120px;
+    transform-origin: top;
 }
 
 .left .date-line-up {
@@ -1358,6 +1363,7 @@ INFORMATIONS - RIGHT AREA
 .date-line-down {
 	right: -38px;
 	bottom: 45px;
+    transform-origin: bottom;
 }
 
 .left .date-line-down {

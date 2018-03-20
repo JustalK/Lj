@@ -29,7 +29,6 @@
 ?>
 <body class="no-scrolling frame0">
 	<div id="CONTENT">
-		<div id="POSITION" class="background-white"></div>
 		<!-- START FRAME1 -->
 		<div id="FRAME1" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation frame-first frame-right">
 			<div class="blackout-effect"></div>

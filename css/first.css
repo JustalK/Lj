@@ -112,14 +112,6 @@ FONT
 	background: #FFF;
 }
 
-
-#POSITION {
-    height: 2px;
-    position: fixed;
-    z-index: 30;
-    transition: width 0.2s;
-}
-
 body {
 	margin: 0;
 	background: black;
