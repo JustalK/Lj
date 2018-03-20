@@ -116,6 +116,7 @@ body {
 	margin: 0;
 	background: black;
 	overflow-x: hidden;
+	scroll-behavior: smooth;
 }
 
 span {
