@@ -564,10 +564,8 @@ LINES STYLE
 
 .line-black-long {
 	position: absolute;
-	
 	width: 100%;
 	height: 1px;
-	
 	z-index: 6;
 }
 

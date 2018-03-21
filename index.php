@@ -82,6 +82,8 @@
 					<div class="photo-line photo-line-vertical photo-line-black-right"></div>
 					<div class="photo-line photo-line-horizontal photo-line-black-up"></div>
 					<div class="photo-line photo-line-horizontal photo-line-black-down"></div>
+					<div class="photo-line photo-line-black-up photo-norepaint"></div>
+					<div class="photo-line photo-line-black-down photo-norepaint"></div>
 					<div class="photo">
 						<div class="background-photo" data-imglow="./imgs/FRAME1_LOW.jpg" data-img="./imgs/FRAME1.jpg"></div>
 						<div class="under-background-photo"></div>
@@ -101,6 +103,7 @@
 					<div class="area-texte-wrap">
 						<div class="area-texte-line"></div>
 						<span class="area-texte-title tekobold">Bienvenue sur mon site !</span>
+						<br>
 						<span class="area-texte-subtitle tekolight">I'm Latsuj ! Un développeur français passioné.</span>
 					</div>
 				</div>
@@ -291,6 +294,7 @@
 					<div class="area-texte-wrap">
 						<div class="area-texte-line"></div>
 						<span class="area-texte-title tekobold">Cum haec taliaque</span>
+						<br>
 						<span class="area-texte-subtitle tekolight">Cum haec taliaque sollicitas eius aures everberent expositas</span>
 					</div>
 				</div>
@@ -370,6 +374,7 @@
 					<div class="area-texte-wrap">
 						<div class="area-texte-line"></div>
 						<span class="area-texte-title tekobold">Cum haec taliaque</span>
+						<br>
 						<span class="area-texte-subtitle tekolight">Cum haec taliaque sollicitas eius aures everberent expositas</span>
 					</div>
 				</div>

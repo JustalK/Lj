@@ -316,43 +316,45 @@ document.addEventListener("DOMContentLoaded", function() {
     	if(currentframe<frames.length/2) {
     		calculChangeFrame = wasmScroll(1,0,1,segment,mwh+100);
     		
-//	    	blocsinsideinformationstitle[currentframe].style.transform = "translateX("+wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px)";
+	    	blocsinsideinformationstitle[currentframe].style.transform = "translateX("+wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px)";
 	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
-//	    	
+	    	
 //	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";transform:translate(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px)";
-//	    	
+	    	
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
-//	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
-//	    	
+	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
+	    	
 //	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(280,100,0.17,segment,-wh/2)+"%)";
 //	    	datelineup[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
 //	    	datelinedown[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
-//	    	
-//	    	photo[currentframe].style.transform = "scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.818,1,segment,mwh+100)+")";
+	    	
+	    	photo[currentframe].style.transform = "scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.818,1,segment,mwh+100)+")";
 //	    	areatexte[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 //	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
-//
+
 //	    	areas[currentframe*2].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
 //	    	areas[currentframe*2+1].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
-//	    	
+	    	
 	    	// Locking at 0.99 opacity for doing the job on the GPU and never painting this area a second time
 	    	blocsinsidewrap[currentframe*2].style.opacity = wasmScroll(0.99,0,0.003,segment,mwh);
 	    	blocsinsidewrap[currentframe*2+1].style.opacity = wasmScroll(0.99,0,0.003,segment,mwh);
 	    	blocsinsidewrap[currentframe*2+2].style.opacity = wasmScroll(0.99,0,0.003,segment,mwh);
-//	    	
-//	    	photolinehorizontal[currentframe*2].style.transform = "scaleX("+calculChangeFrame+")"; 
-//	    	photolinehorizontal[currentframe*2+1].style.transform = "scaleX("+calculChangeFrame+")"; 
-//	    	
+	    	
+	    	// I'm using two element invisible for not repaiting the entire screen
+	    	photolinehorizontal[currentframe*2].style.transform = "scaleX("+calculChangeFrame+")"; 
+	    	photolinehorizontal[currentframe*2+1].style.transform = "scaleX("+calculChangeFrame+")"; 
+	    	
 	    	photolinevertical[currentframe*2].style.transform = "scaleY("+calculChangeFrame+")";
 	    	photolinevertical[currentframe*2+1].style.transform = "scaleY("+calculChangeFrame+")";   	
-//	    	
+	    	
 			photoblockvertical[currentframe*2].style.transform = "scaleX("+calculChangeFrame+")";
 			photoblockvertical[currentframe*2+1].style.transform = "scaleX("+calculChangeFrame+")";
 			photoblockhorizontal[currentframe*2].style.transform = "scaleY("+calculChangeFrame+")";
 			photoblockhorizontal[currentframe*2+1].style.transform = "scaleY("+calculChangeFrame+")";
-//	    	
-//			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
-//			
+	    	
+			// TranslateZ and will-change for repaiting only the good area
+			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") translateZ(0) rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
+			
 			for(var i=0;i<4;i++) {
 				photosquare[currentframe*4+i].style.transform = "scale("+wasmScroll(1,0,1,segment,mwh+100)+","+wasmScroll(1,0,1,segment,mwh+100)+")";
 			}
@@ -361,10 +363,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Lock or active the animation in function of the scroll
 	function hasToLockAnimation() {
-    	if(a < mwh) {
+    	if(a < 100) {
     		if(!runAnimation) animate();
     		lockAnimation = false;
-    	} else if(a > mwh) {
+    	} else if(a > 100) {
     		lockAnimation = true;
     	}
 	}
