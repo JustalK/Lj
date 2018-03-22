@@ -288,10 +288,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
     		document.body.classList.add("new-frame");
 		}
-
-		if ('requestIdleCallback' in window) {
-			requestIdleCallback(adConsole);
-		}
 		
     	hasToLockAnimation();
 		
@@ -324,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
 	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
 	    	
-//	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(280,100,0.17,segment,-wh/2)+"%)";
+	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(280,100,0.17,segment,-wh/2)+"%)";
 //	    	datelineup[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
 //	    	datelinedown[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
 	    	

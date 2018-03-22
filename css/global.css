@@ -156,7 +156,7 @@ FRAME 2
 	color: #6f767b;
 }
 
-.new-frame #FRAME2 .photo, .new-frame #FRAME2 .blocs {
+#FRAME2 .photo, #FRAME2 .blocs {
     border: 1px solid white;
 }
 
@@ -1358,9 +1358,9 @@ INFORMATIONS - RIGHT AREA
 .date-line {
 	position: absolute;
 	width: 2px;
-    height: 32vh;
-    transform: scaleY(0);
-    transition: transform 0.5s;
+	height: 32vh;
+	transform: scaleY(0);
+	transition: transform 0.5s;
 }
 
 .date-line-up {
