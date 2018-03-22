@@ -328,8 +328,8 @@ document.addEventListener("DOMContentLoaded", function() {
 //	    	areatexte[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 //	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 
-//	    	areas[currentframe*2].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
-//	    	areas[currentframe*2+1].style.transform = "translateY(-"+wasmScroll(200,0,0.5,segment,wh+200)+"px)";
+	    	areas[currentframe*2].style.transform = "translate3d(0,-"+wasmScroll(200,0,50,segment,wh+200)+"px,0)";
+	    	areas[currentframe*2+1].style.transform = "translate3d(0,-"+wasmScroll(200,0,50,segment,wh+200)+"px,0)";
 	    	
 	    	// Locking at 0.99 opacity for doing the job on the GPU and never painting this area a second time
 	    	blocsinsidewrap[currentframe*2].style.opacity = wasmScroll(0.99,0,0.003,segment,mwh);
