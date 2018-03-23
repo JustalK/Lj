@@ -14,7 +14,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 	// My temporary variable for all the system
 	var tmp;
-	
 	// ================================================================================
 	// WebAssembly - I have created two functions in C99 for making the user experience smooth
 	// ================================================================================
@@ -218,6 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var position = document.getElementById("POSITION");
 	var timer;
 	var framerateScroll = 1000/60;
+	var notificationSend = false;
 	
 	var blackout = document.getElementsByClassName("blackout-effect");
 	var bigtitle = document.getElementsByClassName("big-title");
@@ -355,7 +355,12 @@ document.addEventListener("DOMContentLoaded", function() {
 				photosquare[currentframe*4+i].style.transform = "scale("+wasmScroll(1,0,1,segment,mwh+100)+","+wasmScroll(1,0,1,segment,mwh+100)+")";
 			}
     	}
-	}
+    	
+    	if(!notificationSend) {
+    		notificationSend = true;
+    		sendNotification("I'm Latsuj !","Hello, thank you to visiting my website. If you wanna send me an email, use the form at the end of the website. I will answer you in the next 48 hours. Yeah I'm fast !")
+    	}
+    }
 	
 	// Lock or active the animation in function of the scroll
 	function hasToLockAnimation() {
@@ -682,6 +687,22 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================	
 	if ('requestIdleCallback' in window) {
 		requestIdleCallback(adConsole);
+		
+		Notification.requestPermission(function (status) {
+			// Cela permet d'utiliser Notification.permission avec Chrome/Safari
+			if (Notification.permission !== status) {
+				Notification.permission = status;
+			}
+		});
+	}
+	
+	/**
+	 * For sending a notyfication system to the user
+	 */
+	function sendNotification(title,body) {
+        if (Notification.permission === "granted") {
+            var n = new Notification(title,{"body": body,"icon": "imgs/cats.png"});
+        }
 	}
 	
 	function adConsole() {
