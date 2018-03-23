@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		// We just add a background for the second frame - the first one dont need it because of the three.js canvas
 		tmp.src = background[1].getAttribute("data-src");
 		tmp.addEventListener('load',function() {
-			for(i=0;i<this.length;i++) {
+			for(var i=this.length;i--;) {
 				// For a better maintainability, we gonna just add a class and make the all animation on the css
 				this[i].classList.add("active");
 			}
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			var backgroundOnWait = [frames[currentframe*2+2],frames[currentframe*2+3]];
 			var backgroundHQ = [new Image(),new Image()];
 			// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
-			for(var i=0; i < 2 ; i++) {
+			for(var i=2;i--;) {
 				backgroundHQ[i].src = backgroundOnWait[i].getAttribute("data-src");
 				backgroundHQ[i].addEventListener('load',function() {
 					// For a better maintainability, we gonna just add a class and make the all animation on the css
@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			// TranslateZ and will-change for repaiting only the good area
 			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") translateZ(0) rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
 			
-			for(var i=0;i<4;i++) {
+			for(var i=4;i--;) {
 				photosquare[currentframe*4+i].style.transform = "scale("+wasmScroll(1,0,1,segment,mwh+100)+","+wasmScroll(1,0,1,segment,mwh+100)+")";
 			}
     	}
@@ -472,7 +472,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	 * this class is use for choosing the movement of the text (left or right)
 	 */
 	function addClassWrapInformation(nameClass) {
-		for(var j=0; j < wrapinformationlength ; j++) {
+		for(var j=wrapinformationlength;j--;) {
 			wrapinformation[j].classList.add(nameClass);
 		}		
 	}
@@ -482,7 +482,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	 * this class is use for choosing the movement of the text (left or right)
 	 */
 	function removeClassWrapInformation(nameClass) {
-		for(var j=0; j < wrapinformationlength ; j++) {
+		for(var j=wrapinformationlength;j--;) {
 			wrapinformation[j].classList.remove(nameClass);
 			wrapinformation[j].classList.remove("clicked");
 		}		
@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	 * So I had a class for making left:0 the normal position when the cursor still on the button
 	 */
 	function clickOnceWrapInformation() {
-		for(var j=0; j < wrapinformationlength ; j++) {
+		for(var j=wrapinformationlength;j--;) {
 			wrapinformation[j].classList.add("clicked");
 		}				
 	}
@@ -505,7 +505,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		var count = 0;
 		// Counting the number of block inside the wrap informations
 		var children = wrapblocsinside[currentframe].childNodes;
-		for(var z=0;z<children.length;z++) {		
+		for(var z=children.length;z--;) {		
 			// The span inside the div count like a children so I have to check the childrens by className
 			if(wrapblocsinside[currentframe].childNodes[z].className != undefined && wrapblocsinside[currentframe].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {
 				count++;
@@ -537,7 +537,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		page[currentframe].innerHTML = (wrapblocsinside[currentframe].dataset.count*1+1)+" / "+count;
 		
 		var children = wrapblocsinside[currentframe].childNodes;
-		for(var z=0,p=0;z<children.length;z++) {		
+		for(var z=children.length,p=0;z--;) {		
 			// The span inside the div count like a children so I have to check the childrens by className
 			if(wrapblocsinside[currentframe].childNodes[z].className != undefined && wrapblocsinside[currentframe].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {					
 				// If It's the frame that I have to show, i remove the two classes
@@ -556,7 +556,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// Then I'm adding the event for the differents button in the website
-	for(var i=0,count = buttonrightinformation.length; i < count ; i++) {
+	for(var i=buttonrightinformation.length; i--;) {
 		buttonrightinformation[i].addEventListener("mouseenter",function() { addClassWrapInformation("right-hover")});
 		buttonrightinformation[i].addEventListener("mouseout",function() { removeClassWrapInformation("right-hover")});
 		buttonrightinformation[i].addEventListener("click",function() {clickWrapInformation("right-click")});
@@ -577,13 +577,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	var menushowlength = menushow.length;
 	
 	// For all the elements for showing the menu
-	for(var i = 0,count = menu.length; i < count; i++) {
+	for(var i = menu.length;i--;) {
 	    // I add an event when the user is clicking the element
 	    menu[i].onclick = onMenu;
 	}
 
 	// For all the elements for showing the menu
-	for(var i = 0,count = menuclose.length; i < count; i++) {
+	for(var i = menuclose.length; i--;) {
 	    // I add an event when the user is clicking the element
 	    menuclose[i].onclick = offMenu;
 	}	
@@ -591,7 +591,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// If the user open the menu
 	function onMenu() {
     	// Then I show all the menu...(there are the exact same number of menu and menushow)
-    	for(var j = 0; j < menushowlength; j++) {
+    	for(var j = menushowlength;j--;) {
 	        menushow[j].classList.add("active");
 		    menu[j].classList.add("active");
     	}
@@ -601,7 +601,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// if the user close the menu
 	function offMenu() {
     	// Then I show all the menu...(there are the exact same number of menu and menushow)
-    	for(var j = 0; j < menushowlength; j++) {
+    	for(var j = menushowlength;j--;) {
 	        menushow[j].classList.remove("active");
 		    menu[j].classList.remove("active");
     	}
@@ -618,20 +618,20 @@ document.addEventListener("DOMContentLoaded", function() {
 	var fmove = true;
 	
 	// Adding the event for changing the menu order
-	for(var i = 0,count = menushownext.length; i < count; i++) {
+	for(var i = menushownext.length; i--;) {
 		menushownext[i].onclick = nextMenu;
 	}	
-	for(var i = 0,count = menushowprev.length; i < count; i++) {
+	for(var i = menushowprev.length;i--;) {
 		menushowprev[i].onclick = prevMenu;
 	}	
 	
-	for(var i = 0,count = menushowcurrent.length; i < count; i++) {
+	for(var i = menushowcurrent.length;i--;) {
 		menushowcurrent[i].onclick = goMenu;
 	}		
-	for(var i = 0,count = menushownexttext.length; i < count; i++) {
+	for(var i = menushownexttext.length; i--;) {
 		menushownexttext[i].onclick = goMenuNext;
 	}	
-	for(var i = 0,count = menushowprevtext.length; i < count; i++) {
+	for(var i = menushowprevtext.length; i--;) {
 		menushowprevtext[i].onclick = goMenuPrev;
 	}	
 	
@@ -664,15 +664,15 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	function updateMenu() {
 		// Changing the previous menu
-		for(var i = 0,count = menushowprevtext.length; i < count; i++) {
+		for(var i = menushowprevtext.length; i--;) {
 			menushowprevtext[i].innerHTML = projectx[(countmenu-1)%projectx.length].innerHTML;
 		}	
 		// Changing the current menu
-		for(var i = 0,count = menushowcurrent.length; i < count; i++) {
+		for(var i = menushowcurrent.length; i--;) {
 			menushowcurrent[i].innerHTML = projectx[countmenu%projectx.length].innerHTML;
 		}		
 		//Changing the next menu
-		for(var i = 0,count = menushownexttext.length; i < count; i++) {
+		for(var i = menushownexttext.length; i--;) {
 			menushownexttext[i].innerHTML = projectx[(countmenu+1)%projectx.length].innerHTML;
 		}
 	}
@@ -692,13 +692,4 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 });
-
-
-
-
-
-
-
-
-
 

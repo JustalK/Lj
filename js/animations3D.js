@@ -136,9 +136,11 @@ function init() {
 	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,30000,30000,0xEEFFFF,0);
 	groupScene.push(createBoard('imgs/zipWorld.jpg','imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
-	for(i=0;childrens!=null && i<childrens.length;i++) {
-		if(childrens[i]["panel"]) {
-			childrens[i].material[4].opacity = 1;
+	if(childrens!=null) {
+		for(var i=childrens.length;i--;) {
+			if(childrens[i]["panel"]) {
+				childrens[i].material[4].opacity = 1;
+			}
 		}
 	}
 	groupScene.push(createBoard('imgs/gouterMagique.jpg','imgs/test.png',-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
@@ -147,7 +149,7 @@ function init() {
 	groupScene.push(createBoard('imgs/onarto.jpg','imgs/test.png',1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
 	groupScene.push(createBoard('imgs/odyssea.jpg','imgs/test.png',-300,250,2400,0,0,Math.radians(-70),-300,250,3000,0,0,Math.radians(-70)));
 
-	for(i=0;i<groupScene.length;i++) {
+	for(var i=groupScene.length;i--;) {
 		scene.add(groupScene[i]);		
 	}
 	
@@ -262,12 +264,12 @@ function createBoard(textureCenter,textureInformations,x,y,z,rx,ry,rz,translatio
 
 	
 	// Add the differents parts to the group of meshes
-	for(i=0;i<piece.length;i++) {
+	for(var i=piece.length;i--;) {
 		boardTmp.add(piece[i]);
 	}
 
 	// Add each mesh to the objectInteract for letting the user play with them
-	for(i=0;i<piece.length;i++) {
+	for(var i=piece.length;i--;) {
 		objectInteraction.push(piece[i]);
 	}
 	
@@ -413,7 +415,7 @@ function createSmoke(numbers,sizex,sizey,color,coeffZ) {
     smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
     smokeGeo = new THREE.PlaneGeometry(sizex,sizey);
     
-    for (p = 0; p < numbers; p++) {
+    for (var p = numbers; p--;) {
         var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
         positionX = Math.randomRange()*WINDOWS_WIDTH;
         positionY = Math.randomRange()*WINDOWS_HEIGHT/2-WINDOWS_HEIGHT/2;
@@ -449,7 +451,7 @@ function animate() {
 		delta = clock.getDelta();
 		moveSmoke();
 		
-		for(i=0;i<groupScene.length;i++) {
+		for(var i=groupScene.length;i--;) {
 			perpetual(groupScene[i]);
 		}
 	
@@ -476,7 +478,7 @@ function animate() {
  * @returns boolean Return true if I have not reach the final position, false if else 
  */
 function isPositionNotReached() {
-	for(i=0;i<ABSCISSA.length;i++) {
+	for(var i=ABSCISSA.length;i--;) {
 		if(!positionReached[i] || !rotationReached[i]) return true;
 	}
 	return false;
@@ -502,13 +504,15 @@ function searchingMatchMouseAndMesh() {
 		if(parent==null || parent!=intersects[0].object.parent) {
 			document.body.style.cursor = "pointer";
 			parent = intersects[0].object.parent;
-			for(i=0;childrens!=null && i<childrens.length;i++) {
-				if(childrens[i]["panel"]) {
-					childrens[i].material[4].opacity = 0;
+			if(childrens!=null) {
+				for(var i=childrens.length;i--;) {
+					if(childrens[i]["panel"]) {
+						childrens[i].material[4].opacity = 0;
+					}
 				}
 			}
 			childrens = parent.children;
-			for(i=0;i<childrens.length;i++) {
+			for(var i=childrens.length;i--;) {
 				if(childrens[i]["wireframe"]) {
 					childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR_HOVER);
 				}
@@ -519,9 +523,11 @@ function searchingMatchMouseAndMesh() {
 		}
 	} else {
 		document.body.style.cursor = "inherit";
-		for(i=0;childrens!=null && i<childrens.length;i++) {
-			if(childrens[i]["wireframe"]) {
-				childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR);
+		if(childrens!=null) {
+			for(var i=childrens.length;i--;) {
+				if(childrens[i]["wireframe"]) {
+					childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR);
+				}
 			}
 		}
 		backButton = false;
@@ -539,7 +545,7 @@ function searchingMatchMouseAndMesh() {
 * Move the smoke particule - in fact they jus rotate arount Z
 **/
 function moveSmoke() {
-    for(i=0,total=smokeParticles.length;i<total;i++) {
+    for(var i=smokeParticles.length;i--;) {
         smokeParticles[i].rotation.z += (delta * DEFAULT_SMOKE_ROTATION_SPEED);
     }
 }
@@ -557,7 +563,7 @@ function perpetual(board) {
 * Move the camera to a new position
 **/
 function moveCameraToBoard() {
-	for(i=0;i<movements.length;i++) {
+	for(var i=movements.length;i--;) {
 		if(isMoveCameraTo(movements[i],camera.position.getComponent(i),positionFinal[i])) {
 			add = delta * movements[i] * speedTranslation[i];
 			camera.position.setComponent(i,camera.position.getComponent(i) + add);
@@ -588,7 +594,7 @@ function isMoveCameraTo(movement,cameraPosition,finalDestination) {
  * Calcul the speed for the translation's movement
  **/
 function getSpeedMovement() {
-	for(i=0;i<ABSCISSA.length;i++) {
+	for(var i=ABSCISSA.length;i--;) {
 		speedTranslation[i] = Math.abs(camera.position.getComponent(i)-positionFinal[i])*DEFAULT_MOVEMENT_CAMERA_SPEED;
 		speedRotation[i] = Math.abs(camera.rotation.toVector3().getComponent(i)-rotationFinal[i])*DEFAULT_ROTATION_CAMERA_SPEED;
 	}
@@ -598,7 +604,7 @@ function getSpeedMovement() {
  * Save the direction of the movement in an array
  **/
 function getMovementWay() {
-	for(i=0;i<ABSCISSA.length;i++) {
+	for(var i=ABSCISSA.length;i--;) {
 		movements[i] = camera.position.getComponent(i)>positionFinal[i] ? -1 : 1;	
 		rotation[i] = camera.rotation.toVector3().getComponent(i)>rotationFinal[i] ? -1 : 1;
 	}
@@ -614,7 +620,7 @@ function backToStart() {
 	rotationFinal[0] = CAMERA_START_ROTATION_X;
 	rotationFinal[1] = CAMERA_START_ROTATION_Y;
 	rotationFinal[2] = CAMERA_START_ROTATION_Z;
-	for(i=0;i<groupScene.length;i++) {
+	for(var i=groupScene.length;i--;) {
 		groupScene[i]["lock"] = false;
 	}
 	getSpeedMovement();
@@ -650,7 +656,7 @@ function onDocumentMouseDown( event ) {
 		// If I'm on a board, I move to the new position
 		if(parent!=null && !parent["lock"]) {
 			framerate = 1000 / 60;
-			for(i=0;i<ABSCISSA.length;i++) {
+			for(var i=ABSCISSA.length;i--;) {
 				positionFinal[i] = parent["translation"+ABSCISSA[i]];
 				rotationFinal[i] = parent["rotation"+ABSCISSA[i]];
 				positionReached[i] = false;
