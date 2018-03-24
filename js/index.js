@@ -189,8 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// bh : Height of the document
 	// wh : Height of the browser's windows of the user
 	// ================================================================================
-	var a, wh = window.innerHeight, mwh, b, c, segment, numberframe, currentframe, hf, bg, bh = document.documentElement.clientHeight;
-	
+	var a, wh = window.innerHeight, mwh, b, c, segment, numberframe, currentframe, hf, bg, bh = document.documentElement.clientHeight, bw = document.documentElement.clientWidth;
 	// Initialize all the important variable
 	function initialization() {
 		// Current position of the user
@@ -322,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	blocsinsideinformationstitle[currentframe].style.transform = "translateX("+wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px)";
 	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
 	    	
-	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0015,segment,0)+";transform:translate3d(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px,0)";
+	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0018,segment,100)+";transform:translateZ(0) translateY("+wasmScroll(mwh,80,0.8,segment,0)+"px)";
 	    	
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
 	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";

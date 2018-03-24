@@ -272,8 +272,8 @@ FRAME 4
 	color: #B20000;
 }
 
-.new-frame #FRAME4 .photo,
-.new-frame #FRAME4 .blocs {
+#FRAME4 .photo,
+#FRAME4 .blocs {
 	border: 1px solid #B20000;	
 }
 
@@ -388,8 +388,8 @@ FRAME 6
 	color: #008C00;
 }
 
-.new-frame #FRAME6 .photo,
-.new-frame #FRAME6 .blocs {
+#FRAME6 .photo,
+#FRAME6 .blocs {
 	border: 1px solid #008C00;	
 }
 

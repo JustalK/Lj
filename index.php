@@ -163,7 +163,7 @@
 		</div>
 	
 		<!-- Title outside for dodging a repaint -->
-		<div class="big-title big-title-blue orbitron">
+		<div class="big-title big-title-blue orbitron left">
 			<span class="title-letters">L</span>
 			<span class="title-letters">A</span>
 			<span class="title-letters">T</span>
