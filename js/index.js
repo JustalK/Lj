@@ -396,9 +396,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		    	// When the user press the key down - we scroll automaticaly down
 		    	case 40:
 	    	    	if(segment>=0 && segment<wh) {
-	    	    		smoothScrollingTo(a,wh*(2*currentframe+1));	    		
+	    	    		smoothScrollingTo(a,wh*(2*currentframe+1)+1);	    		
 	    	    	} else {
-	    	    		smoothScrollingTo(a,hf*(currentframe+1));	
+	    	    		smoothScrollingTo(a,hf*(currentframe+1)+1);	
 	    	    	}
 		    		break;
 		    	// Wehn the user press the key right, we open the menu or we switch page
@@ -413,9 +413,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		    	//when the user press the key up - we scroll automaticaly up
 		    	case 38:
 	    	    	if(segment>=0 && segment<wh) {
-	    	    		smoothScrollingTo(a,wh*(2*currentframe-1));	
+	    	    		smoothScrollingTo(a,wh*(2*currentframe-1)+1);	
 	    	    	} else {
-	    	    		smoothScrollingTo(a,wh*(2*currentframe));	    		
+	    	    		smoothScrollingTo(a,wh*(2*currentframe)+1);	    		
 	    	    	}
 		    		break;
 			    	//when the user press the key left - we off the menu or we switch page
@@ -440,17 +440,23 @@ document.addEventListener("DOMContentLoaded", function() {
 	function smoothScrollingTo(pc,pf) {
 		var b=pc,f=pf;
 		var v=((f-b)/500)>>0;
-		var a=1;
+		var acc=1;
 	    var move = setInterval(function(){
 	        window.scrollTo(0, b);
-	        b += v>0 ? v+a*2 : v-a*2;
-	        a+=0.1;
+	        b += v>0 ? v+acc*2 : v-acc*2;
+	        acc+=0.1;
 	        if (v>=0 && b >= f) {
 	        	window.scrollTo(0, f);
+	        	lastScrollY=f;
+	        	initialization();
+	        	console.log("down : "+a+" - "+f+" - "+segment);
 		    	isMoving = false;
 	        	clearInterval(move);
 	        } else if(v<=0 && b <= f) {
 	        	window.scrollTo(0, f);
+	        	lastScrollY=f;
+	        	initialization();
+	        	console.log("up : "+a+" - "+f+" - "+segment);
 		    	isMoving = false;
 	        	clearInterval(move);
 	        }
