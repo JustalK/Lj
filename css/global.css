@@ -179,7 +179,6 @@ FRAME 3
 	position: relative;
 	
 	height: 100vh;
-	min-height: 800px;
 	width: 100%;
 	
 	background-image: url("../imgs/FRAME2_LOW.jpg");
@@ -296,7 +295,6 @@ FRAME 5
 	position: relative;
 	
 	height: 100vh;
-	min-height: 800px;
 	width: 100%;
 	
 	background-image: url("../imgs/FRAME3_LOW.jpg");

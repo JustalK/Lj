@@ -469,6 +469,7 @@ function animate() {
 			searchingMatchMouseAndMesh();
 		}
 	} else {
+		clock.stop();
 		runAnimation = false;
 	}
 }

@@ -148,6 +148,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Function for loading the images HQ after all the page has been loaded
 	var frames = document.getElementsByClassName("frame");
+	for(var i=frames.length;i--;) {
+		frames[i].style.height = document.documentElement.clientHeight+"px";
+	}
 	var frameslength = frames.length; 
 	function loadHighQualityImages() {
 		// If we reach the end of the website, there are nothing to load
@@ -316,6 +319,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
 	    	
 //	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";transform:translate(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px)";
+//	    	bigtitle[1].style.cssText = "transform:translate3d(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px,0)";
 	    	
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
 	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
@@ -364,10 +368,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Lock or active the animation in function of the scroll
 	function hasToLockAnimation() {
-    	if(a < 100) {
+    	if(a <= 50) {
     		if(!runAnimation) animate();
+    		clock.start();
     		lockAnimation = false;
-    	} else if(a > 100) {
+    	} else if(a > 50) {
     		lockAnimation = true;
     	}
 	}
@@ -449,14 +454,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	        	window.scrollTo(0, f);
 	        	lastScrollY=f;
 	        	initialization();
-	        	console.log("down : "+a+" - "+f+" - "+segment);
 		    	isMoving = false;
 	        	clearInterval(move);
 	        } else if(v<=0 && b <= f) {
 	        	window.scrollTo(0, f);
 	        	lastScrollY=f;
 	        	initialization();
-	        	console.log("up : "+a+" - "+f+" - "+segment);
 		    	isMoving = false;
 	        	clearInterval(move);
 	        }

@@ -165,7 +165,6 @@ span {
 	position: relative;
 	
 	height: 100vh;
-	min-height: 800px;
 	width: 100%;
 	
 	background-size: cover;
@@ -624,7 +623,6 @@ FRAME
 	position: relative;
 	
 	height: 100vh;
-	min-height: 800px;
 	width: 100%;	
 	
 	background-size: cover;
