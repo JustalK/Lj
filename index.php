@@ -29,21 +29,23 @@
 ?>
 <body class="no-scrolling frame0">
 	<div id="CONTENT">
+	
+		<!-- Title outside for dodging a repaint -->
+		<div class="big-title big-title-blue orbitron">
+			<span class="title-letters">L</span>
+			<span class="title-letters">A</span>
+			<span class="title-letters">T</span>
+			<span class="title-letters">S</span>
+			<span class="title-letters">U</span>
+			<span class="title-letters"></span>
+			<span class="title-letters">J</span>
+		</div>
+	
 		<!-- START FRAME1 -->
 		<div id="FRAME1" data-src="./imgs/FRAME1.jpg" class="frame frame-presentation frame-first frame-right">
 			<div class="blackout-effect"></div>
 			<div class="line-vertical line-white-up background-white"></div>
 			<div class="line-vertical line-white-down background-white"></div>
-			
-			<span class="big-title big-title-blue orbitron">
-				<span class="title-letters">L</span>
-				<span class="title-letters">A</span>
-				<span class="title-letters">T</span>
-				<span class="title-letters">S</span>
-				<span class="title-letters">U</span>
-				<span class="title-letters"></span>
-				<span class="title-letters">J</span>
-			</span>
 			
 			<div class="menu">
 				<span class="menu-title tekolight">Menu</span>
@@ -160,21 +162,21 @@
 		<!-- END FRAME2 -->
 		</div>
 	
+		<!-- Title outside for dodging a repaint -->
+		<div class="big-title big-title-blue orbitron">
+			<span class="title-letters">L</span>
+			<span class="title-letters">A</span>
+			<span class="title-letters">T</span>
+			<span class="title-letters">S</span>
+			<span class="title-letters">U</span>
+			<span class="title-letters"></span>
+			<span class="title-letters">J</span>
+		</div>
 		<!-- START FRAME3 -->
 		<div id="FRAME3" data-src="./imgs/FRAME2.jpg" class="frame frame-presentation frame-left">
 			<div class="blackout-effect"></div>
 			<div class="line-vertical line-white-up background-white"></div>
 			<div class="line-vertical line-white-down background-white"></div>
-			
-			<span class="big-title big-title-blue orbitron">
-				<span class="title-letters">L</span>
-				<span class="title-letters">A</span>
-				<span class="title-letters">T</span>
-				<span class="title-letters">S</span>
-				<span class="title-letters">U</span>
-				<span class="title-letters"></span>
-				<span class="title-letters">J</span>
-			</span>
 			
 			<div class="menu">
 				<span class="menu-title tekolight">Menu</span>
@@ -302,21 +304,22 @@
 		<!-- END FRAME4 -->
 		</div>
 		
+		<!-- Title outside for dodging a repaint -->
+		<div class="big-title big-title-blue orbitron">
+			<span class="title-letters">L</span>
+			<span class="title-letters">A</span>
+			<span class="title-letters">T</span>
+			<span class="title-letters">S</span>
+			<span class="title-letters">U</span>
+			<span class="title-letters"></span>
+			<span class="title-letters">J</span>
+		</div>
+		
 		<!-- START FRAME1 -->
 		<div id="FRAME5" data-src="./imgs/FRAME3.jpg" class="frame frame-presentation frame-right">
 			<div class="blackout-effect"></div>
 			<div class="line-vertical line-white-up background-white"></div>
 			<div class="line-vertical line-white-down background-white"></div>
-			
-			<span class="big-title big-title-blue orbitron">
-				<span class="title-letters">L</span>
-				<span class="title-letters">A</span>
-				<span class="title-letters">T</span>
-				<span class="title-letters">S</span>
-				<span class="title-letters">U</span>
-				<span class="title-letters"></span>
-				<span class="title-letters">J</span>
-			</span>
 			
 			<div class="menu">
 				<span class="menu-title tekolight">Menu</span>

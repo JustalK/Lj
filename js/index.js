@@ -224,6 +224,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	var blackout = document.getElementsByClassName("blackout-effect");
 	var bigtitle = document.getElementsByClassName("big-title");
+	// For positionning the bigtitle precisely
+	for(var i=bigtitle.length;i--;) {
+		bigtitle[i].style.top = (i*hf)+"px";
+	}
 	var date = document.getElementsByClassName("date");
 	var datelineup = document.getElementsByClassName("date-line-up");
 	var datelinedown = document.getElementsByClassName("date-line-down");
@@ -318,8 +322,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	blocsinsideinformationstitle[currentframe].style.transform = "translateX("+wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px)";
 	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
 	    	
-//	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0006,segment,0)+";transform:translate(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px)";
-//	    	bigtitle[1].style.cssText = "transform:translate3d(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px,0)";
+	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0015,segment,0)+";transform:translate3d(200px,"+wasmScroll(mwh,80,0.8,segment,0)+"px,0)";
 	    	
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
 	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
