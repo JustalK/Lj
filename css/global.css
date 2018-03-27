@@ -39,6 +39,18 @@ COLOR
 	background: #001966;
 }
 
+::placeholder {
+  color: #44c5f27a;
+}
+
+input {
+	outline: none;	
+    background: #00000000;
+    font-size: 12px;
+    border: none;
+    color: white;
+}
+
 /**
 body:not(.no-scrolling) {
 	pointer-events: none !important;
@@ -691,6 +703,22 @@ LAST_FRAME
 	left: 10%;
 }
 
+.footer-contact input {
+    position: absolute;
+    width: 280px;
+    padding-left: 10px;
+    height: 30px;
+    z-index: 10;	
+}
+.footer-contact .pseudo {
+    left: 40px;
+    top: 14px;
+}
+.footer-contact .email {
+    left: 40px;
+    top: 135px;
+}
+
 .footer-contact .pseudo-down {
 	position: absolute;
 	top: 0;
@@ -791,8 +819,25 @@ LAST_FRAME
     position: absolute;
     top: 170px;
     left: 20px;
-    z-index: 1;
     border: 1px solid white;	
+    z-index: 1;
+}
+
+.footer-contact textarea {
+    position: absolute;
+    top: 231px;
+    width: 292px;
+    left: 41px;
+    height: 157px;
+    background: transparent;
+    border: none;
+    font-size: 12px;
+    text-align: justify;
+    word-spacing: 1.5px;
+    color: white;
+    resize: none;
+    outline: none;
+    z-index: 10;
 }
 
 .footer-contact .message-down {
