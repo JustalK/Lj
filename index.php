@@ -458,12 +458,12 @@
 			</div>
 			
 			<div class="footer-contact">
-				<input class="pseudo orbitronr" name="name" placeholder="Your name">
+				<input id="pseudo" class="pseudo orbitronr" name="name" placeholder="Your name">
 				<div class="pseudo-design tekolight">Pseudo/Nom</div>
-				<div class="pseudo-valid"></div>
+				<div id="pseudo-valid" class="pseudo-valid"></div>
 				<div class="pseudo-under"></div>
 				<div class="pseudo-down"></div>
-				<input class="email orbitronr" name="email" placeholder="Your email">
+				<input id="email" class="email orbitronr" name="email" placeholder="Your email">
 				<div class="email-design tekolight">Email</div>
 				<div class="email-down"></div>
 				<div class="email-under"></div>

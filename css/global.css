@@ -896,7 +896,9 @@ LAST_FRAME
 	width: 198px;
 	height: 30px;
 	background: white;
+    cursor: pointer;
 	clip-path: polygon(18px 0px,0px 30px, 198px 30px,180px 0px);
+	transition: all 0.3s;
 }
 
 #submit:before {
@@ -911,9 +913,14 @@ LAST_FRAME
 	z-index: 5;		
 }
 
+#submit:hover {
+	background: #0069a7;	
+}
+
 .footer-contact .submit {
 	position: absolute;
 	user-select: none;
+	pointer-events: none;
     left: 173px;
     top: 426px;
     color: white;

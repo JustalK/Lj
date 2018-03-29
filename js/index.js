@@ -692,6 +692,24 @@ document.addEventListener("DOMContentLoaded", function() {
 			menushownexttext[i].innerHTML = projectx[(countmenu+1)%projectx.length].innerHTML;
 		}
 	}
+
+	// ================================================================================
+	// Contact Form
+	// ================================================================================	
+	
+	var pseudo = document.getElementById("pseudo");
+	pseudo.addEventListener("keyup", valid);	
+	
+	function valid(event) {		
+		let t = event.target;
+		let id = t.id;
+		let v = t.value;
+		if(v) { 
+			t.classList.add("valid");
+		} else {
+			t.classList.remove("valid");
+		}
+	}
 	
 	// ================================================================================
 	// Ad only if I can and things are not really busy
