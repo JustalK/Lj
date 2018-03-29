@@ -472,6 +472,8 @@
 				<div class="message-down"></div>
 				<div class="message-under"></div>
 				<div class="message-design tekolight">Message</div>
+				<div id="submit"></div>
+				<div class="submit tekolight">Envoyer</div>
 			</div>
 			
 			<div class="footer-game">

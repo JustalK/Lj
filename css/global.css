@@ -754,6 +754,7 @@ LAST_FRAME
 
 .footer-contact .pseudo-design {
     position: absolute;
+    user-select: none;
     left: 50px;
     top: 57px;
     color: white;
@@ -806,6 +807,7 @@ LAST_FRAME
 
 .footer-contact .email-design {
     position: absolute;
+    user-select: none;
     left: 50px;
     top: 177px;
     color: white;
@@ -875,6 +877,7 @@ LAST_FRAME
 
 .footer-contact .message-design {
     position: absolute;
+    user-select: none;
     left: 50px;
     top: 407px;
     color: white;
@@ -884,6 +887,37 @@ LAST_FRAME
 .footer-contact .email-valid.valid,
 .footer-contact .pseudo-valid.valid {
 	background: green;
+}
+
+#submit {
+	position: absolute;
+	top: 420px;
+	left: 91px;
+	width: 198px;
+	height: 30px;
+	background: white;
+	clip-path: polygon(18px 0px,0px 30px, 198px 30px,180px 0px);
+}
+
+#submit:before {
+	content: "";
+	position: absolute;
+    bottom: 0;
+    left: 0;
+	width: 198px;
+	height: 30px;
+    background: #003554;
+	clip-path: polygon(19px 1px,1px 29px, 197px 29px,179px 1px);
+	z-index: 5;		
+}
+
+.footer-contact .submit {
+	position: absolute;
+	user-select: none;
+    left: 173px;
+    top: 426px;
+    color: white;
+    z-index: 6;
 }
 
 .footer-score-text {
