@@ -718,9 +718,18 @@ document.addEventListener("DOMContentLoaded", function() {
 		return false;
 	}
 	
+	send();
 	// Send the information to the script
 	function send() {
-		
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("demo").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("POST", "form_action.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("fname=Henry&lname=Ford");
 	}
 	
 	// ================================================================================
