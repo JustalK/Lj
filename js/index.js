@@ -697,22 +697,34 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Contact Form
 	// ================================================================================	
 	
-	var pseudo = document.getElementById("pseudo");
-	pseudo.addEventListener("keyup", valid);	
+	// All the field that I want to check before the users is allowed to send me something
+	var validation = document.getElementsByClassName("validation");
+	var validator = document.getElementsByClassName("validator");
+	console.log(validator[0]);
+	for(var i = validation.length; i--;) {
+		validation[i].addEventListener("keyup", valid);	
+	}
 	
+	// Just a function for showing if a value is enter or not
+	var ek,nbrk,vk;
 	function valid(event) {		
-		let t = event.target;
-		let id = t.id;
-		let v = t.value;
-		if(v) { 
-			t.classList.add("valid");
-		} else {
-			t.classList.remove("valid");
+		ek = event.target, nbrk = ek.dataset.nbr, vk = ek.value;
+		// If the value is not empty or undefined
+		if(vk!="" || vk!="undefined") {
+			validator[nbrk].classList.add("valid");
+			return true;
 		}
+		validator[nbrk].classList.remove("valid");
+		return false;
+	}
+	
+	// Send the information to the script
+	function send() {
+		
 	}
 	
 	// ================================================================================
-	// Ad only if I can and things are not really busy
+	// Ad only if I can when things are not really busy
 	// ================================================================================	
 	if ('requestIdleCallback' in window) {
 		requestIdleCallback(adConsole);
