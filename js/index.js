@@ -720,16 +720,20 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	send();
 	// Send the information to the script
+	var sname,semail,smsg;
 	function send() {
+		sname = validation[0].value!="" ? validation[0].value : "aaa!";
+		semail = validation[1].value!="" ? validation[1].value : "";
 		var xhttp = new XMLHttpRequest();
+		xhttp.responseType = 'json';
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("demo").innerHTML = this.responseText;
+				console.log(this.response);
 			}
 		};
 		xhttp.open("POST", "form_action.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("fname=Henry&lname=Ford");
+		xhttp.send("sname="+sname+"&semail="+semail);
 	}
 	
 	// ================================================================================
