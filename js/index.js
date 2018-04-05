@@ -708,7 +708,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// All the field that I want to check before the users is allowed to send me something
 	var validation = document.getElementsByClassName("validation");
 	var validator = document.getElementsByClassName("validator");
-	console.log(validator[0]);
+	var submit = document.getElementById("submit");
 	for(var i = validation.length; i--;) {
 		validation[i].addEventListener("keyup", valid);	
 	}
@@ -721,10 +721,23 @@ document.addEventListener("DOMContentLoaded", function() {
 		// If the value is a real email
 		if(vk!="" && vk!="undefined" && (nbrk!=1 || (nbrk==1 && validEmail(vk)))) {
 			validator[nbrk].classList.add("valid");
+			checkAllValidator();
 			return true;
 		}
 		validator[nbrk].classList.remove("valid");
+		checkAllValidator();
 		return false;
+	}
+	
+	function checkAllValidator() {
+		for(var i = validator.length; i--;) {
+			if(!validator[i].classList.contains("valid")) {
+				submit.classList.remove("valid");
+				return false;
+			}
+		}
+		submit.classList.add("valid");
+		return true;
 	}
 	
 	// Send the information to the script

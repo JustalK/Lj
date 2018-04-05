@@ -884,6 +884,18 @@ LAST_FRAME
     z-index: 6;
 }
 
+.footer-contact .message-valid {
+	background: #00314D;
+    width: 30px;
+    height: 15px;
+    position: absolute;
+    top: 387px;
+    left: 32px;
+    border: 1px solid white;
+    z-index: 2;
+}
+
+.footer-contact .message-valid.valid,
 .footer-contact .email-valid.valid,
 .footer-contact .pseudo-valid.valid {
 	background: green;
@@ -899,6 +911,13 @@ LAST_FRAME
     cursor: pointer;
 	clip-path: polygon(18px 0px,0px 30px, 198px 30px,180px 0px);
 	transition: all 0.3s;
+	opacity:0.2;
+	pointer-events: none;
+}
+
+#submit.valid {
+	opacity:1;
+	pointer-events: all;
 }
 
 #submit:before {
@@ -907,10 +926,14 @@ LAST_FRAME
     bottom: 0;
     left: 0;
 	width: 198px;
+    background: black;
 	height: 30px;
-    background: #003554;
 	clip-path: polygon(19px 1px,1px 29px, 197px 29px,179px 1px);
 	z-index: 5;		
+}
+
+#submit.valid::before {
+    background: #003554;
 }
 
 #submit:hover {

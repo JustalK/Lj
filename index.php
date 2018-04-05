@@ -468,9 +468,10 @@
 				<div class="email-down"></div>
 				<div class="email-under"></div>
 				<div class="email-valid validator"></div>
-				<textarea class="orbitronr" name="message" placeholder="Your message..."></textarea>
+				<textarea data-nbr="2" class="validation orbitronr" name="message" placeholder="Your message..."></textarea>
 				<div class="message-down"></div>
 				<div class="message-under"></div>
+				<div class="message-valid validator"></div>
 				<div class="message-design tekolight">Message</div>
 				<div id="submit"></div>
 				<div class="submit tekolight">Envoyer</div>
