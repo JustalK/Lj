@@ -697,6 +697,14 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Contact Form
 	// ================================================================================	
 	
+	/**
+	 * Function for validating the email
+	 */
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	function validEmail(e) {
+	    return re.test(String(e).toLowerCase());
+	}
+	
 	// All the field that I want to check before the users is allowed to send me something
 	var validation = document.getElementsByClassName("validation");
 	var validator = document.getElementsByClassName("validator");
@@ -710,7 +718,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	function valid(event) {		
 		ek = event.target, nbrk = ek.dataset.nbr, vk = ek.value;
 		// If the value is not empty or undefined
-		if(vk!="" || vk!="undefined") {
+		// If the value is a real email
+		if(vk!="" && vk!="undefined" && (nbrk!=1 || (nbrk==1 && validEmail(vk)))) {
 			validator[nbrk].classList.add("valid");
 			return true;
 		}
@@ -718,7 +727,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		return false;
 	}
 	
-	send();
 	// Send the information to the script
 	var sname,semail,smsg;
 	function send() {
