@@ -57,7 +57,7 @@ COLOR
 
 input {
 	outline: none;	
-    background: #000000;
+	background: transparent;
     font-size: 12px;
     border: none;
     color: white;

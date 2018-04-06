@@ -647,9 +647,12 @@ function onDocumentMouseMove(event) {
 * Catch the vent when the user click on the board
 **/
 function onDocumentMouseDown( event ) {
+	raycaster.setFromCamera( mouse, camera );
+	intersects = raycaster.intersectObjects( objectInteraction, true );	
+	
 	if(!movementCamera && intersects.length>0) {
 		// If the user is interacting with the back button
-		if(intersects[0].object==childrens[7]) {
+		if(intersects[0].object==childrens[1]) {
 			backToStart();
 			return true;
 		}

@@ -118,7 +118,14 @@ document.addEventListener("DOMContentLoaded", function() {
     	loadAllTheOtherFont();
     	
     	// And we load the css file
-    	var file = "../css/global.css";
+    	addStyle("../css/global.css");
+	}
+	
+	/**
+	 * Adding a style to the head
+	 * @param file The path of the file that i want to read
+	 */
+	function addStyle(file) {
     	var link = document.createElement( "link" );
     	link.href = file.substr( 0, file.lastIndexOf( "." ) ) + ".css";
     	link.type = "text/css";
@@ -553,7 +560,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		page[currentframe].innerHTML = (wrapblocsinside[currentframe].dataset.count*1+1)+" / "+count;
 		
 		var children = wrapblocsinside[currentframe].childNodes;
-		for(var z=children.length,p=0;z--;) {		
+		for(var z=0,countZ=children.length,p=0;z<countZ;z++) {		
 			// The span inside the div count like a children so I have to check the childrens by className
 			if(wrapblocsinside[currentframe].childNodes[z].className != undefined && wrapblocsinside[currentframe].childNodes[z].className.indexOf("blocs-inside-wrap") !== -1) {					
 				// If It's the frame that I have to show, i remove the two classes
@@ -756,6 +763,20 @@ document.addEventListener("DOMContentLoaded", function() {
 		xhttp.open("POST", "form_action.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("sname="+sname+"&semail="+semail+"&smsg="+smsg);
+	}
+
+	// ================================================================================
+	// Media queries
+	// ================================================================================		
+	var mediaqueries = false;
+	// Load only the css for the media 
+	function loadMediaQueries() {
+		addStyle("../css/queries.css");
+	}
+	
+	// If the width of the client is under 1280px, we read the media queries file
+	if(bw<1280) {
+		loadMediaQueries();
 	}
 	
 	// ================================================================================
