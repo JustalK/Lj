@@ -1,4 +1,9 @@
 <?php
+
+    const BAD_SEND = 1;
+    const GOOD_SEND = 0;
+    const My_EMAIL = "";
+    
     // If the request is a post
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         /**
