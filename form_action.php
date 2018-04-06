@@ -1,10 +1,10 @@
 <?php
 
-    const BAD_SEND = 1;
     const GOOD_SEND = 0;
-    const My_EMAIL = "";
+    const BAD_SEND = 1;
+    const MY_EMAIL = "";
     
-    // If the request is a post
+    // If the request is a post (a hacker can change that but I'm not sure if it's really worth it...Mb for spam bombing me :/)
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         /**
          * Check the datas before sending anything to me
@@ -33,15 +33,16 @@
     
         $name = validateData($_POST["sname"]);
         $email = validateData($_POST["semail"]);
+        $msg = validateData($_POST["smsg"]);
         // Filter the email and putting in lowercase (Normalization's system)
         $email = filter_var(strtolower($email), FILTER_VALIDATE_EMAIL);
         
         // If everything is fine, I send myself an email
-        if($name && $email && mail("lj@gmail.com", subject($name,$email), body("Nothing for now"), headers($name,$email))) {
-            echo json_encode(array(0,$name,$email));
+        if($name && $email && $msg && mail(MY_EMAIL, subject($name,$email), body($msg), headers($name,$email))) {
+            echo json_encode(array(GOOD_SEND,$name,$email));
         }
         
     }
     
-    echo json_encode(array(1));
+    echo json_encode(array(BAD_SEND));
 ?>
