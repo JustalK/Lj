@@ -673,6 +673,7 @@ LAST_FRAME
 
 .footer-level-text {
     position: absolute;
+    left: 0;
     bottom: 211px;
     color: #45cfff;
     -webkit-transform: rotateZ(-51deg);

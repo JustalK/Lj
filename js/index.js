@@ -119,6 +119,11 @@ document.addEventListener("DOMContentLoaded", function() {
     	
     	// And we load the css file
     	addStyle("../css/global.css");
+    	
+    	// If the width of the client is under 1280px, we read the media queries file
+    	if(bw<1280) {
+    		loadMediaQueries();
+    	}
 	}
 	
 	/**
@@ -772,11 +777,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Load only the css for the media 
 	function loadMediaQueries() {
 		addStyle("../css/queries.css");
-	}
-	
-	// If the width of the client is under 1280px, we read the media queries file
-	if(bw<1280) {
-		loadMediaQueries();
 	}
 	
 	// ================================================================================

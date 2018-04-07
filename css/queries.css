@@ -1,5 +1,37 @@
 @media only screen and (max-width: 1280px) {
+	.letters,
+	.footer-score-text,
+	.footer-rocket,
 	.area-60 {
 		display: none;
+	}
+	.area-40 {
+		width: 80%;
+    	float: unset;
+    	margin-left: calc(100% - 250px - 50%);
+	}
+	.scroll-text,
+	.scroll-down-2,
+	.scroll-down-1 {
+		bottom: 125px;
+	}
+	.line-white-down {
+    	bottom: 100px;
+    	height: 60px;
+	}
+	#LASTFRAME {
+		height: 1200px;
+	}
+	#LASTFRAME .board-wrap {
+		left: calc(100% - 250px - 50%);
+		top: 60px;
+	}
+	.footer-contact {
+		left: calc(100% - 185px - 50%);
+		top: 600px;
+	}
+	
+	.blocs.left {
+		float: left;
 	}
 }
