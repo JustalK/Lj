@@ -739,8 +739,8 @@ LAST_FRAME
 
 .footer-contact {
 	position: absolute;
-	top: 100px;
-	left: 10%;
+    top: 130px;
+    left: 16%;
 }
 
 .footer-contact input {
@@ -1263,6 +1263,7 @@ DIAPORAMA - LEFT AREA
 	-o-transition: border 1s, transform 0.5s;
 	transition: border 1s, transform 0.5s;
 	transition: border 1s, transform 0.5s, -webkit-transform 0.5s;
+	transition-delay: 0.5s;
 }
 
 .background-photo {
@@ -1305,6 +1306,7 @@ DIAPORAMA - LEFT AREA
     -o-transition: opacity 1s, transform 0.5s;
     transition: opacity 1s, transform 0.5s;
     transition: opacity 1s, transform 0.5s, -webkit-transform 0.5s;
+    transition-delay: 0.5s;
 }
 
 .photo-square-black-left {
@@ -1347,6 +1349,7 @@ DIAPORAMA - LEFT AREA
 	-webkit-transition: all 0.5s;
 	-o-transition: all 0.5s;
 	transition: all 0.5s;
+	transition-delay: 0.5s;
 }
 
 .photo-block-vertical {
@@ -1363,6 +1366,7 @@ DIAPORAMA - LEFT AREA
     -webkit-transform-origin: left;
         -ms-transform-origin: left;
             transform-origin: left;
+	border-right: 1px solid black;
 }
 
 .photo-block-black-top-right {
@@ -1374,6 +1378,7 @@ DIAPORAMA - LEFT AREA
     -webkit-transform-origin: right;
         -ms-transform-origin: right;
             transform-origin: right;
+	border-left: 1px solid black;
 }
 
 .photo-block-horizontal {	
@@ -1389,7 +1394,8 @@ DIAPORAMA - LEFT AREA
             transform: scaleY(0);
     -webkit-transform-origin: top;
         -ms-transform-origin: top;
-            transform-origin: top;
+            transform-origin: top; 
+	border-bottom: 1px solid black;
 }
 
 .photo-block-black-bottom-right {
@@ -1401,6 +1407,7 @@ DIAPORAMA - LEFT AREA
     -webkit-transform-origin: bottom;
         -ms-transform-origin: bottom;
             transform-origin: bottom;
+	border-top: 1px solid black;
 }
 
 .photo-norepaint {

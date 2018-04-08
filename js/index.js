@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function() {
 //	    	datelineup[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
 //	    	datelinedown[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
 	    	
-	    	photo[currentframe].style.transform = "scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.818,1,segment,mwh+100)+")";
+	    	photo[currentframe].style.transform = "scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.840,1,segment,mwh+100)+")";
 	    	areatexte[currentframe].style.transform = "translate3d(0,"+wasmScroll(200,50,0.4,segment,mwh+200)+"px,0)";
 	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
 
