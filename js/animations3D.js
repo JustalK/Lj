@@ -440,6 +440,8 @@ function createSmoke(numbers,sizex,sizey,color,coeffZ) {
 
 var parent = null;
 var childrens = null;
+var zoomIn = false;
+var zoomOn = null;
 function animate() {
 	// If I scroll down, I lock the animation for using less memory
 	if(!lockAnimation) {
@@ -508,9 +510,11 @@ function searchingMatchMouseAndMesh() {
 			document.body.style.cursor = "pointer";
 			parent = intersects[0].object.parent;
 			if(childrens!=null) {
-				for(var i=childrens.length;i--;) {
-					if(childrens[i]["panel"]) {
-						childrens[i].material[4].opacity = 0;
+				if(zoomIn==false || (zoomOn!=null && zoomOn.children!=childrens)) {
+					for(var i=childrens.length;i--;) {
+						if(childrens[i]["panel"]) {
+							childrens[i].material[4].opacity = 0;
+						}
 					}
 				}
 			}
@@ -527,9 +531,11 @@ function searchingMatchMouseAndMesh() {
 	} else {
 		document.body.style.cursor = "inherit";
 		if(childrens!=null) {
-			for(var i=childrens.length;i--;) {
-				if(childrens[i]["wireframe"]) {
-					childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR);
+			if(zoomIn==false || (zoomOn!=null && zoomOn.children!=childrens)) {
+				for(var i=childrens.length;i--;) {
+					if(childrens[i]["wireframe"]) {
+						childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR);
+					}
 				}
 			}
 		}
@@ -626,6 +632,8 @@ function backToStart() {
 	for(var i=groupScene.length;i--;) {
 		groupScene[i]["lock"] = false;
 	}
+	zoomOn = null;
+	zoomIn = false;
 	getSpeedMovement();
 	getMovementWay();
 	movementCamera = true;
@@ -673,6 +681,8 @@ function onDocumentMouseDown( event ) {
 				rotationFinal[i] = parent["rotation"+ABSCISSA[i]];
 				positionReached[i] = false;
 			}
+			zoomOn = parent;
+			zoomIn = true;
 			getSpeedMovement();
 			getMovementWay();
 			movementCamera = true;
