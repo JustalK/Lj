@@ -516,6 +516,13 @@ function searchingMatchMouseAndMesh() {
 							childrens[i].material[4].opacity = 0;
 						}
 					}
+				} else {
+					for(var i=childrens.length;i--;) {
+						// If I'm on the button "back" or "visit" we make a little effect on it
+						if((i==1 || i==0) && intersects[0].object==childrens[i]) {
+							childrens[i].material[4].color = new THREE.Color("#327DFF");
+						}
+					}
 				}
 			}
 			childrens = parent.children;
@@ -537,6 +544,9 @@ function searchingMatchMouseAndMesh() {
 						childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR);
 					}
 				}
+			}
+			for(var i=childrens.length;i--;) {
+				if(i==1 || i==0) childrens[i].material[4].color = new THREE.Color("#FFFFFF");
 			}
 		}
 		backButton = false;
