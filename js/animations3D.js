@@ -100,9 +100,7 @@ var TEXTURE_SMOKE = './textures/smoke.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var DEFAULT_ROTATION_CAMERA_SPEED = 1;
 var DEFAULT_SMOKE_ROTATION_SPEED = 0.05;
-var DEFAULT_NUMBER_SMOKE_TYPE_1 = 50;
-var DEFAULT_NUMBER_SMOKE_TYPE_2 = 100;
-var DEFAULT_NUMBER_SMOKE_TYPE_3 = 2;
+
 var DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/2;
 var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
 var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
@@ -131,9 +129,8 @@ function init() {
 	initClock();
 	initFog(false);
 	initRaycaster();
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_1,1200,1200,0xFFFFFF,8000);
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_2,1200,1200,0x000000,8000);	
-	createSmoke(DEFAULT_NUMBER_SMOKE_TYPE_3,30000,30000,0xEEFFFF,0);
+	createWorld();
+	
 	groupScene.push(createBoard('imgs/zipWorld.jpg',"https://www.google.fr/",'imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
 	if(childrens!=null) {
@@ -226,6 +223,38 @@ function renderWebGL() {
 	renderer.gammaInput = true;
 	renderer.gammaOutput = true;
 	renderer.powerPreference = "high-performance";
+}
+
+/**
+*============================================================================================>
+* Creating the world
+*============================================================================================> 
+**/
+
+function createWorld() {
+	addObject3(-500,-500,8000, 0,-500,0, -3000,1000,2000);
+	addObject3(-500,-500,8000, 0,-500,0, 0,-500,8000);
+	addObject3(500,-200,8000, 0,-50,6000, 0,-500,8000);
+}
+
+function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
+	var material = new THREE.MeshStandardMaterial( { color : 0xFFFFFF, wireframe: true } );
+	
+	//create a triangular geometry
+	var geometry = new THREE.Geometry();
+	geometry.vertices.push( new THREE.Vector3(x1,y1,z1));
+	geometry.vertices.push( new THREE.Vector3(x2,y2,z2));
+	geometry.vertices.push( new THREE.Vector3(x3,y3,z3));
+	
+	//add the face to the geometry's faces array
+	var face = new THREE.Face3( 0, 1, 2 );
+	geometry.faces.push( face );
+
+	//the face normals and vertex normals can be calculated automatically if not supplied above
+	geometry.computeFaceNormals();
+	geometry.computeVertexNormals();
+	
+	scene.add( new THREE.Mesh( geometry, material ) );	
 }
 
 /**
@@ -419,36 +448,6 @@ function createCenterWireframe(x,y,z,rx,ry,rz) {
 }
 
 /**
-* Create a nice effect with smoke
-* @param int numbers The number of particle
-* @param string texture The texture for the smoke (png)
-* @param string color The color of the smoke
-* @param int x The position X of the smoke
-* @param int y The position Y of the smoke
-* @param int z The position Z of the smoke
-* @param int rz The rotation of the smoke
-**/
-function createSmoke(numbers,sizex,sizey,color,coeffZ) {
-	smokeTexture = THREE.ImageUtils.loadTexture(TEXTURE_SMOKE);
-    smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
-    smokeGeo = new THREE.PlaneGeometry(sizex,sizey);
-    
-    for (var p = numbers; p--;) {
-        var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
-        positionX = Math.randomRange()*WINDOWS_WIDTH;
-        positionY = Math.randomRange()*WINDOWS_HEIGHT/2-WINDOWS_HEIGHT/2;
-        if(positionY<DEFAULT_RANGE_WITHOUT_SMOKE && positionY>=0 && positionX<500 && coeffZ!=0) positionY = positionY+DEFAULT_RANGE_WITHOUT_SMOKE;
-        if(positionY>-DEFAULT_RANGE_WITHOUT_SMOKE && positionY<=0 && positionX<500 && coeffZ!=0) positionY = positionY-DEFAULT_RANGE_WITHOUT_SMOKE;
-        positionZ = Math.random()*coeffZ;
-        if(positionZ<2000) positionY = positionY+Math.random()*WINDOWS_HEIGHT; 
-        particle.position.set(positionX,positionY,positionZ);
-        particle.rotation.z = Math.random() * 360;
-        scene.add(particle);
-        smokeParticles.push(particle);
-    }			
-}
-
-/**
 *============================================================================================>
 * Animations
 *============================================================================================> 
@@ -469,7 +468,6 @@ function animate() {
 		renderer.render( scene, camera );
 	
 		delta = clock.getDelta();
-		moveSmoke();
 		
 		for(var i=groupScene.length;i--;) {
 			perpetual(groupScene[i]);
@@ -575,15 +573,6 @@ function searchingMatchMouseAndMesh() {
 * Calculations
 *============================================================================================> 
 **/
-
-/**
-* Move the smoke particule - in fact they jus rotate arount Z
-**/
-function moveSmoke() {
-    for(var i=smokeParticles.length;i--;) {
-        smokeParticles[i].rotation.z += (delta * DEFAULT_SMOKE_ROTATION_SPEED);
-    }
-}
 
 /**
  * Make the object moving forever - add some animation event when the user is not doing anything
