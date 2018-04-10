@@ -94,8 +94,8 @@ var CAMERA_START_ROTATION_X = 0;
 var CAMERA_START_ROTATION_Y = 0;
 var CAMERA_START_ROTATION_Z = 0;
 var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
-var TEXTURE_BUTTON_BACK = 'imgs/back.png';
-var TEXTURE_BUTTON_VISIT = 'imgs/visit.png';
+var TEXTURE_BUTTON_BACK = new THREE.TextureLoader().load('imgs/back.png');
+var TEXTURE_BUTTON_VISIT = new THREE.TextureLoader().load('imgs/visit.png');
 var TEXTURE_SMOKE = './textures/smoke.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var DEFAULT_ROTATION_CAMERA_SPEED = 1;
@@ -257,11 +257,11 @@ function createBoard(textureCenter,url,textureInformations,x,y,z,rx,ry,rz,transl
 	piece.push(createSideWireframe(-100,0,0,0,0,0));
 	piece.push(createSideWireframe(80,0,10,0,Math.PI,0));
 	piece.push(createCenterWireframe(-10,50,4,0,0,0));
-	piece.push(createCenterBoard(textureCenter,-10,50,4));
+	piece.push(createCenterBoard(textureCenter,-10,50,8));
 	piece.push(createPanel(textureInformations,140, 40, 1,-10,110,8));
 	// The back button has to be the 7th mesh because of the return implementation
-	piece.push(createPanel(TEXTURE_BUTTON_BACK,40, 20, 1,20,-10,8));
-	piece.push(createPanel(TEXTURE_BUTTON_VISIT,40, 20, 1,-40,-10,8));
+	piece.push(createPanelWithTexture(TEXTURE_BUTTON_BACK,40, 20, 1,20,-10,8));
+	piece.push(createPanelWithTexture(TEXTURE_BUTTON_VISIT,40, 20, 1,-40,-10,8));
 
 	
 	// Add the differents parts to the group of meshes
@@ -296,18 +296,20 @@ function createBoard(textureCenter,url,textureInformations,x,y,z,rx,ry,rz,transl
 **/
 function createShape() {
 	var leftShape = new THREE.Shape();
-	leftShape.moveTo( 0, 0 );
+	leftShape.moveTo( -5, -10 );
 	leftShape.lineTo( 0, 20 );
 	leftShape.lineTo( 10, 30 );
 	leftShape.lineTo( 10, 70 );
 	leftShape.lineTo( 0, 80 );
-	leftShape.lineTo( 0, 100 );
-	leftShape.lineTo( 40, 90 );
-	leftShape.lineTo( 40, 80 );
-	leftShape.lineTo( 20, 80 );
-	leftShape.lineTo( 20, 20 );
-	leftShape.lineTo( 40, 20 );
-	leftShape.lineTo( 40, 10 );
+	leftShape.lineTo( -5, 110 );
+	leftShape.lineTo( 40, 100 );
+	leftShape.lineTo( 45, 90 );
+	leftShape.lineTo( 25, 90 );
+	leftShape.lineTo( 20, 85 );
+	leftShape.lineTo( 20, 15 );
+	leftShape.lineTo( 25, 10 );
+	leftShape.lineTo( 45, 10 );
+	leftShape.lineTo( 40, 5 );
 	return leftShape;
 }
 
@@ -352,7 +354,7 @@ function createCenterBoard(textureCenter,x,y,z) {
 }
 
 /**
-* Create a panel on the board
+* Create a panel on the board by using the texture path
 * @param string texture The path for the texture
 * @param int sx The size on X of the panel 
 * @param int sy The size on Y of the panel 
@@ -363,12 +365,26 @@ function createCenterBoard(textureCenter,x,y,z) {
 * @return mesh The panel
 **/
 function createPanel(texture,sx,sy,sz,x,y,z) {
-	texture = new THREE.TextureLoader().load( texture );
+	return createPanelWithTexture(new THREE.TextureLoader().load( texture ),sx,sy,sz,x,y,z);
+}
+
+/**
+* Create a panel on the board by using the texture object
+* @param string texture The path for the texture
+* @param int sx The size on X of the panel 
+* @param int sy The size on Y of the panel 
+* @param int sz The size on Z of the panel 
+* @param int x The position on x of the panel 
+* @param int y The position on y of the panel 
+* @param int z The position on z of the panel 
+* @return mesh The panel
+**/
+function createPanelWithTexture(texture,sx,sy,sz,x,y,z) {
 	material = new THREE.MeshBasicMaterial( { map: texture, transparent: true, opacity: 0 } );
 	informationsMesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( sx, sy, sz ), [0,0,0,0,material,0] );
 	informationsMesh.position.set(x,y,z);
 	informationsMesh["panel"] = true;
-	return informationsMesh;
+	return informationsMesh;	
 }
 
 /**

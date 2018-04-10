@@ -1255,9 +1255,9 @@ DIAPORAMA - LEFT AREA
 	background-position: center;
 	margin: auto;
 	overflow: hidden;
-	-webkit-transform: scale(0.912, 0.818);
-	    -ms-transform: scale(0.912, 0.818);
-	        transform: scale(0.912, 0.818);
+	-webkit-transform: scale(0.912, 0.84);
+	    -ms-transform: scale(0.912, 0.84);
+	        transform: scale(0.912, 0.84);
 	-webkit-transition: border 1s, -webkit-transform 0.5s;
 	transition: border 1s, -webkit-transform 0.5s;
 	-o-transition: border 1s, transform 0.5s;
