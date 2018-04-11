@@ -183,7 +183,8 @@ function initScene(color) {
 **/	
 function initLight(color) {
 	scene.add(new THREE.AmbientLight(color,0.8));
-	var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+	var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 0.5 );
+	light.position.set(2000,100,4000);
 	scene.add( light );
 }
 
@@ -234,13 +235,27 @@ function renderWebGL() {
  * Create the background of the scene with a lot of triangle
  */
 function createWorld() {
-	addObject3(-500,-500,8000, 0,-500,0, -3000,1000,2000);
-	addObject3(-500,-500,8000, 0,-500,0, 0,-500,8000);
-	addObject3(500,-200,8000, 0,-50,6000, 0,-500,8000);
-	
-	addObject3(600,-200,6000, 1200,500,6000, 1200,-500,6000);
-	addObject3(1500,0,6000, 1200,500,6000, 1200,-500,6000);
-	addObject3(1500,0,6000, 1200,-200,6000, 1200,-500,6000);
+	addObject3(500,-200,7200, 1000,-50,7500, 3000,1500,5000);
+	addObject3(500,-200,7200, 200,200,7200, 3000,1500,5000);
+	addObject3(500,-200,7200, 1000,-50,7500, 100,-1000,7200);
+	addObject3(500,-200,7200, 0,-50,7000, 100,-1000,7200);
+	addObject3(500,-200,7200, 0,-50,7000, 200,200,7200);
+	addObject3(100,200,6500, 0,-50,7000, 200,200,7200);
+	addObject3(100,200,6500, 0,-50,7000, -200,-500,6500);
+	addObject3(100,-1000,7200, 0,-50,7000, -200,-500,6500);
+	addObject3(100,200,6500, 300,-200,5000, -200,-500,6500);
+	addObject3(-600,-500,6000, 300,-200,5000, -200,-500,6500);
+	addObject3(-600,-500,6000, -600,-200,7000, -200,-500,6500);
+	addObject3(-600,-500,7500, -600,-200,7000, -200,-500,6500);
+	addObject3(-600,-500,7500, 100,-1000,7200, -200,-500,6500);
+	addObject3(-600,-500,7500, -600,-200,7000, -1200,500,6500);
+	addObject3(-1500,-500,4000, -600,-200,7000, -1200,500,6500);
+	addObject3(-1500,-500,4000, -600,-200,7000, -600,-500,6000);
+	addObject3(-1500,-500,4000, -3000,1000,2000, -1200,500,6500);
+	addObject3(-1500,-500,4000, -3000,1000,2000, -1500,500,500);
+	addObject3(-1500,-500,4000, -600,100,2000, -1500,500,500);
+	addObject3(-1500,-500,4000, -600,100,2000, -600,-500,6000);
+	addObject3(-1500,1000,0, -3000,1000,2000, -1500,500,500);	
 }
 
 /**
@@ -257,6 +272,7 @@ function createWorld() {
  */
 var mTriangle = new THREE.MeshStandardMaterial( { color : 0xFFFFFF, wireframe: true } );
 var mTriangleBlack = new THREE.MeshStandardMaterial( { color : 0x000000 } );
+mTriangleBlack.side = THREE.DoubleSide;
 var fTriangle = new THREE.Face3( 0, 1, 2 );
 function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
 	var geometry = new THREE.Geometry();
@@ -267,7 +283,6 @@ function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
 	geometry.faces.push( fTriangle );
 	geometry.computeFaceNormals();
 	geometry.computeVertexNormals();
-	
 	scene.add( new THREE.Mesh( geometry, mTriangle ) );	
 	scene.add( new THREE.Mesh( geometry, mTriangleBlack ) );	
 }
