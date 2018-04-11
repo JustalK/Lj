@@ -230,31 +230,46 @@ function renderWebGL() {
 * Creating the world
 *============================================================================================> 
 **/
-
+/**
+ * Create the background of the scene with a lot of triangle
+ */
 function createWorld() {
 	addObject3(-500,-500,8000, 0,-500,0, -3000,1000,2000);
 	addObject3(-500,-500,8000, 0,-500,0, 0,-500,8000);
 	addObject3(500,-200,8000, 0,-50,6000, 0,-500,8000);
+	
+	addObject3(600,-200,6000, 1200,500,6000, 1200,-500,6000);
+	addObject3(1500,0,6000, 1200,500,6000, 1200,-500,6000);
+	addObject3(1500,0,6000, 1200,-200,6000, 1200,-500,6000);
 }
 
+/**
+ * Create a triangle at a particular position using the vertices
+ * @param x1 The position X of the vertice 1
+ * @param y1 The position Y of the vertice 1
+ * @param z1 The position Z of the vertice 1
+ * @param x2 The position X of the vertice 2
+ * @param y2 The position Y of the vertice 2
+ * @param z2 The position Z of the vertice 2
+ * @param x3 The position X of the vertice 3
+ * @param y3 The position Y of the vertice 3
+ * @param z3 The position Z of the vertice 3
+ */
+var mTriangle = new THREE.MeshStandardMaterial( { color : 0xFFFFFF, wireframe: true } );
+var mTriangleBlack = new THREE.MeshStandardMaterial( { color : 0x000000 } );
+var fTriangle = new THREE.Face3( 0, 1, 2 );
 function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
-	var material = new THREE.MeshStandardMaterial( { color : 0xFFFFFF, wireframe: true } );
-	
-	//create a triangular geometry
 	var geometry = new THREE.Geometry();
 	geometry.vertices.push( new THREE.Vector3(x1,y1,z1));
 	geometry.vertices.push( new THREE.Vector3(x2,y2,z2));
 	geometry.vertices.push( new THREE.Vector3(x3,y3,z3));
 	
-	//add the face to the geometry's faces array
-	var face = new THREE.Face3( 0, 1, 2 );
-	geometry.faces.push( face );
-
-	//the face normals and vertex normals can be calculated automatically if not supplied above
+	geometry.faces.push( fTriangle );
 	geometry.computeFaceNormals();
 	geometry.computeVertexNormals();
 	
-	scene.add( new THREE.Mesh( geometry, material ) );	
+	scene.add( new THREE.Mesh( geometry, mTriangle ) );	
+	scene.add( new THREE.Mesh( geometry, mTriangleBlack ) );	
 }
 
 /**
