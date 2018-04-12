@@ -13,11 +13,11 @@
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
 	// My temporary variable for all the system
-	var tmp;
+	var tmp,
 	// ================================================================================
 	// WebAssembly - I have created two functions in C99 for making the user experience smooth
 	// ================================================================================
-	var wasmCode = new Uint8Array([ 0, 97, 115, 109, 1, 0, 0,
+	wasmCode = new Uint8Array([ 0, 97, 115, 109, 1, 0, 0,
 			0, 1, 148, 128, 128, 128, 0, 2, 96, 5, 125, 125,
 			125, 125, 125, 1, 125, 96, 6, 125, 125, 125, 125,
 			125, 125, 1, 125, 3, 131, 128, 128, 128, 0, 2, 0,
@@ -35,30 +35,30 @@ document.addEventListener("DOMContentLoaded", function() {
 			0, 0, 32, 2, 32, 0, 32, 4, 32, 5, 147, 32, 3, 148,
 			147, 34, 0, 32, 0, 32, 2, 95, 27, 32, 1, 32, 0, 32,
 			1, 93, 32, 0, 32, 0, 92, 32, 1, 32, 1, 92, 114,
-			114, 27, 11 ]);
-	var m = new WebAssembly.Instance(new WebAssembly.Module(wasmCode));
+			114, 27, 11 ]),
+	m = new WebAssembly.Instance(new WebAssembly.Module(wasmCode)),
 	// Since I'm gonna use this function really often (I use it everytime I scroll)
 	// I have made it with webAssembly for a very fast js - wasmScroll(max,min,velocity,a,offset)
-	let wasmScroll = m.exports.wasmscroll;
-	let wasmScrollReverse = m.exports.wasmscrollreverse;
+	wasmScroll = m.exports.wasmscroll,
+	wasmScrollReverse = m.exports.wasmscrollreverse,
 	
 	// ================================================================================
 	// For the font - FOUT escape - Font Optimization by FontForge for removing the useless glyph
 	// ================================================================================
 	
 	// The font that I want load first
-	var fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)");
-	var fontorbitronr = new FontFace("Orbitron Regular", "url(./../fonts/orbitron-regular-webfont.ttf)");
+	fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)"),
+	fontorbitronr = new FontFace("Orbitron Regular", "url(./../fonts/orbitron-regular-webfont.ttf)"),
 	
 	// The others fonts that I have to load after the first one has been loaded (there are on the first screen)
-	var fontmonserratlight = new FontFace("Montserrat Light", "url(./../fonts/montserrat-light-webfont.ttf)");
-	var fonttekolight = new FontFace("Teko Light", "url(./../fonts/teko-light-webfont.ttf)");
+	fontmonserratlight = new FontFace("Montserrat Light", "url(./../fonts/montserrat-light-webfont.ttf)"),
+	fonttekolight = new FontFace("Teko Light", "url(./../fonts/teko-light-webfont.ttf)"),
 	
 	// And finally the fonts that can be loaded after that the first screen has been loaded
-	var fonttekobold = new FontFace("Teko Bold", "url(./../fonts/teko-bold-webfont.ttf)");
-	var fontmontserratbold = new FontFace("Montserrat Bold", "url(./../fonts/montserrat-bold-webfont.ttf)");
-	var fonttekomedium = new FontFace("Teko Medium", "url(./../fonts/teko-medium-webfont.ttf)");
-	var fontlatsuj = new FontFace("Latsuj", "url(./../fonts/latsuj.ttf)");
+	fonttekobold = new FontFace("Teko Bold", "url(./../fonts/teko-bold-webfont.ttf)"),
+	fontmontserratbold = new FontFace("Montserrat Bold", "url(./../fonts/montserrat-bold-webfont.ttf)"),
+	fonttekomedium = new FontFace("Teko Medium", "url(./../fonts/teko-medium-webfont.ttf)"),
+	fontlatsuj = new FontFace("Latsuj", "url(./../fonts/latsuj.ttf)");
 	
 	// Then we load the first font !
 	document.fonts.add(fontorbitron);
@@ -121,9 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	addStyle("../css/global.css");
     	
     	// If the width of the client is under 1280px, we read the media queries file
-    	if(bw<1280) {
-    		loadMediaQueries();
-    	}
+    	bw<1280 && loadMediaQueries();
 	}
 	
 	/**
@@ -159,11 +157,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// Function for loading the images HQ after all the page has been loaded
-	var frames = document.getElementsByClassName("frame");
+	var frames = document.getElementsByClassName("frame"), frameslength = frames.length; 
 	for(var i=frames.length;i--;) {
 		frames[i].style.height = document.documentElement.clientHeight+"px";
 	}
-	var frameslength = frames.length; 
 	function loadHighQualityImages() {
 		// If we reach the end of the website, there are nothing to load
 		if(currentframe*2+2>=frames.length) {
@@ -228,38 +225,38 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================	
 	
 	// For the little tricky effet for showing when your are
-	var position = document.getElementById("POSITION");
-	var timer;
-	var framerateScroll = 1000/60;
-	var notificationSend = false;
+	var position = document.getElementById("POSITION"),
+	timer,
+	framerateScroll = 1000/60,
+	notificationSend = false,
+	blackout = document.getElementsByClassName("blackout-effect"),
+	bigtitle = document.getElementsByClassName("big-title"),
+	date = document.getElementsByClassName("date"),
+	datelineup = document.getElementsByClassName("date-line-up"),
+	datelinedown = document.getElementsByClassName("date-line-down"),
+	areatexte = document.getElementsByClassName("area-texte"),
+	areatextetitle = document.getElementsByClassName("area-texte-title"),
+	areatextesubtitle = document.getElementsByClassName("area-texte-subtitle"),
+	photo = document.getElementsByClassName("photo"),
+	photowrap = document.getElementsByClassName("photo-wrap"),
+	photolinevertical = document.getElementsByClassName("photo-line-vertical"),
+	photolinehorizontal = document.getElementsByClassName("photo-line-horizontal"),
+	photoblockvertical = document.getElementsByClassName("photo-block-vertical"),
+	photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal"),
+	photosquare = document.getElementsByClassName("photo-square"),
+	blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title"),
+	backgroundphoto = document.getElementsByClassName("background-photo"),
+	frameinformations = document.getElementsByClassName("frame-informations"),
+	areas = document.getElementsByClassName("areas"),
+	blocsinsidewrap = document.getElementsByClassName("blocs-inside-wrap"),
+	refresh = true,
+	lastScrollY = document.documentElement.scrollTop,
+	endRefresh = false;
 	
-	var blackout = document.getElementsByClassName("blackout-effect");
-	var bigtitle = document.getElementsByClassName("big-title");
 	// For positionning the bigtitle precisely
 	for(var i=bigtitle.length;i--;) {
 		bigtitle[i].style.top = (i*hf)+"px";
 	}
-	var date = document.getElementsByClassName("date");
-	var datelineup = document.getElementsByClassName("date-line-up");
-	var datelinedown = document.getElementsByClassName("date-line-down");
-	var areatexte = document.getElementsByClassName("area-texte");
-	var areatextetitle = document.getElementsByClassName("area-texte-title");
-	var areatextesubtitle = document.getElementsByClassName("area-texte-subtitle");
-	var photo = document.getElementsByClassName("photo");
-	var photowrap = document.getElementsByClassName("photo-wrap");
-	var photolinevertical = document.getElementsByClassName("photo-line-vertical");
-	var photolinehorizontal = document.getElementsByClassName("photo-line-horizontal");
-	var photoblockvertical = document.getElementsByClassName("photo-block-vertical");
-	var photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal");
-	var photosquare = document.getElementsByClassName("photo-square");
-	var blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title");
-	var backgroundphoto = document.getElementsByClassName("background-photo");
-	var frameinformations = document.getElementsByClassName("frame-informations");
-	var areas = document.getElementsByClassName("areas");
-	var blocsinsidewrap = document.getElementsByClassName("blocs-inside-wrap");
-	var refresh = true;
-	var lastScrollY = document.documentElement.scrollTop;
-	var endRefresh = false;
 	// For initializing the variable
 	initialization();
 	
@@ -315,9 +312,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	isNewFrame();
     	
     	// When the user stop scrolling - we add an action of this
-    	if(timer!==null) {
-    		clearTimeout(timer);
-    	}
+    	timer!==null && clearTimeout(timer);
 		document.body.classList.remove("no-scrolling");
         timer = setTimeout(stopScrolling, 300);
 	}
@@ -383,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Lock or active the animation in function of the scroll
 	function hasToLockAnimation() {
     	if(a <= 50) {
-    		if(!runAnimation) animate();
+    		!runAnimation && animate();
     		clock.start();
     		lockAnimation = false;
     	} else if(a > 50) {
@@ -398,9 +393,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.body.classList.remove("frame0","frame1","frame2");
 			document.body.classList.add("frame"+currentframe);
 		}
-    	if(segment - mwh <= 0) {
-    		document.body.classList.remove("new-frame");
-    	}
+    	segment - mwh <= 0 && document.body.classList.remove("new-frame");
 	}
 	
 	// ================================================================================
@@ -484,16 +477,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	// For the explications
 	// ================================================================================	
 	
-	var buttonrightinformation = document.getElementsByClassName("blocs-inside-informations-right-page");
-	var buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page");
-	var wrapblocsinside = document.getElementsByClassName("blocs-inside");
-	var wrapinformation = document.getElementsByClassName("blocs-inside-wrap");
-	var areatextetitle = document.getElementsByClassName("area-texte-title");
-	var areatextesubtitle = document.getElementsByClassName("area-texte-subtitle");
-	var wrapinformationlength = wrapinformation.length;
-	var page = document.getElementsByClassName("page");
-	var pagelength = page.length;
-	var click = 0;
+	var buttonrightinformation = document.getElementsByClassName("blocs-inside-informations-right-page"),
+	buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page"),
+	wrapblocsinside = document.getElementsByClassName("blocs-inside"),
+	wrapinformation = document.getElementsByClassName("blocs-inside-wrap"),
+	areatextetitle = document.getElementsByClassName("area-texte-title"),
+	areatextesubtitle = document.getElementsByClassName("area-texte-subtitle"),
+	wrapinformationlength = wrapinformation.length,
+	page = document.getElementsByClassName("page"),
+	pagelength = page.length,
+	click = 0;
 	
 	/**
 	 * Add a class for all the wrap of informations
@@ -599,10 +592,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	// For the menu
 	// ================================================================================	
 	
-	var menu = document.getElementsByClassName("menu");
-	var menushow = document.getElementsByClassName("menu-show");
-	var menuclose = document.getElementsByClassName("menu-close");
-	var menushowlength = menushow.length;
+	var menu = document.getElementsByClassName("menu"),
+	menushow = document.getElementsByClassName("menu-show"),
+	menuclose = document.getElementsByClassName("menu-close"),
+	menushowlength = menushow.length;
 	
 	// For all the elements for showing the menu
 	for(var i = menu.length;i--;) {
@@ -636,14 +629,14 @@ document.addEventListener("DOMContentLoaded", function() {
         return false;		
 	}	
 	
-	var projectx = document.getElementsByClassName("projectx");
-	var menushowcurrent = document.getElementsByClassName("menu-show-current");
-	var menushownext = document.getElementsByClassName("menu-show-next");
-	var menushownexttext = document.getElementsByClassName("menu-show-next-text");
-	var menushowprev = document.getElementsByClassName("menu-show-prev");
-	var menushowprevtext = document.getElementsByClassName("menu-show-prev-text");
-	var countmenu = 0;
-	var fmove = true;
+	var projectx = document.getElementsByClassName("projectx"),
+	menushowcurrent = document.getElementsByClassName("menu-show-current"),
+	menushownext = document.getElementsByClassName("menu-show-next"),
+	menushownexttext = document.getElementsByClassName("menu-show-next-text"),
+	menushowprev = document.getElementsByClassName("menu-show-prev"),
+	menushowprevtext = document.getElementsByClassName("menu-show-prev-text"),
+	countmenu = 0,
+	fmove = true;
 	
 	// Adding the event for changing the menu order
 	for(var i = menushownext.length; i--;) {
@@ -718,9 +711,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// All the field that I want to check before the users is allowed to send me something
-	var validation = document.getElementsByClassName("validation");
-	var validator = document.getElementsByClassName("validator");
-	var submit = document.getElementById("submit");
+	var validation = document.getElementsByClassName("validation"),
+	validator = document.getElementsByClassName("validator"),
+	submit = document.getElementById("submit");
 	for(var i = validation.length; i--;) {
 		validation[i].addEventListener("keyup", valid);	
 	}
