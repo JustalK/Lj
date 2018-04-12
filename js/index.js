@@ -1,10 +1,20 @@
-// I don't use JQUERY because I want to keep the website with the less ressource possible
+// I don't use JQUERY because I want to keep the website with the less ressource possible, so everything you see is made by me ;)
+// The only libraries that I use here is three.js, I could have made everything without using this library but I dont wanna lose all my time on some 3D animation
 // Vanila JS - SCRIPT'S LATSUJ
 
-// I add a class when we scroll for remove the hover element - optimization 60fps scroll
-// I use classList.add instead of += " " because this is faster - jsperf
-// I have created a lot of variables for saving the length of table because...it's faster so better :) 
+// I'm explaining here, some of my choices, what i have done...Feel free to contact me an email, if you have some question or some ways for improving my coding style : kevin.justal@gmail.com
+//
+// I've added a class when we scroll for remove the hover element - optimization 60fps scroll
+// I have made my page HTML instead of PHP because the serveur dont have to render the page, so I'm winning few milliseconds - i could have used some software for prerendering the page but It add some useless complexity to my website. 
+// I've added use classList.add instead of += " " because this is faster - jsperf
+// I've created a lot of variables for saving the elements of the dom only one time 
 // I use sometime the shift operator instead of arithmetic operator because it's faster when you have to turn the float value into an integer and multiply or divide it
+// I've created 2 alias for the function document.getElementById and document.getElementsByClassName - save some byte this way
+// I'm using the transform on z for usinf the GPU and not repainting the windows
+// I'm using the WebAssembly for two functions because it's faster this ways after some profiling on my website
+// I'm loading asynchronously the css and the font and the image - in this way the first impression of the page is fast - the faster the better
+// I'm using some framerate control like you can find in a game loop for controlling the fps when the user scroll - In this way, I keep the 60fps despite the naimation when the user scroll
+// Finally, every choices that I've made is tested with extreme profiling ;)
 
 // ================================================================================
 // MY SCRIPT
@@ -677,7 +687,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	function prevMenu() {
-		if(fmove) ountmenu = countmenu=3;
+		if(fmove) ountmenu = countmenu=3; //TODO Magic Number here - Refactoring coming
 		fmove=false;
 		countmenu = countmenu-1>0 ? countmenu-1:projectx.length;
 		updateMenu();
@@ -740,6 +750,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		return false;
 	}
 	
+	// Chack if all the field has been fill, if yes, we unlock the submit button
 	function checkAllValidator() {
 		for(var i = validator.length; i--;) {
 			if(!validator[i].classList.contains("valid")) {
