@@ -163,7 +163,7 @@ function init() {
 * Initialize the camera
 **/
 function initCamera() {
-	camera = new THREE.PerspectiveCamera( FOV, WINDOWS_WIDTH / WINDOWS_HEIGHT, 1, 10000 );
+	camera = new THREE.PerspectiveCamera( FOV, WINDOWS_WIDTH / WINDOWS_HEIGHT, 1, 15000 );
 	camera.position.set(CAMERA_START_POSITION_X,CAMERA_START_POSITION_Y,CAMERA_START_POSITION_Z);
 	camera.rotation.set(CAMERA_START_ROTATION_X,CAMERA_START_ROTATION_Y,CAMERA_START_ROTATION_Z);
 }
@@ -235,27 +235,52 @@ function renderWebGL() {
  * Create the background of the scene with a lot of triangle
  */
 function createWorld() {
-	addObject3(500,-200,7200, 1000,-50,7500, 3000,1500,5000);
-	addObject3(500,-200,7200, 200,200,7200, 3000,1500,5000);
-	addObject3(500,-200,7200, 1000,-50,7500, 100,-1000,7200);
-	addObject3(500,-200,7200, 0,-50,7000, 100,-1000,7200);
-	addObject3(500,-200,7200, 0,-50,7000, 200,200,7200);
-	addObject3(100,200,6500, 0,-50,7000, 200,200,7200);
-	addObject3(100,200,6500, 0,-50,7000, -200,-500,6500);
-	addObject3(100,-1000,7200, 0,-50,7000, -200,-500,6500);
-	addObject3(100,200,6500, 300,-200,5000, -200,-500,6500);
-	addObject3(-600,-500,6000, 300,-200,5000, -200,-500,6500);
-	addObject3(-600,-500,6000, -600,-200,7000, -200,-500,6500);
-	addObject3(-600,-500,7500, -600,-200,7000, -200,-500,6500);
-	addObject3(-600,-500,7500, 100,-1000,7200, -200,-500,6500);
-	addObject3(-600,-500,7500, -600,-200,7000, -1200,500,6500);
-	addObject3(-1500,-500,4000, -600,-200,7000, -1200,500,6500);
-	addObject3(-1500,-500,4000, -600,-200,7000, -600,-500,6000);
-	addObject3(-1500,-500,4000, -3000,1000,2000, -1200,500,6500);
-	addObject3(-1500,-500,4000, -3000,1000,2000, -1500,500,500);
-	addObject3(-1500,-500,4000, -600,100,2000, -1500,500,500);
-	addObject3(-1500,-500,4000, -600,100,2000, -600,-500,6000);
-	addObject3(-1500,1000,0, -3000,1000,2000, -1500,500,500);	
+	addObject3(500,-200,7200, 1000,-50,7500, 3000,1500,5000,mTriangleBlack);
+	addObject3(500,-200,7200, 200,200,7200, 3000,1500,5000,mTriangleWhite);
+	addObject3(500,-200,7200, 1000,-50,7500, 100,-1000,7200,mTriangleBlack);
+	addObject3(500,-200,7200, 0,-50,7000, 100,-1000,7200,mTriangleBlack);
+	addObject3(500,-200,7200, 0,-50,7000, 200,200,7200,mTriangleBlack);
+	addObject3(100,200,6500, 0,-50,7000, 200,200,7200,mTriangleWhite);
+	addObject3(100,200,6500, 0,-50,7000, -200,-500,6500,mTriangleBlack);
+	addObject3(100,-1000,7200, 0,-50,7000, -200,-500,6500,mTriangleBlack);
+	addObject3(100,200,6500, 300,-200,5000, -200,-500,6500,mTriangleBlack);
+	addObject3(-600,-500,6000, 300,-200,5000, -200,-500,6500,mTriangleBlack);
+	addObject3(-600,-500,6000, -600,-200,7000, -200,-500,6500,mTriangleBlack);
+	addObject3(-600,-500,7500, -600,-200,7000, -200,-500,6500,mTriangleBlack);
+	addObject3(-600,-500,7500, 100,-1000,7200, -200,-500,6500,mTriangleWhite);
+	addObject3(-600,-500,7500, -600,-200,7000, -1200,500,6500,mTriangleBlack);
+	addObject3(-1500,-500,4000, -600,-200,7000, -1200,500,6500,mTriangleBlack);
+	addObject3(-1500,-500,4000, -600,-200,7000, -600,-500,6000,mTriangleWhite);
+	addObject3(-1500,-500,4000, -3000,1000,2000, -1200,500,6500,mTriangleBlack);
+	addObject3(-1500,-500,4000, -3000,1000,2000, -1500,500,500,mTriangleBlack);
+	addObject3(-1500,-500,4000, -600,100,2000, -1500,500,500,mTriangleBlack);
+	addObject3(-1500,-500,4000, -600,100,2000, -600,-500,6000,mTriangleBlack);
+	addObject3(300,-200,5000, -600,100,2000, -600,-500,6000,mTriangleBlack);
+	addObject3(300,-200,5000, -600,100,2000, -100,0,500,mTriangleWhite);
+	addObject3(300,-200,5000, 600,100,2000, -100,0,500,mTriangleBlack);
+	addObject3(500,500,0, 600,100,2000, -100,0,500,mTriangleWhite);
+	addObject3(500,500,0, 600,100,2000, 2000,500,500,mTriangleBlack);
+	addObject3(500,500,0, 600,100,2000, 2000,500,500,mTriangleBlack);
+	addObject3(500,500,0, 800,800,-1500, 2000,500,500,mTriangleBlack);
+	addObject3(2000,1000,-2000, 800,800,-1500, 2000,500,500,mTriangleBlack);
+	addObject3(2000,1000,-2000, 3000,1000,-1500, 2000,500,500,mTriangleBlack);
+	addObject3(2000,1000,-2000, 3000,1000,-1500, 2000,2000,-3000,mTriangleBlack);
+	addObject3(2000,3000,-4000, 3000,1000,-1500, 2000,2000,-3000,mTriangleBlack);
+	addObject3(2000,3000,-4000, 3000,1000,-1500, 4000,5000,-3000,mTriangleWhite);
+	addObject3(5000,3000,-4000, 3000,1000,-1500, 4000,5000,-3000,mTriangleBlack);
+	addObject3(2000,1000,-2000, 800,800,-1500, 2000,4000,-2500,mTriangleWhite);
+	addObject3(-2000,1000,-4000, 800,800,-1500, 2000,4000,-2500,mTriangleBlack);
+	addObject3(-2000,1000,-2000, 800,3000,-1500, 2000,4000,-2500,mTriangleBlack);
+	addObject3(-1500,1000,0, -3000,1000,2000, -1500,500,500,mTriangleWhite);	
+	addObject3(-1500,1000,0, -600,100,2000, -1500,500,500,mTriangleBlack);	
+	addObject3(-1500,1000,0, -600,100,2000, -100,0,500,mTriangleBlack);	
+	addObject3(-1500,1000,0, -600,4000,-1000, -100,0,500,mTriangleBlack);	
+	addObject3(500,500,0, -600,4000,-1000, -100,0,500,mTriangleBlack);	
+	addObject3(500,500,0, -600,4000,-1000, 800,800,-1500,mTriangleBlack);
+	addObject3(-1500,1000,0, -600,4000,-1000, -1500,3000,0,mTriangleWhite);	
+	addObject3(-1500,1000,0, -3000,1000,2000, -1500,3000,0,mTriangleBlack);	
+	addObject3(-4500,2000,0, -3000,1000,2000, -1500,3000,0,mTriangleBlack);	
+	addObject3(-4500,2000,0, -3000,1000,2000, -1200,500,6500,mTriangleBlack);	
 }
 
 /**
@@ -272,9 +297,10 @@ function createWorld() {
  */
 var mTriangle = new THREE.MeshStandardMaterial( { color : 0xFFFFFF, wireframe: true } );
 var mTriangleBlack = new THREE.MeshStandardMaterial( { color : 0x000000 } );
-mTriangleBlack.side = THREE.DoubleSide;
+var mTriangleWhite = new THREE.MeshStandardMaterial( { color : 0xFFFFFF } );
+mTriangleBlack.side = mTriangleWhite.side = THREE.DoubleSide;
 var fTriangle = new THREE.Face3( 0, 1, 2 );
-function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
+function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3,material) {
 	var geometry = new THREE.Geometry();
 	geometry.vertices.push( new THREE.Vector3(x1,y1,z1));
 	geometry.vertices.push( new THREE.Vector3(x2,y2,z2));
@@ -284,7 +310,7 @@ function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
 	geometry.computeFaceNormals();
 	geometry.computeVertexNormals();
 	scene.add( new THREE.Mesh( geometry, mTriangle ) );	
-	scene.add( new THREE.Mesh( geometry, mTriangleBlack ) );	
+	scene.add( new THREE.Mesh( geometry, material ) );	
 }
 
 /**
