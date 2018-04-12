@@ -9,6 +9,7 @@
 // ================================================================================
 // MY SCRIPT
 // ================================================================================
+"use strict";
 
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
@@ -251,7 +252,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	blocsinsidewrap = document.getElementsByClassName("blocs-inside-wrap"),
 	refresh = true,
 	lastScrollY = document.documentElement.scrollTop,
-	endRefresh = false;
+	endRefresh = false,
+	calculChangeFrame;
 	
 	// For positionning the bigtitle precisely
 	for(var i=bigtitle.length;i--;) {
