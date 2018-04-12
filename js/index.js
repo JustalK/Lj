@@ -13,6 +13,10 @@
 
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
+	// Alias for winning some extrabyte
+	const $i = id => document.getElementById(id);
+	const $n = cn => document.getElementsByClassName(cn);
+	
 	// My temporary variable for all the system
 	var tmp,
 	// ================================================================================
@@ -145,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Function for loading the first image in HD - Juste for a better effect
 	function loadHighQualityImagesFirst() {
-		var background = document.getElementsByClassName("frame-first");
+		var background = $n("frame-first");
 		tmp = new Image();
 		// We just add a background for the second frame - the first one dont need it because of the three.js canvas
 		tmp.src = background[1].getAttribute("data-src");
@@ -158,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// Function for loading the images HQ after all the page has been loaded
-	var frames = document.getElementsByClassName("frame"), frameslength = frames.length; 
+	var frames = $n("frame"), frameslength = frames.length; 
 	for(var i=frames.length;i--;) {
 		frames[i].style.height = document.documentElement.clientHeight+"px";
 	}
@@ -185,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	function loadPhoto() {
-		var background = document.getElementById("FRAME1");
+		var background = $i("FRAME1");
 		tmp = new Image();
 		tmp.src = background.getAttribute("data-src");
 		tmp.addEventListener('load',function() {
@@ -226,30 +230,30 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================	
 	
 	// For the little tricky effet for showing when your are
-	var position = document.getElementById("POSITION"),
+	var position = $i("POSITION"),
 	timer,
 	framerateScroll = 1000/60,
 	notificationSend = false,
-	blackout = document.getElementsByClassName("blackout-effect"),
-	bigtitle = document.getElementsByClassName("big-title"),
-	date = document.getElementsByClassName("date"),
-	datelineup = document.getElementsByClassName("date-line-up"),
-	datelinedown = document.getElementsByClassName("date-line-down"),
-	areatexte = document.getElementsByClassName("area-texte"),
-	areatextetitle = document.getElementsByClassName("area-texte-title"),
-	areatextesubtitle = document.getElementsByClassName("area-texte-subtitle"),
-	photo = document.getElementsByClassName("photo"),
-	photowrap = document.getElementsByClassName("photo-wrap"),
-	photolinevertical = document.getElementsByClassName("photo-line-vertical"),
-	photolinehorizontal = document.getElementsByClassName("photo-line-horizontal"),
-	photoblockvertical = document.getElementsByClassName("photo-block-vertical"),
-	photoblockhorizontal = document.getElementsByClassName("photo-block-horizontal"),
-	photosquare = document.getElementsByClassName("photo-square"),
-	blocsinsideinformationstitle = document.getElementsByClassName("blocs-inside-informations-title"),
-	backgroundphoto = document.getElementsByClassName("background-photo"),
-	frameinformations = document.getElementsByClassName("frame-informations"),
-	areas = document.getElementsByClassName("areas"),
-	blocsinsidewrap = document.getElementsByClassName("blocs-inside-wrap"),
+	blackout = $n("blackout-effect"),
+	bigtitle = $n("big-title"),
+	date = $n("date"),
+	datelineup = $n("date-line-up"),
+	datelinedown = $n("date-line-down"),
+	areatexte = $n("area-texte"),
+	areatextetitle = $n("area-texte-title"),
+	areatextesubtitle = $n("area-texte-subtitle"),
+	photo = $n("photo"),
+	photowrap = $n("photo-wrap"),
+	photolinevertical = $n("photo-line-vertical"),
+	photolinehorizontal = $n("photo-line-horizontal"),
+	photoblockvertical = $n("photo-block-vertical"),
+	photoblockhorizontal = $n("photo-block-horizontal"),
+	photosquare = $n("photo-square"),
+	blocsinsideinformationstitle = $n("blocs-inside-informations-title"),
+	backgroundphoto = $n("background-photo"),
+	frameinformations = $n("frame-informations"),
+	areas = $n("areas"),
+	blocsinsidewrap = $n("blocs-inside-wrap"),
 	refresh = true,
 	lastScrollY = document.documentElement.scrollTop,
 	endRefresh = false,
@@ -479,14 +483,14 @@ document.addEventListener("DOMContentLoaded", function() {
 	// For the explications
 	// ================================================================================	
 	
-	var buttonrightinformation = document.getElementsByClassName("blocs-inside-informations-right-page"),
-	buttonleftinformation = document.getElementsByClassName("blocs-inside-informations-left-page"),
-	wrapblocsinside = document.getElementsByClassName("blocs-inside"),
-	wrapinformation = document.getElementsByClassName("blocs-inside-wrap"),
-	areatextetitle = document.getElementsByClassName("area-texte-title"),
-	areatextesubtitle = document.getElementsByClassName("area-texte-subtitle"),
+	var buttonrightinformation = $n("blocs-inside-informations-right-page"),
+	buttonleftinformation = $n("blocs-inside-informations-left-page"),
+	wrapblocsinside = $n("blocs-inside"),
+	wrapinformation = $n("blocs-inside-wrap"),
+	areatextetitle = $n("area-texte-title"),
+	areatextesubtitle = $n("area-texte-subtitle"),
 	wrapinformationlength = wrapinformation.length,
-	page = document.getElementsByClassName("page"),
+	page = $n("page"),
 	pagelength = page.length,
 	click = 0;
 	
@@ -594,9 +598,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	// For the menu
 	// ================================================================================	
 	
-	var menu = document.getElementsByClassName("menu"),
-	menushow = document.getElementsByClassName("menu-show"),
-	menuclose = document.getElementsByClassName("menu-close"),
+	var menu = $n("menu"),
+	menushow = $n("menu-show"),
+	menuclose = $n("menu-close"),
 	menushowlength = menushow.length;
 	
 	// For all the elements for showing the menu
@@ -631,12 +635,12 @@ document.addEventListener("DOMContentLoaded", function() {
         return false;		
 	}	
 	
-	var projectx = document.getElementsByClassName("projectx"),
-	menushowcurrent = document.getElementsByClassName("menu-show-current"),
-	menushownext = document.getElementsByClassName("menu-show-next"),
-	menushownexttext = document.getElementsByClassName("menu-show-next-text"),
-	menushowprev = document.getElementsByClassName("menu-show-prev"),
-	menushowprevtext = document.getElementsByClassName("menu-show-prev-text"),
+	var projectx = $n("projectx"),
+	menushowcurrent = $n("menu-show-current"),
+	menushownext = $n("menu-show-next"),
+	menushownexttext = $n("menu-show-next-text"),
+	menushowprev = $n("menu-show-prev"),
+	menushowprevtext = $n("menu-show-prev-text"),
 	countmenu = 0,
 	fmove = true;
 	
@@ -713,9 +717,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// All the field that I want to check before the users is allowed to send me something
-	var validation = document.getElementsByClassName("validation"),
-	validator = document.getElementsByClassName("validator"),
-	submit = document.getElementById("submit");
+	var validation = $n("validation"),
+	validator = $n("validator"),
+	submit = $i("submit");
 	for(var i = validation.length; i--;) {
 		validation[i].addEventListener("keyup", valid);	
 	}
