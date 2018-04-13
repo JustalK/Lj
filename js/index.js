@@ -349,9 +349,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
 	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
 	    	
-	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(280,100,0.17,segment,-wh/2)+"%)";
-//	    	datelineup[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
-//	    	datelinedown[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
+	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(285,100,0.25,segment,-wh/2)+"%)";
+	    	datelineup[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
+	    	datelinedown[currentframe].style.transform = "scaleY("+calculChangeFrame+")";
 	    	
 	    	photo[currentframe].style.transform = "scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.840,1,segment,mwh+100)+")";
 	    	areatexte[currentframe].style.transform = "translate3d(0,"+wasmScroll(200,50,0.4,segment,mwh+200)+"px,0)";

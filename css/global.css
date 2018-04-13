@@ -175,7 +175,8 @@ FRAME 2
 #FRAME2 .letter-l, 
 #FRAME2 .letter-j,
 #FRAME2 .facebook,
-#FRAME2 .twitter {
+#FRAME2 .twitter,
+#FRAME2 .languages {
 	color: #484848;
 }
 
@@ -295,7 +296,8 @@ FRAME 4
 #FRAME4 .letter-l, 
 #FRAME4 .letter-j,
 #FRAME4 .facebook,
-#FRAME4 .twitter {
+#FRAME4 .twitter,
+#FRAME4 .languages {
 	color: #B20000;
 }
 
@@ -415,7 +417,8 @@ FRAME 6
 #FRAME6 .letter-l, 
 #FRAME6 .letter-j,
 #FRAME6 .facebook,
-#FRAME6 .twitter {
+#FRAME6 .twitter,
+#FRAME6 .languages {
 	color: #008C00;
 }
 
@@ -1144,6 +1147,16 @@ LETTERS
     text-decoration: none;
 }
 
+.left .languages-fr {
+    top: 142px;
+    left: -30px;
+}
+
+.left .languages-en {
+    top: 120px;
+    left: -30px;
+}
+
 .left .facebook {
     bottom: 50px;
     left: -22px;
@@ -1152,6 +1165,16 @@ LETTERS
 .left .twitter {
     bottom: 78px;
     left: -26px;
+}
+
+.right .languages-fr {
+    top: 142px;
+    right: -30px;
+}
+
+.right .languages-en {
+    top: 120px;
+    right: -30px;
 }
 
 .right .facebook {
@@ -1166,6 +1189,12 @@ LETTERS
 
 #CONTENT .social-media:hover {
 	color: black;
+}
+
+body.en #CONTENT .languages-en,
+body.fr #CONTENT .languages-fr {
+	color: black;
+	pointer-events: none;
 }
 
 /*
