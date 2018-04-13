@@ -50,12 +50,29 @@ FONT
 =====================================================================================================
 */
 
+body.en .fr,
 body.fr .en {
-	display: none;
+	visibility: hidden;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    display: block;	
 }
 
-body.en .fr {
-	display: none;
+body.fr .fr,
+body.en .en {
+	visibility: visible;
+    width: initial;
+    height: initial;
+    opacity: inherit;
+    display: block;
+    transition: all 0.5s;
+}
+
+body.nolchange .fr,
+body.nolchange .en {
+	opacity: 0;
+	transition: opacity 0.5s;
 }
 
 .orbitron,

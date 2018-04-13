@@ -790,6 +790,28 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// ================================================================================
+	// Switch languages
+	// ================================================================================
+	
+	
+	var language = "en",	
+	languages = $n("languages");
+	for(var i = languages.length; i--;) {
+		languages[i].addEventListener("click", switchLanguages);	
+	}
+	
+	// Switch the langauges between french and english
+	function switchLanguages() {
+		document.body.classList.add("nolchange");
+		setTimeout(function() { 
+			document.body.classList.remove("nolchange"); 
+			document.body.classList.remove(language);
+			language = language=="en" ? "fr" : "en";
+			document.body.classList.add(language);
+		},500);
+	}
+	
+	// ================================================================================
 	// Ad only if I can when things are not really busy
 	// ================================================================================	
 	if ('requestIdleCallback' in window) {
