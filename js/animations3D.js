@@ -72,6 +72,7 @@ var backButton = false;
 var raycaster;
 // The object with who the mouse is hover it
 var intersects;
+var triangleIntersects;
 // Block the animation when true
 var lockAnimation = false;
 // For knowing if the animation is actually running
@@ -84,6 +85,8 @@ var WINDOWS_WIDTH = window.innerWidth;
 var WINDOWS_HEIGHT = window.innerHeight;
 var BACKGROUND_COLOR = 0x000000;
 var LIGHT_AMBIANT_COLOR = 0xFFFFFF;
+var TRIANGLE_COLOR = 0x000000;
+var TRIANGLE_COLOR_HOVER = 0xFFFFFF;
 var WIREFRAME_COLOR = 0x555555;
 var WIREFRAME_COLOR_HOVER = 0x000000;
 var BOARD_COLOR = 0x333333;
@@ -100,7 +103,6 @@ var TEXTURE_SMOKE = './textures/smoke.png';
 var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
 var DEFAULT_ROTATION_CAMERA_SPEED = 1;
 var DEFAULT_SMOKE_ROTATION_SPEED = 0.05;
-
 var DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/2;
 var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
 var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
@@ -141,10 +143,10 @@ function init() {
 		}
 	}
 	groupScene.push(createBoard('imgs/gouterMagique.jpg',"https://www.google.fr/",'imgs/test.png',-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
-	groupScene.push(createBoard('imgs/hapee.jpg',"https://www.google.fr/",'imgs/test.png',200,100,4000,0,Math.radians(-90),Math.radians(-40),200,100,4500,0,0,Math.radians(-40)));
-	groupScene.push(createBoard('imgs/promarine.jpg',"https://www.google.fr/",'imgs/test.png',-1600,500,3800,0,0,Math.radians(-60),-1550,500,4200,0,0,Math.radians(-60)));
+	groupScene.push(createBoard('imgs/hapee.jpg',"https://www.google.fr/",'imgs/test.png',500,100,4000,0,Math.radians(-90),Math.radians(-40),500,150,4500,0,0,Math.radians(-40)));
+	groupScene.push(createBoard('imgs/promarine.jpg',"https://www.google.fr/",'imgs/test.png',-1600,500,4600,0,0,Math.radians(-60),-1550,500,4900,0,0,Math.radians(-60)));
 	groupScene.push(createBoard('imgs/onarto.jpg',"https://www.google.fr/",'imgs/test.png',1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
-	groupScene.push(createBoard('imgs/odyssea.jpg',"https://www.google.fr/",'imgs/test.png',-300,250,2400,0,0,Math.radians(-70),-300,250,3000,0,0,Math.radians(-70)));
+	groupScene.push(createBoard('imgs/odyssea.jpg',"https://www.google.fr/",'imgs/test.png',2000,250,2400,0,0,Math.radians(-70),2000,250,3000,0,0,Math.radians(-70)));
 
 	for(var i=groupScene.length;i--;) {
 		scene.add(groupScene[i]);		
@@ -183,8 +185,8 @@ function initScene(color) {
 **/	
 function initLight(color) {
 	scene.add(new THREE.AmbientLight(color,0.8));
-	var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 0.5 );
-	light.position.set(2000,100,4000);
+	var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+	light.position.set(0,0,8000);
 	scene.add( light );
 }
 
@@ -235,52 +237,25 @@ function renderWebGL() {
  * Create the background of the scene with a lot of triangle
  */
 function createWorld() {
-	addObject3(500,-200,7200, 1000,-50,7500, 3000,1500,5000,mTriangleBlack);
-	addObject3(500,-200,7200, 200,200,7200, 3000,1500,5000,mTriangleWhite);
-	addObject3(500,-200,7200, 1000,-50,7500, 100,-1000,7200,mTriangleBlack);
-	addObject3(500,-200,7200, 0,-50,7000, 100,-1000,7200,mTriangleBlack);
-	addObject3(500,-200,7200, 0,-50,7000, 200,200,7200,mTriangleBlack);
-	addObject3(100,200,6500, 0,-50,7000, 200,200,7200,mTriangleWhite);
-	addObject3(100,200,6500, 0,-50,7000, -200,-500,6500,mTriangleBlack);
-	addObject3(100,-1000,7200, 0,-50,7000, -200,-500,6500,mTriangleBlack);
-	addObject3(100,200,6500, 300,-200,5000, -200,-500,6500,mTriangleBlack);
-	addObject3(-600,-500,6000, 300,-200,5000, -200,-500,6500,mTriangleBlack);
-	addObject3(-600,-500,6000, -600,-200,7000, -200,-500,6500,mTriangleBlack);
-	addObject3(-600,-500,7500, -600,-200,7000, -200,-500,6500,mTriangleBlack);
-	addObject3(-600,-500,7500, 100,-1000,7200, -200,-500,6500,mTriangleWhite);
-	addObject3(-600,-500,7500, -600,-200,7000, -1200,500,6500,mTriangleBlack);
-	addObject3(-1500,-500,4000, -600,-200,7000, -1200,500,6500,mTriangleBlack);
-	addObject3(-1500,-500,4000, -600,-200,7000, -600,-500,6000,mTriangleWhite);
-	addObject3(-1500,-500,4000, -3000,1000,2000, -1200,500,6500,mTriangleBlack);
-	addObject3(-1500,-500,4000, -3000,1000,2000, -1500,500,500,mTriangleBlack);
-	addObject3(-1500,-500,4000, -600,100,2000, -1500,500,500,mTriangleBlack);
-	addObject3(-1500,-500,4000, -600,100,2000, -600,-500,6000,mTriangleBlack);
-	addObject3(300,-200,5000, -600,100,2000, -600,-500,6000,mTriangleBlack);
-	addObject3(300,-200,5000, -600,100,2000, -100,0,500,mTriangleWhite);
-	addObject3(300,-200,5000, 600,100,2000, -100,0,500,mTriangleBlack);
-	addObject3(500,500,0, 600,100,2000, -100,0,500,mTriangleWhite);
-	addObject3(500,500,0, 600,100,2000, 2000,500,500,mTriangleBlack);
-	addObject3(500,500,0, 600,100,2000, 2000,500,500,mTriangleBlack);
-	addObject3(500,500,0, 800,800,-1500, 2000,500,500,mTriangleBlack);
-	addObject3(2000,1000,-2000, 800,800,-1500, 2000,500,500,mTriangleBlack);
-	addObject3(2000,1000,-2000, 3000,1000,-1500, 2000,500,500,mTriangleBlack);
-	addObject3(2000,1000,-2000, 3000,1000,-1500, 2000,2000,-3000,mTriangleBlack);
-	addObject3(2000,3000,-4000, 3000,1000,-1500, 2000,2000,-3000,mTriangleBlack);
-	addObject3(2000,3000,-4000, 3000,1000,-1500, 4000,5000,-3000,mTriangleWhite);
-	addObject3(5000,3000,-4000, 3000,1000,-1500, 4000,5000,-3000,mTriangleBlack);
-	addObject3(2000,1000,-2000, 800,800,-1500, 2000,4000,-2500,mTriangleWhite);
-	addObject3(-2000,1000,-4000, 800,800,-1500, 2000,4000,-2500,mTriangleBlack);
-	addObject3(-2000,1000,-2000, 800,3000,-1500, 2000,4000,-2500,mTriangleBlack);
-	addObject3(-1500,1000,0, -3000,1000,2000, -1500,500,500,mTriangleWhite);	
-	addObject3(-1500,1000,0, -600,100,2000, -1500,500,500,mTriangleBlack);	
-	addObject3(-1500,1000,0, -600,100,2000, -100,0,500,mTriangleBlack);	
-	addObject3(-1500,1000,0, -600,4000,-1000, -100,0,500,mTriangleBlack);	
-	addObject3(500,500,0, -600,4000,-1000, -100,0,500,mTriangleBlack);	
-	addObject3(500,500,0, -600,4000,-1000, 800,800,-1500,mTriangleBlack);
-	addObject3(-1500,1000,0, -600,4000,-1000, -1500,3000,0,mTriangleWhite);	
-	addObject3(-1500,1000,0, -3000,1000,2000, -1500,3000,0,mTriangleBlack);	
-	addObject3(-4500,2000,0, -3000,1000,2000, -1500,3000,0,mTriangleBlack);	
-	addObject3(-4500,2000,0, -3000,1000,2000, -1200,500,6500,mTriangleBlack);	
+	addObject3(500,-200,7000, 1000,-1000,7000, 3000,1500,7000);
+	addObject3(500,-200,7000, 1000,1000,7000, 3000,1500,7000);
+	addObject3(500,-200,7000, 1000,1000,7000, 0,0,7000);
+	addObject3(0,300,7000, 1000,1000,7000, 0,0,7000);
+	addObject3(0,300,7000, -300,200,7000, 0,0,7000);
+	addObject3(0,300,7000, -300,200,7000, -500,500,7000);
+	addObject3(0,300,7000, -300,2000,7000, -500,500,7000);
+	addObject3(0,300,7000, -300,2000,7000, 1000,1000,7000);
+	addObject3(-700,0,7000, -300,200,7000, -500,500,7000);
+	addObject3(-700,0,7000, -2000,2000,7000, -500,500,7000);
+	addObject3(-700,0,7000, -2000,2000,7000, -800,-200,7000);
+	addObject3(-700,-2000,7000, -2000,2000,7000, -800,-200,7000);
+	addObject3(-700,-2000,7000, -400,-200,7000, -800,-200,7000);
+	addObject3(-700,0,7000, -400,-200,7000, -800,-200,7000);
+	addObject3(0,0,7000, -400,-200,7000, -100,-400,7000);
+	addObject3(0,0,7000, 500,-200,7000, -100,-400,7000);
+	addObject3(-700,-2000,7000, 500,-200,7000, -100,-400,7000);
+	addObject3(-700,-2000,7000, 500,-200,7000, 1000,-1000,7000);
+	addObject3(-700,-2000,7000, -400,-200,7000, -100,-400,7000);
 }
 
 /**
@@ -296,21 +271,24 @@ function createWorld() {
  * @param z3 The position Z of the vertice 3
  */
 var mTriangle = new THREE.MeshStandardMaterial( { color : 0xFFFFFF, wireframe: true } );
-var mTriangleBlack = new THREE.MeshStandardMaterial( { color : 0x000000 } );
-var mTriangleWhite = new THREE.MeshStandardMaterial( { color : 0xFFFFFF } );
-mTriangleBlack.side = mTriangleWhite.side = THREE.DoubleSide;
+var triangleHover = [];
 var fTriangle = new THREE.Face3( 0, 1, 2 );
-function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3,material) {
-	var geometry = new THREE.Geometry();
-	geometry.vertices.push( new THREE.Vector3(x1,y1,z1));
-	geometry.vertices.push( new THREE.Vector3(x2,y2,z2));
-	geometry.vertices.push( new THREE.Vector3(x3,y3,z3));
-	
-	geometry.faces.push( fTriangle );
-	geometry.computeFaceNormals();
-	geometry.computeVertexNormals();
-	scene.add( new THREE.Mesh( geometry, mTriangle ) );	
-	scene.add( new THREE.Mesh( geometry, material ) );	
+function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
+	var geometries = [new THREE.Geometry(),new THREE.Geometry()];
+	for(var i=geometries.length;i--;) {
+		geometries[i].vertices.push( new THREE.Vector3(x1,y1,z1-i));
+		geometries[i].vertices.push( new THREE.Vector3(x2,y2,z2-i));
+		geometries[i].vertices.push( new THREE.Vector3(x3,y3,z3-i));
+		geometries[i].faces.push( fTriangle );
+		geometries[i].computeFaceNormals();
+		geometries[i].computeVertexNormals();
+	}
+	scene.add( new THREE.Mesh( geometries[0], mTriangle ) );
+	// It's not the fastest way to do it but it's the one using the less memory
+	var mTriangleBlack = new THREE.MeshStandardMaterial( { color : TRIANGLE_COLOR } );
+	mTriangleBlack.side = THREE.DoubleSide;
+	triangleHover.push(new THREE.Mesh( geometries[1], mTriangleBlack ));
+	scene.add(triangleHover[triangleHover.length-1]);	
 }
 
 /**
@@ -573,55 +551,66 @@ function resetPositionReached() {
 function searchingMatchMouseAndMesh() {
 	raycaster.setFromCamera( mouse, camera );
 	intersects = raycaster.intersectObjects( objectInteraction, true );	
+	triangleIntersects = raycaster.intersectObjects( triangleHover, true );	
 	
-	if(intersects.length>0) {
-		// If the user trying to interact with a new mesh
-		if(parent==null || parent!=intersects[0].object.parent) {
-			document.body.style.cursor = "pointer";
-			parent = intersects[0].object.parent;
+	if(triangleIntersects.length>0) {
+		for(var i=triangleHover.length;i--;) {
+			if(triangleIntersects[0].object==triangleHover[i]) {
+				triangleHover[i].material.color = new THREE.Color(TRIANGLE_COLOR_HOVER);
+			} else {
+				triangleHover[i].material.color = new THREE.Color(TRIANGLE_COLOR); 
+			}
+		}		
+	} else {
+		if(intersects.length>0) {
+			// If the user trying to interact with a new mesh
+			if(parent==null || parent!=intersects[0].object.parent) {
+				document.body.style.cursor = "pointer";
+				parent = intersects[0].object.parent;
+				if(childrens!=null) {
+					if(zoomIn==false || (zoomOn!=null && zoomOn.children!=childrens)) {
+						for(var i=childrens.length;i--;) {
+							if(childrens[i]["panel"]) {
+								childrens[i].material[4].opacity = 0;
+							}
+						}
+					} else {
+						for(var i=childrens.length;i--;) {
+							// If I'm on the button "back" or "visit" we make a little effect on it
+							if((i==1 || i==0) && intersects[0].object==childrens[i]) {
+								childrens[i].material[4].color = new THREE.Color("#327DFF");
+							}
+						}
+					}
+				}
+				childrens = parent.children;
+				for(var i=childrens.length;i--;) {
+					if(childrens[i]["wireframe"]) {
+						childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR_HOVER);
+					}
+					if(childrens[i]["panel"]) {
+						childrens[i].material[4].opacity = 1;
+					}
+				}
+			}
+		} else {
+			document.body.style.cursor = "inherit";
 			if(childrens!=null) {
 				if(zoomIn==false || (zoomOn!=null && zoomOn.children!=childrens)) {
 					for(var i=childrens.length;i--;) {
-						if(childrens[i]["panel"]) {
-							childrens[i].material[4].opacity = 0;
-						}
-					}
-				} else {
-					for(var i=childrens.length;i--;) {
-						// If I'm on the button "back" or "visit" we make a little effect on it
-						if((i==1 || i==0) && intersects[0].object==childrens[i]) {
-							childrens[i].material[4].color = new THREE.Color("#327DFF");
+						if(childrens[i]["wireframe"]) {
+							childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR);
 						}
 					}
 				}
-			}
-			childrens = parent.children;
-			for(var i=childrens.length;i--;) {
-				if(childrens[i]["wireframe"]) {
-					childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR_HOVER);
-				}
-				if(childrens[i]["panel"]) {
-					childrens[i].material[4].opacity = 1;
-				}
-			}
-		}
-	} else {
-		document.body.style.cursor = "inherit";
-		if(childrens!=null) {
-			if(zoomIn==false || (zoomOn!=null && zoomOn.children!=childrens)) {
 				for(var i=childrens.length;i--;) {
-					if(childrens[i]["wireframe"]) {
-						childrens[i].material.color = new THREE.Color(WIREFRAME_COLOR);
-					}
+					if(i==1 || i==0) childrens[i].material[4].color = new THREE.Color("#FFFFFF");
 				}
 			}
-			for(var i=childrens.length;i--;) {
-				if(i==1 || i==0) childrens[i].material[4].color = new THREE.Color("#FFFFFF");
-			}
-		}
-		backButton = false;
-		parent=null;
-	}	
+			backButton = false;
+			parent=null;
+		}	
+	}
 }
 
 /**
