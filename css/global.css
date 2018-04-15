@@ -1131,12 +1131,6 @@ LETTERS
 	left: calc(50% + 7px);
 }
 
-.title-letters {
-	width: 80px;
-    overflow: hidden;
-    display: inline-block;
-}
-
 .social-media {
 	position: absolute;	
     font-size: 20px;
@@ -1466,7 +1460,7 @@ INFORMATIONS - RIGHT AREA
 }
 
 .area-texte-title {
-	display: inline-block;
+	display: block;
 	font-size: 32px;
 	-webkit-transform: translateX(20%);
 	-ms-transform: translateX(20%);
@@ -1474,11 +1468,12 @@ INFORMATIONS - RIGHT AREA
 	-webkit-transition: opacity 0.6s;
 	-o-transition: opacity 0.6s;
 	transition: opacity 0.6s;
-	margin-left: 15%;
 }
 
 .area-texte-subtitle {
-	display: inline-block;
+	position: absolute;
+    top: 33px;
+	display: block;
 	font-size: 25px;
 	-webkit-transform: translate(40%);
 	    -ms-transform: translate(40%);

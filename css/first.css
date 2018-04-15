@@ -173,7 +173,7 @@ span {
     -webkit-transform: translateZ(0) translateY(80px);
             transform: translateZ(0) translateY(80px);
     left: 200px;
-    width: 310px;
+    width: 340px;
     text-align: justify;
     z-index: 20;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
@@ -680,7 +680,8 @@ LETTERS
 */
 
 .title-letters {
-	width: 80px;
+    width: 80px;
+    padding: 5px;
     overflow: hidden;
     display: inline-block;
 }
