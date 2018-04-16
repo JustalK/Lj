@@ -1291,8 +1291,10 @@ DIAPORAMA - LEFT AREA
 
 .background-photo {
     position: relative;
-    height: 100%;
-    width: 100%;
+	height: calc(100% - 60px);
+    width: calc(100% - 60px);
+    left: 30px;
+    top: 30px;
     background-size: cover;
     opacity: 1;
     z-index: 3;

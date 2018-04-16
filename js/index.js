@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			photoblockhorizontal[currentframe*2+1].style.transform = "scaleY("+calculChangeFrame+")";
 	    	
 			// TranslateZ and will-change for repaiting only the good area
-			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.001,segment,mwh)+") translateZ(0) rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
+			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.002,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.002,segment,mwh)+") translateZ(0) rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
 			
 			for(var i=4;i--;) {
 				photosquare[currentframe*4+i].style.transform = "scale("+wasmScroll(1,0,1,segment,mwh+100)+","+wasmScroll(1,0,1,segment,mwh+100)+")";
@@ -564,8 +564,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		setTimeout(function() {
 			for(var i=currentframe;i--;pos += 2);
 			pos += parseInt(wrapblocsinside[currentframe].dataset.count);
-			console.log(pos);
-			console.log(wrapinformation);
 			backgroundphoto[currentframe].style.backgroundImage = "url("+wrapinformation[pos].dataset.img+")";
 			areatextetitle[currentframe].innerHTML = wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.title;
 			areatextesubtitle[currentframe].innerHTML = wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.text;
