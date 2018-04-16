@@ -539,7 +539,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	 * When the user click, we turn the page in one sense or an other
 	 */
 	function clickWrapInformation(nameClass) {
-		var count = 0;
+		var count = 0,pos=0;
 		// Counting the number of block inside the wrap informations
 		var children = wrapblocsinside[currentframe].childNodes;
 		for(var z=children.length;z--;) {		
@@ -562,7 +562,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		areatextetitle[currentframe].classList.add("active");
 		areatextesubtitle[currentframe].classList.add("active");
 		setTimeout(function() {
-			backgroundphoto[currentframe].style.backgroundImage = "url("+wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.img+")";
+			for(var i=currentframe;i--;pos += 2);
+			pos += parseInt(wrapblocsinside[currentframe].dataset.count);
+			console.log(pos);
+			console.log(wrapinformation);
+			backgroundphoto[currentframe].style.backgroundImage = "url("+wrapinformation[pos].dataset.img+")";
 			areatextetitle[currentframe].innerHTML = wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.title;
 			areatextesubtitle[currentframe].innerHTML = wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.text;
 			backgroundphoto[currentframe].classList.remove("active");			
