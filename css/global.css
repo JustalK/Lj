@@ -491,7 +491,7 @@ LAST_FRAME
     z-index: 2;
 }
 
-#LASTFRAME .board-under span {
+#LASTFRAME .board-under > span {
     position: relative;
     display: block;
     top: 61px;
