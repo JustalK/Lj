@@ -1322,6 +1322,9 @@ DIAPORAMA - LEFT AREA
 	position: absolute;
 	height: 30px;
 	width: 30px;
+	color: white;
+    text-align: center;
+    line-height: 30px;
 	z-index: 20;
 	-webkit-transform: scale(0,0);
 	    -ms-transform: scale(0,0);
@@ -1332,6 +1335,12 @@ DIAPORAMA - LEFT AREA
     transition: opacity 1s, transform 0.5s;
     transition: opacity 1s, transform 0.5s, -webkit-transform 0.5s;
     transition-delay: 0.5s;
+}
+
+#CONTENT .photo-square.latsuj:hover {
+	transition-delay: 0s;
+    background: white;
+    color: black;
 }
 
 .photo-square-black-left {
