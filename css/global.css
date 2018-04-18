@@ -1337,6 +1337,10 @@ DIAPORAMA - LEFT AREA
     transition-delay: 0.5s;
 }
 
+#CONTENT .photo-square.latsuj {
+	cursor: pointer;
+}
+
 #CONTENT .photo-square.latsuj:hover {
 	transition-delay: 0s;
     background: white;

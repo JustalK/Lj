@@ -790,11 +790,26 @@ document.addEventListener("DOMContentLoaded", function() {
 	function loadMediaQueries() {
 		addStyle("../css/queries.css");
 	}
+
+	// ================================================================================
+	// Visit website
+	// ================================================================================	
+	
+	var projectlink = $n("project-link");
+	console.log(projectlink);
+	for(var i=projectlink.length;i--;) {
+		projectlink[i].addEventListener("click", projectlinks);
+	}
+	
+	// Redirect the user to the website in the dataset
+	function projectlinks(event) {
+		console.log(event);
+		window.location.href = event.target.dataset.link;
+	}
 	
 	// ================================================================================
 	// Switch languages
 	// ================================================================================
-	
 	
 	var language = "en",	
 	languages = $n("languages");
