@@ -347,7 +347,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0018,segment,100)+";transform:translateZ(0) translateY("+wasmScroll(mwh,80,0.8,segment,0)+"px)";
 	    	
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
-	    	areatextesubtitle[currentframe].style.transform = "translateX("+wasmScrollReverse(45,45,40,-0.005,segment,hf)+"%)";
 	    	
 	    	date[currentframe].style.transform = "rotate(-90deg) translateX(-"+wasmScroll(285,100,0.25,segment,-wh/2)+"%)";
 	    	datelineup[currentframe].style.transform = "scaleY("+calculChangeFrame+")";

@@ -1490,14 +1490,11 @@ INFORMATIONS - RIGHT AREA
     top: 33px;
 	display: block;
 	font-size: 25px;
-	-webkit-transform: translate(40%);
-	    -ms-transform: translate(40%);
-	        transform: translate(40%);
 	margin-top: 20px;
 	-webkit-transition: opacity 0.6s;
 	-o-transition: opacity 0.6s;
 	transition: opacity 0.6s;
-	margin-left:  25%;
+	margin-left:  40%;
 }
 
 .area-texte-title.active,
