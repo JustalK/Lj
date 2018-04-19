@@ -21,6 +21,9 @@
 // ================================================================================
 "use strict";
 
+var fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)");
+document.fonts.add(fontorbitron);
+
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
 	// Alias for winning some extrabyte
@@ -62,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================
 	
 	// The font that I want load first
-	fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)"),
 	fontorbitronr = new FontFace("Orbitron Regular", "url(./../fonts/orbitron-regular-webfont.ttf)"),
 	
 	// The others fonts that I have to load after the first one has been loaded (there are on the first screen)
@@ -74,16 +76,14 @@ document.addEventListener("DOMContentLoaded", function() {
 	fontmontserratbold = new FontFace("Montserrat Bold", "url(./../fonts/montserrat-bold-webfont.ttf)"),
 	fonttekomedium = new FontFace("Teko Medium", "url(./../fonts/teko-medium-webfont.ttf)"),
 	fontlatsuj = new FontFace("Latsuj", "url(./../fonts/latsuj.ttf)");
-	
+
 	// Then we load the first font !
-	document.fonts.add(fontorbitron);
 	fontorbitron.loaded.then(function() {
 		// When the font is load, we make her appear on the website and we load the others...
 		document.body.classList.add("show-orbitron");
 		document.fonts.add(fontmonserratlight);
 		document.fonts.add(fonttekolight);
 		document.fonts.add(fontlatsuj);
-		document.fonts.add(fontorbitronr);
 		// As soon as the font are loaded, we made them appear on the website
 		fontmonserratlight.loaded.then(function() {
 			document.body.classList.add("show-montserratlight");
@@ -92,19 +92,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		fontlatsuj.loaded.then(function() {
 			document.body.classList.add("show-latsuj");
 		});
-
-		fontorbitronr.loaded.then(function() {
-			document.body.classList.add("show-orbitronr");
-		});		
 		
 		fonttekolight.loaded.then(function() {
 			document.body.classList.add("show-tekolight");
 			loadHighQualityImagesFirst();
 		});
+		
 
-		document.fonts.ready.then(function() {
-			loadTheGlobalCss();
-		});
 	});	
 	
 	// Load the fonts that we dont need for the first paint of the browser
@@ -130,7 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		// For avoiding this function to be executed two time, we first remove the event
 		//window.removeEventListener('scroll', loadTheGlobalCss);
 		// Then we load all the font, we need under the first screen
-    	loadAllTheOtherFont();
     	
     	// And we load the css file
     	addStyle("../css/global.css");
@@ -177,6 +170,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		frames[i].style.height = document.documentElement.clientHeight+"px";
 	}
 	function loadHighQualityImages() {
+		// We are not on the first sreen anymore so we load the other font 
+		loadAllTheOtherFont();
+		loadTheGlobalCss();
+		
 		// If we reach the end of the website, there are nothing to load
 		if(currentframe*2+2>=frames.length) {
 			return false;
@@ -200,8 +197,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	function loadLastPhoto() {
-		console.log(currentframe);
 		if(currentframe>=2) {
+			// We load the font for the last frame
+			document.fonts.add(fontorbitronr);
+			fontorbitronr.loaded.then(function() {
+				document.body.classList.add("show-orbitronr");
+			});
+			// and we load the background just after
 			loadingLastHighQualityImages = true;
 			var background = $i("LASTFRAME");
 			tmp = new Image();
