@@ -96,7 +96,6 @@ var CAMERA_START_POSITION_Z = 8000;
 var CAMERA_START_ROTATION_X = 0;
 var CAMERA_START_ROTATION_Y = 0;
 var CAMERA_START_ROTATION_Z = 0;
-var TEXTURE_BOARD_EXTREMITY = "textures/dark4.jpg";
 var TEXTURE_BUTTON_BACK = new THREE.TextureLoader().load('imgs/back.png');
 var TEXTURE_BUTTON_VISIT = new THREE.TextureLoader().load('imgs/visit.png');
 var TEXTURE_SMOKE = './textures/smoke.png';
@@ -387,10 +386,6 @@ function createShape() {
 * @return Mesh The mesh of this side of the board
 **/
 function createSideBoard(x,y,z,rx,ry,rz) {
-	texture = new THREE.TextureLoader().load(TEXTURE_BOARD_EXTREMITY);
-	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-	texture.repeat.set(0.005, 0.005);
-	
 	materialBoard = new THREE.MeshPhongMaterial( {  color: BOARD_COLOR } );
 	geometryBoard = new THREE.ExtrudeGeometry( createShape(), extrudeSettings );
 	sideMesh = new THREE.Mesh( geometryBoard, materialBoard );	

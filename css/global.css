@@ -443,14 +443,14 @@ LAST_FRAME
 */
 
 .cssvhunit .last-frame {
-	//background-image: url("../imgs/LAST_FRAME.jpg");
+	background-image: url("../imgs/LAST_FRAME_LOW.jpg");
 }
 
 .cssvhunit .last-frame.active {
 	-webkit-transition: background-image 0.5s;
 	-o-transition: background-image 0.5s;
 	transition: background-image 0.5s;
-	background-image: url("../imgs/FRAME3.jpg");
+	background-image: url("../imgs/LAST_FRAME.jpg");
 }
 
 #LASTFRAME .board-wrap {

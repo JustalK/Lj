@@ -200,13 +200,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	function loadLastPhoto() {
-		var background = $i("LASTFRAME");
-		tmp = new Image();
-		tmp.src = background.getAttribute("data-src");
-		tmp.addEventListener('load',function() {
-			// For a better maintainability, we gonna just add a class and make the all animation on the css
-			this.classList.add("active");
-		}.bind(background));
+		console.log(currentframe);
+		if(currentframe>=2) {
+			loadingLastHighQualityImages = true;
+			var background = $i("LASTFRAME");
+			tmp = new Image();
+			tmp.src = background.getAttribute("data-src");
+			tmp.addEventListener('load',function() {
+				// For a better maintainability, we gonna just add a class and make the all animation on the css
+				this.classList.add("active");
+			}.bind(background));
+		}
 	}
 	
 	// ================================================================================
@@ -246,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	framerateScroll = 1000/60,
 	notificationSend = false,
 	loadingHighQualityImages = false,
+	loadingLastHighQualityImages = false,
 	blackout = $n("blackout-effect"),
 	bigtitle = $n("big-title"),
 	date = $n("date"),
@@ -326,6 +331,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 		// Load the image with LQIP technique at the right moment
 		!loadingHighQualityImages && loadHighQualityImages();
+		!loadingLastHighQualityImages && loadLastPhoto();
 		
     	isNewFrame();
     	
