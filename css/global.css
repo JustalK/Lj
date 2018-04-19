@@ -443,7 +443,7 @@ LAST_FRAME
 */
 
 .cssvhunit .last-frame {
-	background-image: url("../imgs/LAST_FRAME.jpg");
+	//background-image: url("../imgs/LAST_FRAME.jpg");
 }
 
 .cssvhunit .last-frame.active {

@@ -183,6 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		// If I'm in a last segment
 		if(segment-wh>0) {
+			loadingHighQualityImages = true;
 			// The first element is load with the other function
 			// @see loadHighQualityImagesFirst()
 			var backgroundOnWait = [frames[currentframe*2+2],frames[currentframe*2+3]];
@@ -198,8 +199,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 	
-	function loadPhoto() {
-		var background = $i("FRAME1");
+	function loadLastPhoto() {
+		var background = $i("LASTFRAME");
 		tmp = new Image();
 		tmp.src = background.getAttribute("data-src");
 		tmp.addEventListener('load',function() {
@@ -244,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	timer,
 	framerateScroll = 1000/60,
 	notificationSend = false,
+	loadingHighQualityImages = false,
 	blackout = $n("blackout-effect"),
 	bigtitle = $n("big-title"),
 	date = $n("date"),
@@ -323,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function() {
     	hasToLockAnimation();
 		
 		// Load the image with LQIP technique at the right moment
-		loadHighQualityImages();
+		!loadingHighQualityImages && loadHighQualityImages();
 		
     	isNewFrame();
     	
@@ -795,14 +797,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================	
 	
 	var projectlink = $n("project-link");
-	console.log(projectlink);
 	for(var i=projectlink.length;i--;) {
 		projectlink[i].addEventListener("click", projectlinks);
 	}
 	
 	// Redirect the user to the website in the dataset
 	function projectlinks(event) {
-		console.log(event);
 		window.location.href = event.target.dataset.link;
 	}
 	
