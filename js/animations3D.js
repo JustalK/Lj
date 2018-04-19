@@ -113,7 +113,7 @@ var DEFAULT_ROTATION_PERPETUAL_X_SPEED = 100;
 var DEFAULT_ROTATION_PERPETUAL_Y_SPEED = 200;
 var FOG_POWER = 0.0002;
 var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
-
+var PROJECT_TEXTURE = ["imgs/zipWorld.jpg","imgs/gouterMagique.jpg","imgs/hapee.jpg","imgs/promarine.jpg","imgs/onarto.jpg","imgs/odyssea.jpg"];
 /**
 *============================================================================================>
 * Initialisation
@@ -132,20 +132,24 @@ function init() {
 	initRaycaster();
 	createWorld();
 	
-	groupScene.push(createBoard('imgs/zipWorld.jpg',"https://www.google.fr/",'imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
+	groupScene.push(createBoard("https://www.zip-world.fr/",'imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
 	childrens = groupScene[0].children;
 	if(childrens!=null) {
 		for(var i=childrens.length;i--;) {
 			if(childrens[i]["panel"]) {
 				childrens[i].material[4].opacity = 1;
+				texture = new THREE.TextureLoader().load( PROJECT_TEXTURE[0] );
+				material = new THREE.MeshBasicMaterial( { map: texture } );
+				childrens[3].material[4] = material;
 			}
 		}
 	}
-	groupScene.push(createBoard('imgs/gouterMagique.jpg',"https://www.google.fr/",'imgs/test.png',-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
-	groupScene.push(createBoard('imgs/hapee.jpg',"https://www.google.fr/",'imgs/test.png',500,100,4000,0,Math.radians(-90),Math.radians(-40),500,150,4500,0,0,Math.radians(-40)));
-	groupScene.push(createBoard('imgs/promarine.jpg',"https://www.google.fr/",'imgs/test.png',-1600,500,4600,0,0,Math.radians(-60),-1550,500,4900,0,0,Math.radians(-60)));
-	groupScene.push(createBoard('imgs/onarto.jpg',"https://www.google.fr/",'imgs/test.png',1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
-	groupScene.push(createBoard('imgs/odyssea.jpg',"https://www.google.fr/",'imgs/test.png',2000,250,2400,0,0,Math.radians(-70),2000,250,3000,0,0,Math.radians(-70)));
+	
+	groupScene.push(createBoard("http://www.gouters-magiques.com/pro/",'imgs/test.png',-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
+	groupScene.push(createBoard("https://www.hapee.fr/",'imgs/test.png',500,100,4000,0,Math.radians(-90),Math.radians(-40),500,150,4500,0,0,Math.radians(-40)));
+	groupScene.push(createBoard("http://www.promarine-boats.com/",'imgs/test.png',-1600,500,4600,0,0,Math.radians(-60),-1550,500,4900,0,0,Math.radians(-60)));
+	groupScene.push(createBoard("https://onarto.com/",'imgs/test.png',1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
+	groupScene.push(createBoard("http://www.odyssea.info/",'imgs/test.png',2000,250,2400,0,0,Math.radians(-70),2000,250,3000,0,0,Math.radians(-70)));
 
 	for(var i=groupScene.length;i--;) {
 		scene.add(groupScene[i]);		
@@ -308,7 +312,7 @@ function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
 * @param int rz The rotation Z of the object
 * @return One board with all his pieces
 **/
-function createBoard(textureCenter,url,textureInformations,x,y,z,rx,ry,rz,translationX,translationY,translationZ,rotationX,rotationY,rotationZ) {
+function createBoard(url,textureInformations,x,y,z,rx,ry,rz,translationX,translationY,translationZ,rotationX,rotationY,rotationZ) {
 	// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 	boardTmp = new THREE.Group();
 
@@ -319,7 +323,7 @@ function createBoard(textureCenter,url,textureInformations,x,y,z,rx,ry,rz,transl
 	piece.push(createSideWireframe(-100,0,0,0,0,0));
 	piece.push(createSideWireframe(80,0,10,0,Math.PI,0));
 	piece.push(createCenterWireframe(-10,50,4,0,0,0));
-	piece.push(createCenterBoard(textureCenter,-10,50,8));
+	piece.push(createCenterBoard(-10,50,8));
 	piece.push(createPanel(textureInformations,140, 40, 1,-10,110,8));
 	// The back button has to be the 7th mesh because of the return implementation
 	piece.push(createPanelWithTexture(TEXTURE_BUTTON_BACK,40, 20, 1,20,-10,8));
@@ -403,9 +407,10 @@ function createSideBoard(x,y,z,rx,ry,rz) {
 * @param int z The position Z of the object
 * @return Mesh The center piece of the board
 **/
-function createCenterBoard(textureCenter,x,y,z) {
-	texture = new THREE.TextureLoader().load( textureCenter );
-	material = new THREE.MeshBasicMaterial( { map: texture } );
+function createCenterBoard(x,y,z) {
+	//texture = new THREE.TextureLoader().load( textureCenter );
+	//material = new THREE.MeshBasicMaterial( { map: texture } );
+	material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
 	centerMesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 150, 75, 1 ),  [0,0,0,0,material,0] );
 	centerMesh.position.set(x,y,z);
 	return centerMesh;
@@ -477,15 +482,28 @@ function createCenterWireframe(x,y,z,rx,ry,rz) {
 }
 
 /**
+ * Loading the texture for the center block after everything has been load
+ */
+function loadProjectsTextures() {
+	firstAllLoadingTexture = false;
+	for(var i=1,countI=groupScene.length;i<countI;i++) {
+		texture = new THREE.TextureLoader().load( PROJECT_TEXTURE[i] );
+		material = new THREE.MeshBasicMaterial( { map: texture } );
+		groupScene[i].children[3].material[4] = material;
+	}
+}
+
+/**
 *============================================================================================>
 * Animations
 *============================================================================================> 
 **/
 
-var parent = null;
-var childrens = null;
-var zoomIn = false;
-var zoomOn = null;
+var parent = null,
+childrens = null,
+zoomIn = false,
+zoomOn = null,
+firstAllLoadingTexture = false;
 function animate() {
 	// If I scroll down, I lock the animation for using less memory
 	if(!lockAnimation) {
@@ -730,6 +748,7 @@ function onDocumentMouseDown( event ) {
 		
 		// If I'm on a board, I move to the new position
 		if(parent!=null && !parent["lock"]) {
+			firstAllLoadingTexture && loadProjectsTextures();
 			framerate = 1000 / 60;
 			for(var i=ABSCISSA.length;i--;) {
 				positionFinal[i] = parent["translation"+ABSCISSA[i]];
