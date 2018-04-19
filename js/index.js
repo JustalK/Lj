@@ -21,8 +21,12 @@
 // ================================================================================
 "use strict";
 
-var fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)");
+var fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)"),
+fontmonserratlight = new FontFace("Montserrat Light", "url(./../fonts/montserrat-light-webfont.ttf)"),
+fonttekolight = new FontFace("Teko Light", "url(./../fonts/teko-light-webfont.ttf)");
 document.fonts.add(fontorbitron);
+document.fonts.add(fontmonserratlight);
+document.fonts.add(fonttekolight);
 
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
@@ -67,10 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	// The font that I want load first
 	fontorbitronr = new FontFace("Orbitron Regular", "url(./../fonts/orbitron-regular-webfont.ttf)"),
 	
-	// The others fonts that I have to load after the first one has been loaded (there are on the first screen)
-	fontmonserratlight = new FontFace("Montserrat Light", "url(./../fonts/montserrat-light-webfont.ttf)"),
-	fonttekolight = new FontFace("Teko Light", "url(./../fonts/teko-light-webfont.ttf)"),
-	
 	// And finally the fonts that can be loaded after that the first screen has been loaded
 	fonttekobold = new FontFace("Teko Bold", "url(./../fonts/teko-bold-webfont.ttf)"),
 	fontmontserratbold = new FontFace("Montserrat Bold", "url(./../fonts/montserrat-bold-webfont.ttf)"),
@@ -81,16 +81,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	fontorbitron.loaded.then(function() {
 		// When the font is load, we make her appear on the website and we load the others...
 		document.body.classList.add("show-orbitron");
-		document.fonts.add(fontmonserratlight);
-		document.fonts.add(fonttekolight);
-		document.fonts.add(fontlatsuj);
 		// As soon as the font are loaded, we made them appear on the website
 		fontmonserratlight.loaded.then(function() {
 			document.body.classList.add("show-montserratlight");
-		});
-		
-		fontlatsuj.loaded.then(function() {
-			document.body.classList.add("show-latsuj");
 		});
 		
 		fonttekolight.loaded.then(function() {
@@ -98,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			loadHighQualityImagesFirst();
 		});
 		
-
 	});	
 	
 	// Load the fonts that we dont need for the first paint of the browser
@@ -107,6 +99,11 @@ document.addEventListener("DOMContentLoaded", function() {
     	document.fonts.add(fonttekobold);
     	document.fonts.add(fontmontserratbold);
     	document.fonts.add(fonttekomedium);
+    	document.fonts.add(fontlatsuj);
+    	
+		fontlatsuj.loaded.then(function() {
+			document.body.classList.add("show-latsuj");
+		});
     	
     	fonttekobold.loaded.then(function() {
 			document.body.classList.add("show-tekobold");
@@ -170,29 +167,17 @@ document.addEventListener("DOMContentLoaded", function() {
 		frames[i].style.height = document.documentElement.clientHeight+"px";
 	}
 	function loadHighQualityImages() {
-		// We are not on the first sreen anymore so we load the other font 
-		loadAllTheOtherFont();
-		loadTheGlobalCss();
-		
-		// If we reach the end of the website, there are nothing to load
-		if(currentframe*2+2>=frames.length) {
-			return false;
-		}
-		// If I'm in a last segment
-		if(segment-wh>0) {
-			loadingHighQualityImages = true;
-			// The first element is load with the other function
-			// @see loadHighQualityImagesFirst()
-			var backgroundOnWait = [frames[currentframe*2+2],frames[currentframe*2+3]];
-			var backgroundHQ = [new Image(),new Image()];
-			// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
-			for(var i=2;i--;) {
-				backgroundHQ[i].src = backgroundOnWait[i].getAttribute("data-src");
-				backgroundHQ[i].addEventListener('load',function() {
-					// For a better maintainability, we gonna just add a class and make the all animation on the css
-					backgroundOnWait[this].classList.add("active");
-				}.bind(i));
-			}
+		// The first element is load with the other function
+		// @see loadHighQualityImagesFirst()
+		var backgroundOnWait = [frames[(currentframe+1)*2],frames[(currentframe+1)*2+1]];
+		var backgroundHQ = [new Image(),new Image()];
+		// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
+		for(var i=2;i--;) {
+			backgroundHQ[i].src = backgroundOnWait[i].getAttribute("data-src");
+			backgroundHQ[i].addEventListener('load',function() {
+				// For a better maintainability, we gonna just add a class and make the all animation on the css
+				backgroundOnWait[this].classList.add("active");
+			}.bind(i));
 		}
 	}
 	
@@ -251,8 +236,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	timer,
 	framerateScroll = 1000/60,
 	notificationSend = false,
-	loadingHighQualityImages = false,
+	loadingHighQualityImages = [true,false,false],
 	loadingLastHighQualityImages = false,
+	loadingCss = false,
 	blackout = $n("blackout-effect"),
 	bigtitle = $n("big-title"),
 	date = $n("date"),
@@ -313,8 +299,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		initialization();
     	
 		animations();
-		
 		if(segment - mwh > 0) {
+			if(currentframe+1<frames.length/2 && !loadingHighQualityImages[currentframe+1] ) {
+				loadingHighQualityImages[currentframe+1] = true;
+				loadHighQualityImages();
+			}
 			// If I have not been in this loop for this frame
 			if(bg.dataset.load!=1) {
 				bg.dataset.load = 1;
@@ -331,10 +320,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		
     	hasToLockAnimation();
 		
+    	if(!loadingCss) {
+    		loadingCss = true;
+    		// We are not on the first sreen anymore so we load the other font 
+    		loadAllTheOtherFont();
+    		loadTheGlobalCss();
+    	}
 		// Load the image with LQIP technique at the right moment
-		!loadingHighQualityImages && loadHighQualityImages();
 		!loadingLastHighQualityImages && loadLastPhoto();
-		
     	isNewFrame();
     	
     	// When the user stop scrolling - we add an action of this
@@ -574,8 +567,11 @@ document.addEventListener("DOMContentLoaded", function() {
 			for(var i=currentframe;i--;pos += 2);
 			pos += parseInt(wrapblocsinside[currentframe].dataset.count);
 			backgroundphoto[currentframe].style.backgroundImage = "url("+wrapinformation[pos].dataset.img+")";
-			areatextetitle[currentframe].innerHTML = wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.title;
-			areatextesubtitle[currentframe].innerHTML = wrapinformation[(currentframe+1)*wrapblocsinside[currentframe].dataset.count].dataset.text;
+			console.log(wrapinformation);
+			console.log(pos);
+			console.log(wrapinformation[pos].dataset.title);
+			areatextetitle[currentframe].innerHTML = wrapinformation[pos].dataset.title;
+			areatextesubtitle[currentframe].innerHTML = wrapinformation[pos].dataset.text;
 			backgroundphoto[currentframe].classList.remove("active");			
 			areatextetitle[currentframe].classList.remove("active");			
 			areatextesubtitle[currentframe].classList.remove("active");			
@@ -811,7 +807,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Redirect the user to the website in the dataset
 	function projectlinks(event) {
-		window.location.href = event.target.dataset.link;
+		window.open(event.target.dataset.link, '_blank').focus();
 	}
 	
 	// ================================================================================

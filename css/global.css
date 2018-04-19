@@ -268,6 +268,9 @@ FRAME 4
     left: 200px;
 }
 
+#FRAME4 .photo-block {
+	background: #9a5c5c;
+}
 #FRAME4 .area-texte-line,
 #FRAME4 .blocs-inside-neartitle {
 	background: #FF7373;
@@ -387,6 +390,10 @@ FRAME 6
     background: #75c175;
     width: 250px;
     left: 200px;
+}
+
+#FRAME6 .photo-block {
+	background: #729a72;	
 }
 
 #FRAME6 .area-texte-line,

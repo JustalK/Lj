@@ -485,7 +485,7 @@ function createCenterWireframe(x,y,z,rx,ry,rz) {
  * Loading the texture for the center block after everything has been load
  */
 function loadProjectsTextures() {
-	firstAllLoadingTexture = false;
+	firstAllLoadingTexture = true;
 	for(var i=1,countI=groupScene.length;i<countI;i++) {
 		texture = new THREE.TextureLoader().load( PROJECT_TEXTURE[i] );
 		material = new THREE.MeshBasicMaterial( { map: texture } );
@@ -748,7 +748,7 @@ function onDocumentMouseDown( event ) {
 		
 		// If I'm on a board, I move to the new position
 		if(parent!=null && !parent["lock"]) {
-			firstAllLoadingTexture && loadProjectsTextures();
+			!firstAllLoadingTexture && loadProjectsTextures();
 			framerate = 1000 / 60;
 			for(var i=ABSCISSA.length;i--;) {
 				positionFinal[i] = parent["translation"+ABSCISSA[i]];
