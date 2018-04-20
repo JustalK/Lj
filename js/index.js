@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 		fonttekolight.loaded.then(function() {
 			document.body.classList.add("show-tekolight");
-			loadHighQualityImagesFirst();
 		});
 		
 	});	
@@ -328,7 +327,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		
     	if(!loadingCss) {
     		loadingCss = true;
-    		// We are not on the first sreen anymore so we load the other font 
+    		// We are not on the first sreen anymore so we load the other font
+    		loadHighQualityImagesFirst(); 
     		loadAllTheOtherFont();
     		loadTheGlobalCss();
     	}

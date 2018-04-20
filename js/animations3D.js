@@ -29,91 +29,94 @@ Math.randomRange = function () {
 **/
 
 /** The Three Camera **/
-var camera;
+var camera,
 /** Framerate **/
-var framerate = 1000/60;
+framerate = 1000/60,
 /** The render **/
-var renderer;
+renderer,
 /** The scene where every mesh and object gonna be **/
-var scene;
+scene,
 /** My special window */
-var board;
+board,
 /** The position of mouse of the user **/
-var mouse = { x: 0, y: 0 };
+mouse = { x: 0, y: 0 },
 /** Object that keep a track on the time */
-var clock;
+clock,
 /** The differents objects with those raycaseter can interact **/
-var objectInteraction = [];
+objectInteraction = [],
 // The array of the mesh group of the scene
-var groupScene = [];
+groupScene = [],
 // The differents object that create the particle system
-var smokeParticles = [];
+smokeParticles = [],
 // True if the camera is actually moving to a new position, false if else
-var movementCamera = false;
+movementCamera = false,
 // The direction of the movement when we translation to a new position
-var movements = [0,0,0];
+movements = [0,0,0],
 // The direction of the rotation when we rotate to a new position
-var rotation = [0,0,0];
+rotation = [0,0,0],
 // The final position of our camera
-var positionFinal = [0,0,0];
+positionFinal = [0,0,0],
 // The final rotation of our camera
-var rotationFinal = [0,0,0];
+rotationFinal = [0,0,0],
 // Check if the position is reached on all abscisse
-var positionReached = [false,false,false];
+positionReached = [false,false,false],
 // Check if the final rotation is reached on all abscisse
-var rotationReached = [false,false,false];
+rotationReached = [false,false,false],
 // The speed of the camera when it's translating to a new position
-var speedTranslation = [0,0,0];
+speedTranslation = [0,0,0],
 // The speed of the camera when it's rotating to a new position
-var speedRotation = [0,0,0];
+speedRotation = [0,0,0],
 // If the user is on a back button
-var backButton = false;
+backButton = false,
 // The object for the intersection between the mouse and the camera
-var raycaster;
+raycaster,
 // The object with who the mouse is hover it
-var intersects;
-var triangleIntersects;
+intersects,
+triangleIntersects,
 // Block the animation when true
-var lockAnimation = false;
+lockAnimation = false,
 // For knowing if the animation is actually running
-var runAnimation = false;
+runAnimation = false,
+// For loading the texture only when the user is moving his mouse.
+hasMouseMove = false;
 
 /* Constants */
-var FOV = 50;
-var ABSCISSA = ["x","y","z"];
-var WINDOWS_WIDTH = window.innerWidth;
-var WINDOWS_HEIGHT = window.innerHeight;
-var BACKGROUND_COLOR = 0x000000;
-var LIGHT_AMBIANT_COLOR = 0xFFFFFF;
-var TRIANGLE_COLOR = 0x000000;
-var TRIANGLE_COLOR_HOVER = 0xFFFFFF;
-var WIREFRAME_COLOR = 0x555555;
-var WIREFRAME_COLOR_HOVER = 0x000000;
-var BOARD_COLOR = 0x333333;
-var CAMERA_START_POSITION_X = 0;
-var CAMERA_START_POSITION_Y = 0;
-var CAMERA_START_POSITION_Z = 8000;
-var CAMERA_START_ROTATION_X = 0;
-var CAMERA_START_ROTATION_Y = 0;
-var CAMERA_START_ROTATION_Z = 0;
-var TEXTURE_BUTTON_BACK = new THREE.TextureLoader().load('imgs/back.png');
-var TEXTURE_BUTTON_VISIT = new THREE.TextureLoader().load('imgs/visit.png');
-var TEXTURE_SMOKE = './textures/smoke.png';
-var DEFAULT_MOVEMENT_CAMERA_SPEED = 1;
-var DEFAULT_ROTATION_CAMERA_SPEED = 1;
-var DEFAULT_SMOKE_ROTATION_SPEED = 0.05;
-var DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/2;
-var DEFAULT_ROTATION_PERPETUAL_X = 0.001;
-var DEFAULT_ROTATION_PERPETUAL_Y = 0.002;
-var DEFAULT_ROTATION_PERPETUAL_X_START = 0;
-var DEFAULT_ROTATION_PERPETUAL_Y_START = 0;
-var DEFAULT_ROTATION_PERPETUAL_X_AMPLITUDE = 20;
-var DEFAULT_ROTATION_PERPETUAL_Y_AMPLITUDE = 15;
-var DEFAULT_ROTATION_PERPETUAL_X_SPEED = 100;
-var DEFAULT_ROTATION_PERPETUAL_Y_SPEED = 200;
-var FOG_POWER = 0.0002;
-var extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 };
-var PROJECT_TEXTURE = ["imgs/zipWorld.jpg","imgs/gouterMagique.jpg","imgs/hapee.jpg","imgs/promarine.jpg","imgs/onarto.jpg","imgs/odyssea.jpg"];
+var FOV = 50,
+ABSCISSA = ["x","y","z"],
+WINDOWS_WIDTH = window.innerWidth,
+WINDOWS_HEIGHT = window.innerHeight,
+BACKGROUND_COLOR = 0x000000,
+LIGHT_AMBIANT_COLOR = 0xFFFFFF,
+TRIANGLE_COLOR = 0x000000,
+TRIANGLE_COLOR_HOVER = 0xFFFFFF,
+WIREFRAME_COLOR = 0x555555,
+WIREFRAME_COLOR_HOVER = 0x000000,
+BOARD_COLOR = 0x333333,
+CAMERA_START_POSITION_X = 0,
+CAMERA_START_POSITION_Y = 0,
+CAMERA_START_POSITION_Z = 8000,
+CAMERA_START_ROTATION_X = 0,
+CAMERA_START_ROTATION_Y = 0,
+CAMERA_START_ROTATION_Z = 0,
+TEXTURE_BUTTON_BACK = 'imgs/back.png',
+TEXTURE_BUTTON_VISIT = 'imgs/visit.png',
+TEXTURE_SMOKE = './textures/smoke.png',
+DEFAULT_MOVEMENT_CAMERA_SPEED = 1,
+DEFAULT_ROTATION_CAMERA_SPEED = 1,
+DEFAULT_SMOKE_ROTATION_SPEED = 0.05,
+DEFAULT_RANGE_WITHOUT_SMOKE = WINDOWS_HEIGHT/2,
+DEFAULT_ROTATION_PERPETUAL_X = 0.001,
+DEFAULT_ROTATION_PERPETUAL_Y = 0.002,
+DEFAULT_ROTATION_PERPETUAL_X_START = 0,
+DEFAULT_ROTATION_PERPETUAL_Y_START = 0,
+DEFAULT_ROTATION_PERPETUAL_X_AMPLITUDE = 20,
+DEFAULT_ROTATION_PERPETUAL_Y_AMPLITUDE = 15,
+DEFAULT_ROTATION_PERPETUAL_X_SPEED = 100,
+DEFAULT_ROTATION_PERPETUAL_Y_SPEED = 200,
+FOG_POWER = 0.0002,
+extrudeSettings = { amount: 10, bevelEnabled: true, bevelSegments: 1, steps: 2, bevelSize: 3, bevelThickness: 3 },
+PROJECT_TEXTURE = ["imgs/zipWorld.jpg","imgs/gouterMagique.jpg","imgs/hapee.jpg","imgs/promarine.jpg","imgs/onarto.jpg","imgs/odyssea.jpg"],
+PROJECT_TITLE_TEXTURE = ["imgs/test.png","imgs/test.png","imgs/test.png","imgs/test.png","imgs/test.png","imgs/test.png"];
 /**
 *============================================================================================>
 * Initialisation
@@ -132,24 +135,12 @@ function init() {
 	initRaycaster();
 	createWorld();
 	
-	groupScene.push(createBoard("https://www.zip-world.fr/",'imgs/test.png',-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
-	childrens = groupScene[0].children;
-	if(childrens!=null) {
-		for(var i=childrens.length;i--;) {
-			if(childrens[i]["panel"]) {
-				childrens[i].material[4].opacity = 1;
-				texture = new THREE.TextureLoader().load( PROJECT_TEXTURE[0] );
-				material = new THREE.MeshBasicMaterial( { map: texture } );
-				childrens[3].material[4] = material;
-			}
-		}
-	}
-	
-	groupScene.push(createBoard("http://www.gouters-magiques.com/pro/",'imgs/test.png',-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
-	groupScene.push(createBoard("https://www.hapee.fr/",'imgs/test.png',500,100,4000,0,Math.radians(-90),Math.radians(-40),500,150,4500,0,0,Math.radians(-40)));
-	groupScene.push(createBoard("http://www.promarine-boats.com/",'imgs/test.png',-1600,500,4600,0,0,Math.radians(-60),-1550,500,4900,0,0,Math.radians(-60)));
-	groupScene.push(createBoard("https://onarto.com/",'imgs/test.png',1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
-	groupScene.push(createBoard("http://www.odyssea.info/",'imgs/test.png',2000,250,2400,0,0,Math.radians(-70),2000,250,3000,0,0,Math.radians(-70)));
+	groupScene.push(createBoard("https://www.zip-world.fr/",-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
+	groupScene.push(createBoard("http://www.gouters-magiques.com/pro/",-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
+	groupScene.push(createBoard("https://www.hapee.fr/",500,100,4000,0,Math.radians(-90),Math.radians(-40),500,150,4500,0,0,Math.radians(-40)));
+	groupScene.push(createBoard("http://www.promarine-boats.com/",-1600,500,4600,0,0,Math.radians(-60),-1550,500,4900,0,0,Math.radians(-60)));
+	groupScene.push(createBoard("https://onarto.com/",1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
+	groupScene.push(createBoard("http://www.odyssea.info/",2000,250,2400,0,0,Math.radians(-70),2000,250,3000,0,0,Math.radians(-70)));
 
 	for(var i=groupScene.length;i--;) {
 		scene.add(groupScene[i]);		
@@ -312,7 +303,7 @@ function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
 * @param int rz The rotation Z of the object
 * @return One board with all his pieces
 **/
-function createBoard(url,textureInformations,x,y,z,rx,ry,rz,translationX,translationY,translationZ,rotationX,rotationY,rotationZ) {
+function createBoard(url,x,y,z,rx,ry,rz,translationX,translationY,translationZ,rotationX,rotationY,rotationZ) {
 	// The mesh of thge board, it has been done with the different mesh that I'm gonna create there
 	boardTmp = new THREE.Group();
 
@@ -324,10 +315,10 @@ function createBoard(url,textureInformations,x,y,z,rx,ry,rz,translationX,transla
 	piece.push(createSideWireframe(80,0,10,0,Math.PI,0));
 	piece.push(createCenterWireframe(-10,50,4,0,0,0));
 	piece.push(createCenterBoard(-10,50,8));
-	piece.push(createPanel(textureInformations,140, 40, 1,-10,110,8));
+	piece.push(createPanel(140, 40, 1,-10,110,8));
 	// The back button has to be the 7th mesh because of the return implementation
-	piece.push(createPanelWithTexture(TEXTURE_BUTTON_BACK,40, 20, 1,20,-10,8));
-	piece.push(createPanelWithTexture(TEXTURE_BUTTON_VISIT,40, 20, 1,-40,-10,8));
+	piece.push(createPanelWithTexture(null,40, 20, 1,20,-10,8));
+	piece.push(createPanelWithTexture(null,40, 20, 1,-40,-10,8));
 
 	
 	// Add the differents parts to the group of meshes
@@ -410,7 +401,7 @@ function createSideBoard(x,y,z,rx,ry,rz) {
 function createCenterBoard(x,y,z) {
 	//texture = new THREE.TextureLoader().load( textureCenter );
 	//material = new THREE.MeshBasicMaterial( { map: texture } );
-	material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+	material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
 	centerMesh =  new THREE.Mesh( new THREE.BoxBufferGeometry( 150, 75, 1 ),  [0,0,0,0,material,0] );
 	centerMesh.position.set(x,y,z);
 	return centerMesh;
@@ -427,8 +418,8 @@ function createCenterBoard(x,y,z) {
 * @param int z The position on z of the panel 
 * @return mesh The panel
 **/
-function createPanel(texture,sx,sy,sz,x,y,z) {
-	return createPanelWithTexture(new THREE.TextureLoader().load( texture ),sx,sy,sz,x,y,z);
+function createPanel(sx,sy,sz,x,y,z) {
+	return createPanelWithTexture(null,sx,sy,sz,x,y,z);
 }
 
 /**
@@ -490,6 +481,33 @@ function loadProjectsTextures() {
 		texture = new THREE.TextureLoader().load( PROJECT_TEXTURE[i] );
 		material = new THREE.MeshBasicMaterial( { map: texture } );
 		groupScene[i].children[3].material[4] = material;
+	}
+}
+
+/**
+ * Loading the texture used for the HUD
+ */
+function loadTexturesOnMove() {
+	hasMouseMove = true;
+	material = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(TEXTURE_BUTTON_BACK), transparent: true, opacity: 1 } );
+	material2 = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(TEXTURE_BUTTON_VISIT), transparent: true, opacity: 1 } );
+	for(var i=0,countI=groupScene.length;i<countI;i++) {
+		material3 = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(PROJECT_TITLE_TEXTURE[i]), transparent: true, opacity: 1 } );
+		groupScene[i].children[0].material = [0,0,0,0,material,0];
+		groupScene[i].children[1].material = [0,0,0,0,material2,0];
+		groupScene[i].children[2].material = [0,0,0,0,material3,0];
+	}
+	
+	childrens = groupScene[0].children;
+	if(childrens!=null) {
+		for(var i=childrens.length;i--;) {
+			if(childrens[i]["panel"]) {
+				childrens[i].material[4].opacity = 1;
+				texture = new THREE.TextureLoader().load( PROJECT_TEXTURE[0] );
+				material = new THREE.MeshBasicMaterial( { map: texture } );
+				childrens[3].material[4] = material;
+			}
+		}
 	}
 }
 
@@ -775,6 +793,15 @@ function onWindowResize() {
 	camera.updateProjectionMatrix();
 	renderer.setSize( window.innerWidth, window.innerHeight );
 }
+// First we init all the object
+document.addEventListener("DOMContentLoaded", function() {
+	init();
+});
+// Then we active the animation
+window.addEventListener("load", function(event) {
+	animate();
+});
 
-init();
-animate();
+window.addEventListener("mousemove", function() {
+	!hasMouseMove && loadTexturesOnMove();
+});
