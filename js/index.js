@@ -24,9 +24,13 @@
 var fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfont.ttf)"),
 fontmonserratlight = new FontFace("Montserrat Light", "url(./../fonts/montserrat-light-webfont.ttf)"),
 fonttekolight = new FontFace("Teko Light", "url(./../fonts/teko-light-webfont.ttf)");
-document.fonts.add(fontorbitron);
-document.fonts.add(fontmonserratlight);
-document.fonts.add(fonttekolight);
+
+// Starting the font download only when the queue is empty
+setTimeout(function() {
+	document.fonts.add(fontorbitron);
+	document.fonts.add(fontmonserratlight);
+	document.fonts.add(fonttekolight);
+},0);
 
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
@@ -190,6 +194,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			});
 			// and we load the background just after
 			loadingLastHighQualityImages = true;
+			var signature = $i("signature");
+			signature.src = signature.getAttribute("data-src");
 			var background = $i("LASTFRAME");
 			tmp = new Image();
 			tmp.src = background.getAttribute("data-src");
