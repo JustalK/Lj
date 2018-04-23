@@ -165,10 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// Function for loading the images HQ after all the page has been loaded
-	var frames = $n("frame"), frameslength = frames.length; 
-	for(var i=frames.length;i--;) {
-		frames[i].style.height = document.documentElement.clientHeight+"px";
-	}
+	var frames = $n("frame"), frameslength = frames.length;
 	function loadHighQualityImages() {
 		// The first element is load with the other function
 		// @see loadHighQualityImagesFirst()

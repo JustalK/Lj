@@ -134,17 +134,9 @@ function init() {
 	initFog(false);
 	initRaycaster();
 	createWorld();
-	
-	groupScene.push(createBoard("https://www.zip-world.fr/",-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
-	groupScene.push(createBoard("http://www.gouters-magiques.com/pro/",-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
-	groupScene.push(createBoard("https://www.hapee.fr/",500,100,4000,0,Math.radians(-90),Math.radians(-40),500,150,4500,0,0,Math.radians(-40)));
-	groupScene.push(createBoard("http://www.promarine-boats.com/",-1600,500,4600,0,0,Math.radians(-60),-1550,500,4900,0,0,Math.radians(-60)));
-	groupScene.push(createBoard("https://onarto.com/",1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
-	groupScene.push(createBoard("http://www.odyssea.info/",2000,250,2400,0,0,Math.radians(-70),2000,250,3000,0,0,Math.radians(-70)));
 
-	for(var i=groupScene.length;i--;) {
-		scene.add(groupScene[i]);		
-	}
+	groupScene.push(createBoard("https://www.zip-world.fr/",-400,-20,6600,0,0,Math.radians(20),-400,-30,7100,0,0,Math.radians(20)));
+	scene.add(groupScene[0]);
 	
 	renderWebGL();
 	document.getElementById("FRAME1").appendChild( renderer.domElement );
@@ -489,6 +481,18 @@ function loadProjectsTextures() {
  */
 function loadTexturesOnMove() {
 	hasMouseMove = true;
+	
+	// Add the groupscene after the client has load everything
+	groupScene.push(createBoard("http://www.gouters-magiques.com/pro/",-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
+	groupScene.push(createBoard("https://www.hapee.fr/",500,100,4000,0,Math.radians(-90),Math.radians(-40),500,150,4500,0,0,Math.radians(-40)));
+	groupScene.push(createBoard("http://www.promarine-boats.com/",-1600,500,4600,0,0,Math.radians(-60),-1550,500,4900,0,0,Math.radians(-60)));
+	groupScene.push(createBoard("https://onarto.com/",1800,1800,1000,0,0,Math.radians(-60),1800,1800,1500,0,0,Math.radians(-60)));
+	groupScene.push(createBoard("http://www.odyssea.info/",2000,250,2400,0,0,Math.radians(-70),2000,250,3000,0,0,Math.radians(-70)));
+	
+	for(var i=groupScene.length;i--;) {
+		scene.add(groupScene[i]);		
+	}
+	
 	material = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(TEXTURE_BUTTON_BACK), transparent: true, opacity: 1 } );
 	material2 = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(TEXTURE_BUTTON_VISIT), transparent: true, opacity: 1 } );
 	for(var i=0,countI=groupScene.length;i<countI;i++) {
@@ -531,7 +535,7 @@ function animate() {
 			requestAnimationFrame( animate );
 		}, framerate );
 		renderer.render( scene, camera );
-	
+		
 		delta = clock.getDelta();
 		
 		for(var i=groupScene.length;i--;) {
