@@ -186,6 +186,10 @@ span {
     transition: transform 0.05s, -webkit-transform 0.05s;
 }
 
+.big-title {
+	position: absolute;
+}
+
 .big-title-blue.left {
 	right: 200px;
 	left: initial;
@@ -194,15 +198,12 @@ span {
 .cssvhunit .frame-presentation,
 .cssvhunit .last-frame {
 	position: relative;
-	
 	height: 100vh;
 	width: 100%;
-	
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
-	
-	 z-index: 1;
+	z-index: 1;
 }
 
 .cssvhunit.rgba #FRAME2 .bloc-informations {
