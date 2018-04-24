@@ -804,8 +804,5 @@ document.addEventListener("DOMContentLoaded", function() {
 // Then we active the animation
 window.addEventListener("load", function(event) {
 	animate();
-});
-
-window.addEventListener("mousemove", function() {
 	!hasMouseMove && loadTexturesOnMove();
 });

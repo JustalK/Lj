@@ -864,5 +864,21 @@ document.addEventListener("DOMContentLoaded", function() {
 			console.log('%c-> www.latsuj.com <-\n%cHello Developer, You have pressed the F12 key, you want to check my code ?! \nThat\'s ok, I have nothing to hide.\nI\'m all geared up for that.\nLatsuj', 'background:#222;color:#ff4141;font-size:40px;text-decoration:none;',"color:#ff4141;font-size:20px");
 		}
 	}
+	
+	// ================================================================================
+	// When the user resize the windows
+	// ================================================================================	
+	var resizeTimer;
+	window.addEventListener("resize", function(e) {
+		  clearTimeout(resizeTimer);
+		  resizeTimer = setTimeout(function() {
+			  wh = window.innerHeight;
+			  bh = document.documentElement.clientHeight; 
+			  bw = document.documentElement.clientWidth;
+			  console.log(bw);
+			  // If the width of the client is under 1280px, we read the media queries file
+			  bw<1280 && loadMediaQueries();
+		  }, 250);
+	});
 });
 
