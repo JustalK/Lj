@@ -121,10 +121,14 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// Load only the the global css file once everything for the first load as been load
 	function loadTheGlobalCss() {
+		loadTheGlobalCssStatus = true;
 		// For avoiding this function to be executed two time, we first remove the event
 		//window.removeEventListener('scroll', loadTheGlobalCss);
 		// Then we load all the font, we need under the first screen
-    	
+		wh = window.innerHeight;
+		bh = document.documentElement.clientHeight; 
+		bw = document.documentElement.clientWidth;
+		
     	// And we load the css file
     	addStyle("../css/global.css");
     	
@@ -207,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// bh : Height of the document
 	// wh : Height of the browser's windows of the user
 	// ================================================================================
-	var a, wh = window.innerHeight, mwh, b, c, segment, numberframe, currentframe, hf, bg, bh = document.documentElement.clientHeight, bw = document.documentElement.clientWidth;
+	var a, wh, mwh, b, c, segment, numberframe, currentframe, hf, bg, bh, bw;
 	// Initialize all the important variable
 	function initialization() {
 		// Current position of the user
@@ -241,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	loadingHighQualityImages = [true,false,false],
 	loadingLastHighQualityImages = false,
 	loadingCss = false,
+	loadTheGlobalCssStatus = false,
 	blackout = $n("blackout-effect"),
 	bigtitle = $n("big-title"),
 	date = $n("date"),
@@ -262,16 +267,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	areas = $n("areas"),
 	blocsinsidewrap = $n("blocs-inside-wrap"),
 	refresh = true,
-	lastScrollY = document.documentElement.scrollTop,
+	lastScrollY = 0,
 	endRefresh = false,
 	calculChangeFrame;
-	
-	// For positionning the bigtitle precisely
-	for(var i=bigtitle.length;i--;) {
-		bigtitle[i].style.top = (i*hf)+"px";
-	}
-	// For initializing the variable
-	initialization();
 	
 	/**
 	 * Creating an event on the croll but setting a framerate for smoothing the animation on every computer
@@ -298,6 +296,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	 */
 	function scroll() {
 		// Initialisation of variables
+		!loadTheGlobalCssStatus && loadTheGlobalCss(); 
 		initialization();
     	
 		animations();
@@ -324,10 +323,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		
     	if(!loadingCss) {
     		loadingCss = true;
+    		loadTheGlobalCss();
     		// We are not on the first sreen anymore so we load the other font
     		loadHighQualityImagesFirst(); 
     		loadAllTheOtherFont();
-    		loadTheGlobalCss();
     	}
 		// Load the image with LQIP technique at the right moment
 		!loadingLastHighQualityImages && loadLastPhoto();
@@ -350,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	blocsinsideinformationstitle[currentframe].style.transform = "translateX("+wasmScrollReverse(30,30,10,0.1,segment,wh-mwh)+"px)";
 	    	blackout[currentframe].style.opacity = wasmScroll(0.5,0,0.001,segment,mwh);
 	    	
-	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0018,segment,100)+";transform:translateZ(0) translateY("+wasmScroll(mwh,80,0.8,segment,0)+"px)";
+	    	bigtitle[currentframe].style.cssText = "opacity:"+wasmScrollReverse(0.55,0.55,0,0.0010,segment,100)+";transform:translateZ(0) translateY("+wasmScroll(mwh,80,0.6,segment,0)+"px)";
 	    	
 	    	areatextetitle[currentframe].style.transform = "translateX("+wasmScrollReverse(20,20,10,0.01,segment,wh)+"%)";
 	    	
@@ -840,12 +839,15 @@ document.addEventListener("DOMContentLoaded", function() {
 	if ('requestIdleCallback' in window) {
 		requestIdleCallback(adConsole);
 		
+		/**
+		/TODO Has to think, where I have to run this piece of code - which event, I'm not sure yet
 		Notification.requestPermission(function (status) {
 			// Cela permet d'utiliser Notification.permission avec Chrome/Safari
 			if (Notification.permission !== status) {
 				Notification.permission = status;
 			}
 		});
+		**/
 	}
 	
 	/**
@@ -857,11 +859,16 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 	}
 	
-	function adConsole() {
-		// Check if the user is not using a very old version of IE - in the case not, trolling him :p
-		if (window.console){
-			// If Some developper look in the console, I have to do something for him also :p
-			console.log('%c-> www.latsuj.com <-\n%cHello Developer, You have pressed the F12 key, you want to check my code ?! \nThat\'s ok, I have nothing to hide.\nI\'m all geared up for that.\nLatsuj', 'background:#222;color:#ff4141;font-size:40px;text-decoration:none;',"color:#ff4141;font-size:20px");
+	function adConsole(deadline) {
+		// We queueing this at the end because we want to do it after the load - we dont need it for the rum
+		!loadTheGlobalCssStatus && loadTheGlobalCss(); 
+		
+		if(deadline.timeRemaining() > 0 || deadline.didTimeout) {
+			// Check if the user is not using a very old version of IE - in the case not, trolling him :p
+			if (window.console){
+				// If Some developper look in the console, I have to do something for him also :p
+				console.log('%c-> www.latsuj.com <-\n%cHello Developer, You have pressed the F12 key, you want to check my code ?! \nThat\'s ok, I have nothing to hide.\nI\'m all geared up for that.\nLatsuj', 'background:#222;color:#ff4141;font-size:40px;text-decoration:none;',"color:#ff4141;font-size:20px");
+			}
 		}
 	}
 	
@@ -875,7 +882,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			  wh = window.innerHeight;
 			  bh = document.documentElement.clientHeight; 
 			  bw = document.documentElement.clientWidth;
-			  console.log(bw);
+			  
 			  // If the width of the client is under 1280px, we read the media queries file
 			  bw<1280 && loadMediaQueries();
 		  }, 250);
