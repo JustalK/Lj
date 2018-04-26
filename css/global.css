@@ -214,10 +214,13 @@ FRAME 3
 	height: 100vh;
 	width: 100%;
 	
-	background-image: url("../imgs/FRAME2_LOW.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+.cssvhunit #FRAME3.preload {
+	background-image: url("../imgs/FRAME2_LOW.jpg");
 }
 
 .cssvhunit #FRAME3.active {	
@@ -247,7 +250,7 @@ FRAME 4
 	background: rgba(102, 26, 0, 0.4);
 }
 
-.cssvhunit #FRAME4 {
+.cssvhunit #FRAME4.preload {
 	background-image: url("../imgs/FRAME2_LOW.jpg");
 }
 
@@ -338,10 +341,13 @@ FRAME 5
 	height: 100vh;
 	width: 100%;
 	
-	background-image: url("../imgs/FRAME3_LOW.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+.cssvhunit #FRAME5.preload {
+	background-image: url("../imgs/FRAME3_LOW.jpg");
 }
 
 .cssvhunit #FRAME5.active {	
@@ -371,7 +377,7 @@ FRAME 6
 	background: rgba(117, 193, 117, 0.4);
 }
 
-.cssvhunit #FRAME6 {
+.cssvhunit #FRAME6.preload {
 	background-image: url("../imgs/FRAME3_LOW.jpg");
 }
 
@@ -449,7 +455,7 @@ LAST_FRAME
 =====================================================================================================
 */
 
-.cssvhunit .last-frame {
+.cssvhunit .last-frame.preload {
 	background-image: url("../imgs/LAST_FRAME_LOW.jpg");
 }
 

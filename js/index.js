@@ -171,6 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		var backgroundHQ = [new Image(),new Image()];
 		// For each frame, we gonna create an object Image fro perloading all the image and add an event on them
 		for(var i=2;i--;) {
+			backgroundOnWait[i].classList.add("preload");
 			backgroundHQ[i].src = backgroundOnWait[i].getAttribute("data-src");
 			backgroundHQ[i].addEventListener('load',function() {
 				// For a better maintainability, we gonna just add a class and make the all animation on the css
