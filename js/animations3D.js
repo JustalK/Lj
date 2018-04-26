@@ -256,9 +256,9 @@ function createWorld() {
  * @param y3 The position Y of the vertice 3
  * @param z3 The position Z of the vertice 3
  */
-var mTriangle = new THREE.MeshStandardMaterial( { color : 0xFFFFFF, wireframe: true } );
-var triangleHover = [];
-var fTriangle = new THREE.Face3( 0, 1, 2 );
+var mTriangle = new THREE.MeshStandardMaterial( { color : 0xFFFFFF, wireframe: true } ),
+triangleHover = [],
+fTriangle = new THREE.Face3( 0, 1, 2 );
 function addObject3(x1,y1,z1,x2,y2,z2,x3,y3,z3) {
 	var geometries = [new THREE.Geometry(),new THREE.Geometry()];
 	for(var i=geometries.length;i--;) {
