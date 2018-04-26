@@ -469,18 +469,6 @@ function createCenterWireframe(x,y,z,rx,ry,rz) {
  */
 function loadProjectsTextures() {
 	firstAllLoadingTexture = true;
-	for(var i=1,countI=groupScene.length;i<countI;i++) {
-		texture = new THREE.TextureLoader().load( PROJECT_TEXTURE[i] );
-		material = new THREE.MeshBasicMaterial( { map: texture } );
-		groupScene[i].children[3].material[4] = material;
-	}
-}
-
-/**
- * Loading the texture used for the HUD
- */
-function loadTexturesOnMove() {
-	hasMouseMove = true;
 	
 	// Add the groupscene after the client has load everything
 	groupScene.push(createBoard("http://www.gouters-magiques.com/pro/",-500,1300,2600,0,0,Math.radians(50),-500,1300,3000,0,0,Math.radians(50)));
@@ -492,6 +480,21 @@ function loadTexturesOnMove() {
 	for(var i=groupScene.length;i--;) {
 		scene.add(groupScene[i]);		
 	}
+	
+	for(var i=1,countI=groupScene.length;i<countI;i++) {
+		texture = new THREE.TextureLoader().load( PROJECT_TEXTURE[i] );
+		material = new THREE.MeshBasicMaterial( { map: texture } );
+		groupScene[i].children[3].material[4] = material;
+	}
+	
+	loadTexturesOnMove();
+}
+
+/**
+ * Loading the texture used for the HUD
+ */
+function loadTexturesOnMove() {
+	hasMouseMove = true;
 	
 	material = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(TEXTURE_BUTTON_BACK), transparent: true, opacity: 1 } );
 	material2 = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(TEXTURE_BUTTON_VISIT), transparent: true, opacity: 1 } );
