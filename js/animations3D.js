@@ -497,8 +497,8 @@ function loadTexturesOnMove() {
 	material2 = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(TEXTURE_BUTTON_VISIT), transparent: true, opacity: 1 } );
 	for(var i=0,countI=groupScene.length;i<countI;i++) {
 		material3 = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load(PROJECT_TITLE_TEXTURE[i]), transparent: true, opacity: 1 } );
-		groupScene[i].children[0].material = [0,0,0,0,material,0];
-		groupScene[i].children[1].material = [0,0,0,0,material2,0];
+		groupScene[i].children[0].material = [0,0,0,0,material2,0];
+		groupScene[i].children[1].material = [0,0,0,0,material,0];
 		groupScene[i].children[2].material = [0,0,0,0,material3,0];
 	}
 	
