@@ -25,12 +25,22 @@ var fontorbitron = new FontFace("Orbitron", "url(./../fonts/orbitron-black-webfo
 fontmonserratlight = new FontFace("Montserrat Light", "url(./../fonts/montserrat-light-webfont.ttf)"),
 fonttekolight = new FontFace("Teko Light", "url(./../fonts/teko-light-webfont.ttf)");
 
-// Starting the font download only when the queue is empty
-setTimeout(function() {
-	document.fonts.add(fontorbitron);
-	document.fonts.add(fontmonserratlight);
-	document.fonts.add(fonttekolight);
-},0);
+document.fonts.add(fontorbitron);
+document.fonts.add(fontmonserratlight);
+document.fonts.add(fonttekolight);
+
+// Then we load the first font !
+fontorbitron.loaded.then(function() {
+	// When the font is load, we make her appear on the website and we load the others...
+	document.body.classList.add("show-orbitron");
+});	
+fontmonserratlight.loaded.then(function() {
+	document.body.classList.add("show-montserratlight");
+});	
+fonttekolight.loaded.then(function() {
+	document.body.classList.add("show-tekolight");
+});
+	
 
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
@@ -74,27 +84,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	// The font that I want load first
 	fontorbitronr = new FontFace("Orbitron Regular", "url(./../fonts/orbitron-regular-webfont.ttf)"),
-	
 	// And finally the fonts that can be loaded after that the first screen has been loaded
 	fonttekobold = new FontFace("Teko Bold", "url(./../fonts/teko-bold-webfont.ttf)"),
 	fontmontserratbold = new FontFace("Montserrat Bold", "url(./../fonts/montserrat-bold-webfont.ttf)"),
 	fonttekomedium = new FontFace("Teko Medium", "url(./../fonts/teko-medium-webfont.ttf)"),
 	fontlatsuj = new FontFace("Latsuj", "url(./../fonts/latsuj.ttf)");
-
-	// Then we load the first font !
-	fontorbitron.loaded.then(function() {
-		// When the font is load, we make her appear on the website and we load the others...
-		document.body.classList.add("show-orbitron");
-		// As soon as the font are loaded, we made them appear on the website
-		fontmonserratlight.loaded.then(function() {
-			document.body.classList.add("show-montserratlight");
-		});
-		
-		fonttekolight.loaded.then(function() {
-			document.body.classList.add("show-tekolight");
-		});
-		
-	});	
 	
 	// Load the fonts that we dont need for the first paint of the browser
 	function loadAllTheOtherFont() {
