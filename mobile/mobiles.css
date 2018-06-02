@@ -1,0 +1,77 @@
+@CHARSET "ISO-8859-1";
+
+html,
+body,
+#CONTENT {
+	height: 100%;
+}
+
+#CONTENT span {
+	position: absolute;
+    width: 100%;
+    font-size: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.frames {
+	position: relative;
+	width: 100%;
+	height: 25%;
+}
+
+body {
+	margin: 0;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+}
+
+#HEADER {
+	height: 15%;
+	width: 100%;
+	position: relative;
+	background: red;
+}
+
+#HEADER span {
+	font-size: 60px;
+}
+	
+#SLIDER {
+	height: 5%;
+	width: 100%;
+	position: relative;
+	background: cyan;
+}
+
+#SLIDER span {
+	font-size: 30px;	
+}
+
+#FRAME1 {
+	position: relative;
+	height: 30%;
+	background: blue;
+}
+
+#FRAME2 .projects {
+	height: 100%;
+	width: 50%;
+	float: left; 
+}
+
+#FRAME2 .project1 {
+	position: relative;
+	background: pink;
+}
+
+#FRAME2 .project2 {
+	position: relative;
+	background: green;
+}
+
+#CONTACT {
+	background: yellow;
+}
