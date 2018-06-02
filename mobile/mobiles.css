@@ -6,6 +6,16 @@ body,
 	height: 100%;
 }
 
+@font-face {
+  font-family: "Orbitron";
+  src: url('./fonts/orbitron-black-webfont.eot');
+  src: url('./fonts/orbitron-black-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/orbitron-black-webfont.woff2') format('woff2'),
+       url('./fonts/orbitron-black-webfont.woff') format('woff'), 
+       url('./fonts/orbitron-black-webfont.ttf')  format('truetype'), 
+       url('./fonts/orbitron-black-webfont.svg#svgFontName') format('svg');
+}
+
 #CONTENT span {
 	position: absolute;
     width: 100%;
@@ -14,6 +24,8 @@ body,
     transform: translateY(-50%);
     text-align: center;
     text-transform: uppercase;
+    font-family: "Orbitron";
+    color: white;
 }
 
 .frames {
@@ -32,18 +44,18 @@ body {
 	height: 15%;
 	width: 100%;
 	position: relative;
-	background: red;
+	background: black;
 }
 
 #HEADER span {
-	font-size: 60px;
+	font-size: 80px;
 }
 	
 #SLIDER {
 	height: 5%;
 	width: 100%;
 	position: relative;
-	background: cyan;
+	background: #888888;
 }
 
 #SLIDER span {
@@ -53,7 +65,9 @@ body {
 #FRAME1 {
 	position: relative;
 	height: 30%;
-	background: blue;
+    background-image: url(./../imgs/FRAME1_LOW.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 #FRAME2 .projects {
@@ -64,14 +78,20 @@ body {
 
 #FRAME2 .project1 {
 	position: relative;
-	background: pink;
+    background-image: url(./../imgs/FRAME2_LOW.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 #FRAME2 .project2 {
 	position: relative;
-	background: green;
+    background-image: url(./../imgs/FRAME3_LOW.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 #CONTACT {
-	background: yellow;
+    background-image: url(./../imgs/LAST_FRAME_LOW.jpg);
+    background-size: cover;
+    background-position: center;
 }
