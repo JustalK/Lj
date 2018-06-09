@@ -17,15 +17,17 @@ body,
        url('./fonts/orbitron-black-webfont.svg#svgFontName') format('svg');
 }
 
-#CONTENT span {
+#CONTENT span,
+#CONTENT h1 {
 	position: absolute;
     width: 100%;
-    font-size: 40px;
+    font-size: 50px;
     top: 50%;
     transform: translateY(-50%);
     text-align: center;
     text-transform: uppercase;
     font-family: "Orbitron";
+    font-weight: inherit;
     color: white;
     pointer-events: none;
 }
@@ -111,13 +113,25 @@ body {
     background-position: center;
 }
 
+
+@font-face {
+  font-family: "Montserrat Light";
+  src: url('./fonts/montserrat-light-webfont.eot');
+  src: url('./fonts/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/montserrat-light-webfont.woff2') format('woff2'),
+       url('./fonts/montserrat-light-webfont.woff') format('woff'), 
+       url('./fonts/montserrat-light-webfont.ttf')  format('truetype'), 
+       url('./fonts/montserrat-light-webfont.svg#svgFontName') format('svg');
+}
+
 #SECOND {
 	position: absolute;
     top: 100%;
     height: 100%;
     width: 100%;
-    background: red;
+    background: white;
     transition: all 0.5s;
+    overflow-x: hidden;
 }
 
 #SECOND.active {
@@ -125,7 +139,7 @@ body {
 }
 
 #SECOND .close {
-    position: absolute;
+	position: absolute;
     right: 10px;
     top: 10px;
     font-size: 100px;
@@ -136,4 +150,44 @@ body {
     height: 50px;
     text-align: center;
     line-height: 50px;
+    z-index: 100;
+    color: white;
+}
+
+#INFORMATIONS {
+	height: 100%;
+}
+
+#SECOND .ban {
+	position: relative;
+	background-image: url(./../imgs/LAST_FRAME.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 20%;
+}
+
+#SECOND .subtitle,
+#SECOND .descriptions {
+    position: static;
+    text-align: justify;
+    transform: inherit;
+    text-transform: inherit;
+    top: initial;
+    display: block;
+    padding: 25px;
+    font-family: "Montserrat Light";
+    font-size: 4.2vw;
+    width: initial;
+	line-height: 1.4;
+	color: #262626;
+} 
+
+#SECOND .descriptions strong {
+	color: blue;
+}
+
+#SECOND .descriptions.v2 {
+	background: gray;
+	color: white;
 }
