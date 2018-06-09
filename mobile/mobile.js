@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						second.classList.add("active");
 					}
 				};
-				xhttp.open("GET", "./templates/whoiam.html", true);
+				xhttp.open("GET", "./templates/"+this.dataset.link+".html", true);
 				xhttp.send();
 				
 			}.bind(ek));

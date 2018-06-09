@@ -160,7 +160,6 @@ body {
 
 #SECOND .ban {
 	position: relative;
-	background-image: url(./../imgs/LAST_FRAME.jpg);
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -175,7 +174,7 @@ body {
     text-transform: inherit;
     top: initial;
     display: block;
-    padding: 25px;
+    padding: 40px;
     font-family: "Montserrat Light";
     font-size: 4.2vw;
     width: initial;
@@ -183,11 +182,21 @@ body {
 	color: #262626;
 } 
 
+#SECOND h1 {
+	font-size: 6vw;
+}
+
+#SECOND .subtitle {
+	font-weight: bold;
+    padding-top: 60px;
+    font-size: 4.6vw;
+}
+
 #SECOND .descriptions strong {
-	color: blue;
+	color: block;
 }
 
 #SECOND .descriptions.v2 {
-	background: gray;
+	background: #3a3a3a;
 	color: white;
 }
