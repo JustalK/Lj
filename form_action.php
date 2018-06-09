@@ -2,9 +2,10 @@
 
     const GOOD_SEND = 0;
     const BAD_SEND = 1;
-    const MY_EMAIL = "";
+    const MY_EMAIL = "justal.kevin@gmail.com";
     
     // If the request is a post (a hacker can change that but I'm not sure if it's really worth it...Mb for spam bombing me :/)
+    // I could check the refere but it does not really be better since a hacker can still change that :/
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         /**
          * Check the datas before sending anything to me

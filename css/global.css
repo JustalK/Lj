@@ -994,6 +994,14 @@ LAST_FRAME
 	pointer-events: all;
 }
 
+#submit.send {
+	pointer-events: none;
+    opacity: 0;
+}
+#msubmit.send {
+    width: 74px;
+    left: 156px;
+}
 #submit:before {
 	content: "";
 	position: absolute;

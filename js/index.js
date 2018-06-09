@@ -733,7 +733,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	// All the field that I want to check before the users is allowed to send me something
 	var validation = $n("validation"),
 	validator = $n("validator"),
-	submit = $i("submit");
+	submit = $i("submit"),
+	msubmit = $i("msubmit");
 	for(var i = validation.length; i--;) {
 		validation[i].addEventListener("keyup", valid);	
 	}
@@ -766,22 +767,30 @@ document.addEventListener("DOMContentLoaded", function() {
 		return true;
 	}
 	
+	submit.addEventListener("click", send);	
+	
 	// Send the information to the script
-	var sname,semail,smsg;
+	var sname,semail,smsg,slock=false;
 	function send() {
-		sname = validation[0].value!="" ? validation[0].value : "";
-		semail = validation[1].value!="" ? validation[1].value : "";
-		smsg = validation[2].value!="" ? validation[2].value : "";
-		var xhttp = new XMLHttpRequest();
-		xhttp.responseType = 'json';
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				console.log(this.response);
-			}
-		};
-		xhttp.open("POST", "form_action.php", true);
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("sname="+sname+"&semail="+semail+"&smsg="+smsg);
+		if(!slock) {
+			// I lock the send fonction for letting the user send me only one msg
+			slock = true;
+			sname = validation[0].value!="" ? validation[0].value : "";
+			semail = validation[1].value!="" ? validation[1].value : "";
+			smsg = validation[2].value!="" ? validation[2].value : "";
+			var xhttp = new XMLHttpRequest();
+			xhttp.responseType = 'json';
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					submit.classList.add("send");
+					msubmit.classList.add("send");
+					msubmit.innerText = "I got your email !";
+				}
+			};
+			xhttp.open("POST", "form_action.php", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("sname="+sname+"&semail="+semail+"&smsg="+smsg);
+		}
 	}
 
 	// ================================================================================
