@@ -2,7 +2,8 @@
 
 html,
 body,
-#CONTENT {
+#CONTENT,
+#HOME {
 	height: 100%;
 }
 
@@ -50,7 +51,7 @@ body,
 
 body {
 	margin: 0;
-	overflow-x: hidden;
+	overflow: hidden;
 	scroll-behavior: smooth;
 }
 
@@ -108,4 +109,31 @@ body {
     background-image: url(./../imgs/LAST_FRAME_LOW.jpg);
     background-size: cover;
     background-position: center;
+}
+
+#SECOND {
+	position: absolute;
+    top: 100%;
+    height: 100%;
+    width: 100%;
+    background: red;
+    transition: all 0.5s;
+}
+
+#SECOND.active {
+	top: 0%;
+}
+
+#SECOND .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 100px;
+    font-weight: bold;
+    transform: rotateZ(45deg) translateY(44px);
+    width: 50px;
+    font-family: "Orbitron";
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
 }
