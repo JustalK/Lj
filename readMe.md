@@ -12,6 +12,11 @@ There are two differents kind of optimizations and I'm always switching between 
  - I'm use AJAX also for loading the global CSS. I mean that I load only the necessaries css rules at the fold. And I load the next rules once the users is starting scrolling.
  - I'm also using the Goodle loading API for avoiding the FOUT and FOIT when you arrive for the first time on the website. I'm using it in two differents parts, I first load the only necessaries FONT and once they have been loaded properly I load the others.
   - Using HTML Page instead of PHP for having the page already rendered and not passing throught the server. I could have used some software for prerendering the page but it add some useless complexity on my website.
+  - Reducing the number of request by adding the minimized css for the fold directly into the dom
+  - Moving the script to the end of the body for downloading the DOM and CSS in priority
+  - Using a custom font based on material design where I remove all the unnecessaries symbols
+  - Using data64 image on the CSS because it's smaller and faster to load at the end
+  - Using clip-path for creating complex forms instead of using img. For this one, by doing that, the website will not work on IE until this css rules become a PR and REC for the W3C. For the moment, it's still a CR but I have good hope for this one.
  - I've created alias on some functions that I use often for keeping my file the smallest possible. By example, I have created $i and $n for respectively document.getElementById and document.getElementsByClassName
 
 ## Improving the performance
