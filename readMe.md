@@ -34,6 +34,7 @@ There are two differents kind of optimizations and I'm always switching between 
 - Removing the value of return when not needed
 - Putting the variable together for not repeating the word "var"
 - Reverse the loop for not using a second variable in the loop
+
 ## Old improvement
 
  - When the page was in PHP, I use the flush function just after the body for showing the content as soon as possible without waiting for the entirely page to be read by the server. 
