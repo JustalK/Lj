@@ -891,5 +891,17 @@ document.addEventListener("DOMContentLoaded", function() {
 			  bw<1280 && loadMediaQueries();
 		  }, 250);
 	});
+	
+	// ================================================================================
+	// Basic SPA Routing
+	// ================================================================================	
+	var page2 = $i("page2"),
+	content = $i("CONTENT");
+	page2.addEventListener("click", function(e) {
+		//adding the class for starting the animation
+		content.classList.add("active");
+		// Pusing the new page into the history - change history
+		//history.pushState(null, null, this.dataset.link);
+	});
 });
 
