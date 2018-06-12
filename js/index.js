@@ -46,11 +46,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.body.classList.add("loaded");
 	
 	// Alias for winning some extrabyte
-	const $i = id => document.getElementById(id);
-	const $n = cn => document.getElementsByClassName(cn);
+	const $i = id => document.getElementById(id),
+	$n = cn => document.getElementsByClassName(cn);
 	
 	// My temporary variable for all the system
 	var tmp,
+	content = $i("CONTENT"),
 	// ================================================================================
 	// WebAssembly - I have created two functions in C99 for making the user experience smooth
 	// ================================================================================
@@ -126,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		
     	// And we load the css file
     	addStyle("../css/global.css");
+    	content.classList.add("dislock");
     	
     	// If the width of the client is under 1280px, we read the media queries file
     	bw<1280 && loadMediaQueries();
@@ -896,8 +898,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================
 	// Basic SPA Routing
 	// ================================================================================	
-	var articles = $i("ARTICLES"),
-	content = $i("CONTENT");
+	var articles = $i("ARTICLES");
 	articles.addEventListener("click", function(e) {
 		//adding the class for starting the animation
 		content.classList.add("active");

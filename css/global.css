@@ -2,7 +2,6 @@
 **/
 
 #CONTENT {
-    position: relative;
     transform-origin: left;
     transition: all 0.5s;
     left: 0;
