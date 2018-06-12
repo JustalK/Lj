@@ -167,6 +167,29 @@ span {
     opacity: 0;
 }
 
+#ARTICLES {
+	width: 400px;
+	background: black;
+	height: 40px;
+	position: absolute;
+	right: -300px;
+	top: -100px;
+	z-index: 1000;
+	text-align: center;
+	color: white;
+	line-height: 40px;
+	text-transform: uppercase;
+	transform: rotateZ(45deg);
+	font-size: 24px;
+	border: 1px solid white;
+	transition: all 1s cubic-bezier(0.75,0,0.25,1);
+}
+
+.loaded #ARTICLES {
+	right: -100px;
+	top: 100px;
+}
+
 .show-orbitron .big-title-blue {
     position: absolute;
     text-transform: uppercase;

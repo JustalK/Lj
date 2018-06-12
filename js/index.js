@@ -40,10 +40,11 @@ fontmonserratlight.loaded.then(function() {
 fonttekolight.loaded.then(function() {
 	document.body.classList.add("show-tekolight");
 });
-	
 
 // Once the document is ready...
 document.addEventListener("DOMContentLoaded", function() {
+	document.body.classList.add("loaded");
+	
 	// Alias for winning some extrabyte
 	const $i = id => document.getElementById(id);
 	const $n = cn => document.getElementsByClassName(cn);
