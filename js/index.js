@@ -896,9 +896,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ================================================================================
 	// Basic SPA Routing
 	// ================================================================================	
-	var page2 = $i("page2"),
+	var articles = $i("ARTICLES"),
 	content = $i("CONTENT");
-	page2.addEventListener("click", function(e) {
+	articles.addEventListener("click", function(e) {
 		//adding the class for starting the animation
 		content.classList.add("active");
 		// Pusing the new page into the history - change history
