@@ -1492,6 +1492,65 @@ DIAPORAMA - LEFT AREA
 	opacity: 0;
 }
 
+.technologies {
+	background: #0000009c;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(.8,0,.25,1);
+}
+
+.photo:hover .technologies {
+	transform: translateY(0);	
+}
+
+.technologies .tags {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;	
+}
+
+.technologies .tags div {
+	display: flex;
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    align-items: center;
+}
+
+.technologies .tags ul {
+    display: block;
+    text-align: center;
+    list-style: none;
+    position: relative;
+}
+
+.technologies .tags ul li {
+    display: inline-block;
+    text-align: left;
+    background: #ffffff47;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #e4e4e4;
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 /*
 =====================================================================================================
 INFORMATIONS - RIGHT AREA
