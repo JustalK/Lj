@@ -321,7 +321,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		
     	if(!loadingCss) {
     		loadingCss = true;
-    		loadTheGlobalCss();
     		// We are not on the first sreen anymore so we load the other font
     		loadHighQualityImagesFirst(); 
     		loadAllTheOtherFont();
@@ -358,6 +357,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	photo[currentframe].style.transform = "scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.840,1,segment,mwh+100)+")";
 	    	areatexte[currentframe].style.transform = "translate3d(0,"+wasmScroll(200,50,0.4,segment,mwh+200)+"px,0)";
 	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
+	    	if(a>mwh+100) backgroundphoto[currentframe].classList.add("lock");
 
 	    	areas[currentframe*2].style.transform = "translate3d(0,-"+wasmScroll(200,0,50,segment,wh+200)+"px,0)";
 	    	areas[currentframe*2+1].style.transform = "translate3d(0,-"+wasmScroll(200,0,50,segment,wh+200)+"px,0)";
@@ -379,9 +379,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			photoblockhorizontal[currentframe*2].style.transform = "scaleY("+calculChangeFrame+")";
 			photoblockhorizontal[currentframe*2+1].style.transform = "scaleY("+calculChangeFrame+")";
 	    	
-			// TranslateZ and will-change for repaiting only the good area
-			backgroundphoto[currentframe].style.transform = "scale("+wasmScrollReverse(1.5,1.5,1,0.002,segment,mwh)+","+wasmScrollReverse(1.5,1.5,1,0.002,segment,mwh)+") translateZ(0) rotateZ("+wasmScrollReverse(30,30,0,0.06,segment,mwh-200)+"deg)";
-			
 			for(var i=4;i--;) {
 				photosquare[currentframe*4+i].style.transform = "scale("+wasmScroll(1,0,1,segment,mwh+100)+","+wasmScroll(1,0,1,segment,mwh+100)+")";
 			}
@@ -567,15 +564,12 @@ document.addEventListener("DOMContentLoaded", function() {
 			for(var i=currentframe;i--;pos += 2);
 			pos += parseInt(wrapblocsinside[currentframe].dataset.count);
 			backgroundphoto[currentframe].style.backgroundImage = "url("+wrapinformation[pos].dataset.img+")";
-			console.log(wrapinformation);
-			console.log(pos);
-			console.log(wrapinformation[pos].dataset.title);
 			areatextetitle[currentframe].innerHTML = wrapinformation[pos].dataset.title;
 			areatextesubtitle[currentframe].innerHTML = wrapinformation[pos].dataset.text;
 			backgroundphoto[currentframe].classList.remove("active");			
 			areatextetitle[currentframe].classList.remove("active");			
 			areatextesubtitle[currentframe].classList.remove("active");			
-		},600);
+		},400);
 		
 		// I update the page number (page number under the text area)	
 		page[currentframe].innerHTML = (wrapblocsinside[currentframe].dataset.count*1+1)+" / "+count;
