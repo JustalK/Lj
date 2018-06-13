@@ -8,6 +8,7 @@ There are two differents kind of optimizations and I'm always switching between 
 
 ## Reducing the loading time
 
+ - Using html-minimizer, cssnano and uglifyjs for building a concatened, minimized, clean production version (HTML, CSS & JS)
  - I'm using AJAX for loading the HQ images of the website when needed. I'm use the LQIP technique. I load a small file of the image with progressive optimization and then I use at the same place the HQ image once it loaded. I have also done that on the 3D parts, look the waterfall of the network, you will understand.
  - I'm use AJAX also for loading the global CSS. I mean that I load only the necessaries css rules at the fold. And I load the next rules once the users is starting scrolling.
  - I'm also using the Goodle loading API for avoiding the FOUT and FOIT when you arrive for the first time on the website. I'm using it in two differents parts, I first load the only necessaries FONT and once they have been loaded properly I load the others.
@@ -39,5 +40,3 @@ There are two differents kind of optimizations and I'm always switching between 
 
  - When the page was in PHP, I use the flush function just after the body for showing the content as soon as possible without waiting for the entirely page to be read by the server. 
  - setTimeout 0, for adding the function that I need to be execute for sure but later into the queue.
-
-**On purpose, I did not minimize and concatenate my file because I want everyone to be able to look into the code directly on my website.**
