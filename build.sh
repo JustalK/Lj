@@ -23,6 +23,7 @@ done
 # For all the CSS Files, we minimize them
 find ./build -iname '*.css' | while read filename; do 
 	echo "Minimize CSS :  ${filename}";
+	npx postcss $filename --use autoprefixer -d $filename;
 	cssnano $filename $filename
 done
 
