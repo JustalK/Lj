@@ -899,7 +899,22 @@ document.addEventListener("DOMContentLoaded", function() {
 		//adding the class for starting the animation
 		content.classList.add("active");
 		// Pusing the new page into the history - change history
-		//history.pushState(null, null, this.dataset.link);
+		history.pushState(null, null, this.dataset.link);
+		setTimeout(function() {			
+			content.classList.remove("active");
+			loadPage("./articles.php").then(function(rsl) {			
+				while(content.firstChild) content.removeChild(content.firstChild);
+				content.innerHTML = rsl;
+			})
+		}, 500);
 	});
+	
+	function loadPage(url) {
+		return fetch(url, {
+		    method: 'GET'
+		  }).then(function(response) {
+			  return response.text();
+		 });		
+	}
 });
 
