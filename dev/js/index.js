@@ -261,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	photosquare = $n("photo-square"),
 	blocsinsideinformationstitle = $n("blocs-inside-informations-title"),
 	backgroundphoto = $n("background-photo"),
+	backgroundphotolength = backgroundphoto.length,
 	frameinformations = $n("frame-informations"),
 	areas = $n("areas"),
 	blocsinsidewrap = $n("blocs-inside-wrap"),
@@ -357,7 +358,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	photo[currentframe].style.transform = "scale("+wasmScroll(1,0.912,1,segment,mwh+100)+","+wasmScroll(1,0.840,1,segment,mwh+100)+")";
 	    	areatexte[currentframe].style.transform = "translate3d(0,"+wasmScroll(200,50,0.4,segment,mwh+200)+"px,0)";
 	    	photowrap[currentframe].style.transform = "translateY("+wasmScroll(200,50,0.4,segment,mwh+200)+"px)";
-	    	if(a>mwh+100) backgroundphoto[currentframe].classList.add("lock");
 
 	    	areas[currentframe*2].style.transform = "translate3d(0,-"+wasmScroll(200,0,50,segment,wh+200)+"px,0)";
 	    	areas[currentframe*2+1].style.transform = "translate3d(0,-"+wasmScroll(200,0,50,segment,wh+200)+"px,0)";
@@ -566,10 +566,12 @@ document.addEventListener("DOMContentLoaded", function() {
 			backgroundphoto[currentframe].style.backgroundImage = "url("+wrapinformation[pos].dataset.img+")";
 			areatextetitle[currentframe].innerHTML = wrapinformation[pos].dataset.title;
 			areatextesubtitle[currentframe].innerHTML = wrapinformation[pos].dataset.text;
-			backgroundphoto[currentframe].classList.remove("active");			
-			areatextetitle[currentframe].classList.remove("active");			
-			areatextesubtitle[currentframe].classList.remove("active");			
-		},400);
+			setTimeout(function() { 
+				backgroundphoto[currentframe].classList.remove("active") 
+				areatextetitle[currentframe].classList.remove("active");			
+				areatextesubtitle[currentframe].classList.remove("active");			
+			}, 200);			
+		},500);
 		
 		// I update the page number (page number under the text area)	
 		page[currentframe].innerHTML = (wrapblocsinside[currentframe].dataset.count*1+1)+" / "+count;

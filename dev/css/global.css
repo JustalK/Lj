@@ -1325,32 +1325,20 @@ DIAPORAMA - LEFT AREA
 
 .background-photo {
     position: relative;
-	height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    background-size: cover;
-    opacity: 1;
-    z-index: 3;
-    will-change:  transform;
-    -webkit-transition: all 0.6s;
-    -o-transition: all 0.6s;
-    transition: all 0.6s;
-    transition-delay: 0.5s;
-}
-
-.background-photo.lock {
 	height: calc(100% - 60px);
     width: calc(100% - 60px);
     left: 30px;
     top: 30px;
+    background-size: cover;
+    opacity: 1;
+    z-index: 3;
+    will-change:  transform;
+	-webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
 }
 
 .background-photo.active {
-	-webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    transition: all 0.4s;
-    transition-delay: 0s;
 	opacity: 0;
 }
 
@@ -1361,7 +1349,7 @@ DIAPORAMA - LEFT AREA
     top: 0;
     left: 0;
     z-index: 2;
-	background: #2E2E2E;
+	background: rgba(0, 0, 0, 0.26);
 }
 
 .photo-square {
